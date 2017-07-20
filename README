@@ -1,0 +1,57 @@
+tex4ht
+
+Environment for local corrections of tex4ht tools
+
+Repository structure:
+
+    Designed to keep in synchro with original sources from
+        http://www.tug.org/applications/tex4ht/tex4ht.zip
+
+    Sources split to separate project directories for each tool tex4ht, t4ht and htcmd respectively.
+
+Building:
+
+    tex4ht binary could be built under GNU Automake using shell script tex4ht/build.sh
+        cd tex4ht
+        ./build.sh
+    For using of GNU Automake environment under MS Windows following tools should be additionaly installed:
+        MinGW gcc compiler:
+            https://sourceforge.net/projects/mingw-w64/files/latest/download?source=files
+                Be carefull -- Bitdefender antivirus complains about MinGW v.7.1.0 distribution package -- files mingw32\opt\bin\python*.exe and mingw32\bin\gdb.exe
+                    are recognized as infected by malware Gen:Variant.Razy.191694
+                    Be prepared to delete these files or use another MinGW distribution, v.5.1.0 for instance:
+                            https://sourceforge.net/projects/tdm-gcc/files/latest/download?source=rw_typ_t5
+                        (not tested yet)
+                Path of installed bianries
+                        %ProgramFiles%\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw32\bin
+                    should be added to environment variable PATH
+        MSYS POSIX shell environment:
+            https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip/download
+        GNU Autoconf / Automake:
+            http://gnuwin32.sourceforge.net/packages/automake.htm
+            http://gnuwin32.sourceforge.net/packages/autoconf.htm
+            http://gnuwin32.sourceforge.net/packages/m4.htm
+            http://gnuwin32.sourceforge.net/packages/regex.htm
+
+Add-ons to module tex4ht:
+
+    Following are attempts to deal with the problem, that original heuristic recognition of spaces in tex4ht doesn't work correctly enough --
+        there are situations, when spaces disappear or are duplicated.
+
+        command line switch -n
+            cuts off heuristic algorithm for recognition of spaces in .dvi file;
+            spaces then should be generated using some explicit means, for example by inserting commands
+                \special{t4ht=\&\#32;} into the source .tex file.
+
+        command line switch -r
+            correction of spaces recognition threshold, switch value as a percentage of the initial value should be provided:
+                -r100   no change, the algorithm operates as usual;
+                -r50    threshold of spaces generation is increased twice -- amount of spaces decreases;
+                -r200   threshold decreased by half, more spaces.
+
+TODO:
+
+Synchronize with source repozitory in
+    http://svn.gnu.org.ua/sources/tex4ht/trunk
+
+Command line switch -r currently does work in math mode solely.
