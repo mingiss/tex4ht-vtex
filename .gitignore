@@ -1,0 +1,9 @@
+.hgignore
+.hg
+*/autom4te.cache
+*/.deps
+*.o
+
+*.log
+*.map
+skaityk.txt
