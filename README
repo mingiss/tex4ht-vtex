@@ -17,8 +17,8 @@ Building:
     For using of GNU Automake environment under MS Windows following tools should be additionaly installed:
         MinGW gcc compiler:
             https://sourceforge.net/projects/mingw-w64/files/latest/download?source=files
-                Be carefull -- Bitdefender antivirus complains about MinGW v.7.1.0 distribution package -- files mingw32\opt\bin\python*.exe and mingw32\bin\gdb.exe
-                    are recognized as infected by malware Gen:Variant.Razy.191694
+                Be carefull -- Bitdefender antivirus complains about MinGW v.7.1.0 build 4.3.0 distribution package of 05.03.2017 --
+                    files mingw32\opt\bin\python*.exe and mingw32\bin\gdb.exe are recognized as infected by malware Gen:Variant.Razy.191694
                     Be prepared to delete these files or use another MinGW distribution, v.5.1.0 for instance:
                             https://sourceforge.net/projects/tdm-gcc/files/latest/download?source=rw_typ_t5
                         (not tested yet)
