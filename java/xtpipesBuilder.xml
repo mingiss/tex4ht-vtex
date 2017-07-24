@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="tex4ht.makextpipesjar" default="makextpipesjar" basedir=".">
-  <target name ="makextpipesjar" description="Create a jar for xtpipes">
-    <jar jarfile="bin/xtpipes/bin/xtpipes.jar" includes="xtpipes.class xtpipes/**/*.class" basedir="bin"/>
-  </target>
-</project>

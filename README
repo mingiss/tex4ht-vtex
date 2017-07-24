@@ -4,52 +4,43 @@ Environment for local corrections of tex4ht tools
 
 Repository structure:
 
-    Designed to keep in synchro with original sources from
-        http://www.tug.org/applications/tex4ht/tex4ht.zip
+    Designed as a mirror copy of TeX Live (TL) tree structure.
 
-    Sources split to separate project directories for each tool tex4ht, t4ht and htcmd respectively.
+    There are problems in running standard TL script trunk/Build/source/reautoconf under MS Windows in MSYS environment,
+        hence additional set of prepared configure scripts are provided.
+
+Prerequisites:
+
+    For use of the GNU Automake environment under MS Windows following tools should be additionally installed:
+        MinGW gcc compiler:
+            https://sourceforge.net/projects/mingw-w64/files/latest/download?source=files
+                Be careful -- Bitdefender antivirus complains about MinGW v.7.1.0 build 4.3.0 distribution package of 05.03.2017 --
+                    files mingw32\opt\bin\python*.exe and mingw32\bin\gdb.exe are recognized as infected by malware Gen:Variant.Razy.191694
+                    Be prepared to delete these files or use another MinGW distribution, v.5.1.0 for instance:
+                            https://sourceforge.net/projects/tdm-gcc/files/latest/download?source=rw_typ_t5
+                        (not tested yet)
+                Path of installed bianries
+                        %ProgramFiles%\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw32\bin
+                    should be added to environment variable PATH
+        MSYS POSIX shell environment:
+            https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip/download
+        GNU Autoconf / Automake:
+            http://gnuwin32.sourceforge.net/packages/automake.htm
+            http://gnuwin32.sourceforge.net/packages/autoconf.htm
+            http://gnuwin32.sourceforge.net/packages/m4.htm
+            http://gnuwin32.sourceforge.net/packages/regex.htm
 
 Building:
 
-    Inside of TeX Live (TL) building tree:
-        - mount current TL repository version to some local path:
-            svn co svn://username:password@tug.org/texlive/trunk
-        - overwrite original TL source file
-                trunk/Build/source/texk/tex4htk/tex4ht.c
-            with modifyed one from this repository
-                tex4ht/tex4ht.c
-        - copy script
-                Build_tex4ht.sh
-            to TL tree subdirectory
-                trunk/Build/source
-        - execute it:
-                cd <...>/trunk/Build/source
-                ./Build_tex4ht.sh
-            resulting binary executable is created here:
-                trunk/Build/source/Work/texk/tex4htk/tex4ht
-
-    Using Automake:
-        tex4ht binary could be built under GNU Automake using shell script tex4ht/build.sh
-            cd tex4ht
-            ./build.sh
-        For use of the GNU Automake environment under MS Windows following tools should be additionally installed:
-            MinGW gcc compiler:
-                https://sourceforge.net/projects/mingw-w64/files/latest/download?source=files
-                    Be careful -- Bitdefender antivirus complains about MinGW v.7.1.0 build 4.3.0 distribution package of 05.03.2017 --
-                        files mingw32\opt\bin\python*.exe and mingw32\bin\gdb.exe are recognized as infected by malware Gen:Variant.Razy.191694
-                        Be prepared to delete these files or use another MinGW distribution, v.5.1.0 for instance:
-                                https://sourceforge.net/projects/tdm-gcc/files/latest/download?source=rw_typ_t5
-                            (not tested yet)
-                    Path of installed bianries
-                            %ProgramFiles%\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw32\bin
-                        should be added to environment variable PATH
-            MSYS POSIX shell environment:
-                https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip/download
-            GNU Autoconf / Automake:
-                http://gnuwin32.sourceforge.net/packages/automake.htm
-                http://gnuwin32.sourceforge.net/packages/autoconf.htm
-                http://gnuwin32.sourceforge.net/packages/m4.htm
-                http://gnuwin32.sourceforge.net/packages/regex.htm
+    - mount current TL repository version to some local path:
+        svn co svn://username:password@tug.org/texlive/trunk
+    - overwrite original TL source files with these provided here
+    - execute scripts:
+            cd <...>/trunk/Build/source
+            ./reautoconf            (not for MS Windows MSYS environment)
+            ./Build_tex4ht.sh
+        resulting binary executables is created here:
+            trunk/Build/source/Work/texk/tex4htk/tex4ht     (tex4ht.exe)
 
 Add-ons to module tex4ht:
 
@@ -69,8 +60,5 @@ Add-ons to module tex4ht:
                 -r200   threshold decreased by half, more spaces.
 
 TODO:
-
-Synchronize with source repository at
-    http://svn.gnu.org.ua/sources/tex4ht/trunk
 
 Command line switch -r currently does work in math mode solely.
