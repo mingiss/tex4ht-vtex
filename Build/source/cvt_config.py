@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding=UTF-8
 
-__author__ = "Mindaugas Pie�ina <mindaugas.piesina@vtex.lt>"
+__author__ = "Mindaugas Piešina <mindaugas.piesina@vtex.lt>"
 __version__ = "0.1"
 
 """
 cvt_config.py
 
-    Sulipdo perlau�tas config.status eilutes, pvz.
+    Sulipdo perlaužtas config.status eilutes, pvz.
             S["DEFS"]="-DPACKAGE_NAME=\\\"TeX\\ Live\\\" -DPACKAGE_TARNAME=\\\"tex-live\\\" -DPACKAGE_VERSION=\\\"2016-05-23\\\" -DPACKAGE_STRING=\\\"TeX\\ Live\\ 2016-05-23\\\" -DPACKAGE_BU"\
             "GREPORT=\\\"tex-k@tug.org\\\" -DPACKAGE_URL=\\\"\\\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_ME"\
             "MORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DPACKAGE=\\\"tex-live\\\" -DVERSION=\\\"2016-05-23\\\" -DLT_OBJDIR=\\\".l"\
@@ -17,22 +17,22 @@ cvt_config.py
         i viena
             S["DEFS"]="-DPACKAGE_NAME=\\\"TeX\\ Live\\\" -DPACKAGE_TARNAME=\\\"tex-live\\\" -DPACKAGE_VERSION=\\\"2016-05-23\\\" -DPACKAGE_STRING=\\\"TeX\\ Live\\ 2016-05-23\\\" -DPACKAGE_BUGREPORT=\\\"tex-k@tug.org\\\" -DPACKAGE_URL=\\\"\\\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DPACKAGE=\\\"tex-live\\\" -DVERSION=\\\"2016-05-23\\\" -DLT_OBJDIR=\\\".libs/\\\" -D_FILE_OFFSET_BITS=64 -DHAVE_FSEEKO=1 -DHAVE_DIRENT_H=1 -DSTDC_HEADERS=1 -DHAVE_ASSERT_H=1 -DHAVE_FLOAT_H=1 -DHAVE_LIMITS_H=1 -DHAVE_STDLIB_H=1 -DHAVE_SYS_PARAM_H=1 -DHAVE_PUTENV=1 -DHAVE_GETCWD=1 -DHAVE_MEMCMP=1 -DHAVE_MEMCPY=1 -DHAVE_MKSTEMP=1 -DHAVE_MKTEMP=1 -DHAVE_STRCHR=1 -DHAVE_STRRCHR=1 -DHAVE_DECL_ISASCII=1 -DX_DISPLAY_MISSING=1" 
 
-    Naudojamas Automake scriptu paleidimui Windowsuose -- sprend�ia ./configure klaida
+    Naudojamas Automake scriptų paleidimui Windowsuose (MSYS'e) -- sprendžia ./configure klaidą
         gawk: ./confrphLUA/subs.awk:114: S["DEFS"]="-DPACKAGE_NAME=\\\"TeX\\ Live\\\" -DPACKAGE_TARNAME=\\\"tex-live\\\" -DPACKAGE_VERSION=\\\"2016-05-23\\\" -DPACKAGE_STRING=\\\"TeX\\ Live\\ 2016-05-23\\\" -DPACKAGE_BU"\
         gawk: ./confrphLUA/subs.awk:114:                                                                                                                                                                                    ^ backslash not last character on line
-    Scripto i�kvietimas iklijuojamas i configure faila prie� config.status i�kvietima
+    Scripto iškvietimas įklijuojamas į configure failą prieš config.status iškvietimą
         $SHELL $CONFIG_STATUS
     Tai galima padaryti, pvz., komandomis:
         cp configure configure.tmp
         sed 's/\$SHELL \$CONFIG_STATUS/cp \$CONFIG_STATUS \$CONFIG_STATUS.tmp; python cvt_config\.py < \$CONFIG_STATUS.tmp \> \$CONFIG_STATUS; \$SHELL \$CONFIG_STATUS/' < configure.tmp > configure
-    
+
 Syntax:
     cp config.status config.status.tmp
     python cvt_config.py < config.status.tmp > config.status 
 
 Changelog:
     2017-07-21  mp  initial creation
-    
+
 """
 
 
@@ -44,14 +44,14 @@ import re
 #     scan
 #     concat
 
-# skanerio busena -- kintamojo mode reik�mes 
+# skanerio būsena -- kintamojo mode reikšmės
 mode_scan = 0       # pradinis skanavimas
-mode_concat = 1     # pratesimo eiluciu apjungimas
- 
+mode_concat = 1     # pratęsimo eilučių apjungimas
+
 # mode = Mode.scan
 mode = mode_scan
 
-# kaupiama eilute apjungta su pratesimais 
+# kaupiama eilutė, apjungta su pratęsimais
 concat_line = ""
 
 # ---------------------------
@@ -64,39 +64,39 @@ while 1:
     if not line:
         break
 
-    # numetam eilutes pabaiga
+    # numetam eilutės pabaigą
     line = line.split("\n")[0]
 
 #   flds = line.split("\"]=\"")
 #   if (len(flds) > 1):
 #       if (flds[0] == "S[\"DEFS"):
 
-    # ar priskyrimo eilute? 
+    # ar priskyrimo eilutė?
     assignment = re.search("S\[\"[A-Z,a-z,0-9,_]+\"\]\=\".*", line)
-    
-    # ar eilute turi pratesima -- ar galas su "\ ?
+
+    # ar eilutė turi pratęsimą -- ar galas su "\ ?
     flds = line.split("\"\\")
     continues = (len(flds) > 1) and (flds[-1] == "")
-     
+
     if (assignment and continues) or (mode == mode_concat):
         if continues:
             mode = mode_concat
-            # numetam pratesimo po�ymi "\ gale 
+            # numetam pratęsimo požymį "\ gale
             del flds[-1]
             line = "\"\\".join(flds)
         if not assignment:
-            # pratesimo eilutes turi prasideti kabutem
+            # pratęsimo eilutės turi prasidėti kabutėm
             flds = line.split("\"")
             if (len(flds) > 1) and (flds[0] == ""):
                 # kabutes numetam
                 del flds[0]
                 line = "\"".join(flds)
             else:
-                raise ValueError("Pratesimo eilute be kabuciu prad�ioje: " + line)
-        # kaupiam apjungta eilute
+                raise ValueError("Pratęsimo eilutė be kabučių pradžioje: " + line)
+        # kaupiam apjungtą eilutę
         concat_line += line
         if not continues:
-            # kaupimas baigesi -- i�vedam sukaupta eilute
+            # kaupimas baigėsi -- išvedam sukauptą eilutę
             print concat_line
             concat_line = ""
             mode = mode_scan
