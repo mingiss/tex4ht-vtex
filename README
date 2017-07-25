@@ -61,4 +61,4 @@ Add-ons to module tex4ht:
 
 TODO:
 
-Command line switch -r currently does work in math mode solely.
+    Command line switch -r currently does work in math mode solely.
