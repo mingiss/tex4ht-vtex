@@ -36,11 +36,13 @@ Building:
         svn co svn://username:password@tug.org/texlive/trunk
     - overwrite original TL source files with these provided here
     - execute scripts:
-            cd <...>/trunk/Build/source
+            cd Build/source
             ./reautoconf            (not for MS Windows MSYS environment)
             ./Build_tex4ht.sh
-        resulting binary executables is created here:
+        resulting binary executables are created here:
             trunk/Build/source/Work/texk/tex4htk/tex4ht     (tex4ht.exe)
+
+        reautoconf does not work yet under MSYS. Necessary slightly corrected configure scripts are provided here from linux building environment.
 
 Add-ons to module tex4ht:
 
@@ -62,3 +64,5 @@ Add-ons to module tex4ht:
 TODO:
 
     Command line switch -r currently does work in math mode solely.
+
+    reautoconf under MSYS
