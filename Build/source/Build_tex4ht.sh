@@ -15,4 +15,6 @@ make
 
 if [ "x$WINDIR" == "x" ]; then
 sudo cp texk/tex4htk/tex4ht /usr/local/texlive/$distribution/bin/x86_64-linux
+else
+cp texk/tex4htk/tex4ht.exe /D/texroot/texlive$distribution/bin/win32
 fi
