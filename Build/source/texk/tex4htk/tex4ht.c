@@ -214,7 +214,7 @@
 #include <setjmp.h>
 #endif 
 
-
+#include "tex4ht_add.h"
 
 
 #ifdef DOS_WIN32
@@ -581,7 +581,7 @@ struct group_path{
   struct group_path * next;
 };
 
-
+/*
 struct font_entry {
  INTEGER num;
  INTEGER scale;
@@ -629,7 +629,7 @@ unsigned long rgba_color;
 
 
 };
-
+*/
 
 struct html_font_rec{  char* name;
                        int   i;     };
@@ -871,8 +871,8 @@ static long int base_pos_x, base_pos_y, min_pos_x,
 static short rect_pos;
 
 
-static struct font_entry*  font_tbl;
-static int font_tbl_size = 0;
+/* static */ struct font_entry*  font_tbl;
+/* static */ int font_tbl_size = 0;
 
 
 static char*  new_font_name;
@@ -1038,65 +1038,6 @@ static struct htf_4hf_rec *htf_4hf;
 
 static BOOL special_on = FALSE;
 
-enum err_codes
-{
-ERR_HELP,
-ERR_IN_FILE,
-ERR_OUT_FILE,
-ERR_CLOSE_FILE,
-ERR_MEM,
-ERR_BAD_CHAR,
-ERR_FONT_NUM,
-ERR_DVI_FILE,
-ERR_FONT_DEF,
-ERR_CMD_LINE,
-ERR_FONT_DEF_REP,
-ERR_FONT_EMPTY_ENV,
-ERR_DIR_ACC,
-ERR_FONT_DIR_ENV,
-ERR_NO_FONTS,
-ERR_HEAD,
-ERR_CHKSUM,
-ERR_MAXFONTS,
-ERR_EOF_SIG,
-ERR_STA_SIG,
-ERR_HTF_FILE_FMT,
-ERR_HTF_FILE,
-ERR_HTF_STA_EOF,
-ERR_IMPL,
-ERR_SPC_GRP,
-ERR_MAP_LINE_OVFL,
-ERR_SPC_OVFL,
-ERR_PBR,
-ERR_CHR_CODE_OVFL,
-ERR_CHR_HTF,
-ERR_STO_ADDR,
-ERR_FLOAT,
-ERR_CTRLC,
-ERR_SCPT_OVFL,
-ERR_MAP_ROWS_OVFL,
-ERR_FNT_OVFL,
-ERR_SPC_CHAR,
-ERR_SPC_BAR_STR,
-ERR_SPC_TILDE_STR,
-ERR_SPC_BSL_STR,
-ERR_SYS_40,
-ERR_SPC_BAD_CHR,
-ERR_SPC_NO_TILDE,
-ERR_SPC_IGNORE,
-ERR_SPC_PUSH,
-ERR_SPC_BAD_CHR_CODE,
-ERR_SPC_PBR,
-ERR_FLS_NO_FILE,
-ERR_ENTRY_LINE,
-ERR_ENV_VAR,
-ERR_MISSING,
-ERR_BACK_FILE,
-ERR_SPC_QUEST,
-ERR_PAR_V,
-ERR_PAR_R
-};
-
 static const U_CHAR *warn_err_mssg[]={ 
 
 "improper command line\ntex4ht [-f<path-separator-ch>]in-file[.dvi]\n"
@@ -1181,9 +1122,13 @@ static const U_CHAR *warn_err_mssg[]={
 "Missing %s\n",                                       
 "Can't back from file `%s\n'",                        
 "\\special{t4ht%s}?\n",                               
-"Improper -v option\n",                               
-"Option -r value out of range: %d\n",
 
+"Improper -v option\n",               // ERR_PAR_V
+"Option -r value out of range: %d\n", // ERR_PAR_R
+"Buffer overflow: %s\n",              // ERR_BUF_OVFL
+"File not found: %s\n",               // ERR_FILE_NFOUND
+"File read error: %s\n",              // ERR_FILE_READ
+"Improper file format: %s\n",         // ERR_FILE_FORMAT
  "" };
 
 
@@ -1445,7 +1390,7 @@ static void warn_i_int( ARG_II(int,int) );
 static void warn_i_int_2( ARG_III(int,int,int) );
 
 
-static void warn_i_str( ARG_II(int,const char *) );
+/* static */ void warn_i_str( ARG_II(int,const char *) );
 
 
 static void warn_i_str2( ARG_III(int,const char *,const char *) );
@@ -1457,7 +1402,7 @@ static void err_i( ARG_I(int) );
 static void err_i_int( ARG_II(int,int) );
 
 
-static void err_i_str( ARG_II(int,char *) );
+/* static */ void err_i_str( ARG_II(int,char *) );
 
 
 static void show_err_context( ARG_I(void) );
@@ -5772,7 +5717,7 @@ static void warn_i_int_2
 
 
 
-static void warn_i_str
+/* static */ void warn_i_str
 #ifdef ANSI
 #define SEP ,
 (
@@ -5869,7 +5814,7 @@ static void err_i_int
 
 
 
-static void err_i_str
+/* static */ void err_i_str
 #ifdef ANSI
 #define SEP ,
 (
@@ -7629,7 +7574,11 @@ new_font.design_sz = (INTEGER) get_unt(4);
 
 {       FILE *font_file;
         U_CHAR  file_name[256];
-   
+
+        BOOL otf_found;
+        int ch_f;
+        int ch_l;
+
 {                        
    font_file = NULL;
    (IGNORED) sprintf(file_name, "%s.tfm", new_font_name);
@@ -7703,6 +7652,12 @@ for( cur_cache_font = cache_font;
 
 }
 
+   otf_found = FALSE;
+   if (font_file == NULL)
+   {
+      font_file = get_otf_fm(new_font_name, job_name);
+      if (font_file) otf_found = TRUE;
+   }
 
    if( font_file == NULL ){
       dump_env();      err_i_str(1,file_name);
@@ -7724,8 +7679,13 @@ for( cur_cache_font = cache_font;
    
 file_length                    = (INTEGER) fget_int(font_file,2);
 header_length                  = (int) fget_int(font_file,2);
-new_font.char_f = (int) fget_int(font_file,2);
-new_font.char_l = (int) fget_int(font_file,2);
+ch_f = (int) fget_int(font_file,2);
+ch_l = (int) fget_int(font_file,2);
+if (!otf_found)
+{
+    new_font.char_f = ch_f;
+    new_font.char_l = ch_l;
+}
 new_font.wtbl_n = (int) fget_int(font_file,2);
 new_font.htbl_n = (int) fget_int(font_file,2);
 new_font.dtbl_n = (int) fget_int(font_file,2);
@@ -7734,12 +7694,13 @@ lig_kern_table_length          = (int) fget_int(font_file,2);
 kern_table_length              = (int) fget_int(font_file,2);
 extensible_char_table_length   = (int) fget_int(font_file,2);
 num_font_parameters            = (int) fget_int(font_file,2);
-if( file_length != ( 6                + header_length
+if ((file_length != ( 6                + header_length
      - new_font.char_f              + new_font.char_l + 1
      + new_font.wtbl_n              + new_font.htbl_n
      + new_font.dtbl_n              + it_correction_table_length
      + lig_kern_table_length        + kern_table_length
-     + extensible_char_table_length + num_font_parameters  )
+     + extensible_char_table_length + num_font_parameters  )) &&
+    (!otf_found)
   ){ err_i_str(15,file_name); }
 
 
