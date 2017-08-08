@@ -3,12 +3,24 @@
  *
  *    add-ons to tex4ht
  *
+ * TODO:
+ *      all local char* to std::string
  */
 
 #include <string.h>
 #include <stdbool.h>
 
 #include "tex4ht_add.h"
+
+// ------------------------------
+HFontParMap mapHFontParMap;
+
+// ------------------------------
+HFontPars::HFontPars()
+{
+    m_ChFirst = INT_MAX;
+    m_ChLast = 1;
+}
 
 // ------------------------------
 FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name)
@@ -21,114 +33,131 @@ FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name)
     char enc_fname[PATH_MAX + 40];
     FILE *enc_file = NULL;
     char *pnts = NULL;
-    int ch_f = INT_MAX;
-    int ch_l = 1;
 
-    if (strlen(job_name) > PATH_MAX)
-        err_i_str(ERR_BUF_OVFL, job_name);
-    strcpy(fmap_fname, ".xdvipsk/");
-    strcat(fmap_fname, job_name);
-    pnts = strstr(fmap_fname, ".idv");
-    if (pnts)
-        *pnts = 0;
-    pnts = strstr(fmap_fname, ".dvi");
-    if (pnts)
-        *pnts = 0;
-    strcat(fmap_fname, ".opentype.map");
 
-    fmap_file = fopen(fmap_fname, "r");
-    if (fmap_file == NULL)
+    HFontParMap::const_iterator it = mapHFontParMap.find(fnt_name);
+    const HFontPars* ppars = &it->second;
+    if (it == mapHFontParMap.end())
     {
-        warn_i_str(ERR_FILE_NFOUND, fmap_fname);
-        return NULL;
-    }
+printf(":::: ieškom: %s\n", fnt_name);
+        if (strlen(job_name) > PATH_MAX)
+            err_i_str(ERR_BUF_OVFL, job_name);
+        strcpy(fmap_fname, ".xdvipsk/");
+        strcat(fmap_fname, job_name);
+        pnts = strstr(fmap_fname, ".idv");
+        if (pnts)
+            *pnts = 0;
+        pnts = strstr(fmap_fname, ".dvi");
+        if (pnts)
+            *pnts = 0;
+        strcat(fmap_fname, ".opentype.map");
 
-    if (strlen(fnt_name) > PATH_MAX)
-        err_i_str(ERR_BUF_OVFL, fnt_name);
-    strcpy(tfm_name, fnt_name);
-    pnts = strstr(tfm_name, ".tfm");
-    if (pnts) *pnts = 0;
-
-    do
-    {
-        /* const */ char *psname = NULL;
-
-        fgets(str_buf, STR_BUF_LEN, fmap_file);
-        if (ferror(fmap_file))
-            err_i_str(ERR_FILE_READ, fmap_fname);
-        if (feof(fmap_file))
-            break;
-
-        pnts = str_buf;
-        for (int ii = 0; ii < 4; ii++)
+        fmap_file = fopen(fmap_fname, "r");
+        if (fmap_file == NULL)
         {
-            pnts = strchr(pnts, '\t');
-            if (pnts == NULL)
+            warn_i_str(ERR_FILE_NFOUND, fmap_fname);
+            return NULL;
+        }
+
+        if (strlen(fnt_name) > PATH_MAX)
+            err_i_str(ERR_BUF_OVFL, fnt_name);
+        strcpy(tfm_name, fnt_name);
+        pnts = strstr(tfm_name, ".tfm");
+        if (pnts) *pnts = 0;
+
+        do
+        {
+            /* const */ char *psname = NULL;
+
+            fgets(str_buf, STR_BUF_LEN, fmap_file);
+            if (ferror(fmap_file))
+                err_i_str(ERR_FILE_READ, fmap_fname);
+            if (feof(fmap_file))
+                break;
+
+            pnts = str_buf;
+            for (int ii = 0; ii < 4; ii++)
             {
-                warn_i_str(ERR_FILE_FORMAT, fmap_fname);
+                pnts = strchr(pnts, '\t');
+                if (pnts == NULL)
+                {
+                    warn_i_str(ERR_FILE_FORMAT, fmap_fname);
+                    break;
+                }
+                *pnts++ = 0;
+                if (ii == 2)
+                    psname = pnts;
+            }
+
+            if (strcmp(tfm_name, str_buf) == 0)
+            {
+                if (psname == NULL)
+                {
+                    warn_i_str(ERR_FILE_FORMAT, fmap_fname);
+                    return NULL;
+                }
+                ps_name = psname;
+
                 break;
             }
-            *pnts++ = 0;
-            if (ii == 2)
-                psname = pnts;
-        }
 
-        if (strcmp(tfm_name, str_buf) == 0)
+        } while (TRUE);
+
+        fclose(fmap_file);
+
+        if (ps_name == NULL)
+            return NULL;
+
+        if (strlen(ps_name) > PATH_MAX)
+            err_i_str(ERR_BUF_OVFL, ps_name);
+        strcpy(enc_fname, ".xdvipsk/");
+        strcat(enc_fname, ps_name);
+        strcat(enc_fname, ".encodings.map");
+
+        enc_file = fopen(enc_fname, "r");
+        if (enc_file == NULL)
         {
-            if (psname == NULL)
-            {
-                warn_i_str(ERR_FILE_FORMAT, fmap_fname);
-                return NULL;
-            }
-            ps_name = psname;
-
-            break;
+            warn_i_str(ERR_FILE_NFOUND, enc_fname);
+            return NULL;
         }
 
-    } while (TRUE);
+        HFontPars pars;
 
-    fclose(fmap_file);
+        do
+        {
+            int ch_code = 0;
 
-    if (ps_name == NULL)
-        return NULL;
+            fgets(str_buf, STR_BUF_LEN, enc_file);
+            if (ferror(enc_file))
+                err_i_str(ERR_FILE_READ, enc_fname);
+            if (feof(enc_file))
+                break;
 
-    if (strlen(ps_name) > PATH_MAX)
-        err_i_str(ERR_BUF_OVFL, ps_name);
-    strcpy(enc_fname, ".xdvipsk/");
-    strcat(enc_fname, ps_name);
-    strcat(enc_fname, ".encodings.map");
+            if (sscanf(str_buf, "%d", &ch_code) == 1)
+            {
+                if (ch_code < pars.m_ChFirst)
+                    pars.m_ChFirst = ch_code;
+                if (ch_code > pars.m_ChLast)
+                    pars.m_ChLast = ch_code;
+            }
 
-    enc_file = fopen(enc_fname, "r");
-    if (enc_file == NULL)
+        } while (TRUE);
+
+        fclose(enc_file);
+
+        ppars = &(mapHFontParMap[fnt_name] = pars);
+    }
+
+    if (ppars == NULL)
     {
-        warn_i_str(ERR_FILE_NFOUND, enc_fname);
+        warn_i(ERR_STO_ADDR);
         return NULL;
     }
 
-    do
-    {
-        int ch_code = 0;
+    new_font.char_f = ppars->m_ChFirst;
+    new_font.char_l = ppars->m_ChLast;
 
-        fgets(str_buf, STR_BUF_LEN, enc_file);
-        if (ferror(enc_file))
-            err_i_str(ERR_FILE_READ, enc_fname);
-        if (feof(enc_file))
-            break;
-
-        if (sscanf(str_buf, "%d", &ch_code) == 1)
-        {
-            if (ch_code < ch_f)
-                ch_f = ch_code;
-            if (ch_code > ch_l)
-                ch_l = ch_code;
-        }
-
-    } while (TRUE);
-
-    fclose(enc_file);
-
-    new_font.char_f = ch_f;
-    new_font.char_l = ch_l;
+printf(":::: %s: %d %d\n", fnt_name, ppars->m_ChFirst, ppars->m_ChLast);
 
     // return pointer to fake .tfm file just not to ruin tfm scanning algorithm
     return fopen("otf.tfm", "rb");

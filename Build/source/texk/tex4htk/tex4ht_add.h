@@ -9,6 +9,13 @@
 #include <stdio.h>
 
 #ifdef __cplusplus
+#include <map>
+#include <string>
+
+using namespace std;
+#endif
+
+#ifdef __cplusplus
 #define PLAIN_C "C"
 #else 
 #define PLAIN_C
@@ -20,7 +27,7 @@
 
 #define STR_BUF_LEN 1024
 
-#if INT_MAX < 2147483647L  
+#if INT_MAX < 2147483647L
 #define LONG L
 #endif
 
@@ -141,9 +148,34 @@ extern int font_tbl_size;
 #define new_font font_tbl[font_tbl_size]
 
 extern PLAIN_C void err_i_str(int, char *);
+extern PLAIN_C void warn_i(int);
 extern PLAIN_C void warn_i_str(int, const char *);
 
 // ------------------------------
+#ifdef __cplusplus
+// conversion table from TeX character codes to unicode
+// indexes -- TeX char codes as provided in .dvi file, values -- unicode equivalent
+typedef map<long, long> HTable;
+
+// structure of .otf font attributes
+class HFontPars
+{
+public:
+    int m_ChFirst;  // TeX char code of the first character in font
+    int m_ChLast;   // last TeX char code
+    HTable m_mHTable; // TeX to unicode conversion table
+
+    HFontPars();
+};
+
+// dictionary of all .otf fonts attribute structure objects
+// index -- internal TeX decorated font name as provided in .dvi file
+// ("[DGMetaSerifScience-Regular.otf]:mode=node;script=latn;language=DFLT;+tlig;" for example)
+typedef map<string, HFontPars> HFontParMap;
+extern HFontParMap mapHFontParMap;
+#endif
+
+// ------------------------------
 // tries to obtain otf font parameters from font mappings provided by luafonts.lua
-// fnt_name -- internal tex decorated font name as provided in .dvi file
+// fnt_name -- internal TeX decorated font name
 extern PLAIN_C FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name);

@@ -1381,7 +1381,7 @@ static long fget_int( ARG_II(FILE *, int) );
 static long cond_int( ARG_I(register  INTEGER) );
 
 
-static void warn_i( ARG_I(int) );
+/* static */ void warn_i( ARG_I(int) );
 
 
 static void warn_i_int( ARG_II(int,int) );
@@ -5656,7 +5656,7 @@ static long cond_int
 
 
 
-static  void warn_i
+/* static */ void warn_i
 #ifdef ANSI
 #define SEP ,
 (     int  n
@@ -7656,6 +7656,7 @@ for( cur_cache_font = cache_font;
    if (font_file == NULL)
    {
       font_file = get_otf_fm(new_font_name, job_name);
+font_file = get_otf_fm(new_font_name, job_name);
       if (font_file) otf_found = TRUE;
    }
 
