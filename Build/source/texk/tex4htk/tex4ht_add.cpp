@@ -87,6 +87,8 @@ FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name)
 
     } while (TRUE);
 
+    fclose(fmap_file);
+
     if (ps_name == NULL)
         return NULL;
 
@@ -122,6 +124,8 @@ FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name)
         }
 
     } while (TRUE);
+
+    fclose(enc_file);
 
     new_font.char_f = ch_f;
     new_font.char_l = ch_l;

@@ -1,7 +1,7 @@
 #! /bin/bash
 
-export distribution=2010
-# export distribution=2016
+# export distribution=2010
+export distribution=2016
 
 # if [ ! -f configure.orig ]; then cp configure configure.orig; fi
 # sed 's/\$SHELL \$CONFIG_STATUS/cp \$CONFIG_STATUS \$CONFIG_STATUS.tmp; python \.\.\/cvt_config\.py < \$CONFIG_STATUS\.tmp \> \$CONFIG_STATUS; \$SHELL \$CONFIG_STATUS/' < configure.orig > configure
