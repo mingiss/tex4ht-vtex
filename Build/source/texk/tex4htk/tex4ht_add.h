@@ -45,9 +45,6 @@ using namespace std;
 #ifndef FALSE
 #define FALSE 0
 #endif
-#ifndef BOOL
-#define BOOL int
-#endif
 
 enum err_codes
 {

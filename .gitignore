@@ -13,6 +13,12 @@ TODO
 Build/README
 Build/logs/*
 Build/source/*
+!Build/source/Build_tex4ht*
+!Build/source/configure*
+!Build/source/cvt_config*
+!Build/source/libs
+Build/source/libs/*
+!Build/source/libs/kplib
 !Build/source/texk
 Build/source/texk/*
 !Build/source/texk/tex4htk
@@ -21,6 +27,8 @@ Build/source/texk/tex4htk/*
 !Build/source/texk/tex4htk/configure*
 !Build/source/texk/tex4htk/tex4ht*
 !Build/source/texk/tex4htk/t4ht*
+!Build/source/texk/tex4htk/envir*
+!Build/source/texk/tex4htk/ProjData*
 Build/tests/*
 
 Master/*

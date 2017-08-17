@@ -9,8 +9,8 @@
 
 #include <string.h>
 #include <stdbool.h>
-
 #include "tex4ht_add.h"
+#include "kpstring.h"
 
 // ------------------------------
 HFontParMap mapHFontParMap;
@@ -133,12 +133,26 @@ printf(":::: ieškom: %s\n", fnt_name);
             if (feof(enc_file))
                 break;
 
-            if (sscanf(str_buf, "%d", &ch_code) == 1)
+            KpString str(str_buf);
+            vector<KpString> codes;
+            str.Split(",", codes);
+
+            if (codes.size() < 3)
+                warn_i_str(ERR_FILE_FORMAT, enc_fname);
+            else
             {
-                if (ch_code < pars.m_ChFirst)
-                    pars.m_ChFirst = ch_code;
-                if (ch_code > pars.m_ChLast)
-                    pars.m_ChLast = ch_code;
+                int tex_code = 0;
+                if (sscanf(codes[0], "%d", &tex_code) == 1)
+                {
+                    if (ch_code < pars.m_ChFirst)
+                        pars.m_ChFirst = ch_code;
+                    if (ch_code > pars.m_ChLast)
+                        pars.m_ChLast = ch_code;
+
+                    int uni_code = 0;
+                    if (sscanf(codes[2], "%x", &uni_code) == 1)
+                        pars.m_mHTable[tex_code] = uni_code;
+                }
             }
 
         } while (TRUE);

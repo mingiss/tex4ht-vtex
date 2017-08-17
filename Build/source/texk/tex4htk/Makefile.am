@@ -10,18 +10,20 @@ EXTRA_DIST = java
 # Files not to be distributed
 include $(srcdir)/../../am/dist_hook.am
 
-AM_CPPFLAGS = $(KPATHSEA_INCLUDES) -DANSI -DKPATHSEA
+AM_CPPFLAGS = $(KPATHSEA_INCLUDES) -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA
 AM_CFLAGS = $(WARNING_CFLAGS)
 
 bin_PROGRAMS = t4ht tex4ht
 
 t4ht_SOURCES = t4ht.c
 
-tex4ht_SOURCES = tex4ht.c tex4ht_add.cpp
+tex4ht_SOURCES = tex4ht.c tex4ht_add.cpp ../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp ../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp
 
 $(t4ht_OBJECTS) $(tex4ht_OBJECTS): $(KPATHSEA_DEPEND)
 
 LDADD = $(KPATHSEA_LIBS)
+
+tex4ht_LDFLAGS = -Wl,-Map,tex4ht$(EXEEXT).map -ggdb
 
 ## Rebuild libkpathsea
 @KPATHSEA_RULE@
@@ -160,4 +162,3 @@ EXTRA_DIST += \
 	xhxelatex \
 	xhxetex \
 	xv4ht.java
-
