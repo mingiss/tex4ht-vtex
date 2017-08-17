@@ -39,10 +39,9 @@ int iCharWeigths[C_CharArrSize44] =
 
 
 // --------------------------------------------------
-int GetKwrdIndex
-(
-   const KpStrPtr p_pszKeywrd,
-   const KpStrPtr
+int GetKwrdIndex(
+    const uchar *p_pszKeywrd,
+    const uchar *
 #if (__GNUC__ != 5) || (__GNUC_MINOR__ != 4) || (__GNUC_PATCHLEVEL__ != 0)
        const    // gcc 5.4.0 throws an error: duplicate ‘const’
 #endif
@@ -90,8 +89,8 @@ return(retv);
 
 int GetKwrdIndexArr
 (
-   const KpStrPtr p_pszKeywrd,
-   const KpStrPtr p_ppszKeytable,
+   const uchar *p_pszKeywrd,
+   const uchar *p_ppszKeytable,
    const int p_iTabSize,
    bool p_bCaseSens,
    bool p_bWholeWords,
@@ -102,7 +101,7 @@ int ix;
 uchar kwd_str[KP_KWD_LEN + 1];
 int ii;
 int retv = TV_TG_NoKey;
-const KpStrPtr cur_kwd = p_ppszKeytable;
+const uchar *cur_kwd = p_ppszKeytable;
 
     KP_ASSERT(p_pszKeywrd && p_ppszKeytable, E_INVALIDARG, null); 
     KP_ASSERT(strlen(p_pszKeywrd) < KP_KWD_LEN, KP_E_BUFFER_OVERFLOW, null);
