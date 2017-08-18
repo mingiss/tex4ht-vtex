@@ -217,6 +217,8 @@
 #include "tex4ht_add.h"
 
 
+
+
 #ifdef DOS_WIN32
 #include <io.h>
 #endif
@@ -581,6 +583,7 @@ struct group_path{
   struct group_path * next;
 };
 
+
 /*
 struct font_entry {
  INTEGER num;
@@ -630,6 +633,7 @@ unsigned long rgba_color;
 
 };
 */
+
 
 struct html_font_rec{  char* name;
                        int   i;     };
@@ -687,6 +691,7 @@ static BOOL dos_file_names =
   FALSE
 #endif
 ;
+
 
 // flag for no spaces recognition
 // set by command line parameter -n
@@ -1038,6 +1043,7 @@ static struct htf_4hf_rec *htf_4hf;
 
 static BOOL special_on = FALSE;
 
+
 static const U_CHAR *warn_err_mssg[]={ 
 
 "improper command line\ntex4ht [-f<path-separator-ch>]in-file[.dvi]\n"
@@ -1122,13 +1128,13 @@ static const U_CHAR *warn_err_mssg[]={
 "Missing %s\n",                                       
 "Can't back from file `%s\n'",                        
 "\\special{t4ht%s}?\n",                               
-
-"Improper -v option\n",               // ERR_PAR_V
+"Improper -v option\n",               // ERR_PAR_V    
 "Option -r value out of range: %d\n", // ERR_PAR_R
 "Buffer overflow: %s\n",              // ERR_BUF_OVFL
 "File not found: %s\n",               // ERR_FILE_NFOUND
 "File read error: %s\n",              // ERR_FILE_READ
 "Improper file format: %s\n",         // ERR_FILE_FORMAT
+
  "" };
 
 
@@ -3385,7 +3391,6 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
 4
 
  )? ch : 256;
-   
 
    if ((font_tbl[cur_fnt].char_wi == NULL) || bad_ch)
       return DEF_GLYPH_WDT_PT;
@@ -3393,6 +3398,7 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
    if ((font_tbl[cur_fnt].wtbl == NULL) || (wt_ix < 0) || (wt_ix >= font_tbl[cur_fnt].wtbl_n))
       return DEF_GLYPH_WDT_PT;
 
+   
 return (INTEGER)(
     
 design_size_to_pt( *(font_tbl[cur_fnt].wtbl
@@ -4172,7 +4178,7 @@ static FILE* search_file_ext
     HANDLE hnd;
     int proceed;
     (IGNORED) strcpy((char *) dirname, (char *) str);
-    strct(dirname, "/*.*");
+    strct(dirname, "/*.*");       
     hnd = FindFirstFile(dirname, &find_file_data);
     if (hnd != INVALID_HANDLE_VALUE) {
       
@@ -6305,21 +6311,21 @@ switch( *(p+2) ){
 ext = p+1;
 
   break; }
-  case 'n':
-    ignore_spaces = no_spaces = TRUE;
-    break;
-  case 'r':
-  {
-    long fact = atol(p + 2);
-    if (fact >= 1)
-    {
-        x_fact = fact;
-        max_x_val = -10000 * 100 / x_fact;
-    }
-    else
-        err_i_int(ERR_PAR_R, fact);
-    break;
-  }
+  case 'n':{ 
+ignore_spaces = no_spaces = TRUE;
+
+  break; }
+  case 'r':{ 
+long fact = atol(p + 2);
+if (fact >= 1)
+{
+    x_fact = fact;
+    max_x_val = -10000 * 100 / x_fact;
+}
+else
+    err_i_int(ERR_PAR_R, fact);
+
+  break; }
    default:{ bad_arg; }
 }
 
@@ -6950,7 +6956,6 @@ char ** fontset=0;
 
        BOOL missing_fonts;
        HANDLE otf_pars = NULL;
-
 #ifndef KPATHSEA
        
 U_CHAR files_cache[PATH_MAX];
@@ -7593,6 +7598,7 @@ new_font.design_sz = (INTEGER) get_unt(4);
         int ch_f;
         int ch_l;
 
+   
 {                        
    font_file = NULL;
    (IGNORED) sprintf(file_name, "%s.tfm", new_font_name);
@@ -7665,6 +7671,7 @@ for( cur_cache_font = cache_font;
 
 
 }
+
 
    otf_pars = NULL;
    if (font_file == NULL)
@@ -7919,27 +7926,28 @@ loopName[0] = '\0';
 
    n_gif = new_font.char_l - new_font.char_f + 1;
    new_font.ch255 = 0;
-   
-new_font.gif_on = NULL;
-new_font.ch_str = NULL;
-new_font.math_closing = NULL;
-new_font.math = NULL;
-new_font.gif1 = NULL;
-new_font.accent = NULL;
-new_font.accented = NULL;
-new_font.ch = NULL;
-new_font.str = NULL;
 
-new_font.accent_array = (unsigned int *) 0;
-new_font.accented_array = (unsigned int *) 0;
-new_font.accent_N = new_font.accented_N = 0;
+   new_font.gif_on = NULL;
+   new_font.ch_str = NULL;
+   new_font.math_closing = NULL;
+   new_font.math = NULL;
+   new_font.gif1 = NULL;
+   new_font.accent = NULL;
+   new_font.accented = NULL;
+   new_font.ch = NULL;
+   new_font.str = NULL;
 
-new_font.pars = otf_pars;
+   new_font.accent_array = (unsigned int *) 0;
+   new_font.accented_array = (unsigned int *) 0;
+   new_font.accent_N = new_font.accented_N = 0;
+
+   new_font.pars = otf_pars;
 
 // ------------------------------------------------------------
-if (!otf_pars)
-{
+   if (!otf_pars)
+   {
 
+   
 {     int n_gif_bytes;
    n_gif_bytes = (n_gif + 7) / 8;
    new_font.gif_on = m_alloc(char, n_gif_bytes );
@@ -8343,12 +8351,12 @@ if( dump_htf_files ){
 if( dump_env_files ){ dump_env(); }
 
  }
-
-} // if (!otf_pars)
-// ---------------------------------------------
-
 }
 
+
+
+   } // if (!otf_pars)
+// ---------------------------------------------
 
    new_font.str = (unsigned U_CHAR **) r_alloc((void *)   new_font.str,
                      (size_t) ( (design_n?design_n:1) * sizeof(char *)) );
@@ -8356,19 +8364,31 @@ if( dump_env_files ){ dump_env(); }
 for( i = fonts_n; i--; )
   if( eq_str(html_font[i].name, new_font_name) ){       int k;
      k = html_font[i].i;
-     free((void *)  new_font.gif1 ); new_font.gif1= font_tbl[ k ].gif1;
-     free((void *)  new_font.ch );   new_font.ch  = font_tbl[ k ].ch;
-     free((void *)  new_font.str );  new_font.str = font_tbl[ k ].str;
+
+     if (new_font.gif1)
+        free((void *)  new_font.gif1 );
+     new_font.gif1= font_tbl[ k ].gif1;
+
+     if (new_font.ch)
+        free((void *)  new_font.ch );
+     new_font.ch  = font_tbl[ k ].ch;
+
+     if (new_font.str)
+        free((void *)  new_font.str );
+     new_font.str = font_tbl[ k ].str;
+
      if (new_font.ch_str)
         free((void *)  new_font.ch_str );
-                               new_font.ch_str = font_tbl[ k ].ch_str;
+     new_font.ch_str = font_tbl[ k ].ch_str;
+
      
-     if (new_font.math_closing)
-        free((void *)  new_font.math_closing );
-           new_font.math_closing = font_tbl[ k ].math_closing;
-     if (new_font.math)
-        free((void *)  new_font.math );
-                           new_font.math = font_tbl[ k ].math;
+if (new_font.math_closing)
+    free((void *)  new_font.math_closing );
+new_font.math_closing = font_tbl[ k ].math_closing;
+
+if (new_font.math)
+    free((void *)  new_font.math );
+new_font.math = font_tbl[ k ].math;
 
 
      break;     }
@@ -8746,7 +8766,7 @@ for( i= get_char(); i>0; i-- ) ch = get_char();
   while( unread_pages-- ){
     (IGNORED) printf("[%d", dis_pages - unread_pages);
     
-x_val = dx_1 = dx_2 = 0;  max_x_val = -10000 * 100 / x_fact;
+x_val = dx_1 = dx_2 = 0;  max_x_val = -10000 * 100 / x_fact; 
 y_val = max_y_val = prev_y_val = dy_1 = dy_2 = 0;
 
 

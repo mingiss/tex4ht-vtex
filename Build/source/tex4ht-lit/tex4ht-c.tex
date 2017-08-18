@@ -7444,6 +7444,7 @@ static  struct del_stack_entry* pop_del(ch, id_hide, cr_fnt)
 ;{                   
    if( del_stack != (struct del_stack_entry*) 0 ){
       if( (cr_fnt ==  del_stack->fnt) && 
+          font_tbl[cr_fnt].math && (ch >= font_tbl[cr_fnt].char_f) && (ch < font_tbl[cr_fnt].char_f) &&
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
                                              struct del_stack_entry  * p;
@@ -10041,6 +10042,27 @@ Lynx introduces a space before and after each figure.
        `<font looping variables`>
    n_gif = new_font.char_l - new_font.char_f + 1;
    new_font.ch255 = 0;  
+
+   new_font.gif_on = NULL;
+   new_font.ch_str = NULL;
+   new_font.math_closing = NULL;
+   new_font.math = NULL;
+   new_font.gif1 = NULL;
+   new_font.accent = NULL;
+   new_font.accented = NULL;
+   new_font.ch = NULL;
+   new_font.str = NULL;
+
+   new_font.accent_array = (unsigned int *) 0;
+   new_font.accented_array = (unsigned int *) 0;
+   new_font.accent_N = new_font.accented_N = 0;
+
+   new_font.pars = otf_pars;
+
+// ------------------------------------------------------------
+   if (!otf_pars)
+   {
+
    `<initiate gif flags`>
    `<initiate htf accents`>
    new_font.ch = m_alloc(unsigned char, n_gif );
@@ -10049,6 +10071,10 @@ Lynx introduces a space before and after each figure.
    new_font.str[0] = &null_str;
    design_n = 0;
       `<load file of characters`>
+
+   } // if (!otf_pars)
+// ---------------------------------------------
+
    new_font.str = (unsigned U_CHAR **) r_alloc((void *)   new_font.str,
                      (size_t) ( (design_n?design_n:1) * sizeof(char *)) );
    `<merge new html font with old ones`>
@@ -10276,11 +10302,23 @@ Don't we loose some vital info here? Were this comes from?
 for( i = fonts_n; i--; )
   if( eq_str(html_font[i].name, new_font_name) ){       int k;
      k = html_font[i].i;
-     free((void *)  new_font.gif1 ); new_font.gif1= font_tbl[ k ].gif1;
-     free((void *)  new_font.ch );   new_font.ch  = font_tbl[ k ].ch;
-     free((void *)  new_font.str );  new_font.str = font_tbl[ k ].str;
-     free((void *)  new_font.ch_str );
-                               new_font.ch_str = font_tbl[ k ].ch_str;
+
+     if (new_font.gif1)
+        free((void *)  new_font.gif1 );
+     new_font.gif1= font_tbl[ k ].gif1;
+
+     if (new_font.ch)
+        free((void *)  new_font.ch );
+     new_font.ch  = font_tbl[ k ].ch;
+
+     if (new_font.str)
+        free((void *)  new_font.str );
+     new_font.str = font_tbl[ k ].str;
+
+     if (new_font.ch_str)
+        free((void *)  new_font.ch_str );
+     new_font.ch_str = font_tbl[ k ].ch_str;
+
      `<merge math entries`>
      break;     }
 if( i < 0 ){ `<record new tex4ht font`> }
@@ -12122,9 +12160,9 @@ unsigned int *accent_array, *accented_array, accent_N, accented_N;
 \<initiate htf accents\><<<
 new_font.accent = m_alloc(unsigned char, n_gif );
 new_font.accented = m_alloc(unsigned char, n_gif );
-new_font.accent_array = (unsigned int *) 0;
-new_font.accented_array = (unsigned int *) 0;
-new_font.accent_N = new_font.accented_N = 0;
+// new_font.accent_array = (unsigned int *) 0;
+// new_font.accented_array = (unsigned int *) 0;
+// new_font.accent_N = new_font.accented_N = 0;
 for( i=n_gif; i--; ) {
    new_font.accent[i] = new_font.accented[i] = 0;
 }
@@ -12677,7 +12715,12 @@ static INTEGER set_ch_class( ARG_I(int) );
 \<functions\><<<
 `[ 
 static  INTEGER set_ch_class(ch)    int ch
-;{                              int r_ch;
+;{
+BOOL bad_ch = ((ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l));
+int wt_ix;
+
+if (font_tbl[cur_fnt].math && (!bad_ch))
+{                              int r_ch;
    r_ch = ch - font_tbl[cur_fnt].char_f;
    if( math_class == `<math close`> ){
       store_bit_I( font_tbl[cur_fnt].math_closing, r_ch ); 
@@ -12687,7 +12730,17 @@ static  INTEGER set_ch_class(ch)    int ch
       store_bit_Z( font_tbl[cur_fnt].math_closing, r_ch ); 
       *(font_tbl[cur_fnt].math + r_ch) = math_class;
    }
+
+} // if (font_tbl[cur_fnt].math && (!bad_ch))
+
    open_del = ( math_class == `<math open`> )? ch : 256;      
+
+   if ((font_tbl[cur_fnt].char_wi == NULL) || bad_ch)
+      return DEF_GLYPH_WDT_PT;
+   wt_ix = font_tbl[cur_fnt].char_wi[(ch - font_tbl[cur_fnt].char_f) % 256];
+   if ((font_tbl[cur_fnt].wtbl == NULL) || (wt_ix < 0) || (wt_ix >= font_tbl[cur_fnt].wtbl_n))
+      return DEF_GLYPH_WDT_PT;
+
    `<return char width`>
 }
 >>>
@@ -12734,7 +12787,8 @@ static int math_class_of( ARG_II(int,int) );
 static  int math_class_of(ch,cur_fnt)    int ch`; int cur_fnt
 ;{                           int math_class;
    math_class = ch - font_tbl[cur_fnt].char_f;
-   return ((get_bit( font_tbl[cur_fnt].math_closing, math_class))?
+   return ((get_bit( font_tbl[cur_fnt].math_closing, math_class)
+              || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l))?
                 `<math close`> : *( math_class + font_tbl[cur_fnt].math));
 
 }
@@ -12824,10 +12878,13 @@ new_font.math[i] =
 >>>
 
 \<merge math entries\><<<
-free((void *)  new_font.math_closing );
-           new_font.math_closing = font_tbl[ k ].math_closing;
-free((void *)  new_font.math );
-                           new_font.math = font_tbl[ k ].math;
+if (new_font.math_closing)
+    free((void *)  new_font.math_closing );
+new_font.math_closing = font_tbl[ k ].math_closing;
+
+if (new_font.math)
+    free((void *)  new_font.math );
+new_font.math = font_tbl[ k ].math;
 >>>
 
 
