@@ -1247,6 +1247,8 @@ interrupts that are not considered here.
 #include <fcntl.h>
 #include <setjmp.h>
 #endif `%/* KPATHSEA */`%
+
+#include "tex4ht_add.h"
 >>>
 
 \List{*}
@@ -2252,6 +2254,7 @@ static int  stack_len;
 \<scan postamble\><<<
 {      `<scan fonts vars`>
        BOOL missing_fonts;
+       HANDLE otf_pars = NULL;
 #ifndef KPATHSEA
        `<fls var`>
    `<get dir of tex4ht.fls`>
@@ -8643,6 +8646,7 @@ Checksums are used to verify consistency between tfm and gf font files.
 
 
 \<types\><<<
+/*
 struct font_entry {     
  INTEGER num;        
  INTEGER scale;
@@ -8654,6 +8658,7 @@ struct font_entry {
  `<entries for math classes`>
  `<entries for xetex`>
 };
+*/
 >>>
 
 
@@ -8663,8 +8668,8 @@ struct font_entry {
 >>>
 
 \<vars\><<<
-static struct font_entry*  font_tbl;
-static int font_tbl_size = 0;
+/* static */ struct font_entry*  font_tbl;
+/* static */ int font_tbl_size = 0;
 >>>
 
 
@@ -9369,7 +9374,15 @@ static int search_font_tbl( cur_fnt )
 \<open font file\><<<
 {       FILE *font_file;
         U_CHAR  file_name[256];
+
+        int ch_f;
+        int ch_l;
+
    `<search dirs for font`>
+   otf_pars = NULL;
+   if (font_file == NULL)
+      font_file = get_otf_fm(new_font_name, job_name, &otf_pars);
+
    if( font_file == NULL ){
       dump_env();      err_i_str(1,file_name);  
       missing_fonts = TRUE;
@@ -9432,8 +9445,13 @@ Dimensions are expressed in printers' point units.
 \<scan dimension of components of font file\><<<
 file_length                    = (INTEGER) fget_int(font_file,2);
 header_length                  = (int) fget_int(font_file,2);
-new_font.char_f = (int) fget_int(font_file,2);
-new_font.char_l = (int) fget_int(font_file,2);
+ch_f = (int) fget_int(font_file,2);
+ch_l = (int) fget_int(font_file,2);
+if (!otf_pars)
+{
+    new_font.char_f = ch_f;
+    new_font.char_l = ch_l;
+}
 new_font.wtbl_n = (int) fget_int(font_file,2);
 new_font.htbl_n = (int) fget_int(font_file,2);
 new_font.dtbl_n = (int) fget_int(font_file,2);
@@ -9442,12 +9460,13 @@ lig_kern_table_length          = (int) fget_int(font_file,2);
 kern_table_length              = (int) fget_int(font_file,2);
 extensible_char_table_length   = (int) fget_int(font_file,2);
 num_font_parameters            = (int) fget_int(font_file,2);
-if( file_length != ( 6                + header_length
+if ((file_length != ( 6                + header_length
      - new_font.char_f              + new_font.char_l + 1
      + new_font.wtbl_n              + new_font.htbl_n
      + new_font.dtbl_n              + it_correction_table_length
      + lig_kern_table_length        + kern_table_length
-     + extensible_char_table_length + num_font_parameters  )  
+     + extensible_char_table_length + num_font_parameters  )) &&
+    (!otf_pars)
   ){ err_i_str(15,file_name); }
 >>>
 
@@ -16936,12 +16955,12 @@ static const U_CHAR *warn_err_mssg[]={ `<warn and err messages`> "" };
 \SubSection{Warnings Commands}
 
 \<header functions\><<<
-static void warn_i( ARG_I(int) );
+/* static */ void warn_i( ARG_I(int) );
 >>>
 
 \<functions\><<<
 `[
-static  void warn_i(n)     int  n
+/* static */ void warn_i(n)     int  n
 ;{  (IGNORED) fprintf(stderr,"--- warning --- ");
    (IGNORED) fprintf(stderr, "%s", warn_err_mssg[n]);
    show_err_context();
@@ -16992,12 +17011,12 @@ static void warn_i_int_2(n,i,j)   int  n`; int i`; int j
 
 
 \<header functions\><<<
-static void warn_i_str( ARG_II(int,const char *) );
+/* static */ void warn_i_str( ARG_II(int,const char *) );
 >>>
 
 \<functions\><<<
 `[
-static void warn_i_str(n,str) 
+/* static */ void warn_i_str(n,str) 
     int  n`;
     const char *str
 
@@ -17079,12 +17098,12 @@ static void err_i_int(n,i)     int  n`;  int i
 
 
 \<header functions\><<<
-static void err_i_str( ARG_II(int,char *) );
+/* static */ void err_i_str( ARG_II(int,char *) );
 >>>
 
 \<functions\><<<
 `[
-static void err_i_str(n,str) 
+/* static */ void err_i_str(n,str) 
      int  n`;
      U_CHAR *str
 
