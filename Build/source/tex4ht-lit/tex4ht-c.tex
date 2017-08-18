@@ -1381,6 +1381,14 @@ put_char('\n');put_char('\n');
 
 
 \<vars\><<<
+// flag for no spaces recognition
+// set by command line parameter -n
+static BOOL no_spaces;
+
+// factor for threshold of spaces recognition max_x_val, in percents
+// set by command line parameter -r
+static long x_fact = 100;
+
 static FILE*  dot_file;
 >>>
 
@@ -1489,6 +1497,8 @@ switch( *(p+1) ){
   case 'v':{ `<idv version replacement num`>  break; }
   case 'x':{ `<extra options`>  break; }
   case '.':{ `<default extension`>  break; }
+  case 'n':{ `<no spaces`>  break; }
+  case 'r':{ `<space factor`>  break; }
    default:{ bad_arg; }
 }
 >>>
@@ -1549,6 +1559,8 @@ The following is incomplete!!!
 "   [-utf8]              utf-8 encoding for unicode characters\n"
 "   [-v<idv version>]    replacement for the given dvi version\n"
 "   [-xs]           ms-dos file names for automatically generated gifs\n"
+"   [-n]            no space recognition\n"
+"   [-r<factor>]    factor for threshold of spaces recognition, in percents\n"
 >>>
 
 
@@ -1637,6 +1649,22 @@ static U_CHAR *ext = NULL;
 ext = p+1;
 >>>
 
+
+\<no spaces\><<<
+ignore_spaces = no_spaces = TRUE;
+>>>
+
+
+\<space factor\><<<
+long fact = atol(p + 2);
+if (fact >= 1)
+{
+    x_fact = fact;
+    max_x_val = -10000 * 100 / x_fact;
+}
+else
+    err_i_int(ERR_PAR_R, fact);
+>>>
 
 
 
@@ -2340,7 +2368,7 @@ verbatim environment that are expressed by \`'<pre>' elements
 
 
 \<initial values for new page\><<<
-x_val = dx_1 = dx_2 = 0;  max_x_val = -10000; `%temp`%
+x_val = dx_1 = dx_2 = 0;  max_x_val = -10000 * 100 / x_fact; `%temp`%
 y_val = max_y_val = prev_y_val = dy_1 = dy_2 = 0;
 >>>
 
@@ -2997,7 +3025,7 @@ static void try_new_line(MYVOID)
    v = y_val - prev_y_val;      
    if( !text_on && (y_val > max_y_val) ){
      if( v > dy/2.5 ){
-        `<cond insert new line`>  max_x_val = -10000;
+        `<cond insert new line`>  max_x_val = -10000 * 100 / x_fact;
         prev_y_val = max_y_val  = stack_n? y_val : 0;
      }
    }else{
@@ -3085,7 +3113,7 @@ static INTEGER move_x( d )
 ;{    register long     i, dx;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
-     if( max_x_val == -10000) max_x_val = x_val - d;  
+     if (max_x_val == -10000 * 100 / x_fact) max_x_val = x_val - d;  
      `<insert space`>
    } else    if( d && text_on  && (x_val != max_x_val) ){
       `<space for llap`>
@@ -3128,7 +3156,7 @@ The following provides a solution.
 if( !ignore_spaces ){
    i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
-   if( !i ) i = dx>99999L;
+   if( !i ) i = (dx >= 100000L * 100 / x_fact);
    if( i ){ put_char(' '); }
 }
 >>>
@@ -3244,7 +3272,7 @@ if( i ){ `<trace h spaces`> }
 if( !ignore_spaces ){
   `<end text accent`>
    while( i-- ) { text_on=TRUE;  put_char(' '); }
-} else { recover_spaces = (int) i; }
+} else { if (!no_spaces) recover_spaces = (int) i; }
 max_x_val = x_val;
 >>>
 
@@ -3705,7 +3733,7 @@ if( (x_val + right)  &&
           || ( !text_on && !ignore_chs )
         )
 ){ 
-   if( (max_x_val == -10000) || ((x_val + right) <= max_x_val) )
+   if ( (max_x_val == -10000 * 100 / x_fact) || ((x_val + right) <= max_x_val) )
    {  max_x_val = x_val;  }        
    i =  (INTEGER) (  (double) (x_val + right - max_x_val) 
                    /         (text_on? word_sp : margin_sp)
@@ -5042,7 +5070,7 @@ static U_CHAR ok_map = TRUE;
 \<get row and col for ch\><<<
 {          double x;
    row = (int) ( (y_val>0? y_val : 0.0) / (double) yresolution + 0.5);
-   if( row >= HEIGHT ){  
+   if ((row >= HEIGHT) || (row < 0)){
      if( ok_map ){ warn_i_int_2( 34, row, ch); ok_map = FALSE; }
      return; }
    x = (x_val>0? x_val : 0.0 ) / (double) xresolution + 0.75;
@@ -7273,7 +7301,7 @@ to the left of the current location (e.g., items of list).
 `<trace dvi pop`>
 `<halign at exit from group`>
 pop_stack();
-if( ((x_val+0.6*word_sp) <  stack[stack_n].x_val) )  put_char(' ');
+if ( (!no_spaces) && ((x_val+0.6*word_sp) <  stack[stack_n].x_val) )  put_char(' ');
 text_on = stack[stack_n].text_on;
 >>>
 
@@ -15441,7 +15469,7 @@ static FILE* search_file( name, dir, flags )
   `<search file in named dir`>
   str[i] = '\0';
   return  subs?  search_file_ext( name, str, flags):
-                FALSE;
+                NULL;
 } 
 >>>
 
@@ -16892,7 +16920,12 @@ static long cond_int( n )
 "Missing %s\n",                                       `%50`%
 "Can't back from file ``%s\n'",                        `%51`%
 "\\special{t4ht%s}?\n",                               `%52`%
-"Improper -v option\n",                               `%53`%
+"Improper -v option\n",               // ERR_PAR_V    `%53`%
+"Option -r value out of range: %d\n", // ERR_PAR_R
+"Buffer overflow: %s\n",              // ERR_BUF_OVFL
+"File not found: %s\n",               // ERR_FILE_NFOUND
+"File read error: %s\n",              // ERR_FILE_READ
+"Improper file format: %s\n",         // ERR_FILE_FORMAT
 >>>
 
 \<vars\><<<
