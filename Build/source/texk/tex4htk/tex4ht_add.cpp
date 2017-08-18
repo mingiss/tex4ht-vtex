@@ -23,7 +23,7 @@ HFontPars::HFontPars()
 }
 
 // ------------------------------
-FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name)
+FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *prpars)
 {
     char fmap_fname[PATH_MAX + 40];
     FILE *fmap_file = NULL;
@@ -168,11 +168,13 @@ printf(":::: ieškom: %s\n", fnt_name);
         return NULL;
     }
 
+    if (prpars)
+        *prpars = (HANDLE)ppars;
+
     new_font.char_f = ppars->m_ChFirst;
     new_font.char_l = ppars->m_ChLast;
 
 printf(":::: %s: %d %d\n", fnt_name, ppars->m_ChFirst, ppars->m_ChLast);
 
-    // return pointer to fake .tfm file just not to ruin tfm scanning algorithm
     return fopen("otf.tfm", "rb");
 }

@@ -15,11 +15,7 @@
 using namespace std;
 #endif
 
-#ifdef __cplusplus
-#define PLAIN_C "C"
-#else 
-#define PLAIN_C
-#endif
+#include "kpstdlib.h"
 
 #ifndef PATH_MAX
 #define PATH_MAX 512
@@ -45,6 +41,9 @@ using namespace std;
 #ifndef FALSE
 #define FALSE 0
 #endif
+
+#define DEF_FNT_SIZE_PT 10
+#define DEF_GLYPH_WDT_PT (DEF_FNT_SIZE_PT * 3 / 4)
 
 enum err_codes
 {
@@ -137,7 +136,45 @@ struct font_entry
     char *math, *math_closing;
     INTEGER layout_dir;
     unsigned long rgba_color;
+
+    HANDLE pars; // pointer to OTF font HFontPars object actually
 };
+
+// TODO:
+
+// tikrint kreipinius į:
+// gif1
+// accent
+// accented
+// ch
+// str
+// accent_array
+// accented_array
+
+// tikrint, ar kreipimosi lentelė tab nenulinė ir ar simbolio kodas ch neviršija bitų skaičiaus n_gif_bytes = (n_gif + 7) / 8;
+// add_bit(tab, ch, n)
+// get_bit(tab, ch)
+// store_bit_I(tab, ch)
+// store_bit_Z(tab, ch)
+
+// tikrint, ar simbolio kodas neviršija glifų skaičiaus n_gif
+
+// inicijuot nereikia, sukurti ~255 elementų masyvai, tikrint, ar nesikreipia dideliais kodais
+// char_wi
+// char_hidp
+// wtbl         // dydis: wtbl_n
+// htbl         // dydis: htbl_n
+// dtbl         // dydis: dtbl_n
+
+// fiktyviai inicijuot kai nėra .tfm
+// char_f = 0;
+// char_l = 255;
+// wtbl_n
+// htbl_n
+// dtbl_n
+// accent_N = 0
+// accented_N = 0
+
 
 extern struct font_entry* font_tbl;
 extern int font_tbl_size;
@@ -175,4 +212,7 @@ extern HFontParMap mapHFontParMap;
 // ------------------------------
 // tries to obtain otf font parameters from font mappings provided by luafonts.lua
 // fnt_name -- internal TeX decorated font name
-extern PLAIN_C FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name);
+// return:
+//      pointer to fake .tfm file just not to ruin tfm scanning algorithm of tex4ht
+//      *ppars -- pointer to found or newly created font parameter structure object
+extern PLAIN_C FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *ppars);

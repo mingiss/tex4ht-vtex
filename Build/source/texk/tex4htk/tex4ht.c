@@ -2166,7 +2166,7 @@ tag
    
 {          double x;
    row = (int) ( (y_val>0? y_val : 0.0) / (double) yresolution + 0.5);
-   if((row >= HEIGHT) || (row < 0)){
+   if ((row >= HEIGHT) || (row < 0)){
      if( ok_map ){ warn_i_int_2( 34, row, ch); ok_map = FALSE; }
      return; }
    x = (x_val>0? x_val : 0.0 ) / (double) xresolution + 0.75;
@@ -2662,6 +2662,7 @@ static  struct del_stack_entry* pop_del
 {
    if( del_stack != (struct del_stack_entry*) 0 ){
       if( (cr_fnt ==  del_stack->fnt) &&
+          font_tbl[cr_fnt].math && (ch >= font_tbl[cr_fnt].char_f) && (ch < font_tbl[cr_fnt].char_f) &&
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
                                              struct del_stack_entry  * p;
@@ -3359,6 +3360,11 @@ static  INTEGER set_ch_class
 ;
 #undef SEP
 #endif
+{
+BOOL bad_ch = ((ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l));
+int wt_ix;
+
+if (font_tbl[cur_fnt].math && (!bad_ch))
 {                              int r_ch;
    r_ch = ch - font_tbl[cur_fnt].char_f;
    if( math_class == 
@@ -3372,19 +3378,25 @@ static  INTEGER set_ch_class
       store_bit_Z( font_tbl[cur_fnt].math_closing, r_ch );
       *(font_tbl[cur_fnt].math + r_ch) = math_class;
    }
+
+} // if (font_tbl[cur_fnt].math && (!bad_ch))
+
    open_del = ( math_class == 
 4
 
  )? ch : 256;
    
+
+   if ((font_tbl[cur_fnt].char_wi == NULL) || bad_ch)
+      return DEF_GLYPH_WDT_PT;
+   wt_ix = font_tbl[cur_fnt].char_wi[(ch - font_tbl[cur_fnt].char_f) % 256];
+   if ((font_tbl[cur_fnt].wtbl == NULL) || (wt_ix < 0) || (wt_ix >= font_tbl[cur_fnt].wtbl_n))
+      return DEF_GLYPH_WDT_PT;
+
 return (INTEGER)(
     
 design_size_to_pt( *(font_tbl[cur_fnt].wtbl
-                     +  (int) (
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
-
-) )
+                     + wt_ix)
                  )
 * (double) font_tbl[cur_fnt].scale
 
@@ -3410,7 +3422,8 @@ static  int math_class_of
 #endif
 {                           int math_class;
    math_class = ch - font_tbl[cur_fnt].char_f;
-   return ((get_bit( font_tbl[cur_fnt].math_closing, math_class))?
+   return ((get_bit( font_tbl[cur_fnt].math_closing, math_class)
+              || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l))?
                 
 5
 
@@ -6936,6 +6949,8 @@ char ** fontset=0;
 
 
        BOOL missing_fonts;
+       HANDLE otf_pars = NULL;
+
 #ifndef KPATHSEA
        
 U_CHAR files_cache[PATH_MAX];
@@ -7575,7 +7590,6 @@ new_font.design_sz = (INTEGER) get_unt(4);
 {       FILE *font_file;
         U_CHAR  file_name[256];
 
-        BOOL otf_found;
         int ch_f;
         int ch_l;
 
@@ -7652,13 +7666,9 @@ for( cur_cache_font = cache_font;
 
 }
 
-   otf_found = FALSE;
+   otf_pars = NULL;
    if (font_file == NULL)
-   {
-      font_file = get_otf_fm(new_font_name, job_name);
-font_file = get_otf_fm(new_font_name, job_name);
-      if (font_file) otf_found = TRUE;
-   }
+      font_file = get_otf_fm(new_font_name, job_name, &otf_pars);
 
    if( font_file == NULL ){
       dump_env();      err_i_str(1,file_name);
@@ -7682,7 +7692,7 @@ file_length                    = (INTEGER) fget_int(font_file,2);
 header_length                  = (int) fget_int(font_file,2);
 ch_f = (int) fget_int(font_file,2);
 ch_l = (int) fget_int(font_file,2);
-if (!otf_found)
+if (!otf_pars)
 {
     new_font.char_f = ch_f;
     new_font.char_l = ch_l;
@@ -7701,7 +7711,7 @@ if ((file_length != ( 6                + header_length
      + new_font.dtbl_n              + it_correction_table_length
      + lig_kern_table_length        + kern_table_length
      + extensible_char_table_length + num_font_parameters  )) &&
-    (!otf_found)
+    (!otf_pars)
   ){ err_i_str(15,file_name); }
 
 
@@ -7910,6 +7920,26 @@ loopName[0] = '\0';
    n_gif = new_font.char_l - new_font.char_f + 1;
    new_font.ch255 = 0;
    
+new_font.gif_on = NULL;
+new_font.ch_str = NULL;
+new_font.math_closing = NULL;
+new_font.math = NULL;
+new_font.gif1 = NULL;
+new_font.accent = NULL;
+new_font.accented = NULL;
+new_font.ch = NULL;
+new_font.str = NULL;
+
+new_font.accent_array = (unsigned int *) 0;
+new_font.accented_array = (unsigned int *) 0;
+new_font.accent_N = new_font.accented_N = 0;
+
+new_font.pars = otf_pars;
+
+// ------------------------------------------------------------
+if (!otf_pars)
+{
+
 {     int n_gif_bytes;
    n_gif_bytes = (n_gif + 7) / 8;
    new_font.gif_on = m_alloc(char, n_gif_bytes );
@@ -7937,9 +7967,7 @@ new_font.math[i] =
    
 new_font.accent = m_alloc(unsigned char, n_gif );
 new_font.accented = m_alloc(unsigned char, n_gif );
-new_font.accent_array = (unsigned int *) 0;
-new_font.accented_array = (unsigned int *) 0;
-new_font.accent_N = new_font.accented_N = 0;
+
 for( i=n_gif; i--; ) {
    new_font.accent[i] = new_font.accented[i] = 0;
 }
@@ -8315,6 +8343,10 @@ if( dump_htf_files ){
 if( dump_env_files ){ dump_env(); }
 
  }
+
+} // if (!otf_pars)
+// ---------------------------------------------
+
 }
 
 
@@ -8327,12 +8359,15 @@ for( i = fonts_n; i--; )
      free((void *)  new_font.gif1 ); new_font.gif1= font_tbl[ k ].gif1;
      free((void *)  new_font.ch );   new_font.ch  = font_tbl[ k ].ch;
      free((void *)  new_font.str );  new_font.str = font_tbl[ k ].str;
-     free((void *)  new_font.ch_str );
+     if (new_font.ch_str)
+        free((void *)  new_font.ch_str );
                                new_font.ch_str = font_tbl[ k ].ch_str;
      
-free((void *)  new_font.math_closing );
+     if (new_font.math_closing)
+        free((void *)  new_font.math_closing );
            new_font.math_closing = font_tbl[ k ].math_closing;
-free((void *)  new_font.math );
+     if (new_font.math)
+        free((void *)  new_font.math );
                            new_font.math = font_tbl[ k ].math;
 
 
