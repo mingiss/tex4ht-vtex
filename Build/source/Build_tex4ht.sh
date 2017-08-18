@@ -3,6 +3,12 @@
 # export distribution=2010
 export distribution=2016
 
+cd tex4ht-lit
+# errors here could be ignored
+tex4ht-c.sh
+cd ..
+cp tex4ht-lit/tex4ht.c texk/tex4htk/tex4ht.c
+
 # if [ ! -f configure.orig ]; then cp configure configure.orig; fi
 # sed 's/\$SHELL \$CONFIG_STATUS/cp \$CONFIG_STATUS \$CONFIG_STATUS.tmp; python \.\.\/cvt_config\.py < \$CONFIG_STATUS\.tmp \> \$CONFIG_STATUS; \$SHELL \$CONFIG_STATUS/' < configure.orig > configure
 

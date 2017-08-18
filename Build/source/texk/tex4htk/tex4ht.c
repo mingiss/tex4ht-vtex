@@ -1,6 +1,6 @@
 
-/* tex4ht.c (2012-07-25-19:36), generated from tex4ht-c.tex
-   Copyright (C) 2009-2016 TeX Users Group
+/* tex4ht.c (2017-08-18-15:43), generated from tex4ht-c.tex
+   Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
 %
@@ -1054,7 +1054,7 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-F<ch-code>]        replacement for missing font characters; 0--255; default 0\n"
 "   [-g<bitmap-file-ext>]\n"
 "   [-h(e|f|F|g|s|v|V)]  trace: e-errors/warnings, f-htf, F-htf search\n"
-"                            g-groups, s-specials, v-env, V-env search\n"
+"                             g-groups, s-specials, v-env, V-env search, A-all\n"
 "   [-i<htf-font-dir>]\n"
 "   [-l<bookkeeping-file>]\n"
 "   [-P(*|<filter>)]     permission for system calls: *-always, filter\n"
@@ -3402,7 +3402,11 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
 return (INTEGER)(
     
 design_size_to_pt( *(font_tbl[cur_fnt].wtbl
-                     + wt_ix)
+                     +  (int) (
+*(font_tbl[cur_fnt].char_wi +  (int)
+   ( ch - font_tbl[cur_fnt].char_f)% 256)
+
+) )
                  )
 * (double) font_tbl[cur_fnt].scale
 
@@ -6015,15 +6019,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2012-07-25-19:36 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-18-15:43 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2012-07-25-19:36)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-18-15:43)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2012-07-25-19:36 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-18-15:43 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2012-07-25-19:36 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-18-15:43 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -6174,24 +6178,25 @@ gif = p+2;
 
       break; }
   case 'h':{ 
-switch( *(p+2) ){
-  case 'e':{ 
+{
+  char trace = *(p+2);
+  if (trace == 'A' || trace == 'e') { 
 err_context = TRUE;
 
-  break; }
-  case 'f':{ 
+ }
+  if (trace == 'A' || trace == 'f') { 
 dump_htf_files = 1;
 
-  break; }
-  case 'F':{ 
+ }
+  if (trace == 'A' || trace == 'F') { 
 dump_htf_search = TRUE;
 
-  break; }
-  case 's':{ 
+ }
+  if (trace == 'A' || trace == 's') { 
 trace_special = TRUE;
 
-  break;}
-  case 'g':{ 
+ }
+  if (trace == 'A' || trace == 'g') { 
 trace_dvi_P++;
 if( !(   *trace_dvi_del_P || *end_trace_dvi_del_P
       || *trace_dvi_del_p || *end_trace_dvi_del_p
@@ -6215,16 +6220,16 @@ if( !(   *trace_dvi_del_P || *end_trace_dvi_del_P
    (IGNORED) strcpy((char *) end_trace_dvi_del_p, "]" );
 }
 
-  break;}
-  case 'v':{ 
+ }
+  if (trace == 'A' || trace == 'v') { 
 dump_env_files = TRUE;
 
-  break; }
-  case 'V':{ 
+ }
+  if (trace == 'A' || trace == 'V') { 
 dump_env_search = TRUE;
 
-  break; }
-   default:{ bad_arg; }
+ }
+  else { bad_arg; }
 }
 
   break; }
@@ -6575,10 +6580,11 @@ envfile= kpse_find_file ("tex4ht.env", kpse_program_text_format, 0);
 
  }
   if ( !envfile ){ 
+#define KPSEWHICH_CMD "kpsewhich --progname=tex4ht --format=othertext tex4ht.env"
 if( dump_env_search ){
-  (IGNORED) printf("system(\"kpsewhich --progname=tex4ht tex4ht.env\")?\n");
+  (IGNORED) printf("system(" KPSEWHICH_CMD ")?\n"); /* cpp concatenation */
 }
-if( system("kpsewhich --progname=tex4ht tex4ht.env > tex4ht.tmp") == 0 ){
+if( system(KPSEWHICH_CMD ">tex4ht.tmp") == 0 ){
    
 char fileaddr [256];
 int loc = 0;
@@ -6595,7 +6601,7 @@ if( file ){
    envfile= kpse_find_file (fileaddr, kpse_program_text_format, 0);
    if( envfile ){
       warn_i_str( 50,
-          "search support for kpse_find_file--unsing system kpsewhich calls instead");
+          "search support for kpse_find_file--using kpsewhich calls instead");
 }  }
 
  }
@@ -6613,15 +6619,14 @@ if( file ){
 #endif
 
 
-   if( !dot_file ) warn_i_str( 1, 
+   if( !dot_file ) { bad_in_file(
 #ifdef  DOS_WIN32
    "tex4ht.env"
-#endif
-#ifndef  DOS_WIN32
+#else
    "tex4ht.env | .tex4ht"
 #endif
 
-);
+); } /* give up if no tex4ht.env */
 }
 
 
@@ -6856,8 +6861,8 @@ if( (i<4)
     ||
     ((ch != 
 2 
-) && (ch >
-10
+) && (ch != 
+5
 
 ))
   )  bad_dvi;
@@ -7975,7 +7980,9 @@ new_font.math[i] =
    
 new_font.accent = m_alloc(unsigned char, n_gif );
 new_font.accented = m_alloc(unsigned char, n_gif );
-
+// new_font.accent_array = (unsigned int *) 0;
+// new_font.accented_array = (unsigned int *) 0;
+// new_font.accent_N = new_font.accented_N = 0;
 for( i=n_gif; i--; ) {
    new_font.accent[i] = new_font.accented[i] = 0;
 }
@@ -9183,7 +9190,7 @@ for( i = (INTEGER) get_unt(1)
 if( flags & 
 0x0200
 
- ){ (void) get_unt(4); }
+ ){ (INTEGER) get_unt(4); }
 if( flags & 
 0x0800
 
