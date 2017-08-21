@@ -143,9 +143,6 @@ struct font_entry
 // TODO:
 
 // tikrint kreipinius į:
-// gif1
-// accent
-// accented
 // ch
 // str
 // accent_array

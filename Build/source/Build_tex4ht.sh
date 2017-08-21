@@ -5,7 +5,7 @@ export distribution=2016
 
 cd tex4ht-lit
 # errors here could be ignored
-tex4ht-c.sh
+./tex4ht-c.sh
 cd ..
 cp tex4ht-lit/tex4ht.c texk/tex4htk/tex4ht.c
 

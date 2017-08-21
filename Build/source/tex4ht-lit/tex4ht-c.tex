@@ -10761,7 +10761,11 @@ Does \`'verb_ch' correspond to \''\Char'?
    int gif_flag, chr, r_ch;
     BOOL  ch_str_flag;
 r_ch = ch - font_tbl[cur_fnt].char_f;
-gif_flag = font_tbl[cur_fnt].gif1[r_ch];
+
+gif_flag = FALSE;
+if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
+    gif_flag = font_tbl[cur_fnt].gif1[r_ch];
+
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
                          *(font_tbl[cur_fnt].ch + r_ch);
@@ -12297,21 +12301,32 @@ if( in_accenting ){
 } else if( `<is accent char?`> ){
   if( needs_accent_sym ){
                                         BOOL needs_end_accent;
+                                        BOOL acc_avail;
+                                        int acc_ix = 1;
     needs_end_accent = (needs_accent_sym == 2 * TRUE);
+    acc_avail = (font_tbl[cur_fnt].accent
+      && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
+      && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
+      );
+    if (acc_avail)
+    {
+        acc_ix = font_tbl[cur_fnt].accent[ch]; // font_tbl[cur_fnt].accent[ch - font_tbl[cur_fnt].char_f]; ???
+        acc_avail = (font_tbl[cur_fnt].accent_array && (acc_ix > 0) && (acc_ix <= font_tbl[cur_fnt].accent_N));
+    }
     if( needs_end_accent && t_accent_template ){
       (IGNORED) fprintf(cur_o_file, "%s%s%s%d%s%d%s",
          t_accent_first,   font_tbl[cur_fnt].family_name, 
          t_accent_second, ch, t_accent_third,
-         font_tbl[cur_fnt].accent[ch]? 
-           font_tbl[cur_fnt].accent_array[font_tbl[cur_fnt].accent[ch]-1]
+         acc_avail? 
+           font_tbl[cur_fnt].accent_array[acc_ix - 1]
            : 0,
          t_accent_fourth); 
     } else if( m_accent_template ){
       (IGNORED) fprintf(cur_o_file, "%s%s%s%d%s%d%s",
          m_accent_first,   font_tbl[cur_fnt].family_name, 
          m_accent_second, ch, m_accent_third,
-         font_tbl[cur_fnt].accent[ch]? 
-           font_tbl[cur_fnt].accent_array[font_tbl[cur_fnt].accent[ch]-1]
+         acc_avail? 
+           font_tbl[cur_fnt].accent_array[acc_ix - 1]
            : 0,
          m_accent_fourth); 
     }
@@ -12473,11 +12488,22 @@ static void get_open_accent(all,first,second,third,fourth,fifth,n)
 
 \<mark accented ch\><<<
 if( a_accent_template && needs_accented_sym ){
+                                        BOOL acc_avail;
+                                        int acc_ix = 1;
+  acc_avail = (font_tbl[cur_fnt].accented
+      && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
+      && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
+      );
+  if (acc_avail)
+  {
+        acc_ix = font_tbl[cur_fnt].accented[ch]; // font_tbl[cur_fnt].accented[ch - font_tbl[cur_fnt].char_f]; ???
+        acc_avail = (font_tbl[cur_fnt].accented_array && (acc_ix > 0) && (acc_ix <= font_tbl[cur_fnt].accented_N));
+  }
   (IGNORED) fprintf(cur_o_file, "%s%s%s%d%s%d%s",
      a_accent_first,   font_tbl[cur_fnt].family_name, 
      a_accent_second, ch, a_accent_third,
-     font_tbl[cur_fnt].accented[ch]? 
-       font_tbl[cur_fnt].accented_array[font_tbl[cur_fnt].accented[ch]-1]
+     acc_avail? 
+       font_tbl[cur_fnt].accented_array[acc_ix - 1]
        : 0,
      a_accent_fourth); 
 }
@@ -12716,7 +12742,7 @@ static INTEGER set_ch_class( ARG_I(int) );
 `[ 
 static  INTEGER set_ch_class(ch)    int ch
 ;{
-BOOL bad_ch = ((ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l));
+BOOL bad_ch = ((ch < font_tbl[cur_fnt].char_f) || (ch > font_tbl[cur_fnt].char_l));
 int wt_ix;
 
 if (font_tbl[cur_fnt].math && (!bad_ch))
@@ -12788,7 +12814,7 @@ static  int math_class_of(ch,cur_fnt)    int ch`; int cur_fnt
 ;{                           int math_class;
    math_class = ch - font_tbl[cur_fnt].char_f;
    return ((get_bit( font_tbl[cur_fnt].math_closing, math_class)
-              || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l))?
+              || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch > font_tbl[cur_fnt].char_l))?
                 `<math close`> : *( math_class + font_tbl[cur_fnt].math));
 
 }

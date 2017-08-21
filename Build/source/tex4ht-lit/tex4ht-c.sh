@@ -1,3 +1,5 @@
 #! /bin/sh
 
-vtex 2010 luatex_dvi tex4ht-c.tex
+export runtex_options="--interaction=batchmode"
+
+vtex 2016 luatex_dvi tex4ht-c.tex

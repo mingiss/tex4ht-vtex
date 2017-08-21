@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-18-15:43), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-21-09:53), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -3367,7 +3367,7 @@ static  INTEGER set_ch_class
 #undef SEP
 #endif
 {
-BOOL bad_ch = ((ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l));
+BOOL bad_ch = ((ch < font_tbl[cur_fnt].char_f) || (ch > font_tbl[cur_fnt].char_l));
 int wt_ix;
 
 if (font_tbl[cur_fnt].math && (!bad_ch))
@@ -3433,7 +3433,7 @@ static  int math_class_of
 {                           int math_class;
    math_class = ch - font_tbl[cur_fnt].char_f;
    return ((get_bit( font_tbl[cur_fnt].math_closing, math_class)
-              || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch >= font_tbl[cur_fnt].char_l))?
+              || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch > font_tbl[cur_fnt].char_l))?
                 
 5
 
@@ -4752,11 +4752,22 @@ design_size_to_pt( *(font_tbl[cur_fnt].dtbl
 
 
 if( a_accent_template && needs_accented_sym ){
+                                        BOOL acc_avail;
+                                        int acc_ix = 1;
+  acc_avail = (font_tbl[cur_fnt].accented
+      && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
+      && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
+      );
+  if (acc_avail)
+  {
+        acc_ix = font_tbl[cur_fnt].accented[ch]; // font_tbl[cur_fnt].accented[ch - font_tbl[cur_fnt].char_f]; ???
+        acc_avail = (font_tbl[cur_fnt].accented_array && (acc_ix > 0) && (acc_ix <= font_tbl[cur_fnt].accented_N));
+  }
   (IGNORED) fprintf(cur_o_file, "%s%s%s%d%s%d%s",
      a_accent_first,   font_tbl[cur_fnt].family_name,
      a_accent_second, ch, a_accent_third,
-     font_tbl[cur_fnt].accented[ch]?
-       font_tbl[cur_fnt].accented_array[font_tbl[cur_fnt].accented[ch]-1]
+     acc_avail?
+       font_tbl[cur_fnt].accented_array[acc_ix - 1]
        : 0,
      a_accent_fourth);
 }
@@ -4789,7 +4800,11 @@ if( keepChar ){
    int gif_flag, chr, r_ch;
     BOOL  ch_str_flag;
 r_ch = ch - font_tbl[cur_fnt].char_f;
-gif_flag = font_tbl[cur_fnt].gif1[r_ch];
+
+gif_flag = FALSE;
+if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
+    gif_flag = font_tbl[cur_fnt].gif1[r_ch];
+
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
                          *(font_tbl[cur_fnt].ch + r_ch);
@@ -5086,7 +5101,11 @@ if( no_root_file ){  open_o_file(); }
    int gif_flag, chr, r_ch;
     BOOL  ch_str_flag;
 r_ch = ch - font_tbl[cur_fnt].char_f;
-gif_flag = font_tbl[cur_fnt].gif1[r_ch];
+
+gif_flag = FALSE;
+if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
+    gif_flag = font_tbl[cur_fnt].gif1[r_ch];
+
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
                          *(font_tbl[cur_fnt].ch + r_ch);
@@ -6019,15 +6038,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-18-15:43 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-21-09:53 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-18-15:43)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-21-09:53)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-18-15:43 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-21-09:53 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-18-15:43 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-21-09:53 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -8969,21 +8988,32 @@ needs_accent_sym && (ch < 128)
  ){
   if( needs_accent_sym ){
                                         BOOL needs_end_accent;
+                                        BOOL acc_avail;
+                                        int acc_ix = 1;
     needs_end_accent = (needs_accent_sym == 2 * TRUE);
+    acc_avail = (font_tbl[cur_fnt].accent
+      && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
+      && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
+      );
+    if (acc_avail)
+    {
+        acc_ix = font_tbl[cur_fnt].accent[ch]; // font_tbl[cur_fnt].accent[ch - font_tbl[cur_fnt].char_f]; ???
+        acc_avail = (font_tbl[cur_fnt].accent_array && (acc_ix > 0) && (acc_ix <= font_tbl[cur_fnt].accent_N));
+    }
     if( needs_end_accent && t_accent_template ){
       (IGNORED) fprintf(cur_o_file, "%s%s%s%d%s%d%s",
          t_accent_first,   font_tbl[cur_fnt].family_name,
          t_accent_second, ch, t_accent_third,
-         font_tbl[cur_fnt].accent[ch]?
-           font_tbl[cur_fnt].accent_array[font_tbl[cur_fnt].accent[ch]-1]
+         acc_avail?
+           font_tbl[cur_fnt].accent_array[acc_ix - 1]
            : 0,
          t_accent_fourth);
     } else if( m_accent_template ){
       (IGNORED) fprintf(cur_o_file, "%s%s%s%d%s%d%s",
          m_accent_first,   font_tbl[cur_fnt].family_name,
          m_accent_second, ch, m_accent_third,
-         font_tbl[cur_fnt].accent[ch]?
-           font_tbl[cur_fnt].accent_array[font_tbl[cur_fnt].accent[ch]-1]
+         acc_avail?
+           font_tbl[cur_fnt].accent_array[acc_ix - 1]
            : 0,
          m_accent_fourth);
     }
