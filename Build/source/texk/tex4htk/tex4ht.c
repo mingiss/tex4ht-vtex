@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-21-09:53), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-21-11:46), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -3218,8 +3218,12 @@ static void  put_alt_ch
 {
    if( !ch_str_flag ) put_char( chr );
    else if( chr > 0 ){ 
-    unsigned U_CHAR * p;
-p = font_tbl[cur_fnt].str[chr-1];
+    unsigned U_CHAR * p = NULL;
+if (font_tbl[cur_fnt].str && (chr > 0) &&
+    (chr <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f /* + 1 ??? */)) // (chr <= design_n)) ???
+        p = font_tbl[cur_fnt].str[chr-1];
+if (p)
+{
 if( gif_ch )  print_f( (char *) p );  
 else while( *p ){
   switch( *p ){
@@ -3229,6 +3233,7 @@ else while( *p ){
    case '\'':  { p++;  break; }
     default:   { put_char( (int) *p  ) ; p++; }
 } }
+}
 
  }
 }
@@ -4807,7 +4812,8 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
-                         *(font_tbl[cur_fnt].ch + r_ch);
+                ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+                         *(font_tbl[cur_fnt].ch + r_ch) : 32);
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { 
       U_CHAR  str[256], *p;
@@ -5108,7 +5114,8 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
-                         *(font_tbl[cur_fnt].ch + r_ch);
+                ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+                         *(font_tbl[cur_fnt].ch + r_ch) : 32);
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { 
       U_CHAR  str[256], *p;
@@ -6038,15 +6045,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-21-09:53 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-21-11:46 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-21-09:53)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-21-11:46)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-21-09:53 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-21-11:46 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-21-09:53 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-21-11:46 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -8328,11 +8335,14 @@ new_font.accented[i] = new_font.accented_N;
 
       
 add_bit( new_font.ch_str, i, j!=2 );
+if (new_font.ch && (i >= 0) && (i <= new_font.char_l - new_font.char_f))
 switch( j ){
   case 1: { new_font.ch[i] = 0;    break; }
   case 2: { new_font.ch[i] = *str; break; }
   default: {                           unsigned U_CHAR  *p;
-    new_font.str[design_n] = p = m_alloc(unsigned char, j);
+    p = m_alloc(unsigned char, j);
+    if (new_font.str && (design_n >= 0) && (design_n <= new_font.char_l - new_font.char_f))
+            new_font.str[design_n] = p;
     if( design_n>255 ){ design_n--; warn_i(35);}
     if( i==255 ){
        if( design_n == 255 ){

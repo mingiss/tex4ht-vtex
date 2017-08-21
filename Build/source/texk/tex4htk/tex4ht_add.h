@@ -142,12 +142,6 @@ struct font_entry
 
 // TODO:
 
-// tikrint kreipinius į:
-// ch
-// str
-// accent_array
-// accented_array
-
 // tikrint, ar kreipimosi lentelė tab nenulinė ir ar simbolio kodas ch neviršija bitų skaičiaus n_gif_bytes = (n_gif + 7) / 8;
 // add_bit(tab, ch, n)
 // get_bit(tab, ch)

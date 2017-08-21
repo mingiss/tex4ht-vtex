@@ -10470,11 +10470,14 @@ one.
 
 \<store html character\><<<
 add_bit( new_font.ch_str, i, j!=2 );
+if (new_font.ch && (i >= 0) && (i <= new_font.char_l - new_font.char_f))
 switch( j ){
   case 1: { new_font.ch[i] = 0;    break; }
   case 2: { new_font.ch[i] = *str; break; }  
   default: {                           unsigned U_CHAR  *p;
-    new_font.str[design_n] = p = m_alloc(unsigned char, j);
+    p = m_alloc(unsigned char, j);
+    if (new_font.str && (design_n >= 0) && (design_n <= new_font.char_l - new_font.char_f))
+            new_font.str[design_n] = p;
     if( design_n>255 ){ design_n--; warn_i(35);}
     if( i==255 ){
        if( design_n == 255 ){
@@ -10768,7 +10771,8 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
-                         *(font_tbl[cur_fnt].ch + r_ch);
+                ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+                         *(font_tbl[cur_fnt].ch + r_ch) : 32);
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { `<insert design chr`> } design_ch = 0;    }
 else { `<insert standard char`> }
@@ -11449,8 +11453,12 @@ Within that range, used in ALT's, we want to eliminate the html
 comamnds \`'<...>' and the delimiter characters \`'"'.
 
 \<put htf char string\><<<
-    unsigned U_CHAR * p;
-p = font_tbl[cur_fnt].str[chr-1];
+    unsigned U_CHAR * p = NULL;
+if (font_tbl[cur_fnt].str && (chr > 0) &&
+    (chr <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f /* + 1 ??? */)) // (chr <= design_n)) ???
+        p = font_tbl[cur_fnt].str[chr-1];
+if (p)
+{
 if( gif_ch )  print_f( (char *) p );  `% /*new*/`%
 else while( *p ){
   switch( *p ){
@@ -11460,6 +11468,7 @@ else while( *p ){
    case '\'':  { p++;  break; }
     default:   { put_char( (int) *p  ) ; p++; }
 } }
+}
 >>>
 
 %     case '&':  { alt_ch_length = strlen((char *) p); }
