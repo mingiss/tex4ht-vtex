@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-21-11:46), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-21-13:02), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -382,10 +382,10 @@ struct halign_rec{
 #define BASE  36
 
 
-#define store_bit_I(ch,i)  ch[(i)/8]|=(1<<((i)%8));
-#define store_bit_Z(ch,i)  ch[(i)/8]&=~(1<<((i)%8))
-#define add_bit(ch,i,b)   ch[(i)/8] |= ((b) << ((i)%8))
-#define get_bit(ch,i)     ((ch[(i)/8] >> ((i)%8)) & 1)
+#define store_bit_I(ch, i, size) { if (ch && (i >= 0) && (i < size)) ch[(i) / 8] |= (1 << ((i) % 8)); }
+#define store_bit_Z(ch, i, size) { if (ch && (i >= 0) && (i < size)) ch[(i) / 8] &= ~(1 << ((i) % 8)); }
+#define add_bit(ch, i, b, size)  { if (ch && (i >= 0) && (i < size)) ch[(i) / 8] |= ((b) << ((i) % 8)); }
+#define get_bit(ch, i, size)     ( (ch && (i >= 0) && (i < size))? (((ch[(i) / 8] >> ((i) % 8)) & 1)) : 0 )
 
 
 #define gif_open  span_open
@@ -943,7 +943,7 @@ static BOOL not_notify = FALSE;
 static U_CHAR * span_name[256], * span_open[256], * span_size[256],
      * span_mag[256],  * span_ch[256],   * end_span[256],
      * span_ord[256],  * gif_id[256];
-static U_CHAR class_on[32];
+static U_CHAR class_on[CLASS_ON_SIZE];
 
 
 static BOOL needs_accent_sym = FALSE,  needs_end_accent = FALSE;
@@ -3382,11 +3382,11 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
 5
 
  ){
-      store_bit_I( font_tbl[cur_fnt].math_closing, r_ch );
+      store_bit_I( font_tbl[cur_fnt].math_closing, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
       *(font_tbl[cur_fnt].math + r_ch) =
               (char) ((open_del == 256)?  ch : open_del);
    } else {
-      store_bit_Z( font_tbl[cur_fnt].math_closing, r_ch );
+      store_bit_Z( font_tbl[cur_fnt].math_closing, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
       *(font_tbl[cur_fnt].math + r_ch) = math_class;
    }
 
@@ -3437,7 +3437,7 @@ static  int math_class_of
 #endif
 {                           int math_class;
    math_class = ch - font_tbl[cur_fnt].char_f;
-   return ((get_bit( font_tbl[cur_fnt].math_closing, math_class)
+   return ((get_bit( font_tbl[cur_fnt].math_closing, math_class, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1))
               || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch > font_tbl[cur_fnt].char_l))?
                 
 5
@@ -4810,7 +4810,7 @@ gif_flag = FALSE;
 if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
     gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
-ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
+ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
                 ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
                          *(font_tbl[cur_fnt].ch + r_ch) : 32);
@@ -4860,9 +4860,9 @@ gif_id[gif_flag] = gif_open[gif_flag]+28;
   *(gif_id[gif_flag] - 1) = '\0';
 
 
-   } else if( !get_bit( class_on, gif_flag ) ) {
+   } else if( !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
       notify_class_info(gif_flag);
-      store_bit_I( class_on, gif_flag );
+      store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
    }
    
 p= gif_open[gif_flag];
@@ -4889,7 +4889,7 @@ if( dos_file_names ){
 
 
    print_f(str);
-   add_bit( font_tbl[cur_fnt].gif_on, r_ch, 1 );
+   add_bit( font_tbl[cur_fnt].gif_on, r_ch, 1, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
 }
 
 
@@ -4944,9 +4944,9 @@ if( !gif_flag || (gif_flag % 2)  || ch_map_flag ) {
    put_alt_ch(chr,ch_str_flag);  }
 else{ 
 
-if( gif_flag && !get_bit( class_on, gif_flag ) ) {
+if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
-  store_bit_I( class_on, gif_flag );
+  store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
 }
 
 
@@ -5022,9 +5022,9 @@ if( no_root_file ){  open_o_file(); }
 
 
 
-if( gif_flag && !get_bit( class_on, gif_flag ) ) {
+if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
-  store_bit_I( class_on, gif_flag );
+  store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
 }
 
 
@@ -5112,7 +5112,7 @@ gif_flag = FALSE;
 if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
     gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
-ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch);
+ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
                 ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
                          *(font_tbl[cur_fnt].ch + r_ch) : 32);
@@ -5162,9 +5162,9 @@ gif_id[gif_flag] = gif_open[gif_flag]+28;
   *(gif_id[gif_flag] - 1) = '\0';
 
 
-   } else if( !get_bit( class_on, gif_flag ) ) {
+   } else if( !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
       notify_class_info(gif_flag);
-      store_bit_I( class_on, gif_flag );
+      store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
    }
    
 p= gif_open[gif_flag];
@@ -5191,7 +5191,7 @@ if( dos_file_names ){
 
 
    print_f(str);
-   add_bit( font_tbl[cur_fnt].gif_on, r_ch, 1 );
+   add_bit( font_tbl[cur_fnt].gif_on, r_ch, 1, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
 }
 
 
@@ -5246,9 +5246,9 @@ if( !gif_flag || (gif_flag % 2)  || ch_map_flag ) {
    put_alt_ch(chr,ch_str_flag);  }
 else{ 
 
-if( gif_flag && !get_bit( class_on, gif_flag ) ) {
+if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
-  store_bit_I( class_on, gif_flag );
+  store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
 }
 
 
@@ -5324,9 +5324,9 @@ if( no_root_file ){  open_o_file(); }
 
 
 
-if( gif_flag && !get_bit( class_on, gif_flag ) ) {
+if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
-  store_bit_I( class_on, gif_flag );
+  store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
 }
 
 
@@ -6045,15 +6045,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-21-11:46 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-21-13:02 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-21-11:46)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-21-13:02)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-21-11:46 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-21-13:02 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-21-11:46 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-21-13:02 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -6115,8 +6115,8 @@ margin_sp = (double) MARGINSP;
      span_name[i] = span_open[i] = span_size[i] =
      span_mag[i]  = span_ch[i]   = end_span[i]  =
      span_ord[i]  = gif_id[i] = NULL;
-       if( (i>0) && !(i%2) ) {  store_bit_Z( class_on, i ); }
-       else {   store_bit_I( class_on, i ); }
+       if( (i>0) && !(i%2) ) {  store_bit_Z( class_on, i, CLASS_ON_SIZE); }
+       else {   store_bit_I( class_on, i, CLASS_ON_SIZE); }
     }
 }
 
@@ -8334,7 +8334,7 @@ new_font.accented[i] = new_font.accented_N;
 
 
       
-add_bit( new_font.ch_str, i, j!=2 );
+add_bit( new_font.ch_str, i, j!=2, (new_font.char_l - new_font.char_f + 1));
 if (new_font.ch && (i >= 0) && (i <= new_font.char_l - new_font.char_f))
 switch( j ){
   case 1: { new_font.ch[i] = 0;    break; }
@@ -10478,9 +10478,9 @@ if( n>
       span_ch[m]   = t[5];  end_span[m]  = t[6];
       gif_id[m]   = t[7];
       if( not_notify ) {
-        store_bit_I( class_on, m );
+        store_bit_I( class_on, m, CLASS_ON_SIZE);
         not_notify = FALSE;
-      } else   store_bit_Z( class_on, m );
+      } else   store_bit_Z( class_on, m, CLASS_ON_SIZE);
    }
 }
 if( bad_str ){  warn_i_str(37,err_str); }
@@ -12448,7 +12448,7 @@ if( errCode > 0 ){
 
       for( i = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
            i--; )
-         if( get_bit( font_tbl[cur_fnt].gif_on, i) ){
+         if( get_bit( font_tbl[cur_fnt].gif_on, i, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1)) ){
             bop_addr = advance_idv_page( bop_addr, cur_font );
             set_loc( 
 143 

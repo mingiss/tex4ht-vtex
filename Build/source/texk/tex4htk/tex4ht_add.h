@@ -45,6 +45,8 @@ using namespace std;
 #define DEF_FNT_SIZE_PT 10
 #define DEF_GLYPH_WDT_PT (DEF_FNT_SIZE_PT * 3 / 4)
 
+#define CLASS_ON_SIZE 32
+
 enum err_codes
 {
 ERR_HELP,
@@ -141,14 +143,6 @@ struct font_entry
 };
 
 // TODO:
-
-// tikrint, ar kreipimosi lentelė tab nenulinė ir ar simbolio kodas ch neviršija bitų skaičiaus n_gif_bytes = (n_gif + 7) / 8;
-// add_bit(tab, ch, n)
-// get_bit(tab, ch)
-// store_bit_I(tab, ch)
-// store_bit_Z(tab, ch)
-
-// tikrint, ar simbolio kodas neviršija glifų skaičiaus n_gif
 
 // inicijuot nereikia, sukurti ~255 elementų masyvai, tikrint, ar nesikreipia dideliais kodais
 // char_wi
