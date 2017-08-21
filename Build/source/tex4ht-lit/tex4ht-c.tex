@@ -9798,10 +9798,14 @@ margin_sp = (double) MARGINSP;     `%/ (double)(1L<<20) * (double) 655360;`%
 if( new_font.word_sp == 0 ) {
         int i;
   for( i = new_font.char_f; i <= new_font.char_l; i++ ){
+    INTEGER wdt = 0;
+    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l - new_font.char_f))
+        wdt = new_font.char_wi[i - new_font.char_f];
     new_font.word_sp = 
       ( new_font.word_sp
        +
-        *(new_font.wtbl + (int)(*(new_font.char_wi + i - new_font.char_f)))
+        ( (new_font.wtbl && (wdt >= 0) && (wdt < new_font.wtbl_n))?
+            new_font.wtbl[wdt] : 0 )
       )  / (new_font.char_f<i? 2:1);
   } }
 if( new_font.word_sp == 0 )  new_font.word_sp = MARGINSP; `%fix`%
@@ -9850,29 +9854,31 @@ return (INTEGER)(
 
 
 \<(double) char_width( chr )\><<<
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl + 
-                  (int) `<chr width of`>) )
-* (double) font_tbl[cur_fnt].scale 
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (`<chr width of`> >= 0) && (`<chr width of`> < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[`<chr width of`>] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 >>>
 
 
 \<chr width of\><<<
-*(font_tbl[cur_fnt].char_wi +
-       (chr - font_tbl[cur_fnt].char_f)% 256)
+( (font_tbl[cur_fnt].char_wi && (chr >= font_tbl[cur_fnt].char_f) && (chr <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(chr - font_tbl[cur_fnt].char_f) % 256] : 0 )
 >>>
 
 
 
 \<(double) char_width( design_ch? design_ch : ch )\><<<
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl 
-                 +  (int) (`<design-ch / ch width of`>)) )
-   * (double) font_tbl[cur_fnt].scale
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (`<design-ch / ch width of`> >= 0) && (`<design-ch / ch width of`> < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[`<design-ch / ch width of`>] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 >>>
 
 
 \<design-ch / ch width of\><<<
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( (design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f)% 256)
+( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % 256] : 0 )
 >>>
 
 
@@ -9880,16 +9886,16 @@ design_size_to_pt( *(font_tbl[cur_fnt].wtbl
 
 
 \<(double) char_width( ch )\><<<
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl 
-                     +  (int) (`<ch of width`>) )
-                 )  
-* (double) font_tbl[cur_fnt].scale
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (`<ch of width`> >= 0) && (`<ch of width`> < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[`<ch of width`>] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 >>>
 
 
 \<ch of width\><<<
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 >>>
 
 
@@ -9903,16 +9909,16 @@ design_size_to_pt( *(font_tbl[cur_fnt].wtbl
 
 
 \<(double) char_height( ch )\><<<
-design_size_to_pt( *(font_tbl[cur_fnt].htbl 
-                 +  (int) (`<ch of height`>)) )
-   * (double) font_tbl[cur_fnt].scale
+design_size_to_pt( (font_tbl[cur_fnt].htbl && (`<ch of height`> >= 0) && (`<ch of height`> < font_tbl[cur_fnt].htbl_n))?
+    font_tbl[cur_fnt].htbl[`<ch of height`>] : 0 )
+        * (double) font_tbl[cur_fnt].scale
 >>>
 
 
 \<ch of height\><<<
-( *(font_tbl[cur_fnt].char_hidp +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
-  >>  4
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+        >>  4
 ) & 0x0F
 >>>
 
@@ -9927,15 +9933,15 @@ design_size_to_pt( *(font_tbl[cur_fnt].htbl
 
 
 \<(double) char_depth( ch )\><<<
-design_size_to_pt( *(font_tbl[cur_fnt].dtbl 
-                 +  (int) (`<ch of depth`>)) )
-* (double) font_tbl[cur_fnt].scale
+design_size_to_pt( (font_tbl[cur_fnt].dtbl && (`<ch of depth`> >= 0) && (`<ch of depth`> < font_tbl[cur_fnt].dtbl_n))?
+    font_tbl[cur_fnt].dtbl[`<ch of depth`>] : 0 )
+        * (double) font_tbl[cur_fnt].scale
 >>>
 
 
 \<ch of depth\><<<
-( *(font_tbl[cur_fnt].char_hidp +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 ) & 0x0F
 >>>
 
@@ -10771,8 +10777,8 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
-                ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-                         *(font_tbl[cur_fnt].ch + r_ch) : 32);
+    ( (font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+        font_tbl[cur_fnt].ch[r_ch] : 0 );
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { `<insert design chr`> } design_ch = 0;    }
 else { `<insert standard char`> }

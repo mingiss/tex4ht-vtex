@@ -142,25 +142,6 @@ struct font_entry
     HANDLE pars; // pointer to OTF font HFontPars object actually
 };
 
-// TODO:
-
-// inicijuot nereikia, sukurti ~255 elementų masyvai, tikrint, ar nesikreipia dideliais kodais
-// char_wi
-// char_hidp
-// wtbl         // dydis: wtbl_n
-// htbl         // dydis: htbl_n
-// dtbl         // dydis: dtbl_n
-
-// fiktyviai inicijuot kai nėra .tfm
-// char_f = 0;
-// char_l = 255;
-// wtbl_n
-// htbl_n
-// dtbl_n
-// accent_N = 0
-// accented_N = 0
-
-
 extern struct font_entry* font_tbl;
 extern int font_tbl_size;
 
