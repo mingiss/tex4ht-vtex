@@ -41,7 +41,6 @@ public:
         m_pNextBrother = NULL;
     }
 
-
     //-----------------------------------
     virtual ~KpTreeEntry()
     {

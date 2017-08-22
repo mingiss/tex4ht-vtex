@@ -93,7 +93,12 @@ KpCommonApp::~KpCommonApp(void){}
 
 
 // ----------------------------------
-void KpCommonApp::Init(HINSTANCE p_hInstance, const uchar *p_pszCmdLine, const void *p_pStackTop)
+void KpCommonApp::Init(
+    HINSTANCE
+#ifdef __WIN32__
+        p_hInstance
+        #endif
+            , const uchar *p_pszCmdLine, const void *p_pStackTop)
 {
 #ifdef __WIN32__
     KpInitWindows(p_hInstance);

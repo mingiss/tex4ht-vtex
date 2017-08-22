@@ -375,7 +375,7 @@ void KpString::Split(const uchar *pszDelim, vector<KpString> &saOutArr)
 
     do
     {
-        int delim_pos = tmp_str.find((const char *)pszDelim);
+        size_t delim_pos = tmp_str.find((const char *)pszDelim);
         if (delim_pos != npos)
         {
             saOutArr.push_back(KpString(tmp_str.substr(0, delim_pos)));

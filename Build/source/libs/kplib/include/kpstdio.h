@@ -213,6 +213,8 @@ int m_iCurLpos; // current line byte position
         /* const */ FILE *p_pFile /* = NULL */, int p_iFileDesc /* = NO_FILE_DESC */, HANDLE p_hFile /* = 0 */);
     virtual void InitMembers(void);
 
+    virtual ~KpFileDesc() {}
+
     virtual void PullData(const KpFileDesc *p_pDescObj); // kopijuoja duomenis iš *p_pDescObj į *this
 
     // TeXtrcFileDesc: išveda dabartinės eilutės paskutinio simbolio pozicijos pranešimą        

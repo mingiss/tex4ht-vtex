@@ -268,6 +268,8 @@ the HTML/XML and \`'.css', also \`'.lg', \`'.idv', and
 ----------------------------------------------- */
 `<h-defines`>
 /* ******************************************** */
+#include "c-auto.h"
+
 `<define MSVC-1-52`>
 `<bordland: bcc32 -DBCC32 tex4ht`>
 `<bordland: bcc -DBCC -mh tex4ht`>
@@ -9267,7 +9269,13 @@ for( i = (INTEGER) get_unt(1) `% font name `%
        + (INTEGER) get_unt(1) `% font style name `%
     ; i>0 
     ; i-- ){ ch = get_char(); }
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wunused-value"
+#endif
 if( flags & `<xdv flag colored`> ){ (INTEGER) get_unt(4); }
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Wunused-value"
+#endif
 if( flags & `<xdv flag variations`> ){ 
    int n =  (INTEGER) get_unt(2);
    int i;
@@ -9916,10 +9924,12 @@ design_size_to_pt( (font_tbl[cur_fnt].htbl && (`<ch of height`> >= 0) && (`<ch o
 
 
 \<ch of height\><<<
+(
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
         >>  4
 ) & 0x0F
+)
 >>>
 
 
@@ -9940,9 +9950,11 @@ design_size_to_pt( (font_tbl[cur_fnt].dtbl && (`<ch of depth`> >= 0) && (`<ch of
 
 
 \<ch of depth\><<<
+(
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 ) & 0x0F
+)
 >>>
 
 
@@ -10075,11 +10087,12 @@ Lynx introduces a space before and after each figure.
    `<set default characters`>
    new_font.str =  m_alloc(unsigned char*, n_gif);  
    new_font.str[0] = &null_str;
-   design_n = 0;
-      `<load file of characters`>
 
    } // if (!otf_pars)
 // ---------------------------------------------
+
+   design_n = 0;
+      `<load file of characters`>
 
    new_font.str = (unsigned U_CHAR **) r_alloc((void *)   new_font.str,
                      (size_t) ( (design_n?design_n:1) * sizeof(char *)) );
@@ -10151,7 +10164,7 @@ iteration searches for aliased font.
      } }
      if( flag ){ break; }
   }
-  if( font_name_n == 0 ){
+  if( (font_name_n == 0) && (new_font.pars == NULL) ){
      if( errCode == 0 ){ errCode= 21; }
      warn_i_str(21,search_font_name); 
      (IGNORED) fprintf(stderr,
@@ -10801,12 +10814,18 @@ a string character (\''ch_str_flag').
 sv = special_on;   special_on = TRUE;   
 if( gif_ch && (gif_flag % 2) ){
    `<open output file`>
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
    if( !gif_open[gif_flag] ){
      `<img char without template`>    
    } else if( !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
       notify_class_info(gif_flag);
       store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);  
    } 
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
    `<<IMG SRC="...`>
    `<..."ALT="...`>
    `<..."CLASS="family...`>
@@ -11723,10 +11742,16 @@ if( n>`<n spans+2`> ){
       span_mag[m]  = t[3];  span_ord[m]  = t[4];
       span_ch[m]   = t[5];  end_span[m]  = t[6];
       gif_id[m]   = t[7];
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
       if( not_notify ) { 
         store_bit_I( class_on, m, CLASS_ON_SIZE);
         not_notify = FALSE; 
       } else   store_bit_Z( class_on, m, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
    }
 }
 if( bad_str ){  warn_i_str(37,err_str); }
@@ -11770,8 +11795,14 @@ static U_CHAR class_on[CLASS_ON_SIZE];
      span_name[i] = span_open[i] = span_size[i] =
      span_mag[i]  = span_ch[i]   = end_span[i]  =
      span_ord[i]  = gif_id[i] = NULL; 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
        if( (i>0) && !(i%2) ) {  store_bit_Z( class_on, i, CLASS_ON_SIZE); }
        else {   store_bit_I( class_on, i, CLASS_ON_SIZE); }
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
     }
 }
 >>>
@@ -11843,9 +11874,15 @@ if( span_on ){
 >>>
 
 \<ensure for chr\><<<
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
 } 
 >>>
 
@@ -12322,7 +12359,7 @@ if( in_accenting ){
   if( needs_accent_sym ){
                                         BOOL needs_end_accent;
                                         BOOL acc_avail;
-                                        int acc_ix = 1;
+                                        unsigned int acc_ix = 1;
     needs_end_accent = (needs_accent_sym == 2 * TRUE);
     acc_avail = (font_tbl[cur_fnt].accent
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
@@ -12509,7 +12546,7 @@ static void get_open_accent(all,first,second,third,fourth,fifth,n)
 \<mark accented ch\><<<
 if( a_accent_template && needs_accented_sym ){
                                         BOOL acc_avail;
-                                        int acc_ix = 1;
+                                        unsigned int acc_ix = 1;
   acc_avail = (font_tbl[cur_fnt].accented
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
       && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
@@ -13918,7 +13955,9 @@ Where access comes from in dos?  in \''<io.h>'
 #endif
 #ifndef KPATHSEA  
 #ifndef DOS_WIN32
+#ifndef HAVE_UNISTD_H
 #define HAVE_UNISTD_H
+#endif
 #endif
 #endif
 #endif
@@ -14164,7 +14203,12 @@ open the appropriate file.
 
 
 \<search font in cache files\><<<      
-                 U_CHAR cache_dir[256], dot_dir[256], *p, *q;
+                 U_CHAR cache_dir[256], dot_dir[256], *q;
+// gcc 5.4.0 does not distinguish between a pointer to const and const pointer
+// #if (__GNUC__ != 5) || (__GNUC_MINOR__ != 4) || (__GNUC_PATCHLEVEL__ != 0)
+                 const
+// #endif
+                     U_CHAR *p;
                  BOOL flag;
                  int  n,  ch;
 (IGNORED) fseek(cache_files, 0L, `<abs file addr`>);

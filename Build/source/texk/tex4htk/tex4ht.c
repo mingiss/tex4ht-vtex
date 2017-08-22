@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-21-13:02), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-22-10:51), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -84,6 +84,8 @@
 
 
 /* ******************************************** */
+#include "c-auto.h"
+
 
 
 #ifdef BCC32
@@ -182,7 +184,9 @@
 #endif
 #ifndef KPATHSEA
 #ifndef DOS_WIN32
+#ifndef HAVE_UNISTD_H
 #define HAVE_UNISTD_H
+#endif
 #endif
 #endif
 #endif
@@ -2187,13 +2191,22 @@ tag
       }else  prevrow = -1;
       prev_x = x
              + (
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl
-                 +  (int) (
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( (design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f)% 256)
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (
+( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
-)) )
-   * (double) font_tbl[cur_fnt].scale
+ >= 0) && (
+( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+ < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[
+( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 
 )
              / (double) xresolution;
@@ -3406,14 +3419,22 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
    
 return (INTEGER)(
     
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl
-                     +  (int) (
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
-) )
-                 )
-* (double) font_tbl[cur_fnt].scale
+ >= 0) && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+ < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 
 
   );
@@ -3783,7 +3804,12 @@ static FILE*  search_in_dot_file
 #ifndef KPATHSEA
    if( cache_files != (FILE *) 0 ){
       
-                 U_CHAR cache_dir[256], dot_dir[256], *p, *q;
+                 U_CHAR cache_dir[256], dot_dir[256], *q;
+// gcc 5.4.0 does not distinguish between a pointer to const and const pointer
+// #if (__GNUC__ != 5) || (__GNUC_MINOR__ != 4) || (__GNUC_PATCHLEVEL__ != 0)
+                 const
+// #endif
+                     U_CHAR *p;
                  BOOL flag;
                  int  n,  ch;
 (IGNORED) fseek(cache_files, 0L, 
@@ -4711,43 +4737,85 @@ if( no_root_file ){  open_o_file(); }
   if( x_val < min_pos_x )                       min_pos_x = x_val;
   if( (d = x_val + 
 (int)(
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl
-                     +  (int) (
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
-) )
-                 )
-* (double) font_tbl[cur_fnt].scale
+ >= 0) && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+ < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 
 )
 
 )  > max_pos_x ) max_pos_x = d;
   if( (d = y_val - 
 (int)(
-design_size_to_pt( *(font_tbl[cur_fnt].htbl
-                 +  (int) (
-( *(font_tbl[cur_fnt].char_hidp +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
-  >>  4
+design_size_to_pt( (font_tbl[cur_fnt].htbl && (
+(
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+        >>  4
 ) & 0x0F
+)
 
-)) )
-   * (double) font_tbl[cur_fnt].scale
+ >= 0) && (
+(
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+        >>  4
+) & 0x0F
+)
+
+ < font_tbl[cur_fnt].htbl_n))?
+    font_tbl[cur_fnt].htbl[
+(
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+        >>  4
+) & 0x0F
+)
+
+] : 0 )
+        * (double) font_tbl[cur_fnt].scale
 
 )
 
 ) < min_pos_y ) min_pos_y = d;
   if( (d = y_val + 
 (int)(
-design_size_to_pt( *(font_tbl[cur_fnt].dtbl
-                 +  (int) (
-( *(font_tbl[cur_fnt].char_hidp +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
+design_size_to_pt( (font_tbl[cur_fnt].dtbl && (
+(
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 ) & 0x0F
+)
 
-)) )
-* (double) font_tbl[cur_fnt].scale
+ >= 0) && (
+(
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+) & 0x0F
+)
+
+ < font_tbl[cur_fnt].dtbl_n))?
+    font_tbl[cur_fnt].dtbl[
+(
+( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+) & 0x0F
+)
+
+] : 0 )
+        * (double) font_tbl[cur_fnt].scale
 
 )
 
@@ -4758,7 +4826,7 @@ design_size_to_pt( *(font_tbl[cur_fnt].dtbl
 
 if( a_accent_template && needs_accented_sym ){
                                         BOOL acc_avail;
-                                        int acc_ix = 1;
+                                        unsigned int acc_ix = 1;
   acc_avail = (font_tbl[cur_fnt].accented
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
       && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
@@ -4812,8 +4880,8 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
-                ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-                         *(font_tbl[cur_fnt].ch + r_ch) : 32);
+    ( (font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+        font_tbl[cur_fnt].ch[r_ch] : 0 );
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { 
       U_CHAR  str[256], *p;
@@ -4825,6 +4893,9 @@ if( gif_ch && (gif_flag % 2) ){
 if( no_root_file ){  open_o_file(); }
 
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
    if( !gif_open[gif_flag] ){
      
 (IGNORED) sprintf(str,
@@ -4864,6 +4935,9 @@ gif_id[gif_flag] = gif_open[gif_flag]+28;
       notify_class_info(gif_flag);
       store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
    }
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
    
 p= gif_open[gif_flag];
 if( p )
@@ -4944,9 +5018,15 @@ if( !gif_flag || (gif_flag % 2)  || ch_map_flag ) {
    put_alt_ch(chr,ch_str_flag);  }
 else{ 
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
 }
 
 
@@ -5022,9 +5102,15 @@ if( no_root_file ){  open_o_file(); }
 
 
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
 }
 
 
@@ -5114,8 +5200,8 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
 chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
-                ((font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-                         *(font_tbl[cur_fnt].ch + r_ch) : 32);
+    ( (font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+        font_tbl[cur_fnt].ch[r_ch] : 0 );
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { 
       U_CHAR  str[256], *p;
@@ -5127,6 +5213,9 @@ if( gif_ch && (gif_flag % 2) ){
 if( no_root_file ){  open_o_file(); }
 
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
    if( !gif_open[gif_flag] ){
      
 (IGNORED) sprintf(str,
@@ -5166,6 +5255,9 @@ gif_id[gif_flag] = gif_open[gif_flag]+28;
       notify_class_info(gif_flag);
       store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
    }
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
    
 p= gif_open[gif_flag];
 if( p )
@@ -5246,9 +5338,15 @@ if( !gif_flag || (gif_flag % 2)  || ch_map_flag ) {
    put_alt_ch(chr,ch_str_flag);  }
 else{ 
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
 }
 
 
@@ -5324,9 +5422,15 @@ if( no_root_file ){  open_o_file(); }
 
 
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
 }
 
 
@@ -5477,14 +5581,22 @@ needs_accented_sym--;
    
 return (INTEGER)(
     
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl
-                     +  (int) (
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
-) )
-                 )
-* (double) font_tbl[cur_fnt].scale
+ >= 0) && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+ < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 
 
   );
@@ -6045,15 +6157,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-21-13:02 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-22-10:51 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-21-13:02)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-22-10:51)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-21-13:02 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-22-10:51 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-21-13:02 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-22-10:51 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -6115,8 +6227,14 @@ margin_sp = (double) MARGINSP;
      span_name[i] = span_open[i] = span_size[i] =
      span_mag[i]  = span_ch[i]   = end_span[i]  =
      span_ord[i]  = gif_id[i] = NULL;
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
        if( (i>0) && !(i%2) ) {  store_bit_Z( class_on, i, CLASS_ON_SIZE); }
        else {   store_bit_I( class_on, i, CLASS_ON_SIZE); }
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
     }
 }
 
@@ -7507,10 +7625,14 @@ new_font.word_sp = 350000;
 if( new_font.word_sp == 0 ) {
         int i;
   for( i = new_font.char_f; i <= new_font.char_l; i++ ){
+    INTEGER wdt = 0;
+    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l - new_font.char_f))
+        wdt = new_font.char_wi[i - new_font.char_f];
     new_font.word_sp =
       ( new_font.word_sp
        +
-        *(new_font.wtbl + (int)(*(new_font.char_wi + i - new_font.char_f)))
+        ( (new_font.wtbl && (wdt >= 0) && (wdt < new_font.wtbl_n))?
+            new_font.wtbl[wdt] : 0 )
       )  / (new_font.char_f<i? 2:1);
   } }
 if( new_font.word_sp == 0 )  new_font.word_sp = MARGINSP; 
@@ -7858,10 +7980,14 @@ new_font.word_sp = ( INTEGER) fget_int(font_file,4);
 if( new_font.word_sp == 0 ) {
         int i;
   for( i = new_font.char_f; i <= new_font.char_l; i++ ){
+    INTEGER wdt = 0;
+    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l - new_font.char_f))
+        wdt = new_font.char_wi[i - new_font.char_f];
     new_font.word_sp =
       ( new_font.word_sp
        +
-        *(new_font.wtbl + (int)(*(new_font.char_wi + i - new_font.char_f)))
+        ( (new_font.wtbl && (wdt >= 0) && (wdt < new_font.wtbl_n))?
+            new_font.wtbl[wdt] : 0 )
       )  / (new_font.char_f<i? 2:1);
   } }
 if( new_font.word_sp == 0 )  new_font.word_sp = MARGINSP; 
@@ -8024,6 +8150,10 @@ for( i = new_font.char_f; i <= new_font.char_l ; i++ ){
 
    new_font.str =  m_alloc(unsigned char*, n_gif);
    new_font.str[0] = &null_str;
+
+   } // if (!otf_pars)
+// ---------------------------------------------
+
    design_n = 0;
       
 {  char search_font_name [256];
@@ -8377,7 +8507,7 @@ if( dump_htf_files ){
      } }
      if( flag ){ break; }
   }
-  if( font_name_n == 0 ){
+  if( (font_name_n == 0) && (new_font.pars == NULL) ){
      if( errCode == 0 ){ errCode= 21; }
      warn_i_str(21,search_font_name);
      (IGNORED) fprintf(stderr,
@@ -8390,9 +8520,6 @@ if( dump_env_files ){ dump_env(); }
 }
 
 
-
-   } // if (!otf_pars)
-// ---------------------------------------------
 
    new_font.str = (unsigned U_CHAR **) r_alloc((void *)   new_font.str,
                      (size_t) ( (design_n?design_n:1) * sizeof(char *)) );
@@ -8978,14 +9105,22 @@ needs_accented_sym++;
   stack[stack_n-1].accented = TRUE; }
 needs_accent_sym = FALSE;
 width = (INTEGER)( 
-design_size_to_pt( *(font_tbl[cur_fnt].wtbl
-                     +  (int) (
-*(font_tbl[cur_fnt].char_wi +  (int)
-   ( ch - font_tbl[cur_fnt].char_f)% 256)
+design_size_to_pt(
+    (font_tbl[cur_fnt].wtbl && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
-) )
-                 )
-* (double) font_tbl[cur_fnt].scale
+ >= 0) && (
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+ < font_tbl[cur_fnt].wtbl_n))?
+        font_tbl[cur_fnt].wtbl[
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+
+] : 0 )
+            * (double) font_tbl[cur_fnt].scale
 
  );
 if( needs_end_accent ){  needs_end_accent = x_val + 9 * width / 10; }
@@ -8999,7 +9134,7 @@ needs_accent_sym && (ch < 128)
   if( needs_accent_sym ){
                                         BOOL needs_end_accent;
                                         BOOL acc_avail;
-                                        int acc_ix = 1;
+                                        unsigned int acc_ix = 1;
     needs_end_accent = (needs_accent_sym == 2 * TRUE);
     acc_avail = (font_tbl[cur_fnt].accent
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
@@ -9227,10 +9362,16 @@ for( i = (INTEGER) get_unt(1)
        + (INTEGER) get_unt(1) 
     ; i>0
     ; i-- ){ ch = get_char(); }
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wunused-value"
+#endif
 if( flags & 
 0x0200
 
  ){ (INTEGER) get_unt(4); }
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Wunused-value"
+#endif
 if( flags & 
 0x0800
 
@@ -10477,10 +10618,16 @@ if( n>
       span_mag[m]  = t[3];  span_ord[m]  = t[4];
       span_ch[m]   = t[5];  end_span[m]  = t[6];
       gif_id[m]   = t[7];
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
       if( not_notify ) {
         store_bit_I( class_on, m, CLASS_ON_SIZE);
         not_notify = FALSE;
       } else   store_bit_Z( class_on, m, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
    }
 }
 if( bad_str ){  warn_i_str(37,err_str); }

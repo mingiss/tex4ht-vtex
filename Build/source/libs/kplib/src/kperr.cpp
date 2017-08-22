@@ -434,7 +434,10 @@ HRESULT KpErrorClass::FormatSystemErrorMessage
 (
 long p_lWindowsErrorCode,
 uchar *p_pszMsg,
-bool p_bFullFormat
+bool
+#ifdef __WIN32__
+    p_bFullFormat
+#endif
 )
 {
 HRESULT retc = S_OK;
@@ -900,7 +903,12 @@ return(retc);
 
 
 // ---------------------
-void KpErrorClass::SendDiagMsg(const uchar *p_pszMessageText, bool p_bSevereError, const uchar *p_pszAddMessage)
+void KpErrorClass::SendDiagMsg(
+    const uchar *
+#if (!defined(KP_VERBOSE)) && (!defined(Debug))
+        p_pszMessageText
+#endif
+    , bool /* p_bSevereError */, const uchar * /* p_pszAddMessage */)
 {
 #ifdef KP_CONSOLE
 #if (!defined(KP_VERBOSE)) && (!defined(Debug))

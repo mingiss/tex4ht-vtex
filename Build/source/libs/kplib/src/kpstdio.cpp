@@ -144,13 +144,13 @@ uchar *pnts;
 
 // --------------------------------------
 #ifndef __WIN32__
-FILE* _wfopen(const wchar_t* filename, const wchar_t* mode)
+FILE* _wfopen(const wchar_t * /* filename */, const wchar_t * /* mode */)
 {
     KP_ERROR(E_NOTIMPL, null);
 return NULL;
 }
 
-int _wopen(const wchar_t* filename, int oflag, ... /* int pmode */)
+int _wopen(const wchar_t * /* filename */, int /* oflag */, ... /* int pmode */)
 {
     KP_ERROR(E_NOTIMPL, null);
     return 0;
@@ -158,7 +158,7 @@ int _wopen(const wchar_t* filename, int oflag, ... /* int pmode */)
 #endif
 
 #ifndef HAVE__GET_OSFHANDLE
-intptr_t __cdecl _get_osfhandle(int _FileHandle)
+intptr_t __cdecl _get_osfhandle(int /* _FileHandle */)
 {
     KP_ERROR(E_NOTIMPL, null);
 return 0;
@@ -300,8 +300,24 @@ return(ret_file);
 }
 
 
-FILE *kpadd_wfopen(const WCHAR *p_pszFname, const WCHAR *p_pszOpenMode,
-    const char *p_pszSrcFile, int p_iSrcLine)
+FILE *kpadd_wfopen(
+    const WCHAR *
+#ifdef __WIN32__
+        p_pszFname
+#endif
+    , const WCHAR *
+#ifdef __WIN32__
+        p_pszOpenMode
+#endif
+    , const char *
+#ifdef __WIN32__
+        p_pszSrcFile
+#endif
+    , int
+#ifdef __WIN32__
+        p_iSrcLine
+#endif
+    )
 {
 FILE *ret_file = NULL;
 
@@ -380,8 +396,28 @@ return(ret_fdesc);
 }
 
 
-int kpadd_wopen(const WCHAR *p_pszFname, int p_iFlags, int p_iPerm,
-    const char *p_pszSrcFile, int p_iSrcLine)
+int kpadd_wopen(
+    const WCHAR *
+#ifdef __WIN32__
+        p_pszFname
+#endif
+    , int
+#ifdef __WIN32__
+        p_iFlags
+#endif
+    , int
+#ifdef __WIN32__
+        p_iPerm
+#endif
+    , const char *
+#ifdef __WIN32__
+        p_pszSrcFile
+#endif
+    , int
+#ifdef __WIN32__
+        p_iSrcLine
+#endif
+    )
 {
 int ret_fdesc = NO_FILE_DESC;
 
@@ -404,10 +440,44 @@ return(ret_fdesc);
 }
 
 
-HANDLE kpadd_CreateFileA(const char *p_lpFileName,
-    DWORD p_dwDesiredAccess, DWORD p_dwShareMode, LPSECURITY_ATTRIBUTES p_lpSecurityAttributes,
-    DWORD p_dwCreationDisposition, DWORD p_dwFlagsAndAttributes, HANDLE p_hTemplateFile,
-    const char *p_pszSrcFile, int p_iSrcLine)
+HANDLE kpadd_CreateFileA(
+    const char *
+#ifdef __WIN32__
+        p_lpFileName
+#endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwDesiredAccess
+#endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwShareMode
+#endif
+    , LPSECURITY_ATTRIBUTES
+#ifdef __WIN32__
+        p_lpSecurityAttributes
+#endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwCreationDisposition
+#endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwFlagsAndAttributes
+#endif
+    , HANDLE
+#ifdef __WIN32__
+        p_hTemplateFile
+#endif
+    , const char *
+#ifdef __WIN32__
+        p_pszSrcFile
+#endif
+    , int
+#ifdef __WIN32__
+        p_iSrcLine
+#endif
+    )
 {
 HANDLE retv = 0;
 
@@ -430,10 +500,44 @@ return(retv);
 }
 
 
-HANDLE kpadd_CreateFileW(const WCHAR *p_lpFileName,
-    DWORD p_dwDesiredAccess, DWORD p_dwShareMode, LPSECURITY_ATTRIBUTES p_lpSecurityAttributes,
-    DWORD p_dwCreationDisposition, DWORD p_dwFlagsAndAttributes, HANDLE p_hTemplateFile,
-    const char *p_pszSrcFile, int p_iSrcLine)
+HANDLE kpadd_CreateFileW(
+    const WCHAR *
+#ifdef __WIN32__
+        p_lpFileName
+        #endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwDesiredAccess
+#endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwShareMode
+#endif
+    , LPSECURITY_ATTRIBUTES
+#ifdef __WIN32__
+        p_lpSecurityAttributes
+#endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwCreationDisposition
+#endif
+    , DWORD
+#ifdef __WIN32__
+        p_dwFlagsAndAttributes
+#endif
+    , HANDLE
+#ifdef __WIN32__
+        p_hTemplateFile
+#endif
+    , const char *
+#ifdef __WIN32__
+        p_pszSrcFile
+#endif
+    , int
+#ifdef __WIN32__
+        p_iSrcLine
+#endif
+    )
 {
 HANDLE retv = 0;
 
@@ -456,8 +560,12 @@ return(retv);
 }
 
 
-void kpadd_wfopen_chkin(const TCHAR *p_pszFname, int p_iFlags,
-    /* const */ FILE *p_pFile, int p_iFileDesc, HANDLE p_hFile,
+void kpadd_wfopen_chkin(
+    const TCHAR *
+#ifdef __WIN32__
+        p_pszFname
+#endif
+    , int p_iFlags, /* const */ FILE *p_pFile, int p_iFileDesc, HANDLE p_hFile,
     const char *p_pszSrcFile, int p_iSrcLine)
 {
     try
@@ -478,7 +586,15 @@ void kpadd_wfopen_chkin(const TCHAR *p_pszFname, int p_iFlags,
 
 void kpadd_fopen_chkin(const char *p_pszFname, int p_iFlags,
     /* const */ FILE *p_pFile, int p_iFileDesc, HANDLE p_hFile,
-    const char *p_pszSrcFile, int p_iSrcLine)
+    const char *
+#ifdef Debug
+        p_pszSrcFile
+#endif
+    , int
+#ifdef Debug
+        p_iSrcLine
+#endif
+    )
 {
     try
     {
@@ -494,7 +610,7 @@ void kpadd_fopen_chkin(const char *p_pszFname, int p_iFlags,
 uchar str_buf[KP_MAX_FILE_LIN_LEN + 1];    
         sprintf((char *)str_buf, ".... kpstdio: kpadd_fopen_chkin(\"%s\") %x; %lx; %d; %lx; file: %s line: %d\n",
             p_pszFname, p_iFlags,
-            (unsigned long)p_pFile, p_iFileDesc, p_hFile,
+            (unsigned long)p_pFile, p_iFileDesc, (unsigned long)p_hFile,
             p_pszSrcFile, p_iSrcLine);
 //      cout << endl << str_buf;
         puts("\n"); puts((const char *)str_buf);
@@ -535,7 +651,20 @@ return(retv);
 }
 
 
-BOOL kpadd_CloseHandle(HANDLE p_hFile, const char *p_pszSrcFile, int p_iSrcLine)
+BOOL kpadd_CloseHandle(
+    HANDLE
+#ifdef __WIN32__
+        p_hFile
+#endif
+    , const char *
+#ifdef __WIN32__
+        p_pszSrcFile
+#endif
+    , int
+#ifdef __WIN32__
+        p_iSrcLine
+#endif
+    )
 {
 BOOL retv = False;
 
