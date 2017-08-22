@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-22-11:53), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-22-12:16), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -4964,7 +4964,7 @@ if( end_span[gif_flag] )
     else
     {
         char str_buf[10];
-        sprintf(str_buf, "&#%d;", chr);
+        sprintf(str_buf, "&#x%04x;", chr);
         print_f(str_buf);
     }
 }
@@ -5382,7 +5382,7 @@ if( end_span[gif_flag] )
     else
     {
         char str_buf[10];
-        sprintf(str_buf, "&#%d;", chr);
+        sprintf(str_buf, "&#x%04x;", chr);
         print_f(str_buf);
     }
 }
@@ -6353,15 +6353,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-22-11:53 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-22-12:16 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-22-11:53)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-22-12:16)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-22-11:53 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-22-12:16 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-22-11:53 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-22-12:16 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){

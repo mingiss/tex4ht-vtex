@@ -10794,7 +10794,7 @@ if (font_tbl[cur_fnt].pars)
     else
     {
         char str_buf[10];
-        sprintf(str_buf, "&#%d;", chr);
+        sprintf(str_buf, "&#x%04x;", chr);
         print_f(str_buf);
     }
 }
