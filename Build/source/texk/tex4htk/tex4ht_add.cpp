@@ -36,7 +36,7 @@ FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE 
 
 
     HFontParMap::const_iterator it = mapHFontParMap.find(fnt_name);
-    const HFontPars* ppars = &it->second;
+    const HFontPars *ppars = &it->second;
     if (it == mapHFontParMap.end())
     {
 printf(":::: ieškom: %s\n", fnt_name);
@@ -149,7 +149,7 @@ printf(":::: ieškom: %s\n", fnt_name);
                     if (ch_code > pars.m_ChLast)
                         pars.m_ChLast = ch_code;
 
-                    int uni_code = 0;
+                    int /* UniChar */ uni_code = 0;
                     if (sscanf(codes[2], "%x", &uni_code) == 1)
                         pars.m_mHTable[tex_code] = uni_code;
                 }
@@ -177,4 +177,15 @@ printf(":::: ieškom: %s\n", fnt_name);
 printf(":::: %s: %d %d\n", fnt_name, ppars->m_ChFirst, ppars->m_ChLast);
 
     return fopen("otf.tfm", "rb");
+}
+
+int /* UniChar */ get_uni_ch(int tex_ch, HANDLE fnt_pars)
+{
+    HFontPars *ppars = (HFontPars *)fnt_pars;
+    if (!ppars)
+        return 0;
+    HTable::const_iterator it = ppars->m_mHTable.find(tex_ch);
+    if (it == ppars->m_mHTable.end())
+        return 0;
+    return (it->second);
 }

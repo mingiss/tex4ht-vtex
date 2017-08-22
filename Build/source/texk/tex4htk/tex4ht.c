@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-22-10:51), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-22-11:53), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -4870,11 +4870,108 @@ next_str
 if( keepChar ){
   keepChar=FALSE;
   { 
-   int gif_flag, chr, r_ch;
-    BOOL  ch_str_flag;
+   int gif_flag = FALSE;
+   int chr, r_ch;
+   BOOL ch_str_flag = FALSE;
+
+if (font_tbl[cur_fnt].pars)
+{
+    chr = get_uni_ch(ch, font_tbl[cur_fnt].pars);
+    if (chr < 256)
+    {
+        
+if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);
+} else{ 
+
+if( no_root_file ){  open_o_file(); }
+
+
+
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
+if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
+  notify_class_info(gif_flag);
+  store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
+}
+
+
+if( span_on ){
+   
+if( span_open[gif_flag] )
+  if( *span_open[gif_flag] ){
+     print_f( span_open[gif_flag] );
+}
+
+
+   
+if( span_name[gif_flag] )
+  if( *span_name[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
+                        font_tbl[cur_fnt].family_name);
+}
+
+
+   
+if( span_size[gif_flag] )
+  if( *span_size[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
+                        font_tbl[cur_fnt].font_size);
+}
+
+
+   
+if( span_mag[gif_flag] )
+  if( *span_mag[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
+                        font_tbl[cur_fnt].mag);
+}
+
+
+   
+if( span_ord[gif_flag] )
+  if( *span_ord[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_ord[gif_flag], chr);
+}
+
+
+   
+if( span_ch[gif_flag] )
+  if( *span_ch[gif_flag] ){
+    print_f( span_ch[gif_flag] );
+}
+
+
+}
+put_char(chr);
+if( span_on ){
+   
+if( end_span[gif_flag] )
+  if( *end_span[gif_flag] ){
+     print_f( end_span[gif_flag] );
+}
+
+
+}
+
+ }
+
+
+    }
+    else
+    {
+        char str_buf[10];
+        sprintf(str_buf, "&#%d;", chr);
+        print_f(str_buf);
+    }
+}
+else
+{
 r_ch = ch - font_tbl[cur_fnt].char_f;
 
-gif_flag = FALSE;
 if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
     gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
@@ -5175,6 +5272,7 @@ if( end_span[gif_flag] )
  }
 
  }
+}
 
  }
 }
@@ -5190,11 +5288,108 @@ if( no_root_file ){  open_o_file(); }
 
       (IGNORED) put_4ht_ch( ch, cur_o_file );
    } else {  
-   int gif_flag, chr, r_ch;
-    BOOL  ch_str_flag;
+   int gif_flag = FALSE;
+   int chr, r_ch;
+   BOOL ch_str_flag = FALSE;
+
+if (font_tbl[cur_fnt].pars)
+{
+    chr = get_uni_ch(ch, font_tbl[cur_fnt].pars);
+    if (chr < 256)
+    {
+        
+if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);
+} else{ 
+
+if( no_root_file ){  open_o_file(); }
+
+
+
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Waddress"
+#endif
+if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
+  notify_class_info(gif_flag);
+  store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+#ifdef __GNUC__
+#pragma GCC diagnostic warning "-Waddress"
+#endif
+}
+
+
+if( span_on ){
+   
+if( span_open[gif_flag] )
+  if( *span_open[gif_flag] ){
+     print_f( span_open[gif_flag] );
+}
+
+
+   
+if( span_name[gif_flag] )
+  if( *span_name[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
+                        font_tbl[cur_fnt].family_name);
+}
+
+
+   
+if( span_size[gif_flag] )
+  if( *span_size[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
+                        font_tbl[cur_fnt].font_size);
+}
+
+
+   
+if( span_mag[gif_flag] )
+  if( *span_mag[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
+                        font_tbl[cur_fnt].mag);
+}
+
+
+   
+if( span_ord[gif_flag] )
+  if( *span_ord[gif_flag] ){
+    (IGNORED) fprintf(cur_o_file, span_ord[gif_flag], chr);
+}
+
+
+   
+if( span_ch[gif_flag] )
+  if( *span_ch[gif_flag] ){
+    print_f( span_ch[gif_flag] );
+}
+
+
+}
+put_char(chr);
+if( span_on ){
+   
+if( end_span[gif_flag] )
+  if( *end_span[gif_flag] ){
+     print_f( end_span[gif_flag] );
+}
+
+
+}
+
+ }
+
+
+    }
+    else
+    {
+        char str_buf[10];
+        sprintf(str_buf, "&#%d;", chr);
+        print_f(str_buf);
+    }
+}
+else
+{
 r_ch = ch - font_tbl[cur_fnt].char_f;
 
-gif_flag = FALSE;
 if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
     gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
@@ -5495,6 +5690,7 @@ if( end_span[gif_flag] )
  }
 
  }
+}
 
  }
 }
@@ -6157,15 +6353,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-22-10:51 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-22-11:53 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-22-10:51)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-22-11:53)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-22-10:51 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-22-11:53 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-22-10:51 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-22-11:53 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){

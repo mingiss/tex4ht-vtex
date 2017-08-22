@@ -10780,11 +10780,28 @@ Does \`'verb_ch' correspond to \''\Char'?
 
 
 \<insert font char\><<<
-   int gif_flag, chr, r_ch;
-    BOOL  ch_str_flag;
+   int gif_flag = FALSE;
+   int chr, r_ch;
+   BOOL ch_str_flag = FALSE;
+
+if (font_tbl[cur_fnt].pars)
+{
+    chr = get_uni_ch(ch, font_tbl[cur_fnt].pars);
+    if (chr < 256)
+    {
+        `<insert standard char`>
+    }
+    else
+    {
+        char str_buf[10];
+        sprintf(str_buf, "&#%d;", chr);
+        print_f(str_buf);
+    }
+}
+else
+{
 r_ch = ch - font_tbl[cur_fnt].char_f;
 
-gif_flag = FALSE;
 if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
     gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
@@ -10795,6 +10812,7 @@ chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { `<insert design chr`> } design_ch = 0;    }
 else { `<insert standard char`> }
+}
 >>>
 
 

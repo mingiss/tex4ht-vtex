@@ -155,7 +155,7 @@ extern PLAIN_C void warn_i_str(int, const char *);
 #ifdef __cplusplus
 // conversion table from TeX character codes to unicode
 // indexes -- TeX char codes as provided in .dvi file, values -- unicode equivalent
-typedef map<long, long> HTable;
+typedef map<int, int /* UniChar */> HTable;
 
 // structure of .otf font attributes
 class HFontPars
@@ -182,3 +182,9 @@ extern HFontParMap mapHFontParMap;
 //      pointer to fake .tfm file just not to ruin tfm scanning algorithm of tex4ht
 //      *ppars -- pointer to found or newly created font parameter structure object
 extern PLAIN_C FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *ppars);
+
+// ------------------------------
+// converts TeX character code to unicode
+// tex_ch -- TeX character code
+// fnt_pars -- pointer to font HFontPars object
+extern PLAIN_C int /* UniChar */ get_uni_ch(int tex_ch, HANDLE fnt_pars);
