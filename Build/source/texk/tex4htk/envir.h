@@ -2,9 +2,11 @@
  *
  * envir.h
  *
- *    local environment definitions
+ *  local environment definitions
+ *      should be copied to the main project directory and edited to conform project prerequisites
  *
- * 2013-02-22  mp  initial creation
+ * Changelog:
+ *  2013-02-22  mp  initial creation
  *
  */
 
@@ -17,7 +19,7 @@
 
 #define KP_CONSOLE          // console application
 // #define KP_WINDOWED      // windows application; 
-                            // could be defined together with KP_CONSOLE – for 
+                            // could be defined together with KP_CONSOLE – for
                             //      console applications opening additional
                             //      dialog windows
 
@@ -28,11 +30,27 @@
 
 // #define KP_ENCODE_LOG    // encode log file
 
+#define DEV_EMAIL "tex-dev@vtex.lt"
+
+#define MSVC_EXPRESS        // MSVC Express compiler used -- lack of standard libraries -- libuser32.a, for instance
 
 // -------------------------------------
-#ifdef _MSC_VER
-#ifdef _WIN32
+#if defined(WIN32) || defined(_WIN32)
+#ifndef __WIN32__
 #define __WIN32__
 #endif
 #endif
 
+#ifdef _MSC_VER 
+// #define _X86_
+#endif
+
+#ifdef WIN32
+#define HAVE_STRLWR 1
+#define HAVE__GET_OSFHANDLE 1
+#endif
+
+#ifdef _MSC_VER 
+#define HAVE__ACCESS 1
+#define HAVE__OPEN 1
+#endif

@@ -103,6 +103,17 @@ void KpClose(void)
 // ========================================= malloc
 
 // -----------------------------
+#ifdef _MSC_VER
+void *xmalloc(size_t size)
+{
+    void *ptr = malloc(size);
+    if (!ptr)
+        abort();
+    return ptr;
+}
+#endif
+
+// -----------------------------
 // memory allocation control
 #ifdef KP_ALLOC_SAFE
 KpHeapClass KpHeap;

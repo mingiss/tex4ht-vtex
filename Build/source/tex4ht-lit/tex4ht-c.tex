@@ -268,7 +268,11 @@ the HTML/XML and \`'.css', also \`'.lg', \`'.idv', and
 ----------------------------------------------- */
 `<h-defines`>
 /* ******************************************** */
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#else
 #include "c-auto.h"
+#endif
 
 `<define MSVC-1-52`>
 `<bordland: bcc32 -DBCC32 tex4ht`>
@@ -1163,14 +1167,20 @@ DJGPP:(sig\_err): If got fatal signal other than SIGINT or SIGQUIT, don't
 \<set signals\><<<
 
 #ifdef SIGSEGV
-  (void) signal(SIGSEGV,sig_err);
+(void) signal(SIGSEGV, (void (
+`<CDECL`>
+*)(int))sig_err);
 #endif
-  (void) signal(SIGFPE,sig_err);
+(void) signal(SIGFPE, (void (
+`<CDECL`>
+*)(int))sig_err);
 #ifdef WIN32
   `<KWIN32 signals`>
 #else 
 #ifdef SIGINT
-  (void) signal(SIGINT,sig_err);    `%Control-c, user interrupt`%
+(void) signal(SIGINT, (void (
+`<CDECL`>
+*)(int))sig_err);    `%Control-c, user interrupt`%
 #endif
 #endif
 >>>
@@ -8699,7 +8709,7 @@ if( (font_tbl_size + 1) < MAXFONTS )
 #endif
 {
               INTEGER new_font_checksum;
-              int font_name_n;
+              size_t font_name_n;
    font_tbl = font_tbl_size?
               (struct font_entry *) r_alloc((void *) font_tbl,
                  (size_t) ((font_tbl_size+1)
@@ -8768,7 +8778,8 @@ switch( ch ){
 
 
 \<get font name\><<<
-{    int  n, area_ln;
+{    size_t n;
+     int area_ln;
      U_CHAR *ch;
   area_ln = (int) get_unt(1);
   font_name_n = (int) get_unt(1);
@@ -8812,7 +8823,8 @@ char *family_name, *font_size;
 
 
 \<family and size of font\><<<
-{    int n, i;
+{    size_t n;
+     int i;
    for( n=0; n<font_name_n; n++ ){
      if(  ( '0' <= new_font_name[n] ) && ( new_font_name[n] <= '9' )){
        break;
@@ -8834,7 +8846,7 @@ char *family_name, *font_size;
 
 
 \<real size?\><<<
-{                       int m;
+{                       size_t m;
    for( m=n; m<font_name_n; m++ ){
      if(  ( new_font_name[m] < '0' ) || ( new_font_name[m] > '9' )){
        n=font_name_n;
@@ -8944,7 +8956,8 @@ if( flags & `<xdv flag variations`> ){
 
 
 \<get xdv font name\><<<
-{    int  n, family_name_n, style_name_n;
+{    size_t n;
+     int family_name_n, style_name_n;
      U_CHAR *ch;
 `%     char* family_name;
      char* style_name;`%
@@ -13229,7 +13242,7 @@ tex4ht_env_file = p+2;
 >>>
 
 
-% if( !access(p+2,F_OK) ) tex4ht_env_file = p+2; 
+% if( !_access(p+2,F_OK) ) tex4ht_env_file = p+2; 
 % else warn_i_str(12,p+2);
 
 
@@ -13276,7 +13289,7 @@ dump_env_search = TRUE;
    `<ENVFILE env`>
    `<env from prog dir`>
    `<kpathsea env file`>
-   if( !dot_file ) { bad_in_file(`<warn 1`>); } /* give up if no tex4ht.env */
+   if( !dot_file ) { bad_in_file(warn_1); } /* give up if no tex4ht.env */
 }
 >>>
 
@@ -13386,11 +13399,12 @@ if( TEX4HTENV ){
 
 
 
-\<warn 1\><<<
+\<vars\><<<
+static char *warn_1 =
 #ifdef  DOS_WIN32
-   "tex4ht.env"
+   "tex4ht.env";
 #else
-   "tex4ht.env | .tex4ht" 
+   "tex4ht.env | .tex4ht";
 #endif
 >>>
 
@@ -13831,15 +13845,15 @@ tfm_dirs = p;
      if( HOME_DIR ){ 
          str = m_alloc(char, strlen((char *) HOME_DIR)+strlen((char *) base));
          (IGNORED) sprintf(str,"%s%s", HOME_DIR, base+1);
-         if( access(str,F_OK) ) {
+         if( _access(str,F_OK) ) {
             warn_i_str2(49, env_var, str); base = NULL; }
          free((void *)  str);
      } else { 
-         if( access(base,F_OK) ) {
+         if( _access(base,F_OK) ) {
             warn_i_str2(49, env_var, base); base = NULL; }
      }
    } else {    
-     if( access(base,F_OK) )  { 
+     if( _access(base,F_OK) )  { 
         warn_i_str2(49, env_var, base); base = NULL; }
 }  }
 >>>
@@ -14099,7 +14113,7 @@ static void com_dir(p)
 }
 >>>
 
-%   if( !access(str,F_OK) ) return TRUE;
+%   if( !_access(str,F_OK) ) return TRUE;
 %  warn_i_str(12,p+2);     return FALSE;
 
 
@@ -14269,7 +14283,7 @@ else{
 flag = FALSE;
 (IGNORED) fseek(dot_file, 0L, `<abs file addr`>);
 while( search_dot_file( typ ) && !flag ){        U_CHAR *q, save_ch;
-                                                 int  n, m;
+                                                 size_t  n, m;
   q = dot_dir; 
   do
      *(q++) = ch = (int) getc(dot_file); 
@@ -16524,22 +16538,22 @@ U-04000000 - U-7FFFFFFF:  1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
 
 \<dec to utf8\><<<
 if( dec < 0x80 ){
-   uni_code_p = 1;  uni_code[0] = dec; 
+   uni_code_p = 1;  uni_code[0] = (char)dec; 
 } 
 else if( dec < 0x800 ){
    uni_code_p = 2;  
-   uni_code[0] = (dec >> 6)           | 0xC0; 
+   uni_code[0] = (char)((dec >> 6)           | 0xC0);
    uni_code[1] = (dec & 0x3F)         | 0x80; 
 } 
 else if( dec < 0x10000 ){
    uni_code_p = 3;  
-   uni_code[0] = (dec >> 12)          | 0xE0; 
+   uni_code[0] = (char)((dec >> 12)          | 0xE0);
    uni_code[1] = ((dec >> 6)  & 0x3F) | 0x80; 
    uni_code[2] =  (dec        & 0x3F) | 0x80; 
 } 
 else if( dec < 0x200000 ){
    uni_code_p = 4;  
-   uni_code[0] = (dec >> 18)          | 0xF0; 
+   uni_code[0] = (char)((dec >> 18)          | 0xF0);
    uni_code[1] = ((dec >> 12) & 0x3F) | 0x80; 
    uni_code[2] = ((dec >>  6) & 0x3F) | 0x80; 
    uni_code[3] =  (dec        & 0x3F) | 0x80; 

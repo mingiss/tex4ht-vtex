@@ -17,6 +17,8 @@
 #ifndef KPSTDIO_INCLUDED
 #define KPSTDIO_INCLUDED
 
+#include "kptree.h"
+
 // ------------------------ opcijos
 // #define KPSTDIO_FULL_LOG // former TEXTRC_FULL_LOG
 
@@ -61,6 +63,7 @@
 #define _O_BINARY   0x8000
 #endif
 // https://msdn.microsoft.com/en-us/library/aa822867(v=vs.85).aspx
+#if defined(__GNUC__) && (!defined(WIN32))
 #define FILE_READ_DATA      0x0001
 #define FILE_WRITE_DATA     0x0002
 #define FILE_APPEND_DATA    0x0004
@@ -68,7 +71,16 @@
 // #define _wfopen fopen
 FILE* __cdecl _wfopen(const wchar_t* filename, const wchar_t* mode);
 int __cdecl _wopen(const wchar_t* filename, int oflag, ... /* int pmode */);
-// #endif
+#endif
+// #endif // #ifndef __WIN32__
+
+#ifndef HAVE__ACCESS
+#define _access access
+#endif
+
+#ifndef HAVE__OPEN
+#define _open open
+#endif
 
 #ifndef HAVE__FDOPEN
 #define _fdopen fdopen

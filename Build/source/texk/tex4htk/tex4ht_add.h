@@ -15,11 +15,13 @@
 using namespace std;
 #endif
 
-#include "kpstdlib.h"
-
-#ifndef PATH_MAX
-#define PATH_MAX 512
+#ifdef __WIN32__
+#include <windows.h>
 #endif
+
+#include "kpstdlib.h"
+#include "kpstring.h"
+#include "kpstdio.h"
 
 #define STR_BUF_LEN 1024
 
@@ -34,13 +36,6 @@ using namespace std;
 #endif
 
 #define U_CHAR char
-
-#ifndef TRUE
-#define TRUE 1
-#endif
-#ifndef FALSE
-#define FALSE 0
-#endif
 
 #define DEF_FNT_SIZE_PT 10
 #define DEF_GLYPH_WDT_PT (DEF_FNT_SIZE_PT * 3 / 4)
@@ -142,8 +137,8 @@ struct font_entry
     HANDLE pars; // pointer to OTF font HFontPars object actually
 };
 
-extern struct font_entry* font_tbl;
-extern int font_tbl_size;
+extern PLAIN_C struct font_entry* font_tbl;
+extern PLAIN_C int font_tbl_size;
 
 #define new_font font_tbl[font_tbl_size]
 

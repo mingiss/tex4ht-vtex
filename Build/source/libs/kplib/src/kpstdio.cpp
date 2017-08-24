@@ -25,6 +25,9 @@
 #include <iostream>
 #include <fstream>
 #include <fcntl.h>
+#ifdef _MSC_VER
+#include <io.h>
+#endif
 #ifdef __WIN32__
 #include <windows.h>
 #endif
@@ -302,19 +305,19 @@ return(ret_file);
 
 FILE *kpadd_wfopen(
     const WCHAR *
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_pszFname
 #endif
     , const WCHAR *
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_pszOpenMode
 #endif
     , const char *
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_pszSrcFile
 #endif
     , int
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_iSrcLine
 #endif
     )
@@ -323,7 +326,7 @@ FILE *ret_file = NULL;
 
     try
     {
-#ifndef __WIN32__
+#if (!defined(__WIN32__)) || (!defined(UNICODE))
         KP_ASSERT(false, E_NOTIMPL, null);
 #else
         KP_ASSERT(p_pszFname, E_INVALIDARG, null);
@@ -386,7 +389,7 @@ int ret_fdesc = NO_FILE_DESC;
         KP_ASSERT(p_pszFname, E_INVALIDARG, null);
 
     int fflags = (p_iFlags & ~_O_TEXT) | _O_BINARY; // atidarinėjam visada binary mode, į tekstą vers I/O wrapperiai
-        ret_fdesc = open(p_pszFname, fflags, p_iPerm);
+        ret_fdesc = _open(p_pszFname, fflags, p_iPerm);
 
         kpadd_fopen_chkin(p_pszFname, p_iFlags, NULL, ret_fdesc, 0, p_pszSrcFile, p_iSrcLine);
     }
@@ -398,23 +401,23 @@ return(ret_fdesc);
 
 int kpadd_wopen(
     const WCHAR *
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_pszFname
 #endif
     , int
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_iFlags
 #endif
     , int
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_iPerm
 #endif
     , const char *
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_pszSrcFile
 #endif
     , int
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_iSrcLine
 #endif
     )
@@ -423,7 +426,7 @@ int ret_fdesc = NO_FILE_DESC;
 
     try
     {
-#ifndef __WIN32__
+#if (!defined(__WIN32__)) || (!defined(UNICODE))
         KP_ASSERT(false, E_NOTIMPL, null);
 #else
         KP_ASSERT(p_pszFname, E_INVALIDARG, null);
@@ -502,39 +505,39 @@ return(retv);
 
 HANDLE kpadd_CreateFileW(
     const WCHAR *
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_lpFileName
-        #endif
+#endif
     , DWORD
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_dwDesiredAccess
 #endif
     , DWORD
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_dwShareMode
 #endif
     , LPSECURITY_ATTRIBUTES
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_lpSecurityAttributes
 #endif
     , DWORD
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_dwCreationDisposition
 #endif
     , DWORD
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_dwFlagsAndAttributes
 #endif
     , HANDLE
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_hTemplateFile
 #endif
     , const char *
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_pszSrcFile
 #endif
     , int
-#ifdef __WIN32__
+#if defined(__WIN32__) && defined(UNICODE)
         p_iSrcLine
 #endif
     )
@@ -543,7 +546,7 @@ HANDLE retv = 0;
 
     try
     {
-#ifndef __WIN32__
+#if (!defined(__WIN32__)) || (!defined(UNICODE))
         KP_ASSERT(false, E_NOTIMPL, null);
 #else
         retv = CreateFileW(p_lpFileName, p_dwDesiredAccess, p_dwShareMode, p_lpSecurityAttributes,
@@ -561,11 +564,7 @@ return(retv);
 
 
 void kpadd_wfopen_chkin(
-    const TCHAR *
-#ifdef __WIN32__
-        p_pszFname
-#endif
-    , int p_iFlags, /* const */ FILE *p_pFile, int p_iFileDesc, HANDLE p_hFile,
+    const TCHAR * /* p_pszFname */, int p_iFlags, /* const */ FILE *p_pFile, int p_iFileDesc, HANDLE p_hFile,
     const char *p_pszSrcFile, int p_iSrcLine)
 {
     try
@@ -577,8 +576,8 @@ void kpadd_wfopen_chkin(
         // TODO: konvertuoti p_pszFname į UTF-8
         KP_THROW(E_NOTIMPL, null);
 
-    kpadd_fopen_chkin((const char *)fname_utf8, p_iFlags, p_pFile, p_iFileDesc, p_hFile,
-        p_pszSrcFile, p_iSrcLine);
+        kpadd_fopen_chkin((const char *)fname_utf8, p_iFlags, p_pFile, p_iFileDesc, p_hFile,
+            p_pszSrcFile, p_iSrcLine);
     }
     KP_CATCH_ALL;
 }
@@ -608,10 +607,25 @@ void kpadd_fopen_chkin(const char *p_pszFname, int p_iFlags,
 
 #ifdef Debug
 uchar str_buf[KP_MAX_FILE_LIN_LEN + 1];    
-        sprintf((char *)str_buf, ".... kpstdio: kpadd_fopen_chkin(\"%s\") %x; %lx; %d; %lx; file: %s line: %d\n",
-            p_pszFname, p_iFlags,
-            (unsigned long)p_pFile, p_iFileDesc, (unsigned long)p_hFile,
-            p_pszSrcFile, p_iSrcLine);
+        sprintf((char *)str_buf,
+#ifdef _WIN64
+            ".... kpstdio: kpadd_fopen_chkin(\"%s\") %x; %llx; %d; %llx; file: %s line: %d\n",
+#else
+            ".... kpstdio: kpadd_fopen_chkin(\"%s\") %x; %lx; %d; %lx; file: %s line: %d\n",
+#endif
+                p_pszFname, p_iFlags,
+                (unsigned long
+#ifdef _WIN64
+                    long
+#endif
+                        )p_pFile,
+                p_iFileDesc,
+                (unsigned long
+#ifdef _WIN64
+                    long
+#endif
+                        )p_hFile,
+                p_pszSrcFile, p_iSrcLine);
 //      cout << endl << str_buf;
         puts("\n"); puts((const char *)str_buf);
         KpError.PutLogMessage(str_buf);
@@ -692,8 +706,23 @@ void kpadd_fclose_chkin(const FILE *p_pFile, int p_iFileDesc, HANDLE p_hFile,
         KP_ASSERT(KpFileDescListPtr, E_POINTER, null);
 
 uchar str_buf[KP_MAX_FILE_LIN_LEN + 1];
-        sprintf((char *)str_buf, ".... kpstdio: kpadd_fclose_chkin(%lx, %d, %lx); file: %s line: %d\n",
-            (unsigned long)p_pFile, p_iFileDesc, (unsigned long)p_hFile, p_pszSrcFile, p_iSrcLine);
+        sprintf((char *)str_buf,
+#ifdef _WIN64
+            ".... kpstdio: kpadd_fclose_chkin(%llx, %d, %llx); file: %s line: %d\n",
+#else
+            ".... kpstdio: kpadd_fclose_chkin(%lx, %d, %lx); file: %s line: %d\n",
+#endif
+            (unsigned long
+#ifdef _WIN64
+                long
+#endif
+                    )p_pFile,
+            p_iFileDesc,
+            (unsigned long
+#ifdef _WIN64
+                long
+#endif
+                    )p_hFile, p_pszSrcFile, p_iSrcLine);
 
 #ifdef KPSTDIO_FULL_LOG
         KpFileDescListPtr->PutLogMessage(p_pFile, "Closed");
@@ -718,7 +747,11 @@ uchar str_buf[KP_MAX_FILE_LIN_LEN + 1];
 void KpFileDesc::InitMembers(void)
 {
 #ifdef Debug
+#ifdef _WIN64
+printf(".... kpstdio: KpFileDesc::InitMembers(%llx)\n", (unsigned long long)this);
+#else
 printf(".... kpstdio: KpFileDesc::InitMembers(%lx)\n", (unsigned long)this);
+#endif
 #endif
 
     m_pFile = NULL;
@@ -900,8 +933,22 @@ KpFileDesc *desc_obj_ptr = NULL;
     KP_ASSERTW(desc_obj_ptr == NULL, KP_E_DOUBLE_CALL, p_pszFileName);
     if(FAILED(retc))
     {
-        KpError.PutLogMessage("KpFileDescList::RegNewFile(): failas jau yra: %lx %d %x %s", 
-            (DWORD)p_pFile, p_iFileDesc, p_hFile, desc_obj_ptr->m_pszFileName);
+        KpError.PutLogMessage(
+#ifdef _WIN64
+            "KpFileDescList::RegNewFile(): failas jau yra: %llx %d %llx %s",
+#else
+            "KpFileDescList::RegNewFile(): failas jau yra: %lx %d %lx %s",
+#endif
+            (unsigned long
+#ifdef _WIN64
+                long
+#endif
+                    )p_pFile, p_iFileDesc,
+            (unsigned long
+#ifdef _WIN64
+                long
+#endif
+                    )p_hFile, desc_obj_ptr->m_pszFileName);
         DelFile(p_pFile, p_iFileDesc, p_hFile);
     }
 
@@ -920,7 +967,12 @@ KpTreeEntry<KpFileDesc> *new_node = NULL;
 void KpFileDescList::DelFile(const FILE *p_pFile, int p_iFileDesc, HANDLE p_hFile)
 {
 uchar out_str[MAX_LONG_HEX_DIGITS + 10];
-    sprintf((char *)out_str, "%lx", (DWORD)p_pFile);
+    sprintf((char *)out_str,
+#ifdef _WIN64
+        "%llx", (unsigned long long)p_pFile);
+#else
+        "%lx", (unsigned long)p_pFile);
+#endif
 
 HRESULT retc = S_OK;
 KpTreeEntry<KpFileDesc> **node_ptr_ptr = NULL;

@@ -54,7 +54,11 @@ typedef int HRESULT;
 // Access denied
 #define E_ACCESSDENIED ((HRESULT)0x80070005)
 #define E_PENDING ((HRESULT)0x8000000A)
+#endif
+
+#ifndef _MSC_VER
 #define E_BUFFER_TOO_SMALL ((HRESULT)0x8007007A)
+#endif
 
 /*
 http://research.microsoft.com/en-us/um/redmond/projects/invisible/iunknown.htm
@@ -552,7 +556,6 @@ Reserved policy QoS element type.
 A reserved policy element was found in the QoS provider-specific buffer.
  
 */
-#endif // #ifndef WIN32
 
 #ifdef _MSC_VER
 #define E_BUFFER_TOO_SMALL ((HRESULT)0x8007007a)

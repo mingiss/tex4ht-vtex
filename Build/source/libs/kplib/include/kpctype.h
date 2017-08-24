@@ -13,6 +13,7 @@
 #define KPCTYPE_INCLUDED
 
 #include "kperrno.h"
+#include "kpstdlib.h"
 
 // ---------------------------------------
 // predefined spec. character strings

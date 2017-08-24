@@ -42,6 +42,17 @@ using namespace std;
 
 
 // -----------------------------
+#ifdef _MSC_VER
+char *xstrdup(const char *string)
+{
+    char *pstr = strdup(string);
+    if (!pstr)
+        abort();
+    return pstr;
+}
+#endif
+
+// -----------------------------
 size_t strlen(const uchar *src){ return(strlen((const char *)src)); }
 
 uchar *strcpy(uchar *dest, const uchar *src)
@@ -396,7 +407,7 @@ void KpString::Split(const uchar *pszDelim, vector<KpString> &saOutArr)
 
 KpString KpString::Join(const vector<KpString> &saStrArr)
 {
-    int len = saStrArr.size();
+    size_t len = saStrArr.size();
     KpString ret_str;
 
     for (int ii = 0; ii < len - 1; ii++) ret_str += saStrArr[ii] + *this;

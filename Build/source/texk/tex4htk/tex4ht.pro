@@ -1,4 +1,9 @@
 TEMPLATE = app
+
+DEFINES -= UNICODE
+DEFINES += DEBUG Debug
+# DEFINES += KPATHSEA
+
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
@@ -12,7 +17,8 @@ SOURCES += tex4ht.c \
     ../../libs/kplib/src/kpsort.cpp \
     ../../libs/kplib/src/kpstdio.cpp \
     ../../libs/kplib/src/kpstdlib.cpp \
-    ../../libs/kplib/src/kpstring.cpp
+    ../../libs/kplib/src/kpstring.cpp \
+    ../../libs/kplib/src/win/kpwindow.cpp
 
 HEADERS += \
     ../../libs/kplib/include/kpctype.h \
@@ -29,12 +35,11 @@ HEADERS += \
     ../../libs/kplib/src/kptree.h \
     tex4ht_add.h
 
-INCLUDEPATH += ../../Work/texk/tex4htk ../../libs/kplib/include ../../libs/kplib/src/net
-
-DEFINES += DEBUG Debug
-# DEFINES += KPATHSEA
-# DEFINES -= UNICODE
+INCLUDEPATH += ../../Work/texk/tex4htk ../../libs/kplib/include ../../libs/kplib/src ../../libs/kplib/src/net ../../libs/kplib/src/win
 
 # QMAKE_CXXFLAGS += -ggdb -O0
 # QMAKE_CFLAGS += -ggdb -O0
 # QMAKE_CFLAGS += -Waddress
+
+# QMAKE_CXXFLAGS -= -DUNICODE
+# QMAKE_CFLAGS -= -DUNICODE

@@ -54,6 +54,10 @@ extern void kp_append_chr(const uchar out_chr, uchar **str_buf_ptr, int *buf_len
 
 
 // -------------------------
+#ifdef _MSC_VER
+extern PLAIN_C char *xstrdup(const char *string);
+#endif
+
 #ifdef __cplusplus
 
 // -------------------------

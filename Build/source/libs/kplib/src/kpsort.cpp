@@ -53,7 +53,7 @@ int GetKwrdIndex(
 {
 int ix;
 uchar kwd_str[KP_KWD_LEN + 1];
-int ii;
+size_t ii;
 int retv = TV_TG_NoKey;
 
     KP_ASSERT(p_pszKeywrd && p_ppszKeytable, E_INVALIDARG, null); 
@@ -99,7 +99,7 @@ int GetKwrdIndexArr
 {
 int ix;
 uchar kwd_str[KP_KWD_LEN + 1];
-int ii;
+size_t ii;
 int retv = TV_TG_NoKey;
 const uchar *cur_kwd = p_ppszKeytable;
 

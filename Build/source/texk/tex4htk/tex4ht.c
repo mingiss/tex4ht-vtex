@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-22-12:16), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-23-18:27), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -84,7 +84,11 @@
 
 
 /* ******************************************** */
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#else
 #include "c-auto.h"
+#endif
 
 
 
@@ -989,6 +993,14 @@ static U_CHAR *open_class[
 
 
 static BOOL dump_env_search = FALSE;
+
+
+static char *warn_1 =
+#ifdef  DOS_WIN32
+   "tex4ht.env";
+#else
+   "tex4ht.env | .tex4ht";
+#endif
 
 
 static struct env_c_rec *envChoice
@@ -3672,15 +3684,15 @@ static struct env_var_rec * get_env_var
      if( HOME_DIR ){
          str = m_alloc(char, strlen((char *) HOME_DIR)+strlen((char *) base));
          (IGNORED) sprintf(str,"%s%s", HOME_DIR, base+1);
-         if( access(str,F_OK) ) {
+         if( _access(str,F_OK) ) {
             warn_i_str2(49, env_var, str); base = NULL; }
          free((void *)  str);
      } else {
-         if( access(base,F_OK) ) {
+         if( _access(base,F_OK) ) {
             warn_i_str2(49, env_var, base); base = NULL; }
      }
    } else {
-     if( access(base,F_OK) )  {
+     if( _access(base,F_OK) )  {
         warn_i_str2(49, env_var, base); base = NULL; }
 }  }
 
@@ -3854,7 +3866,7 @@ flag = FALSE;
 0
 );
 while( search_dot_file( typ ) && !flag ){        U_CHAR *q, save_ch;
-                                                 int  n, m;
+                                                 size_t  n, m;
   q = dot_dir;
   do
      *(q++) = ch = (int) getc(dot_file);
@@ -4502,22 +4514,22 @@ if( (uni_code[2] == 'x') || (uni_code[2] == 'X') ) {
    else     { 
 
 if( dec < 0x80 ){
-   uni_code_p = 1;  uni_code[0] = dec;
+   uni_code_p = 1;  uni_code[0] = (char)dec;
 }
 else if( dec < 0x800 ){
    uni_code_p = 2;
-   uni_code[0] = (dec >> 6)           | 0xC0;
+   uni_code[0] = (char)((dec >> 6)           | 0xC0);
    uni_code[1] = (dec & 0x3F)         | 0x80;
 }
 else if( dec < 0x10000 ){
    uni_code_p = 3;
-   uni_code[0] = (dec >> 12)          | 0xE0;
+   uni_code[0] = (char)((dec >> 12)          | 0xE0);
    uni_code[1] = ((dec >> 6)  & 0x3F) | 0x80;
    uni_code[2] =  (dec        & 0x3F) | 0x80;
 }
 else if( dec < 0x200000 ){
    uni_code_p = 4;
-   uni_code[0] = (dec >> 18)          | 0xF0;
+   uni_code[0] = (char)((dec >> 18)          | 0xF0);
    uni_code[1] = ((dec >> 12) & 0x3F) | 0x80;
    uni_code[2] = ((dec >>  6) & 0x3F) | 0x80;
    uni_code[3] =  (dec        & 0x3F) | 0x80;
@@ -6334,9 +6346,23 @@ struct htf_com_rec* htf_font_dir = (struct htf_com_rec *) 0;
    
 
 #ifdef SIGSEGV
-  (void) signal(SIGSEGV,sig_err);
+(void) signal(SIGSEGV, (void (
+
+#ifdef CDECL
+CDECL
 #endif
-  (void) signal(SIGFPE,sig_err);
+
+
+*)(int))sig_err);
+#endif
+(void) signal(SIGFPE, (void (
+
+#ifdef CDECL
+CDECL
+#endif
+
+
+*)(int))sig_err);
 #ifdef WIN32
   
 SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
@@ -6344,7 +6370,14 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 
 #else
 #ifdef SIGINT
-  (void) signal(SIGINT,sig_err);    
+(void) signal(SIGINT, (void (
+
+#ifdef CDECL
+CDECL
+#endif
+
+
+*)(int))sig_err);    
 #endif
 #endif
 
@@ -6353,15 +6386,15 @@ SetConsoleCtrlHandler((PHANDLER_ROUTINE)sigint_handler, TRUE);
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-22-12:16 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-23-18:27 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-22-12:16)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-23-18:27)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-22-12:16 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-23-18:27 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-22-12:16 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-23-18:27 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -6959,14 +6992,7 @@ if( file ){
 #endif
 
 
-   if( !dot_file ) { bad_in_file(
-#ifdef  DOS_WIN32
-   "tex4ht.env"
-#else
-   "tex4ht.env | .tex4ht"
-#endif
-
-); } /* give up if no tex4ht.env */
+   if( !dot_file ) { bad_in_file(warn_1); } /* give up if no tex4ht.env */
 }
 
 
@@ -7678,7 +7704,7 @@ if( (font_tbl_size + 1) < MAXFONTS )
 #endif
 {
               INTEGER new_font_checksum;
-              int font_name_n;
+              size_t font_name_n;
    font_tbl = font_tbl_size?
               (struct font_entry *) r_alloc((void *) font_tbl,
                  (size_t) ((font_tbl_size+1)
@@ -7700,7 +7726,8 @@ new_font.scale     = (INTEGER) get_unt(4);
 new_font.design_sz = new_font.scale;
 flags = (INTEGER) get_unt(2);
 
-{    int  n, family_name_n, style_name_n;
+{    size_t n;
+     int family_name_n, style_name_n;
      U_CHAR *ch;
 
   font_name_n =  (INTEGER) get_unt(1);
@@ -7857,14 +7884,15 @@ new_font_name[font_name_n] = '\0';
 new_font.name = m_alloc(char, font_name_n + 1);
 (IGNORED) strcpy((char *)  new_font.name, (char *) new_font_name );
 
-{    int n, i;
+{    size_t n;
+     int i;
    for( n=0; n<font_name_n; n++ ){
      if(  ( '0' <= new_font_name[n] ) && ( new_font_name[n] <= '9' )){
        break;
      }
    }
    
-{                       int m;
+{                       size_t m;
    for( m=n; m<font_name_n; m++ ){
      if(  ( new_font_name[m] < '0' ) || ( new_font_name[m] > '9' )){
        n=font_name_n;
@@ -7922,7 +7950,8 @@ new_font_checksum  = (INTEGER) get_int(4);
 new_font.scale     = (INTEGER) get_unt(4);
 new_font.design_sz = (INTEGER) get_unt(4);
 
-{    int  n, area_ln;
+{    size_t n;
+     int area_ln;
      U_CHAR *ch;
   area_ln = (int) get_unt(1);
   font_name_n = (int) get_unt(1);
@@ -8231,14 +8260,15 @@ new_font_name[font_name_n] = '\0';
 new_font.name = m_alloc(char, font_name_n + 1);
 (IGNORED) strcpy((char *)  new_font.name, (char *) new_font_name );
 
-{    int n, i;
+{    size_t n;
+     int i;
    for( n=0; n<font_name_n; n++ ){
      if(  ( '0' <= new_font_name[n] ) && ( new_font_name[n] <= '9' )){
        break;
      }
    }
    
-{                       int m;
+{                       size_t m;
    for( m=n; m<font_name_n; m++ ){
      if(  ( new_font_name[m] < '0' ) || ( new_font_name[m] > '9' )){
        n=font_name_n;

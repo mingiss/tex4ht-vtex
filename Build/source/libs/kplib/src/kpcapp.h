@@ -11,6 +11,8 @@
 #ifndef KPCAPP_INCLUDED
 #define KPCAPP_INCLUDED
 
+#include "kpstdlib.h"
+
 #ifdef __cplusplus
 
 class KpCommonApp

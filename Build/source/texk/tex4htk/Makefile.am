@@ -17,7 +17,7 @@ bin_PROGRAMS = t4ht tex4ht
 
 t4ht_SOURCES = t4ht.c
 
-tex4ht_SOURCES = tex4ht.c tex4ht_add.cpp ../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp ../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp
+tex4ht_SOURCES = tex4ht.c tex4ht_add.cpp ../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp ../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp ../../libs/kplib/src/win/kpwindow.cpp
 
 $(t4ht_OBJECTS) $(tex4ht_OBJECTS): $(KPATHSEA_DEPEND)
 

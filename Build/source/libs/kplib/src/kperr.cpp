@@ -21,13 +21,15 @@
 #include <fstream>
 #include <time.h>
 #ifdef __WIN32__
-#include <windows.h>
-#ifdef __MINGW32__
+#if defined(__MINGW32__) && (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__ <= 40401) // existed until mingw 4.4.1
 #include <ddk\ntapi.h>
 #endif
 #ifdef _MSC_VER
 #include <WinSock2.h>
+#else
+#include <winsock2.h>
 #endif
+#include <windows.h>
 #endif
 
 using namespace std;
@@ -454,7 +456,7 @@ const
 uchar *pnts;
 uchar str_buf[MAX_LONG_DIGITS + 20];
     str_buf[0] = Nul;
-int ii;
+size_t ii;
 
     KP_ASSERT(p_pszMsg, E_INVALIDARG, null);
 
@@ -942,7 +944,7 @@ uchar msg_text[KP_MAX_FILE_LIN_LEN + 1];
         sprintf((char *)out_str, (const char *)p_pszFmt, argptr);
 
         strcpy(msg_text, ": ");
-    int ll = strlen(msg_text);
+    size_t ll = strlen(msg_text);
         strncpy(msg_text + ll, out_str, KP_MAX_FILE_LIN_LEN - ll);
         msg_text[KP_MAX_FILE_LIN_LEN] = Nul;
 
@@ -978,11 +980,11 @@ uchar msg_text[KP_MAX_FILE_LIN_LEN + 1];
 
         FormatErrorMessage(p_lhRetc, out_text + strlen(out_text));
 
-    int ll = strlen(out_text);
+    size_t ll = strlen(out_text);
         strncpy(out_text + ll, msg_text, KP_MAX_FILE_LIN_LEN - ll);
         out_text[KP_MAX_FILE_LIN_LEN] = Nul;
 
-    int msg_tail_pos = ll = strlen(out_text);
+    size_t msg_tail_pos = ll = strlen(out_text);
         sprintf((char *)out_text + ll, (const char *)KP_MSG_FILE_LINE, p_lhRetc, p_pszSourceFile, p_iSourceLine);
         out_text[KP_MAX_FILE_LIN_LEN] = Nul;
 
@@ -1148,7 +1150,12 @@ tm *tm_ptr = NULL;
             prod_ver = KpApp->m_iProdVer;
             prod_date = KpApp->m_pszProdDate;
         }
-        sprintf((char *)out_str, "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %ld ",
+        sprintf((char *)out_str,
+#if defined(_MSC_VER) && (!defined(_USE_32BIT_TIME_T))
+            "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %lld ",
+#else
+            "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %ld ",
+#endif
             1900 + tm_ptr->tm_year, 1 + tm_ptr->tm_mon, tm_ptr->tm_mday, tm_ptr->tm_hour + 2, tm_ptr->tm_min, tm_ptr->tm_sec,
             prod_name, prod_ver, prod_date, ltime);
 
@@ -1162,7 +1169,7 @@ tm *tm_ptr = NULL;
 #endif
 
 // --------------------
-int out_str_len = strlen(out_str);
+size_t out_str_len = strlen(out_str);
 #  ifdef ENCODE_LOG
         if (SUCCEEDED(retc)) retc = EncodeLogBuf(out_str, out_str_len);
 #  endif

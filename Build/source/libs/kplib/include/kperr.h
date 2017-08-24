@@ -19,6 +19,7 @@
 //    assertion, whether p_bCond is kept
 //    definitions of possible p_lhErrCode's given in kperrno.h
 //    p_pszMsg / p_pszFmt could be null
+//    in place of p_pszMsg return code from GetLastError() could be used as well
 //
 // severe error – throws an exception if p_bCond not kept
 #ifdef KP_CPP
@@ -71,15 +72,15 @@
 
 // ---------------------------------------- error messages
 #ifdef __cplusplus
-#define KP_ERROR(p_lhErrCode, p_pszMsg) {{ KpError.OutputErrorMessage(p_lhErrCode, (const uchar *)p_pszMsg, True, (const uchar *)__FILE__, __LINE__); }}
+#define KP_ERROR(p_lhErrCode, p_pszMsg) {{ KpError.OutputErrorMessage(p_lhErrCode, /* (const uchar *) */ p_pszMsg, True, (const uchar *)__FILE__, __LINE__); }}
 #define KP_ERRORF(p_lhErrCode, p_pszFmt, ...) {{ KpError.OutputErrorMessage(p_lhErrCode, (const uchar *)p_pszFmt, True, (const uchar *)__FILE__, __LINE__, __VA_ARGS__); }}
-#define KP_WARNING(p_lhErrCode, p_pszMsg) {{ KpError.OutputErrorMessage(p_lhErrCode, (const uchar *)p_pszMsg, False, (const uchar *)__FILE__, __LINE__); }}
+#define KP_WARNING(p_lhErrCode, p_pszMsg) {{ KpError.OutputErrorMessage(p_lhErrCode, /* (const uchar *) */ p_pszMsg, False, (const uchar *)__FILE__, __LINE__); }}
 #define KP_WARNINGF(p_lhErrCode, p_pszFmt, ...) {{ KpError.OutputErrorMessage(p_lhErrCode, (const uchar *)p_pszFmt, False, (const uchar *)__FILE__, __LINE__, __VA_ARGS__); }}
 #define KP_TRACE(...) {{ KpError.PutLogMessage((const char *)__VA_ARGS__); }}
 #else
-#define KP_ERROR(p_lhErrCode, p_pszMsg) {{ KpOutputErrorMessage(p_lhErrCode, (const uchar *)p_pszFmt, True, (const uchar *)__FILE__, __LINE__); }}
+#define KP_ERROR(p_lhErrCode, p_pszMsg) {{ KpOutputErrorMessage(p_lhErrCode, /* (const uchar *) */ p_pszMsg, True, (const uchar *)__FILE__, __LINE__); }}
 #define KP_ERRORF(p_lhErrCode, p_pszFmt, ...) {{ KpOutputErrorMessage(p_lhErrCode, (const uchar *)p_pszFmt, True, (const uchar *)__FILE__, __LINE__, __VA_ARGS__); }}
-#define KP_WARNING(p_lhErrCode, p_pszMsg) {{ KpOutputErrorMessage(p_lhErrCode, (const uchar *)p_pszMsg, False, (const uchar *)__FILE__, __LINE__); }}
+#define KP_WARNING(p_lhErrCode, p_pszMsg) {{ KpOutputErrorMessage(p_lhErrCode, /* (const uchar *) */ p_pszMsg, False, (const uchar *)__FILE__, __LINE__); }}
 #define KP_WARNINGF(p_lhErrCode, p_pszFmt, ...) {{ KpOutputErrorMessage(p_lhErrCode, (const uchar *)p_pszFmt, False, (const uchar *)__FILE__, __LINE__, __VA_ARGS__); }}
 #define KP_TRACE(...) {{ KpPutLogMessage((const char *)__VA_ARGS__); }}
 #endif

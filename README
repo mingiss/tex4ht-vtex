@@ -62,6 +62,11 @@ Add-ons to module tex4ht:
                 -r200   threshold decreased by half, more spaces.
 
 TODO:
+    Bug in command line parameters recognition:
+        command line
+            tex4ht foo -cunihtf -n
+        is not recognized until order of parameters is changed to 
+            tex4ht foo -n -cunihtf
 
     Command line switch -r currently does work in math mode solely.
 

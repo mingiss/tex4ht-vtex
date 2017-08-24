@@ -39,6 +39,9 @@
 #include <iostream>
 #ifdef __WIN32__
 #include <windows.h>
+#ifdef _MSC_VER
+#include <Tchar.h>
+#endif
 #endif
 
 using namespace std;
@@ -81,7 +84,10 @@ KpCommonApp::KpCommonApp(const uchar *p_pszProdName, int p_iProdVer)
     strcat(m_pszCmdLine, KP_EXT_SEP_STR); 
     strcat(m_pszCmdLine, KP_EXE_EXT);
 
-    strncpy(m_pszProdDate, PROJ_DATE, KP_MAX_FNAME_LEN);
+#ifdef UNICODE
+#error PROJ_DATE defined as _T("...")
+#endif
+    strncpy(m_pszProdDate, (const uchar *)PROJ_DATE, KP_MAX_FNAME_LEN);
     m_pszProdDate[KP_MAX_FNAME_LEN] = Nul;
 
     m_pStackTop = NULL;

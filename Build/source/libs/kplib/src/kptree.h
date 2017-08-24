@@ -11,6 +11,8 @@
 #ifndef KPTREE_INCLUDED
 #define KPTREE_INCLUDED
 
+#ifdef __cplusplus
+
 template <class KpTreeRecType> 
 class KpTreeEntry
 {
@@ -390,5 +392,7 @@ public:
     }
 
 };
+
+#endif // #ifdef __cplusplus
 
 #endif // #ifndef KPTREE_INCLUDED

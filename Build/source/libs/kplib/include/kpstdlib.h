@@ -15,7 +15,24 @@
 #ifndef KPSTDLIB_INCLUDED
 #define KPSTDLIB_INCLUDED
 
+#include "envir.h"
 
+#include <stdarg.h>
+
+#ifdef _MSC_VER
+#include <stdio.h>
+#include <intrin.h>
+#include <windows.h>
+#include <WinDef.h>
+#endif
+
+#ifdef WIN32
+#include <tchar.h>
+
+#ifndef GWL_HINSTANCE
+#define GWL_HINSTANCE (-6)
+#endif
+#endif
 
 // -------------------------------------- plain exportai
 #ifdef MAKE_KPADD_SHARED
@@ -182,22 +199,25 @@ extern PLAIN_C void KpClose(void);                  // usually pointer to some l
 //     True
 // } bool;
 
+
 #ifndef WIN32
 typedef int BOOL;
 #endif
 
-#ifdef __MINGW32__
+// #if defined(__MINGW32__) || defined(_MSC_VER)
 #ifndef __cplusplus
 typedef char bool;
 #endif
-#endif
+// #endif
 
 #ifndef FALSE
 #define FALSE 0
 #endif
 #ifndef TRUE
+// #define TRUE 1
 #define TRUE (!FALSE)
 #endif
+
 
 #ifndef __cplusplus
 #ifndef true
@@ -209,7 +229,7 @@ typedef char bool;
 #define True ((bool)TRUE)
 #define False ((bool)FALSE)
 
-#ifdef __MINGW32__
+#if defined(__MINGW32__) && (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__ <= 40401) // existed until mingw 4.4.1
 #define va_list __VALIST 
 #else
 #   ifdef __GNUC__
@@ -221,6 +241,7 @@ typedef char bool;
 #endif
 
 #ifndef __WIN32__
+#ifndef WIN32
 typedef unsigned short u_short;
 typedef unsigned int uint;
 typedef unsigned int* UINT_PTR;
@@ -228,15 +249,18 @@ typedef long LONG;
 typedef unsigned long ulong;
 typedef unsigned long u_long;
 #endif
+#endif
 
 //--------------------------- pointer processing
 typedef void (*FuncPtr)(void);    /* funkcijos rodykles tipas */ // former Funpnt
 #define Null ((FuncPtr)0)         /* nuline funkcijos rodykle */
 
 #ifndef __WIN32__
+#ifndef WIN32
 #define FAR // far
 #define WINAPI
 typedef void* LPVOID;
+#endif
 #endif
 
 #ifndef __WIN32__
@@ -259,6 +283,9 @@ typedef int (*ComparePtrFuncPtr)(const void *ppVal1, const void *ppVal2);
       // -1: **ppVal1 > **ppVal2
 
 // ========================================= file I/O
+#ifndef PATH_MAX
+#define PATH_MAX 512
+#endif
 #define KP_MAX_FNAME_LEN 260 // MAX_PATH // FILENAME_MAX // negalima keist/naudot neaiškios makrokomandos – pasikeis kpstart.ini dydis
 #define KP_MAX_FTYPE_LEN KP_MAX_FNAME_LEN // 4  // negalima keist – pasikeis kpstart.ini dydis
 #define KP_MAX_FILE_LIN_LEN 4096
@@ -278,6 +305,10 @@ typedef int (*ComparePtrFuncPtr)(const void *ppVal1, const void *ppVal2);
 #define KP_CUR_DIR_STR (const uchar *)"."
 
 // ========================================= malloc
+#ifdef _MSC_VER
+extern PLAIN_C void *xmalloc(size_t size);
+#endif
+
 #ifdef __cplusplus
 
 #ifdef KP_ALLOC_TRACE
@@ -460,6 +491,7 @@ double NormAngle(double p_dAngle); // sukiša kampą į intervalą [-pi, pi)
 
 // ================================================== OS porting (Windows API <--> Linux)
 #ifndef __WIN32__
+#ifndef WIN32
 // typedef unsigned long HINSTANCE;
 #define DECLARE_HANDLE(name) struct name##__ { int unused; }; typedef struct name##__ *name
 DECLARE_HANDLE(HINSTANCE);
@@ -469,8 +501,9 @@ typedef void* HANDLE;
 
 typedef void* LPSECURITY_ATTRIBUTES;
 #endif
+#endif
 
-#ifdef __WIN32__
+#if defined(__WIN32__) || defined(WIN32)
 // #ifdef WINDOWS
 // #include <direct.h>
 // #define GetCurrentDir _getcwd
