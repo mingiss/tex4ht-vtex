@@ -41,7 +41,7 @@
 #endif
 #endif
 
-#ifdef _MSC_VER 
+#ifdef _MSC_VER
 // #define _X86_
 #endif
 
@@ -50,7 +50,7 @@
 #define HAVE__GET_OSFHANDLE 1
 #endif
 
-#ifdef _MSC_VER 
+#ifdef _MSC_VER
 #define HAVE__ACCESS 1
 #define HAVE__OPEN 1
 #endif
