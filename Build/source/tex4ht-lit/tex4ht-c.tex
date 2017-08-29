@@ -268,15 +268,17 @@ the HTML/XML and \`'.css', also \`'.lg', \`'.idv', and
 ----------------------------------------------- */
 `<h-defines`>
 /* ******************************************** */
-#ifdef __GNUC__
+#ifdef __MINGW32__
 #pragma GCC diagnostic ignored "-Wmisleading-indentation"
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
-
-#include "c-auto.h"
 #endif
 
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#ifdef __GNUC__
+#include "c-auto.h"
 #endif
 
 `<define MSVC-1-52`>

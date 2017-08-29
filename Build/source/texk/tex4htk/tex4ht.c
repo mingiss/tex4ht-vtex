@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-29-12:44), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-29-12:53), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -84,15 +84,17 @@
 
 
 /* ******************************************** */
-#ifdef __GNUC__
+#ifdef __MINGW32__
 #pragma GCC diagnostic ignored "-Wmisleading-indentation"
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
-
-#include "c-auto.h"
 #endif
 
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#ifdef __GNUC__
+#include "c-auto.h"
 #endif
 
 
@@ -6391,15 +6393,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:44 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:53 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:44)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:53)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:44 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:53 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:44 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:53 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
