@@ -305,9 +305,11 @@ typedef int (*ComparePtrFuncPtr)(const void *ppVal1, const void *ppVal2);
 #define KP_CUR_DIR_STR (const uchar *)"."
 
 // ========================================= malloc
-#ifdef _MSC_VER
+// #ifdef _MSC_VER
+#ifndef KPATHSEA
 extern PLAIN_C void *xmalloc(size_t size);
 #endif
+// #endif
 
 #ifdef __cplusplus
 

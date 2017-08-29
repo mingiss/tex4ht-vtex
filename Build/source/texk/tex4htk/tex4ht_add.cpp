@@ -22,7 +22,7 @@ HFontPars::HFontPars()
 }
 
 // ------------------------------
-FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *prpars)
+void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *pfont_pars)
 {
     char fmap_fname[PATH_MAX + 40];
     FILE *fmap_file = NULL;
@@ -57,7 +57,7 @@ printf(":::: ieškom: %s\n", fnt_name);
         if (fmap_file == NULL)
         {
             warn_i_str(ERR_FILE_NFOUND, fmap_fname);
-            return NULL;
+            return;
         }
 
         if (strlen(fnt_name) > PATH_MAX)
@@ -95,7 +95,7 @@ printf(":::: ieškom: %s\n", fnt_name);
                 if (psname == NULL)
                 {
                     warn_i_str(ERR_FILE_FORMAT, fmap_fname);
-                    return NULL;
+                    return;
                 }
                 ps_name = psname;
 
@@ -107,7 +107,7 @@ printf(":::: ieškom: %s\n", fnt_name);
         fclose(fmap_file);
 
         if (ps_name == NULL)
-            return NULL;
+            return;
 
         if (strlen(ps_name) > PATH_MAX)
             err_i_str(ERR_BUF_OVFL, ps_name);
@@ -119,7 +119,7 @@ printf(":::: ieškom: %s\n", fnt_name);
         if (enc_file == NULL)
         {
             warn_i_str(ERR_FILE_NFOUND, enc_fname);
-            return NULL;
+            return;
         }
 
         HFontPars pars;
@@ -166,18 +166,16 @@ printf(":::: ieškom: %s\n", fnt_name);
     if (ppars == NULL)
     {
         warn_i(ERR_STO_ADDR);
-        return NULL;
+        return;
     }
 
-    if (prpars)
-        *prpars = (HANDLE)ppars;
+    if (pfont_pars)
+        *pfont_pars = (HANDLE)ppars;
 
     new_font.char_f = ppars->m_ChFirst;
     new_font.char_l = ppars->m_ChLast;
 
 printf(":::: %s: %d %d\n", fnt_name, ppars->m_ChFirst, ppars->m_ChLast);
-
-    return fopen("otf.tfm", "rb");
 }
 
 int /* UniChar */ get_uni_ch(int tex_ch, HANDLE fnt_pars)

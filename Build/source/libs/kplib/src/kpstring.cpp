@@ -42,7 +42,8 @@ using namespace std;
 
 
 // -----------------------------
-#ifdef _MSC_VER
+// #ifdef _MSC_VER
+#ifndef KPATHSEA
 char *xstrdup(const char *string)
 {
     char *pstr = strdup(string);
@@ -51,6 +52,7 @@ char *xstrdup(const char *string)
     return pstr;
 }
 #endif
+// #endif
 
 // -----------------------------
 size_t strlen(const uchar *src){ return(strlen((const char *)src)); }
@@ -410,7 +412,7 @@ KpString KpString::Join(const vector<KpString> &saStrArr)
     size_t len = saStrArr.size();
     KpString ret_str;
 
-    for (int ii = 0; ii < len - 1; ii++) ret_str += saStrArr[ii] + *this;
+    for (size_t ii = 0; ii < len - 1; ii++) ret_str += saStrArr[ii] + *this;
     if (len > 0) ret_str += saStrArr[len - 1];
 
 return ret_str;

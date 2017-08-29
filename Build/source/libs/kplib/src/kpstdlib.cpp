@@ -103,7 +103,8 @@ void KpClose(void)
 // ========================================= malloc
 
 // -----------------------------
-#ifdef _MSC_VER
+// #ifdef _MSC_VER
+#ifndef KPATHSEA
 void *xmalloc(size_t size)
 {
     void *ptr = malloc(size);
@@ -112,6 +113,7 @@ void *xmalloc(size_t size)
     return ptr;
 }
 #endif
+// #endif
 
 // -----------------------------
 // memory allocation control

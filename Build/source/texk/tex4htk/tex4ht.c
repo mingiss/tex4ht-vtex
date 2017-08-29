@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-23-18:27), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-29-12:02), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -84,10 +84,15 @@
 
 
 /* ******************************************** */
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wmisleading-indentation"
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
+
+#include "c-auto.h"
+#endif
+
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
-#else
-#include "c-auto.h"
 #endif
 
 
@@ -3433,16 +3438,16 @@ return (INTEGER)(
     
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  >= 0) && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
 ] : 0 )
@@ -4751,16 +4756,16 @@ if( no_root_file ){  open_o_file(); }
 (int)(
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  >= 0) && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
 ] : 0 )
@@ -5791,16 +5796,16 @@ return (INTEGER)(
     
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  >= 0) && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
 ] : 0 )
@@ -6386,15 +6391,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-23-18:27 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:02 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-23-18:27)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:02)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-23-18:27 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:02 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-23-18:27 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:02 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -7884,8 +7889,7 @@ new_font_name[font_name_n] = '\0';
 new_font.name = m_alloc(char, font_name_n + 1);
 (IGNORED) strcpy((char *)  new_font.name, (char *) new_font_name );
 
-{    size_t n;
-     int i;
+{    size_t n, i;
    for( n=0; n<font_name_n; n++ ){
      if(  ( '0' <= new_font_name[n] ) && ( new_font_name[n] <= '9' )){
        break;
@@ -7973,9 +7977,6 @@ new_font.design_sz = (INTEGER) get_unt(4);
 {       FILE *font_file;
         U_CHAR  file_name[256];
 
-        int ch_f;
-        int ch_l;
-
    
 {                        
    font_file = NULL;
@@ -8053,14 +8054,16 @@ for( cur_cache_font = cache_font;
 
    otf_pars = NULL;
    if (font_file == NULL)
-      font_file = get_otf_fm(new_font_name, job_name, &otf_pars);
+      get_otf_fm(new_font_name, job_name, &otf_pars);
 
-   if( font_file == NULL ){
+   if((font_file == NULL) && (otf_pars == NULL)){
       dump_env();      err_i_str(1,file_name);
       missing_fonts = TRUE;
       new_font.char_f = 2;
       new_font.char_l = 1;
-   } else {
+   }
+
+   if (font_file) {
       
 {       
  INTEGER  file_length;     
@@ -8075,13 +8078,8 @@ for( cur_cache_font = cache_font;
    
 file_length                    = (INTEGER) fget_int(font_file,2);
 header_length                  = (int) fget_int(font_file,2);
-ch_f = (int) fget_int(font_file,2);
-ch_l = (int) fget_int(font_file,2);
-if (!otf_pars)
-{
-    new_font.char_f = ch_f;
-    new_font.char_l = ch_l;
-}
+new_font.char_f = (int) fget_int(font_file,2);
+new_font.char_l = (int) fget_int(font_file,2);
 new_font.wtbl_n = (int) fget_int(font_file,2);
 new_font.htbl_n = (int) fget_int(font_file,2);
 new_font.dtbl_n = (int) fget_int(font_file,2);
@@ -8090,13 +8088,12 @@ lig_kern_table_length          = (int) fget_int(font_file,2);
 kern_table_length              = (int) fget_int(font_file,2);
 extensible_char_table_length   = (int) fget_int(font_file,2);
 num_font_parameters            = (int) fget_int(font_file,2);
-if ((file_length != ( 6                + header_length
+if (file_length != ( 6                + header_length
      - new_font.char_f              + new_font.char_l + 1
      + new_font.wtbl_n              + new_font.htbl_n
      + new_font.dtbl_n              + it_correction_table_length
      + lig_kern_table_length        + kern_table_length
-     + extensible_char_table_length + num_font_parameters  )) &&
-    (!otf_pars)
+     + extensible_char_table_length + num_font_parameters  )
   ){ err_i_str(15,file_name); }
 
 
@@ -8260,8 +8257,7 @@ new_font_name[font_name_n] = '\0';
 new_font.name = m_alloc(char, font_name_n + 1);
 (IGNORED) strcpy((char *)  new_font.name, (char *) new_font_name );
 
-{    size_t n;
-     int i;
+{    size_t n, i;
    for( n=0; n<font_name_n; n++ ){
      if(  ( '0' <= new_font_name[n] ) && ( new_font_name[n] <= '9' )){
        break;
@@ -8801,7 +8797,7 @@ fonts_n++;
   for( search_css_ext = css_ext;
        search_css_ext != (struct css_ext_rec *) 0;
        search_css_ext = search_css_ext->next       ){
-     int css_name_n = (int) strlen((char *)  new_font.name );
+     size_t css_name_n = strlen((char *)  new_font.name );
      char * css_file_name = m_alloc(char, css_name_n + 1);
      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
      for( ; css_name_n; css_name_n-- ){
@@ -9118,7 +9114,9 @@ if( file_rec ){
 #endif
    
 if( html_font ){
-  while( fonts_n-- )  free((void *)  html_font[fonts_n].name);
+  while( fonts_n-- )
+    if (html_font[fonts_n].name)
+        free((void *)  html_font[fonts_n].name);
   free((void *)  html_font );
 }
 
@@ -9333,16 +9331,16 @@ needs_accent_sym = FALSE;
 width = (INTEGER)( 
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  >= 0) && (
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
+( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
     font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
 
 ] : 0 )

@@ -1151,10 +1151,10 @@ tm *tm_ptr = NULL;
             prod_date = KpApp->m_pszProdDate;
         }
         sprintf((char *)out_str,
-#if defined(_MSC_VER) && (!defined(_USE_32BIT_TIME_T))
-            "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %lld ",
-#else
+#ifdef _USE_32BIT_TIME_T
             "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %ld ",
+#else
+            "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %lld ",
 #endif
             1900 + tm_ptr->tm_year, 1 + tm_ptr->tm_mon, tm_ptr->tm_mday, tm_ptr->tm_hour + 2, tm_ptr->tm_min, tm_ptr->tm_sec,
             prod_name, prod_ver, prod_date, ltime);
@@ -1211,11 +1211,11 @@ void KpErrorClass::Catch(const exception &p_rExc)
 {
    try
    {
-      if (&p_rExc == NULL)
-      {
-         KP_ERROR(E_POINTER, null);
-      }
-      else
+//    if (&p_rExc == NULL)
+//    {
+//       KP_ERROR(E_POINTER, null);
+//    }
+//    else
       {
 const KpException *exc = dynamic_cast<const KpException *>(&p_rExc);
 

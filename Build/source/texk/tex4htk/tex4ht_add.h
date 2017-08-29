@@ -171,15 +171,13 @@ extern HFontParMap mapHFontParMap;
 #endif
 
 // ------------------------------
-// tries to obtain otf font parameters from font mappings provided by luafonts.lua
+// tries to obtain otf font parameters from font mappings in subdirectory .xdvips provided by luafonts.lua
 // fnt_name -- internal TeX decorated font name
-// return:
-//      pointer to fake .tfm file just not to ruin tfm scanning algorithm of tex4ht
-//      *ppars -- pointer to found or newly created font parameter structure object
-extern PLAIN_C FILE *get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *ppars);
+// returns *pfnt_pars -- pointer to found or newly created font parameter structure HFontPars object
+extern PLAIN_C void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *pfnt_pars);
 
 // ------------------------------
 // converts TeX character code to unicode
 // tex_ch -- TeX character code
-// fnt_pars -- pointer to font HFontPars object
+// fnt_pars -- pointer to current font HFontPars object
 extern PLAIN_C int /* UniChar */ get_uni_ch(int tex_ch, HANDLE fnt_pars);

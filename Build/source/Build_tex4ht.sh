@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# ./reautoconf > reautoconf.log 2>&1 
-# ./Build_tex4ht.sh > Build_tex4ht.sh.log 2>&1 
+# ./reautoconf > reautoconf.log 2>&1
+# ./Build_tex4ht.sh > Build_tex4ht.sh.log 2>&1
 
 if [ "x$WINDIR" == "x" ]; then
 export distribution=2016
