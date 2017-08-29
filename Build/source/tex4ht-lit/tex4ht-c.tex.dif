@@ -1,0 +1,53 @@
+diff --git a/Build/source/tex4ht-lit/tex4ht-c.tex b/Build/source/tex4ht-lit/tex4ht-c.tex
+index bc18b0e..6123ec7 100644
+--- a/Build/source/tex4ht-lit/tex4ht-c.tex
++++ b/Build/source/tex4ht-lit/tex4ht-c.tex
+
+@@ -8720,6 +8720,9 @@
+                  (size_t) ((font_tbl_size+1)
+                            * sizeof(struct font_entry)))
+             : m_alloc(struct font_entry, 1);
++
++   memset(&new_font, 0, sizeof(struct font_entry));
++
+    if(       (version_id == `<version xdv`>) 
+          &&  (ch == `<xdv-native-font-def op`>) 
+    ){
+
+@@ -9353,7 +9356,7 @@
+ \<first definition of font?\><<<
+ {        int i;
+-   for( i=font_tbl_size-1; i>0;  i-- )
++   for( i=font_tbl_size-1; i >= 0;  i-- )
+      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+ >>>
+
+@@ -10155,9 +10158,12 @@
+   while( 1 ){                         BOOL flag;
+      `<font looping test`>
+      flag = TRUE;
+-     for( ; font_name_n; font_name_n-- ){  FILE* file;
++     for( ; font_name_n >= 0; font_name_n-- ){  FILE* file;
+                                            int   char_f, char_l;
+        new_font_name[font_name_n] = '\0';
++       if (font_name_n == 0)
++            break;
++
+        `<file = .htf file`>
+        if( file != NULL){
+                                            INTEGER x_char_l;
+
+@@ -12053,9 +12059,12 @@
+      int css_name_n = (int) strlen((char *)  new_font.name );
+      char * css_file_name = m_alloc(char, css_name_n + 1);
+      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
+-     for( ; css_name_n; css_name_n-- ){
++     for( ; css_name_n >= 0; css_name_n-- ){
+                                                FILE* file;
+        css_file_name[css_name_n] = '\0';
++       if (css_name_n == 0)
++            break;
++
+        `<file = .css file`>
+      }
+      free((void *) css_file_name); 

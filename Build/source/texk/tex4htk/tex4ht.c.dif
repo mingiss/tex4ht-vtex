@@ -1,0 +1,54 @@
+diff --git a/Build/source/texk/tex4htk/tex4ht.c b/Build/source/texk/tex4htk/tex4ht.c
+index c777ae5..7a2aa8d 100644
+--- a/Build/source/texk/tex4htk/tex4ht.c
++++ b/Build/source/texk/tex4htk/tex4ht.c
+
+@@ -7715,6 +7715,9 @@
+                  (size_t) ((font_tbl_size+1)
+                            * sizeof(struct font_entry)))
+             : m_alloc(struct font_entry, 1);
++
++   memset(&new_font, 0, sizeof(struct font_entry));
++
+    if(       (version_id == 
+ 5
+
+@@ -7780,7 +7783,7 @@
+ {        int i;
+-   for( i=font_tbl_size-1; i>0;  i-- )
++   for( i=font_tbl_size-1; i >= 0;  i-- )
+      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+
+@@ -7969,7 +7972,7 @@
+ {        int i;
+-   for( i=font_tbl_size-1; i>0;  i-- )
++   for( i=font_tbl_size-1; i >= 0;  i-- )
+      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+
+@@ -8398,9 +8401,12 @@
+      flag = TRUE;
+-     for( ; font_name_n; font_name_n-- ){  FILE* file;
++     for( ; font_name_n >= 0; font_name_n-- ){  FILE* file;
+                                            int   char_f, char_l;
+        new_font_name[font_name_n] = '\0';
++       if (font_name_n == 0)
++            break;
++
+        
+ {                              U_CHAR name[256];
+    (IGNORED) sprintf(name, "%s.htf", new_font_name);
+
+@@ -8800,9 +8806,12 @@
+      int css_name_n = (int) strlen((char *)  new_font.name );
+      char * css_file_name = m_alloc(char, css_name_n + 1);
+      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
+-     for( ; css_name_n; css_name_n-- ){
++     for( ; css_name_n >= 0; css_name_n-- ){
+                                                FILE* file;
+        css_file_name[css_name_n] = '\0';
++       if (css_name_n == 0)
++            break;
++
+        
+ {                              U_CHAR name[256];
+    (IGNORED) sprintf(name, "%s.%s", css_file_name,

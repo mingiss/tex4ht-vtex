@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-29-12:02), generated from tex4ht-c.tex
+/* tex4ht.c (2017-08-29-12:44), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -6391,15 +6391,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:02 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:44 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:02)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:44)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:02 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:44 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:02 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-08-29-12:44 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -7715,6 +7715,9 @@ if( (font_tbl_size + 1) < MAXFONTS )
                  (size_t) ((font_tbl_size+1)
                            * sizeof(struct font_entry)))
             : m_alloc(struct font_entry, 1);
+
+   memset(&new_font, 0, sizeof(struct font_entry));
+
    if(       (version_id == 
 5
 
@@ -7780,7 +7783,7 @@ if( flags &
 
 
 {        int i;
-   for( i=font_tbl_size-1; i>0;  i-- )
+   for( i=font_tbl_size-1; i >= 0;  i-- )
      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
 
 
@@ -7969,7 +7972,7 @@ new_font.design_sz = (INTEGER) get_unt(4);
 
 
 {        int i;
-   for( i=font_tbl_size-1; i>0;  i-- )
+   for( i=font_tbl_size-1; i >= 0;  i-- )
      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
 
 
@@ -8398,9 +8401,12 @@ if( loopBound > 10 ){
 
 
      flag = TRUE;
-     for( ; font_name_n; font_name_n-- ){  FILE* file;
+     for( ; TRUE /* font_name_n >= 0 */; font_name_n-- ){  FILE* file;
                                            int   char_f, char_l;
        new_font_name[font_name_n] = '\0';
+       if (font_name_n == 0)
+            break;
+
        
 {                              U_CHAR name[256];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
@@ -8800,9 +8806,12 @@ fonts_n++;
      size_t css_name_n = strlen((char *)  new_font.name );
      char * css_file_name = m_alloc(char, css_name_n + 1);
      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
-     for( ; css_name_n; css_name_n-- ){
+     for( ; TRUE /* css_name_n >= 0 */; css_name_n-- ){
                                                FILE* file;
        css_file_name[css_name_n] = '\0';
+       if (css_name_n == 0)
+            break;
+
        
 {                              U_CHAR name[256];
    (IGNORED) sprintf(name, "%s.%s", css_file_name,
