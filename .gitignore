@@ -23,9 +23,10 @@ Build/source/libs/*
 !Build/source/tex4ht-lit
 Build/source/tex4ht-lit/*
 !Build/source/tex4ht-lit/Makefile
-!Build/source/tex4ht-lit/tex4ht-c.sh
 !Build/source/tex4ht-lit/tex4ht-c.tex
 !Build/source/tex4ht-lit/tex4ht-c.tex.dif
+!Build/source/tex4ht-lit/tex4ht-c.sh
+!Build/source/tex4ht-lit/tex4ht-c.bat
 
 !Build/source/texk
 Build/source/texk/*
