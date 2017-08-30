@@ -51,3 +51,27 @@ index bc18b0e..6123ec7 100644
         `<file = .css file`>
       }
       free((void *) css_file_name); 
+
+@@ -1514,14 +1514,15 @@
+ \<trace context\><<<
+ {
+   char trace = *(p+2);
+-  if (trace == 'A' || trace == 'e') { `<context for warn and errs`> }
+-  if (trace == 'A' || trace == 'f') { `<dump htf files`> }
+-  if (trace == 'A' || trace == 'F') { `<trace htf search`> }
+-  if (trace == 'A' || trace == 's') { `<trace specials in dvi`> }
+-  if (trace == 'A' || trace == 'g') { `<cmd line trace groups`> }
+-  if (trace == 'A' || trace == 'v') { `<dump env file`> }
+-  if (trace == 'A' || trace == 'V') { `<trace env search`> }
+-  else { bad_arg; }
++  BOOL unkn_opt = TRUE;
++  if (trace == 'A' || trace == 'e') { `<context for warn and errs`> unkn_opt = FALSE; }
++  if (trace == 'A' || trace == 'f') { `<dump htf files`> unkn_opt = FALSE; }
++  if (trace == 'A' || trace == 'F') { `<trace htf search`> unkn_opt = FALSE; }
++  if (trace == 'A' || trace == 's') { `<trace specials in dvi`> unkn_opt = FALSE; }
++  if (trace == 'A' || trace == 'g') { `<cmd line trace groups`> unkn_opt = FALSE; }
++  if (trace == 'A' || trace == 'v') { `<dump env file`> unkn_opt = FALSE; }
++  if (trace == 'A' || trace == 'V') { `<trace env search`> unkn_opt = FALSE; }
++  if (unkn_opt) { bad_arg; }
+ }
+ >>>

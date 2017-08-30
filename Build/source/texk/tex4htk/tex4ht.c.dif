@@ -52,3 +52,54 @@ index c777ae5..7a2aa8d 100644
         
  {                              U_CHAR name[256];
     (IGNORED) sprintf(name, "%s.%s", css_file_name,
+
+@@ -6144,22 +6144,23 @@
+   case 'h':{ 
+ {
+   char trace = *(p+2);
++  BOOL unkn_opt = TRUE;
+   if (trace == 'A' || trace == 'e') { 
+ err_context = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'f') { 
+ dump_htf_files = 1;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'F') { 
+ dump_htf_search = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 's') { 
+ trace_special = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'g') { 
+ trace_dvi_P++;
+ if( !(   *trace_dvi_del_P || *end_trace_dvi_del_P
+
+@@ -6184,16 +6185,16 @@
+    (IGNORED) strcpy((char *) end_trace_dvi_del_p, "]" );
+ }
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'v') { 
+ dump_env_files = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'V') { 
+ dump_env_search = TRUE;
+ 
+- }
+-  else { bad_arg; }
++ unkn_opt = FALSE; }
++  if (unkn_opt) { bad_arg; }
+ }
+ 
+   break; }
