@@ -2990,6 +2990,7 @@ if( trace_dvi_C && !ch_map_flag ){
       x_val += math_class_on? `<set-ch-class(ch-1)`> 
                             : insert_ch(ch_1);       `%typset and move`%
       if(  max_x_val < x_val ) max_x_val = x_val;
+      ch_fl = TRUE; // printable character -- ready for sending back specials
    } else switch( ch ) {
       case 133: case 134: case 135: case 136: {`%typset and don't move`%
            INTEGER w;
@@ -4172,6 +4173,8 @@ while( special_n-- > 0 ){
         BOOL flag;
         struct hcode_repl_typ *q;
    ch = get_char();
+   if ((ch == '<') || (ch == '>'))
+        ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
    q = hcode_repl;
    flag = FALSE;
    while( q != (struct hcode_repl_typ*) 0 ){
@@ -6634,11 +6637,13 @@ if( special_n ){
                int   ch, sv_stack_n;
                `<subp vars`>
   `<init subp vars`>  stack_id = 0;
+  ch_fl = FALSE;
   curr_pos = ftell(dvi_file);  sv_stack_n = stack_n;
   `<send info backward`>
   `<exit early pass`>
   (IGNORED) fseek(dvi_file, curr_pos, `<abs file addr`>);
   group_dvi = TRUE;  stack_n = sv_stack_n;    stack_id = 0;
+  ch_fl = FALSE;
 } else { `<exit group special`> }
 >>>
 
@@ -6663,6 +6668,16 @@ if( (in_ch = get_char()) == '>' ) {
   `<store forward submissions`>
 } else if( in_ch == '!' ) {
   `<store path-based forward submissions`>
+} else if( in_ch == '<' ) {
+    in_ch = get_char();
+    special_n -= 2;
+    if ((in_ch == '*') && (!ch_fl)) // supressed back sending special -- placing it right here
+    {
+        `<insert verbatim record`>
+    }
+    else
+        (IGNORED) fseek(dvi_file, (long) special_n, `<relative file addr`>);
+    special_n = 0;
 } else {
   if( !group_dvi ){ warn_i(42); }
   (IGNORED) fseek(dvi_file, (long) --special_n, 
@@ -7053,6 +7068,13 @@ case `<special 3`>:  case `<special 4`>: {  long int i;
   if( tex4ht_special( &ch, &i ) ){
      if( ch == '~' ){                  
         `<handle requests for backward submissions`> 
+     } else if (ch == '='){
+        while (i--)
+        {
+            int ch = get_char();
+            if ((ch == '<') || (ch == '>'))
+                ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+        }
      } else {
        (IGNORED) fseek(dvi_file, (long) i, `<relative file addr`>);
      }
@@ -7372,7 +7394,7 @@ to deal with parenthese that are not balanced, for instance,
 
 \<pop-id + 1\><<<
 if( !back_id_off ){
-   if( !id_hide ){  ch_token = FALSE;
+   if( !id_hide ){ /* ch_fl = */ ch_token = FALSE;
                     sv_id = stack[stack_n].stack_id; }
    while( del_stack != (struct del_stack_entry*) 0 ){
                                      struct del_stack_entry* p;
@@ -7402,7 +7424,9 @@ if( !back_id_off )
 \<ch-id + 1\><<<
 ch_id++;   
 if(!back_id_off ){
-   if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id; }
+   if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id;
+                    ch_fl = TRUE; // printable character -- ready for sending back specials
+   }
    switch( math_class_of( ch, cr_fnt ) ){
      case `<math open`>: { del_stack = push_del( (char) ch, cr_fnt);
                            break; }
@@ -7468,7 +7492,9 @@ static  struct del_stack_entry* pop_del(ch, id_hide, cr_fnt)
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
                                              struct del_stack_entry  * p;
-         if( !id_hide && !id_latex ){  sv_id = del_stack->id; }
+         if( !id_hide && !id_latex ){  sv_id = del_stack->id;
+//                                     ch_fl = FALSE;
+         }
          del_stack = (p = del_stack)->next;  free((void *)  p );
    }  }
    return del_stack;
@@ -7508,10 +7534,14 @@ struct del_stack_entry{
 
 \<vars\><<<
 static int ch_id, sv_id, id_latex, back_id_off; 
+BOOL ch_fl; // flag for no xml tags after the last printable character
+            // used for cutting off any further back sendings after verbatims with xml tags
+            // in contrast with ch_token it should be equally functional during both runs of group_dvi
 >>>
 
 \<main's init\><<<
 back_id_off = 1;  id_latex = 0;
+ch_fl = FALSE;
 >>>
 
 
@@ -7528,6 +7558,7 @@ int  id_hide;
 \<init subp vars\><<<
 sv_id = 0;    `<init ch-id`>
 id_hide = 0;    ch_token = TRUE;
+ch_fl = FALSE;
 while( del_stack != (struct del_stack_entry*) 0 ){
                                   struct del_stack_entry* p;
   del_stack = (p = del_stack)->next;
@@ -7602,8 +7633,9 @@ back_token->id = -1;
 
 \<send back over token / group\><<<
               struct send_back_entry *p, *q, *t=0;
-if( back_id_off ){
-   while( i-- ){ (IGNORED) get_char();  }
+if( back_id_off
+        || (!ch_fl)){ // there were xml tags after the last character -- ignoring back sending special -- on second run it will be placed right here as a verbatim special
+   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
 } else {
    p =  m_alloc(struct send_back_entry,1);
    p->send = get_str( (int)( i - 1 ));

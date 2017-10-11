@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-08-29-12:53), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-11-09:18), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -877,6 +877,9 @@ static struct del_stack_entry  *del_stack;
 
 
 static int ch_id, sv_id, id_latex, back_id_off;
+BOOL ch_fl; // flag for no xml tags after the last printable character
+            // used for cutting off any further back sendings after verbatims with xml tags
+            // in contrast with ch_token it should be equally functional during both runs of group_dvi
 
 
 static struct send_back_entry *back_token, *back_group;
@@ -2704,7 +2707,9 @@ static  struct del_stack_entry* pop_del
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
                                              struct del_stack_entry  * p;
-         if( !id_hide && !id_latex ){  sv_id = del_stack->id; }
+         if( !id_hide && !id_latex ){  sv_id = del_stack->id;
+//                                     ch_fl = FALSE;
+         }
          del_stack = (p = del_stack)->next;  free((void *)  p );
    }  }
    return del_stack;
@@ -6393,15 +6398,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:53 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-11-09:18 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:53)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-11-09:18)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:53 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-11-09:18 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-08-29-12:53 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-11-09:18 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -6445,6 +6450,7 @@ del_stack = (struct del_stack_entry  *) 0;
 
 
 back_id_off = 1;  id_latex = 0;
+ch_fl = FALSE;
 
 
 back_token = back_group = m_alloc(struct send_back_entry,1);
@@ -9412,6 +9418,7 @@ set_ch_class(ch_1)
 
                             : insert_ch(ch_1);       
       if(  max_x_val < x_val ) max_x_val = x_val;
+      ch_fl = TRUE; // printable character -- ready for sending back specials
    } else switch( ch ) {
       case 133: case 134: case 135: case 136: {
            INTEGER w;
@@ -10609,6 +10616,8 @@ while( special_n-- > 0 ){
         BOOL flag;
         struct hcode_repl_typ *q;
    ch = get_char();
+   if ((ch == '<') || (ch == '>'))
+        ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
    q = hcode_repl;
    flag = FALSE;
    while( q != (struct hcode_repl_typ*) 0 ){
@@ -11067,6 +11076,39 @@ if( p->action == '>' ){
 }  }
 
 
+} else if( in_ch == '<' ) {
+    in_ch = get_char();
+    special_n -= 2;
+    if ((in_ch == '*') && (!ch_fl)) // supressed back sending special -- placing it right here
+    {
+        
+while( special_n-- > 0 ){
+        int ch;
+        BOOL flag;
+        struct hcode_repl_typ *q;
+   ch = get_char();
+   if ((ch == '<') || (ch == '>'))
+        ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+   q = hcode_repl;
+   flag = FALSE;
+   while( q != (struct hcode_repl_typ*) 0 ){
+      if( ch == *(q->str) ){ flag = TRUE; break; }
+      q = q->next;
+   }
+   if( flag ){
+                   char *chr;
+      chr = (q->str) + 1;
+      while( *chr != 0 ){ put_char( *chr ); chr++; }
+   } else { put_char( ch ); }
+}
+
+
+    }
+    else
+        (IGNORED) fseek(dvi_file, (long) special_n, 
+1
+);
+    special_n = 0;
 } else {
   if( !group_dvi ){ warn_i(42); }
   (IGNORED) fseek(dvi_file, (long) --special_n,
@@ -11097,6 +11139,7 @@ ch_id = 0;
 
 
 id_hide = 0;    ch_token = TRUE;
+ch_fl = FALSE;
 while( del_stack != (struct del_stack_entry*) 0 ){
                                   struct del_stack_entry* p;
   del_stack = (p = del_stack)->next;
@@ -11104,6 +11147,7 @@ while( del_stack != (struct del_stack_entry*) 0 ){
 }
 
   stack_id = 0;
+  ch_fl = FALSE;
   curr_pos = ftell(dvi_file);  sv_stack_n = stack_n;
   
 while( group_dvi ){
@@ -11117,7 +11161,9 @@ case 134: case 135: case 136: {
   
 ch_id++;
 if(!back_id_off ){
-   if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id; }
+   if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id;
+                    ch_fl = TRUE; // printable character -- ready for sending back specials
+   }
    switch( math_class_of( ch, cr_fnt ) ){
      case 
 4
@@ -11340,7 +11386,7 @@ case
 : {
    stack_n--;  
 if( !back_id_off ){
-   if( !id_hide ){  ch_token = FALSE;
+   if( !id_hide ){ /* ch_fl = */ ch_token = FALSE;
                     sv_id = stack[stack_n].stack_id; }
    while( del_stack != (struct del_stack_entry*) 0 ){
                                      struct del_stack_entry* p;
@@ -11380,8 +11426,9 @@ if( i==0 ){
            if( (ch = get_char()) == '*' )
              { 
               struct send_back_entry *p, *q, *t=0;
-if( back_id_off ){
-   while( i-- ){ (IGNORED) get_char();  }
+if( back_id_off
+        || (!ch_fl)){ // there were xml tags after the last character -- ignoring back sending special -- on second run it will be placed right here as a verbatim special
+   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
 } else {
    p =  m_alloc(struct send_back_entry,1);
    p->send = get_str( (int)( i - 1 ));
@@ -11469,6 +11516,13 @@ while( --i ) *q++ = get_char();
 } }
 
 
+     } else if (ch == '='){
+        while (i--)
+        {
+            int ch = get_char();
+            if ((ch == '<') || (ch == '>'))
+                ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+        }
      } else {
        (IGNORED) fseek(dvi_file, (long) i, 
 1
@@ -11530,7 +11584,9 @@ default: {
 } else { 
 ch_id++;
 if(!back_id_off ){
-   if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id; }
+   if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id;
+                    ch_fl = TRUE; // printable character -- ready for sending back specials
+   }
    switch( math_class_of( ch, cr_fnt ) ){
      case 
 4
@@ -11582,6 +11638,7 @@ ch_id = 0;
 0
 );
   group_dvi = TRUE;  stack_n = sv_stack_n;    stack_id = 0;
+  ch_fl = FALSE;
 } else { 
 {              int stack_n;
   for( stack_n=
