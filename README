@@ -52,7 +52,11 @@ Add-ons to module tex4ht:
         command line switch -n
             totally cuts off the heuristic algorithm for recognition of spaces in .dvi file;
             spaces then should be generated using some explicit means, for example by inserting commands
-                \special{t4ht=\&\#32;} into the source .tex file.
+                \special{t4ht=\&\#32;}
+            into the source .tex file using LuaTeX script 4hspship.lua, provided in repository
+                    https://gitlab.vtex.lt/texgr/tex4ht-v2.git
+                subfolder
+                    2_spaces/styles
 
         command line switch -r
             correction of spaces recognition threshold;
@@ -60,6 +64,32 @@ Add-ons to module tex4ht:
                 -r100   no change, the algorithm operates as usual;
                 -r50    threshold of spaces generation is increased twice -- resulting amount of spaces decreases;
                 -r200   threshold decreased by half, more spaces.
+
+    OTF font character encoding.
+
+        Character mappings are provided during LaTex file compilation by additional LuaTeX script luafonts.lua .
+        Encoding files are placed in subdirectory of the working folder named .xdvips . They are used instead of *.htf encoding files.
+
+        OTF font encoding exporter luafonts.lua with supplementing LaTeX styles could be found at
+                https://gitlab.vtex.lt/vtex-soft/texlive.xdvipsk.git
+            or
+                https://gitlab.vtex.lt/TeXProd.texroot/texlive-vtex-adds.git
+            Folow instructions as provided in file README.overview, sections
+                    Opentype font support
+                and
+                    Running xdvipsk
+
+    Attempt to solve the problem in MathML sup/subscript tag sending back algorithm.
+
+        The problem arises in case of baseless sup/subscripts, for instance:
+                $a_b{}^c$
+            tex4ht has a mechanizm of sup/subscript base searching through sending back initial MathML tags prior to the last printable character.
+            In case, when that character allready is inside of a previous tagged structure, such a back insertion ruins the validity of tags.
+
+            Following modification implemented: when after the last printable character there are verbatim insertions 't4ht=',
+            containing tag characters '<' or '>', back sending of the initiating tags is suppressed,
+            resulting in the verbatim insertion of the special 't4ht~<*' contents right in the place, where it was encountered.
+            (The result is as the special 't4ht~<*' was entered as 't4ht='.)
 
 TODO:
     Bug in command line parameters recognition:
@@ -71,3 +101,7 @@ TODO:
     Command line switch -r currently does work in math mode solely.
 
     reautoconf under MSYS
+
+    MathML sup/subscript tag sending back algorithm:
+        Stepping over is not allowed not just through tags, entered inside of verbatim specials 't4ht='.
+        All tag insertion specials, including 't4ht~<*' itself, should be examined as well.
