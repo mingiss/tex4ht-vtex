@@ -131,7 +131,8 @@ HEADERS += \
     ../kpathsea/xopendir.h \
     ../kpathsea/xstat.h
 
-INCLUDEPATH += . ../../Work/texk/tex4htk .. ../../Work/texk ../../libs/kplib/include ../../libs/kplib/src ../../libs/kplib/src/net ../../libs/kplib/src/win
+INCLUDEPATH += . ../../Work/texk/tex4htk .. ../../Work/texk \
+    ../../libs/kplib/include ../../libs/kplib/src ../../libs/kplib/src/net ../../libs/kplib/src/win
 
 # QMAKE_CXXFLAGS += -ggdb -O0
 # QMAKE_CFLAGS += -ggdb -O0
