@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-13-14:32), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-13-15:04), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -6426,15 +6426,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-13-14:32 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-15:04 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-13-14:32)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-15:04)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-13-14:32 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-15:04 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-13-14:32 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-15:04 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
