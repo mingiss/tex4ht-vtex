@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-13-10:35), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-13-13:35), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -362,6 +362,9 @@ struct halign_rec{
 
 #define new_font   font_tbl[font_tbl_size]
 
+
+// #define DEF_WORD_SP 999999.0
+#define WORD_SP_XDV 350000
 
 #ifdef LONG
 #define MARGINSP 344061L        
@@ -904,7 +907,7 @@ static char*  new_font_name;
 static U_CHAR *lg_font_fmt = NULL;
 
 
-static double word_sp   = 999999.0, margin_sp;
+static double word_sp   = DEF_WORD_SP, margin_sp;
 
 
 static int ignore_ch = 0;
@@ -5081,7 +5084,9 @@ p= gif_open[gif_flag];
 if( p )
 if( *p ){
    print_f(p); (IGNORED) strcpy((char *) str, (char *) font_tbl[cur_fnt].name);
-   mag = (int) ((double) font_tbl[cur_fnt].scale /
+   mag = 10;
+   if (font_tbl[cur_fnt].design_sz > 0)
+      mag = (int) ((double) font_tbl[cur_fnt].scale /
                 font_tbl[cur_fnt].design_sz  * 10 );
    
 if( !dos_file_names ){
@@ -5499,7 +5504,9 @@ p= gif_open[gif_flag];
 if( p )
 if( *p ){
    print_f(p); (IGNORED) strcpy((char *) str, (char *) font_tbl[cur_fnt].name);
-   mag = (int) ((double) font_tbl[cur_fnt].scale /
+   mag = 10;
+   if (font_tbl[cur_fnt].design_sz > 0)
+      mag = (int) ((double) font_tbl[cur_fnt].scale /
                 font_tbl[cur_fnt].design_sz  * 10 );
    
 if( !dos_file_names ){
@@ -6415,15 +6422,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-13-10:35 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-13:35 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-13-10:35)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-13:35)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-13-10:35 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-13:35 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-13-10:35 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-13:35 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -7877,7 +7884,7 @@ new_font.it = 0;
 
              
 
-new_font.word_sp = 350000;
+new_font.word_sp = WORD_SP_XDV;
 
 if( new_font.word_sp == 0 ) {
         int i;
@@ -7947,7 +7954,9 @@ new_font.name = m_alloc(char, font_name_n + 1);
 
 
 
-new_font.mag = new_font.scale / (new_font.design_sz / 100);
+new_font.mag = 100;
+if (new_font.design_sz > 0)
+    new_font.mag = new_font.scale / (new_font.design_sz / 100);
 
 
 
@@ -8315,7 +8324,9 @@ new_font.name = m_alloc(char, font_name_n + 1);
 
 
 
-new_font.mag = new_font.scale / (new_font.design_sz / 100);
+new_font.mag = 100;
+if (new_font.design_sz > 0)
+    new_font.mag = new_font.scale / (new_font.design_sz / 100);
 
 
 
@@ -12943,7 +12954,9 @@ if( errCode > 0 ){
 if( (ch = i + font_tbl[cur_fnt].char_f) > 127 )  {
   if( ch < 256 ) cond_idv_char(133);  else  warn_i(23);   }
 cond_idv_char( ch );
-mag = (int) ((double) font_tbl[cur_fnt].scale /
+mag = 10;
+if (font_tbl[cur_fnt].design_sz > 0)
+  mag = (int) ((double) font_tbl[cur_fnt].scale /
              font_tbl[cur_fnt].design_sz  * 10 );
 
 if( !dos_file_names ){

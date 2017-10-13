@@ -174,6 +174,10 @@ printf(":::: ieškom: %s\n", fnt_name);
 
     new_font.char_f = ppars->m_ChFirst;
     new_font.char_l = ppars->m_ChLast;
+    new_font.word_sp = DEF_WORD_SP;
+    new_font.scale = DEF_FONT_SCALE;
+    new_font.design_sz = DEF_DESIGN_SZ;
+    new_font.mag = DEF_MAG_VAL;
 
 printf(":::: %s: %d %d\n", fnt_name, ppars->m_ChFirst, ppars->m_ChLast);
 }

@@ -6009,7 +6009,9 @@ BOOL visible_cnt=FALSE;
 if( (ch = i + font_tbl[cur_fnt].char_f) > 127 )  {
   if( ch < 256 ) cond_idv_char(133);  else  warn_i(23);   }
 cond_idv_char( ch );    
-mag = (int) ((double) font_tbl[cur_fnt].scale /
+mag = 10;
+if (font_tbl[cur_fnt].design_sz > 0)
+  mag = (int) ((double) font_tbl[cur_fnt].scale /
              font_tbl[cur_fnt].design_sz  * 10 );
 `<insert gif symbol to lg file`>
 script(font_gif, job_name ,page_n, str);
@@ -8869,7 +8871,9 @@ We take it here relative to 100.
 
 
 \<compute mag of font\><<<
-new_font.mag = new_font.scale / (new_font.design_sz / 100);
+new_font.mag = 100;
+if (new_font.design_sz > 0)
+    new_font.mag = new_font.scale / (new_font.design_sz / 100);
 >>>
 
 \<mag of font\><<<
@@ -9190,7 +9194,9 @@ new_font.name = m_alloc(char, font_name_n + 1);
 
 
 \<compute mag of xdv font\><<< 
-new_font.mag = new_font.scale / (new_font.design_sz / 100); 
+new_font.mag = 100;
+if (new_font.design_sz > 0)
+    new_font.mag = new_font.scale / (new_font.design_sz / 100); 
 >>> 
  
 
@@ -9258,7 +9264,7 @@ new_font.it = 0;
 
 
 \<xdv interword space\><<<
-new_font.word_sp = 350000;
+new_font.word_sp = WORD_SP_XDV;
 `<adjust inter-word space`>
 >>>
 
@@ -9849,6 +9855,9 @@ loop.
 
 
 \<defines\><<<
+// #define DEF_WORD_SP 999999.0
+#define WORD_SP_XDV 350000
+
 #ifdef LONG
 #define MARGINSP 344061L        `%tt at 10pt`%
 #else
@@ -9857,7 +9866,7 @@ loop.
 >>>
 
 \<vars\><<<
-static double word_sp   = 999999.0, margin_sp;
+static double word_sp   = DEF_WORD_SP, margin_sp;
 >>>
 
 Turbo C didn't let me to do casting within initialization.
@@ -11681,7 +11690,9 @@ p= gif_open[gif_flag];
 if( p ) 
 if( *p ){      
    print_f(p); (IGNORED) strcpy((char *) str, (char *) font_tbl[cur_fnt].name);
-   mag = (int) ((double) font_tbl[cur_fnt].scale /
+   mag = 10;
+   if (font_tbl[cur_fnt].design_sz > 0)
+      mag = (int) ((double) font_tbl[cur_fnt].scale /
                 font_tbl[cur_fnt].design_sz  * 10 );
    `<insert gif symbol to html file`>
    print_f(str);
