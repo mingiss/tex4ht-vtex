@@ -103,3 +103,14 @@ index c777ae5..7a2aa8d 100644
  }
  
    break; }
+
+
+@@ -10804,7 +10804,7 @@
+              { 
+               struct send_back_entry *p, *q, *t=0;
+ if( back_id_off ){
+-   while( i-- ){ (IGNORED) get_char();  }
++   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
+ } else {
+    p =  m_alloc(struct send_back_entry,1);
+    p->send = get_str( (int)( i - 1 ));

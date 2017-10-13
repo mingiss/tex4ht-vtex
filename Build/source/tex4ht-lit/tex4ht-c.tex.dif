@@ -75,3 +75,14 @@ index bc18b0e..6123ec7 100644
 +  if (unkn_opt) { bad_arg; }
  }
  >>>
+
+
+@@ -7553,7 +7553,7 @@
+ \<send back over token / group\><<<
+               struct send_back_entry *p, *q, *t=0;
+ if( back_id_off ){
+-   while( i-- ){ (IGNORED) get_char();  }
++   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
+ } else {
+    p =  m_alloc(struct send_back_entry,1);
+    p->send = get_str( (int)( i - 1 ));
