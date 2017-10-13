@@ -9202,6 +9202,10 @@ if (new_font.design_sz > 0)
 
 
 
+\<defines\><<<
+// #define DEF_CHAR_F 2
+// #define DEF_CHAR_L 1
+>>>
 
 
 
@@ -9213,8 +9217,8 @@ if (new_font.design_sz > 0)
    if( font_file == NULL ){
       dump_env();      err_i_str(1,file_name);  
       missing_fonts = TRUE;
-      new_font.char_f = 2;
-      new_font.char_l = 1;
+      new_font.char_f = DEF_CHAR_F;
+      new_font.char_l = DEF_CHAR_L;
    } else {
 */
       `<get xdv chars dimensions`>
@@ -9469,8 +9473,8 @@ static int search_font_tbl( cur_fnt )
    if((font_file == NULL) && (otf_pars == NULL)){
       dump_env();      err_i_str(1,file_name);  
       missing_fonts = TRUE;
-      new_font.char_f = 2;
-      new_font.char_l = 1;
+      new_font.char_f = DEF_CHAR_F;
+      new_font.char_l = DEF_CHAR_L;
    }
 
    if (font_file) {

@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-13-13:35), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-13-14:32), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -361,6 +361,10 @@ struct halign_rec{
 
 
 #define new_font   font_tbl[font_tbl_size]
+
+
+// #define DEF_CHAR_F 2
+// #define DEF_CHAR_L 1
 
 
 // #define DEF_WORD_SP 999999.0
@@ -6422,15 +6426,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-13-13:35 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-14:32 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-13-13:35)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-14:32)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-13-13:35 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-14:32 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-13-13:35 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-14:32 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -7827,8 +7831,8 @@ if( flags &
    if( font_file == NULL ){
       dump_env();      err_i_str(1,file_name);
       missing_fonts = TRUE;
-      new_font.char_f = 2;
-      new_font.char_l = 1;
+      new_font.char_f = DEF_CHAR_F;
+      new_font.char_l = DEF_CHAR_L;
    } else {
 */
       
@@ -8097,8 +8101,8 @@ for( cur_cache_font = cache_font;
    if((font_file == NULL) && (otf_pars == NULL)){
       dump_env();      err_i_str(1,file_name);
       missing_fonts = TRUE;
-      new_font.char_f = 2;
-      new_font.char_l = 1;
+      new_font.char_f = DEF_CHAR_F;
+      new_font.char_l = DEF_CHAR_L;
    }
 
    if (font_file) {

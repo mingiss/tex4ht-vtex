@@ -42,6 +42,9 @@ using namespace std;
 
 #define DEF_WORD_SP 999999.0
 
+#define DEF_CHAR_F 2
+#define DEF_CHAR_L 1
+
 // scale and design_sz values of /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 #define DEF_FONT_SCALE  655360
 #define DEF_DESIGN_SZ   655360

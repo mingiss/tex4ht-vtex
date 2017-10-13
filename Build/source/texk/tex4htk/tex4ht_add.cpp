@@ -54,126 +54,129 @@ printf(":::: ieškom: %s\n", fnt_name);
         strcat(fmap_fname, ".opentype.map");
 
         fmap_file = fopen(fmap_fname, "r");
-        if (fmap_file == NULL)
+        if (fmap_file)
         {
-            warn_i_str(ERR_FILE_NFOUND, fmap_fname);
-            return;
-        }
+            if (strlen(fnt_name) > PATH_MAX)
+                err_i_str(ERR_BUF_OVFL, fnt_name);
+            strcpy(tfm_name, fnt_name);
+            pnts = strstr(tfm_name, ".tfm");
+            if (pnts) *pnts = 0;
 
-        if (strlen(fnt_name) > PATH_MAX)
-            err_i_str(ERR_BUF_OVFL, fnt_name);
-        strcpy(tfm_name, fnt_name);
-        pnts = strstr(tfm_name, ".tfm");
-        if (pnts) *pnts = 0;
-
-        do
-        {
-            /* const */ char *psname = NULL;
-
-            fgets(str_buf, STR_BUF_LEN, fmap_file);
-            if (ferror(fmap_file))
-                err_i_str(ERR_FILE_READ, fmap_fname);
-            if (feof(fmap_file))
-                break;
-
-            pnts = str_buf;
-            for (int ii = 0; ii < 4; ii++)
+            do
             {
-                pnts = strchr(pnts, '\t');
-                if (pnts == NULL)
+                /* const */ char *psname = NULL;
+
+                fgets(str_buf, STR_BUF_LEN, fmap_file);
+                if (ferror(fmap_file))
+                    err_i_str(ERR_FILE_READ, fmap_fname);
+                if (feof(fmap_file))
+                    break;
+
+                pnts = str_buf;
+                for (int ii = 0; ii < 4; ii++)
                 {
-                    warn_i_str(ERR_FILE_FORMAT, fmap_fname);
+                    pnts = strchr(pnts, '\t');
+                    if (pnts == NULL)
+                    {
+                        warn_i_str(ERR_FILE_FORMAT, fmap_fname);
+                        break;
+                    }
+                    *pnts++ = 0;
+                    if (ii == 2)
+                        psname = pnts;
+                }
+
+                if (strcmp(tfm_name, str_buf) == 0)
+                {
+                    if (psname == NULL)
+                        warn_i_str(ERR_FILE_FORMAT, fmap_fname);
+
+                    ps_name = psname;
                     break;
                 }
-                *pnts++ = 0;
-                if (ii == 2)
-                    psname = pnts;
-            }
 
-            if (strcmp(tfm_name, str_buf) == 0)
-            {
-                if (psname == NULL)
-                {
-                    warn_i_str(ERR_FILE_FORMAT, fmap_fname);
-                    return;
-                }
-                ps_name = psname;
+            } while (TRUE);
 
-                break;
-            }
-
-        } while (TRUE);
-
-        fclose(fmap_file);
-
-        if (ps_name == NULL)
-            return;
-
-        if (strlen(ps_name) > PATH_MAX)
-            err_i_str(ERR_BUF_OVFL, ps_name);
-        strcpy(enc_fname, ".xdvipsk/");
-        strcat(enc_fname, ps_name);
-        strcat(enc_fname, ".encodings.map");
-
-        enc_file = fopen(enc_fname, "r");
-        if (enc_file == NULL)
-        {
-            warn_i_str(ERR_FILE_NFOUND, enc_fname);
-            return;
+            fclose(fmap_file);
         }
+        else // if (fmap_file)
+            warn_i_str(ERR_FILE_NFOUND, fmap_fname);
 
         HFontPars pars;
 
-        do
+        if (ps_name)
         {
-            int ch_code = 0;
+            if (strlen(ps_name) > PATH_MAX)
+                err_i_str(ERR_BUF_OVFL, ps_name);
+            strcpy(enc_fname, ".xdvipsk/");
+            strcat(enc_fname, ps_name);
+            strcat(enc_fname, ".encodings.map");
 
-            fgets(str_buf, STR_BUF_LEN, enc_file);
-            if (ferror(enc_file))
-                err_i_str(ERR_FILE_READ, enc_fname);
-            if (feof(enc_file))
-                break;
-
-            KpString str(str_buf);
-            vector<KpString> codes;
-            str.Split(",", codes);
-
-            if (codes.size() < 3)
-                warn_i_str(ERR_FILE_FORMAT, enc_fname);
-            else
+            enc_file = fopen(enc_fname, "r");
+            if (enc_file)
             {
-                int tex_code = 0;
-                if (sscanf(codes[0], "%d", &tex_code) == 1)
+                do
                 {
-                    if (ch_code < pars.m_ChFirst)
-                        pars.m_ChFirst = ch_code;
-                    if (ch_code > pars.m_ChLast)
-                        pars.m_ChLast = ch_code;
+                    int ch_code = 0;
 
-                    int /* UniChar */ uni_code = 0;
-                    if (sscanf(codes[2], "%x", &uni_code) == 1)
-                        pars.m_mHTable[tex_code] = uni_code;
-                }
+                    fgets(str_buf, STR_BUF_LEN, enc_file);
+                    if (ferror(enc_file))
+                        err_i_str(ERR_FILE_READ, enc_fname);
+                    if (feof(enc_file))
+                        break;
+
+                    KpString str(str_buf);
+                    vector<KpString> codes;
+                    str.Split(",", codes);
+
+                    if (codes.size() < 3)
+                        warn_i_str(ERR_FILE_FORMAT, enc_fname);
+                    else
+                    {
+                        int tex_code = 0;
+                        if (sscanf(codes[0], "%d", &tex_code) == 1)
+                        {
+                            if (ch_code < pars.m_ChFirst)
+                                pars.m_ChFirst = ch_code;
+                            if (ch_code > pars.m_ChLast)
+                                pars.m_ChLast = ch_code;
+
+                            int /* UniChar */ uni_code = 0;
+                            if (sscanf(codes[2], "%x", &uni_code) == 1)
+                                pars.m_mHTable[tex_code] = uni_code;
+                        }
+                    }
+
+                } while (TRUE);
+
+                fclose(enc_file);
             }
-
-        } while (TRUE);
-
-        fclose(enc_file);
+            else // if (enc_file)
+                warn_i_str(ERR_FILE_NFOUND, enc_fname);
+        }
 
         ppars = &(mapHFontParMap[fnt_name] = pars);
     }
 
     if (ppars == NULL)
-    {
         warn_i(ERR_STO_ADDR);
-        return;
-    }
 
     if (pfont_pars)
         *pfont_pars = (HANDLE)ppars;
 
-    new_font.char_f = ppars->m_ChFirst;
-    new_font.char_l = ppars->m_ChLast;
+    new_font.char_f = DEF_CHAR_F;
+    new_font.char_l = DEF_CHAR_L;
+    if (ppars)
+    {
+        new_font.char_f = ppars->m_ChFirst;
+        new_font.char_l = ppars->m_ChLast;
+    }
+    if (new_font.char_l < new_font.char_f - 1)
+    {
+        new_font.char_f = DEF_CHAR_F;
+        new_font.char_l = DEF_CHAR_L;
+    }
+
     new_font.word_sp = DEF_WORD_SP;
     new_font.scale = DEF_FONT_SCALE;
     new_font.design_sz = DEF_DESIGN_SZ;
