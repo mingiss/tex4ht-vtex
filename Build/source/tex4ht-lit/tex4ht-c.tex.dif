@@ -86,3 +86,94 @@ index bc18b0e..6123ec7 100644
  } else {
     p =  m_alloc(struct send_back_entry,1);
     p->send = get_str( (int)( i - 1 ));
+
+
+@@ -3085,6 +3085,7 @@
+ static INTEGER move_x( d ) 
+       register INTEGER  d
+ ;{    register long     i, dx;
++      double sp;
+    x_val += d;
+    if( (x_val > max_x_val) && x_val ){
+      if( max_x_val == -10000) max_x_val = x_val - d;  
+@@ -3128,7 +3129,9 @@
+ 
+ \<space for llap\><<<
+ if( !ignore_spaces ){
+-   i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
++   i = 0;
++   if (word_sp > 0.0001)
++      i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
+    if( i<0 ) i=0;
+    if( !i ) i = dx>99999L;
+    if( i ){ put_char(' '); }
+@@ -3236,8 +3239,11 @@
+ 
+ 
+ \<insert space\><<<
+-i =  (INTEGER) (  (double) (dx = x_val - max_x_val) 
+-            /         (text_on? word_sp : margin_sp)
++i = 0;
++sp = (text_on? word_sp : margin_sp);
++if (sp > 0.0001)
++    i =  (INTEGER) (  (double) (dx = x_val - max_x_val) 
++            /         sp
+             +         0.5 );
+ `<try word space if i=0`>
+ if( i<0 ) i=0;
+@@ -3252,7 +3258,8 @@
+ 
+ \<try word space if i=0\><<<
+ if( i==0 ){
+-   i =  (INTEGER) (  (double) dx 
++   if (word_sp > 0.0001)
++      i =  (INTEGER) (  (double) dx 
+             /         word_sp 
+             +         0.5 );
+ }
+@@ -3482,12 +3489,16 @@
+ 
+ \<check alternative space\><<<
+          double word_sp;
++         double sp;
+ cr_fnt = ch - `<font 0`>;
+ cr_fnt = search_font_tbl( cr_fnt );
+ word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
+              * (double) font_tbl[cr_fnt].scale;
+-i =  (INTEGER) (  (double) dx
+-            /         (text_on? word_sp : margin_sp)
++i = 0;
++sp = (text_on? word_sp : margin_sp);
++if (sp > 0.0001)
++    i =  (INTEGER) (  (double) dx
++            /         sp
+             +         0.5 );
+ `<try word space if i=0`>
+ if( i>0 ){ i =1; }
+@@ -3707,10 +3718,14 @@
+           || ( !text_on && !ignore_chs )
+         )
+ ){ 
++   double sp;
+    if( (max_x_val == -10000) || ((x_val + right) <= max_x_val) )
+    {  max_x_val = x_val;  }        
+-   i =  (INTEGER) (  (double) (x_val + right - max_x_val) 
+-                   /         (text_on? word_sp : margin_sp)
++   i = 0;
++   sp = (text_on? word_sp : margin_sp);
++   if (sp > 0.0001)
++      i =  (INTEGER) (  (double) (x_val + right - max_x_val) 
++                   /         sp
+                    +         0.5 );
+    `<try word size if i=0`>
+    if( i && !text_on )  try_new_line();
+@@ -3728,7 +3743,8 @@
+ 
+ \<try word size if i=0\><<<
+ if( i==0 ){
+-   i =  (INTEGER) (  (double) (x_val + right - max_x_val) 
++   if (word_sp > 0.0001)
++      i =  (INTEGER) (  (double) (x_val + right - max_x_val) 
+                    /         word_sp
+                    +         0.5 );
+ }

@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-11-09:18), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-13-10:35), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -1747,16 +1747,21 @@ static INTEGER move_x
 #undef SEP
 #endif
 {    register long     i, dx;
+      double sp;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
      if (max_x_val == -10000 * 100 / x_fact) max_x_val = x_val - d;
      
-i =  (INTEGER) (  (double) (dx = x_val - max_x_val)
-            /         (text_on? word_sp : margin_sp)
+i = 0;
+sp = (text_on? word_sp : margin_sp);
+if (sp > 0.0001)
+    i =  (INTEGER) (  (double) (dx = x_val - max_x_val)
+            /         sp
             +         0.5 );
 
 if( i==0 ){
-   i =  (INTEGER) (  (double) dx
+   if (word_sp > 0.0001)
+      i =  (INTEGER) (  (double) dx
             /         word_sp
             +         0.5 );
 }
@@ -1809,18 +1814,23 @@ case
         } else {
            
          double word_sp;
+         double sp;
 cr_fnt = ch - 
 171  
 ;
 cr_fnt = search_font_tbl( cr_fnt );
 word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
              * (double) font_tbl[cr_fnt].scale;
-i =  (INTEGER) (  (double) dx
-            /         (text_on? word_sp : margin_sp)
+i = 0;
+sp = (text_on? word_sp : margin_sp);
+if (sp > 0.0001)
+    i =  (INTEGER) (  (double) dx
+            /         sp
             +         0.5 );
 
 if( i==0 ){
-   i =  (INTEGER) (  (double) dx
+   if (word_sp > 0.0001)
+      i =  (INTEGER) (  (double) dx
             /         word_sp
             +         0.5 );
 }
@@ -1875,7 +1885,9 @@ max_x_val = x_val;
    } else    if( d && text_on  && (x_val != max_x_val) ){
       
 if( !ignore_spaces ){
-   i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
+   i = 0;
+   if (word_sp > 0.0001)
+      i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
    if( !i ) i = (dx >= 100000L * 100 / x_fact);
    if( i ){ put_char(' '); }
@@ -2011,14 +2023,19 @@ if( (x_val + right)  &&
           || ( !text_on && !ignore_chs )
         )
 ){
+   double sp;
    if ( (max_x_val == -10000 * 100 / x_fact) || ((x_val + right) <= max_x_val) )
    {  max_x_val = x_val;  }
-   i =  (INTEGER) (  (double) (x_val + right - max_x_val)
-                   /         (text_on? word_sp : margin_sp)
+   i = 0;
+   sp = (text_on? word_sp : margin_sp);
+   if (sp > 0.0001)
+      i =  (INTEGER) (  (double) (x_val + right - max_x_val)
+                   /         sp
                    +         0.5 );
    
 if( i==0 ){
-   i =  (INTEGER) (  (double) (x_val + right - max_x_val)
+   if (word_sp > 0.0001)
+      i =  (INTEGER) (  (double) (x_val + right - max_x_val)
                    /         word_sp
                    +         0.5 );
 }
@@ -6398,15 +6415,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-11-09:18 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-10:35 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-11-09:18)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-10:35)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-11-09:18 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-13-10:35 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-11-09:18 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-13-10:35 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){

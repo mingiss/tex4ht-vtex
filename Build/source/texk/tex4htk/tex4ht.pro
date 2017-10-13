@@ -2,7 +2,7 @@ TEMPLATE = app
 
 DEFINES -= UNICODE
 DEFINES += DEBUG Debug
-DEFINES += KPATHSEA
+# DEFINES += KPATHSEA
 
 CONFIG += console
 CONFIG -= app_bundle
@@ -18,50 +18,50 @@ SOURCES += tex4ht.c \
     ../../libs/kplib/src/kpstdio.cpp \
     ../../libs/kplib/src/kpstdlib.cpp \
     ../../libs/kplib/src/kpstring.cpp \
-    ../../libs/kplib/src/win/kpwindow.cpp \
-    ../kpathsea/progname.c \
-    ../kpathsea/debug.c \
-    ../kpathsea/variable.c \
-    ../kpathsea/tex-file.c \
-    ../kpathsea/xputenv.c \
-    ../kpathsea/mingw32.c \
-    ../kpathsea/xdirname.c \
-    ../kpathsea/xbasename.c \
-    ../kpathsea/find-suffix.c \
-    ../kpathsea/rm-suffix.c \
-    ../kpathsea/kpathsea.c \
-    ../kpathsea/concat3.c \
-    ../kpathsea/cnf.c \
-    ../kpathsea/expand.c \
-    ../kpathsea/xrealloc.c \
-    ../kpathsea/xmalloc.c \
-    ../kpathsea/xstrdup.c \
-    ../kpathsea/fn.c \
-    ../kpathsea/knj.c \
-    ../kpathsea/kdefault.c \
-    ../kpathsea/path-elt.c \
-    ../kpathsea/concat.c \
-    ../kpathsea/uppercasify.c \
-    ../kpathsea/concatn.c \
-    ../kpathsea/fontmap.c \
-    ../kpathsea/pathsearch.c \
-    ../kpathsea/tex-make.c \
-    ../kpathsea/absolute.c \
-    ../kpathsea/xcalloc.c \
-    ../kpathsea/hash.c \
-    ../kpathsea/xfopen.c \
-    ../kpathsea/line.c \
-    ../kpathsea/db.c \
-    ../kpathsea/tilde.c \
-    ../kpathsea/str-list.c \
-    ../kpathsea/elt-dirs.c \
-    ../kpathsea/extend-fname.c \
-    ../kpathsea/readable.c \
-    ../kpathsea/str-llist.c \
-    ../kpathsea/magstep.c \
-    ../kpathsea/file-p.c \
-    ../kpathsea/dir.c \
-    ../kpathsea/tex-hush.c
+    ../../libs/kplib/src/win/kpwindow.cpp #\
+#    ../kpathsea/progname.c \
+#    ../kpathsea/debug.c \
+#    ../kpathsea/variable.c \
+#    ../kpathsea/tex-file.c \
+#    ../kpathsea/xputenv.c \
+#    ../kpathsea/mingw32.c \
+#    ../kpathsea/xdirname.c \
+#    ../kpathsea/xbasename.c \
+#    ../kpathsea/find-suffix.c \
+#    ../kpathsea/rm-suffix.c \
+#    ../kpathsea/kpathsea.c \
+#    ../kpathsea/concat3.c \
+#    ../kpathsea/cnf.c \
+#    ../kpathsea/expand.c \
+#    ../kpathsea/xrealloc.c \
+#    ../kpathsea/xmalloc.c \
+#    ../kpathsea/xstrdup.c \
+#    ../kpathsea/fn.c \
+##    ../kpathsea/knj.c \
+#    ../kpathsea/kdefault.c \
+#    ../kpathsea/path-elt.c \
+#    ../kpathsea/concat.c \
+#    ../kpathsea/uppercasify.c \
+#    ../kpathsea/concatn.c \
+#    ../kpathsea/fontmap.c \
+#    ../kpathsea/pathsearch.c \
+#    ../kpathsea/tex-make.c \
+#    ../kpathsea/absolute.c \
+#    ../kpathsea/xcalloc.c \
+#    ../kpathsea/hash.c \
+#    ../kpathsea/xfopen.c \
+#    ../kpathsea/line.c \
+#    ../kpathsea/db.c \
+#    ../kpathsea/tilde.c \
+#    ../kpathsea/str-list.c \
+#    ../kpathsea/elt-dirs.c \
+#    ../kpathsea/extend-fname.c \
+#    ../kpathsea/readable.c \
+#    ../kpathsea/str-llist.c \
+#    ../kpathsea/magstep.c \
+#    ../kpathsea/file-p.c \
+#    ../kpathsea/dir.c \
+#    ../kpathsea/tex-hush.c
 
 HEADERS += \
     ../../libs/kplib/include/kpctype.h \
