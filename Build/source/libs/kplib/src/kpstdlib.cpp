@@ -12,9 +12,10 @@
 #include "envir.h"
 
 #include <string.h>
-#include <string>
 #include <vector>
 #include <stdio.h>
+// #include <regex>
+#include <regex.h>
 #include <iostream>
 #include <math.h>
 #ifdef __WIN32__
@@ -206,3 +207,55 @@ double angle = fract * (2.0 * M_PI);
 return(angle);
 }
 
+
+// ----------------------------------
+// expansion of environment variables inside a string
+// https://stackoverflow.com/questions/1902681/expand-file-names-that-have-environment-variables-in-their-path
+
+// Update the input string.
+void autoExpandEnvironmentVariables(string &text, LPCTSTR rexp,
+                                      int nPrefixLen, int nPostfixLen)
+{
+/*
+    static regex env(
+#ifndef UNICODE
+        (const char *)
+#endif
+            rexp);
+    smatch match;
+    while (regex_search(text, match, env))
+    {
+        const char *svar = getenv(match[1].str().c_str());
+        const string var(svar == NULL? "" : svar);
+        text.replace(match[0].first, match[0].second, var);
+    }
+*/
+
+// https://stackoverflow.com/questions/5179451/gcc-regular-expressions
+    regex_t env;
+    if (regcomp(&env,
+#ifndef UNICODE
+            (const char *)
+#endif
+                rexp, REG_EXTENDED) == REG_NOERROR)
+    {
+        regmatch_t rmatch[1];
+        while (regexec(&env, text.c_str(), 1, rmatch, 0) == REG_NOERROR)
+        {
+            string var_name(text.substr(rmatch[0].rm_so + nPrefixLen, rmatch[0].rm_eo - rmatch[0].rm_so - nPrefixLen - nPostfixLen));
+            const char *svar = getenv(var_name.c_str());
+            const string var(svar == NULL? "" : svar);
+            text.replace(rmatch[0].rm_so, rmatch[0].rm_eo, var);
+        }
+    }
+}
+
+// Leave input alone and return new string.
+string expandEnvironmentVariables(const string &input)
+{
+    string text = input;
+    autoExpandEnvironmentVariables(text, _T("\\$\\{([^}]+)\\}"), 2, 1);
+    autoExpandEnvironmentVariables(text, _T("\\$([A-Za-z]+)"), 1, 0);
+    autoExpandEnvironmentVariables(text, _T("\\%(.+)\\%"), 1, 1);
+    return text;
+}

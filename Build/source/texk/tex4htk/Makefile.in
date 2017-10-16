@@ -439,6 +439,7 @@ NEVER_NAMES_LT = -o -name .libs -o -name '*.lo'
 
 # Files not to be distributed
 AM_CPPFLAGS = $(KPATHSEA_INCLUDES) -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA
+# AM_CPPFLAGS += -std=c++11
 AM_CFLAGS = $(WARNING_CFLAGS)
 t4ht_SOURCES = t4ht.c
 tex4ht_SOURCES = tex4ht.c tex4ht_add.cpp ../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp ../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp ../../libs/kplib/src/win/kpwindow.cpp

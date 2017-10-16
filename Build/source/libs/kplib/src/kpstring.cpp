@@ -382,9 +382,9 @@ void KpString::Split(const uchar *pszDelim, vector<KpString> &saOutArr)
 {
     KP_ASSERT(pszDelim, E_INVALIDARG, null);
 
-    saOutArr.clear();
-
     KpString tmp_str = *this;
+
+    saOutArr.clear();
 
     do
     {

@@ -19,6 +19,9 @@
 
 #include <stdarg.h>
 #include <stdlib.h>
+#ifdef __cplusplus
+#include <string>
+#endif
 
 #ifdef _MSC_VER
 #include <stdio.h>
@@ -33,6 +36,10 @@
 #ifndef GWL_HINSTANCE
 #define GWL_HINSTANCE (-6)
 #endif
+#endif
+
+#ifdef __cplusplus
+using namespace std;
 #endif
 
 // -------------------------------------- plain exportai
@@ -81,9 +88,11 @@ typedef unsigned char u_char;
 #ifdef UNICODE
 #define _T(str) L##str
 #define TCHAR wchar_t
+#define LPCTSTR const wchar_t*
 #else
 #define _T(str) ((const uchar *)str)
 #define TCHAR uchar
+#define LPCTSTR const uchar*
 #endif
 #endif
 
@@ -181,7 +190,7 @@ typedef enum
 #define KP_LNG_NA  ('@')       // not applicable: text not allowed; used for xml tags, excluded from index creation or non-text tags
 
 
-// ========================================= KpLib 
+// ========================================= KpLib
 // KpLib initialization/destruction procedures for plain C projects
 #ifdef __cplusplus
 #define PLAIN_C "C"
@@ -479,7 +488,7 @@ typedef unsigned long ulong;
 
 // formats p_iVal as 16 bytes binary string
 // p_lpszBinStrBuf[16 + 1]
-void I2BinStr(uchar *p_lpszBinStrBuf, int p_iVal);  
+void I2BinStr(uchar *p_lpszBinStrBuf, int p_iVal);
 
 double NormAngle(double p_dAngle); // sukiša kampą į intervalą [-pi, pi)
 
@@ -490,6 +499,12 @@ double NormAngle(double p_dAngle); // sukiša kampą į intervalą [-pi, pi)
 
 // ================================================== searching and sorting
 #define KP_KWD_LEN 400 // negalima keist – pasikeis susijusių failų layout
+
+
+// ================================================== OS related
+#ifdef __cplusplus
+extern string expandEnvironmentVariables(const string &input);
+#endif
 
 
 // ================================================== OS porting (Windows API <--> Linux)

@@ -11,6 +11,7 @@ EXTRA_DIST = java
 include $(srcdir)/../../am/dist_hook.am
 
 AM_CPPFLAGS = $(KPATHSEA_INCLUDES) -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA
+# AM_CPPFLAGS += -std=c++11
 AM_CFLAGS = $(WARNING_CFLAGS)
 
 bin_PROGRAMS = t4ht tex4ht
