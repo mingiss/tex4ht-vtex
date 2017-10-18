@@ -5923,7 +5923,7 @@ case `<def 4 byte font`>:
 case `<def 3 byte font`>: 
 case `<def 2 byte font`>: 
 case `<def 1 byte font`>: {  idv_char( ch );             file_n++;
-  for( i=14; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
+  for( i=14 + ch - 243; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
   i = ch;  i += ch = get_char();  idv_char( ch );        file_n++;
   while( i-- ){ idv_copy(); }
   break;  }
@@ -15688,18 +15688,20 @@ static char *  abs_addr( dir, base)
 ;{                                         U_CHAR  *p;
    p = m_alloc(char, (int) strlen( dir )            +
                      (base? (int) strlen( base ):0) +
-                     (int) strlen((char *)  HOME_DIR  )      + 1 );
+                     (HOME_DIR? (int) strlen((char *)  HOME_DIR  ) : 0)      + 1 );
    *p = '\0';    
    if( (*(dir+1) == '~') && base ){  
      if( *base == '~' ){  
-       (IGNORED) strct(p, HOME_DIR);   
+       if (HOME_DIR)
+            (IGNORED) strct(p, HOME_DIR);   
        (IGNORED) strct(p, base+1);   
      } else {
        (IGNORED) strct(p, base);   
      } 
      (IGNORED) strct(p, dir+2);   
    } else {
-     (IGNORED) strct(p, HOME_DIR);   
+     if (HOME_DIR)
+            (IGNORED) strct(p, HOME_DIR);   
      (IGNORED) strct(p, dir+1);   
    }
    return p;

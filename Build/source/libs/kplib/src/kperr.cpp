@@ -1151,7 +1151,7 @@ tm *tm_ptr = NULL;
             prod_date = KpApp->m_pszProdDate;
         }
         sprintf((char *)out_str,
-#if defined(__GNUC__) || defined(_USE_32BIT_TIME_T)
+#if /* defined(__GNUC__) || */ defined(_USE_32BIT_TIME_T)
             "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %ld ",
 #else
             "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %lld ",

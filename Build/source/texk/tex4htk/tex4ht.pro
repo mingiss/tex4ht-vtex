@@ -2,7 +2,7 @@ TEMPLATE = app
 
 DEFINES -= UNICODE
 DEFINES += DEBUG Debug
-# DEFINES += KPATHSEA
+DEFINES += KPATHSEA
 
 CONFIG += console
 CONFIG -= app_bundle
@@ -141,3 +141,5 @@ INCLUDEPATH += . ../../Work/texk/tex4htk .. ../../Work/texk ../../libs/kplib/inc
 
 # QMAKE_CXXFLAGS -= -DUNICODE
 # QMAKE_CFLAGS -= -DUNICODE
+
+LIBS += ../../Work/texk/kpathsea/.libs/libkpathsea.a

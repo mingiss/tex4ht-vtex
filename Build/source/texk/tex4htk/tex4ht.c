@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-17-16:51), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-18-14:22), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -4028,18 +4028,20 @@ static char *  abs_addr
 {                                         U_CHAR  *p;
    p = m_alloc(char, (int) strlen( dir )            +
                      (base? (int) strlen( base ):0) +
-                     (int) strlen((char *)  HOME_DIR  )      + 1 );
+                     (HOME_DIR? (int) strlen((char *)  HOME_DIR  ) : 0)      + 1 );
    *p = '\0';
    if( (*(dir+1) == '~') && base ){
      if( *base == '~' ){
-       (IGNORED) strct(p, HOME_DIR);
+       if (HOME_DIR)
+            (IGNORED) strct(p, HOME_DIR);
        (IGNORED) strct(p, base+1);
      } else {
        (IGNORED) strct(p, base);
      }
      (IGNORED) strct(p, dir+2);
    } else {
-     (IGNORED) strct(p, HOME_DIR);
+     if (HOME_DIR)
+            (IGNORED) strct(p, HOME_DIR);
      (IGNORED) strct(p, dir+1);
    }
    return p;
@@ -6426,15 +6428,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-17-16:51 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-18-14:22 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-17-16:51)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-18-14:22)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-17-16:51 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-18-14:22 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-17-16:51 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-18-14:22 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -12737,7 +12739,7 @@ case
 case 
 243 
 : {  idv_char( ch );             file_n++;
-  for( i=14; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
+  for( i=14 + ch - 243; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
   i = ch;  i += ch = get_char();  idv_char( ch );        file_n++;
   while( i-- ){ idv_copy(); }
   break;  }

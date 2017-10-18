@@ -9,13 +9,15 @@ else
 export distribution=2010
 fi
 
-if [ "x$WINDIR" == "x" ]; then
 cd tex4ht-lit
 # errors here could be ignored
+if [ "x$WINDIR" == "x" ]; then
 ./tex4ht-c.sh
+# else
+# ./tex4ht-c.bat
+fi
 cd ..
 cp tex4ht-lit/tex4ht.c texk/tex4htk/tex4ht.c
-fi
 
 # if [ ! -f configure.orig ]; then cp configure configure.orig; fi
 # sed 's/\$SHELL \$CONFIG_STATUS/cp \$CONFIG_STATUS \$CONFIG_STATUS.tmp; python \.\.\/cvt_config\.py < \$CONFIG_STATUS\.tmp \> \$CONFIG_STATUS; \$SHELL \$CONFIG_STATUS/' < configure.orig > configure

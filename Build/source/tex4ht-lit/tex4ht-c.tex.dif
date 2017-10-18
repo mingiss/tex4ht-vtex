@@ -3,55 +3,6 @@ index bc18b0e..6123ec7 100644
 --- a/Build/source/tex4ht-lit/tex4ht-c.tex
 +++ b/Build/source/tex4ht-lit/tex4ht-c.tex
 
-@@ -8720,6 +8720,9 @@
-                  (size_t) ((font_tbl_size+1)
-                            * sizeof(struct font_entry)))
-             : m_alloc(struct font_entry, 1);
-+
-+   memset(&new_font, 0, sizeof(struct font_entry));
-+
-    if(       (version_id == `<version xdv`>) 
-          &&  (ch == `<xdv-native-font-def op`>) 
-    ){
-
-@@ -9353,7 +9356,7 @@
- \<first definition of font?\><<<
- {        int i;
--   for( i=font_tbl_size-1; i>0;  i-- )
-+   for( i=font_tbl_size-1; i >= 0;  i-- )
-      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
- >>>
-
-@@ -10155,9 +10158,12 @@
-   while( 1 ){                         BOOL flag;
-      `<font looping test`>
-      flag = TRUE;
--     for( ; font_name_n; font_name_n-- ){  FILE* file;
-+     for( ; font_name_n >= 0; font_name_n-- ){  FILE* file;
-                                            int   char_f, char_l;
-        new_font_name[font_name_n] = '\0';
-+       if (font_name_n == 0)
-+            break;
-+
-        `<file = .htf file`>
-        if( file != NULL){
-                                            INTEGER x_char_l;
-
-@@ -12053,9 +12059,12 @@
-      int css_name_n = (int) strlen((char *)  new_font.name );
-      char * css_file_name = m_alloc(char, css_name_n + 1);
-      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
--     for( ; css_name_n; css_name_n-- ){
-+     for( ; css_name_n >= 0; css_name_n-- ){
-                                                FILE* file;
-        css_file_name[css_name_n] = '\0';
-+       if (css_name_n == 0)
-+            break;
-+
-        `<file = .css file`>
-      }
-      free((void *) css_file_name); 
-
 @@ -1514,14 +1514,15 @@
  \<trace context\><<<
  {
@@ -75,19 +26,6 @@ index bc18b0e..6123ec7 100644
 +  if (unkn_opt) { bad_arg; }
  }
  >>>
-
-
-@@ -7553,7 +7553,7 @@
- \<send back over token / group\><<<
-               struct send_back_entry *p, *q, *t=0;
- if( back_id_off ){
--   while( i-- ){ (IGNORED) get_char();  }
-+   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
- } else {
-    p =  m_alloc(struct send_back_entry,1);
-    p->send = get_str( (int)( i - 1 ));
-
-
 @@ -3085,6 +3085,7 @@
  static INTEGER move_x( d ) 
        register INTEGER  d
@@ -97,7 +35,6 @@ index bc18b0e..6123ec7 100644
     if( (x_val > max_x_val) && x_val ){
       if( max_x_val == -10000) max_x_val = x_val - d;  
 @@ -3128,7 +3129,9 @@
- 
  \<space for llap\><<<
  if( !ignore_spaces ){
 -   i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
@@ -108,8 +45,6 @@ index bc18b0e..6123ec7 100644
     if( !i ) i = dx>99999L;
     if( i ){ put_char(' '); }
 @@ -3236,8 +3239,11 @@
- 
- 
  \<insert space\><<<
 -i =  (INTEGER) (  (double) (dx = x_val - max_x_val) 
 -            /         (text_on? word_sp : margin_sp)
@@ -122,7 +57,6 @@ index bc18b0e..6123ec7 100644
  `<try word space if i=0`>
  if( i<0 ) i=0;
 @@ -3252,7 +3258,8 @@
- 
  \<try word space if i=0\><<<
  if( i==0 ){
 -   i =  (INTEGER) (  (double) dx 
@@ -132,7 +66,6 @@ index bc18b0e..6123ec7 100644
              +         0.5 );
  }
 @@ -3482,12 +3489,16 @@
- 
  \<check alternative space\><<<
           double word_sp;
 +         double sp;
@@ -168,7 +101,6 @@ index bc18b0e..6123ec7 100644
     `<try word size if i=0`>
     if( i && !text_on )  try_new_line();
 @@ -3728,7 +3743,8 @@
- 
  \<try word size if i=0\><<<
  if( i==0 ){
 -   i =  (INTEGER) (  (double) (x_val + right - max_x_val) 
@@ -177,3 +109,90 @@ index bc18b0e..6123ec7 100644
                     /         word_sp
                     +         0.5 );
  }
+@@ -5871,7 +5871,7 @@
+ case `<def 3 byte font`>: 
+ case `<def 2 byte font`>: 
+ case `<def 1 byte font`>: {  idv_char( ch );             file_n++;
+-  for( i=14; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
++  for( i=14 + ch - 243; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
+   i = ch;  i += ch = get_char();  idv_char( ch );        file_n++;
+   while( i-- ){ idv_copy(); }
+   break;  }
+@@ -7553,7 +7553,7 @@
+ \<send back over token / group\><<<
+               struct send_back_entry *p, *q, *t=0;
+ if( back_id_off ){
+-   while( i-- ){ (IGNORED) get_char();  }
++   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
+ } else {
+    p =  m_alloc(struct send_back_entry,1);
+    p->send = get_str( (int)( i - 1 ));
+@@ -8720,6 +8720,9 @@
+                  (size_t) ((font_tbl_size+1)
+                            * sizeof(struct font_entry)))
+             : m_alloc(struct font_entry, 1);
++
++   memset(&new_font, 0, sizeof(struct font_entry));
++
+    if(       (version_id == `<version xdv`>) 
+          &&  (ch == `<xdv-native-font-def op`>) 
+    ){
+@@ -9353,7 +9356,7 @@
+ \<first definition of font?\><<<
+ {        int i;
+-   for( i=font_tbl_size-1; i>0;  i-- )
++   for( i=font_tbl_size-1; i >= 0;  i-- )
+      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+ >>>
+@@ -10155,9 +10158,12 @@
+   while( 1 ){                         BOOL flag;
+      `<font looping test`>
+      flag = TRUE;
+-     for( ; font_name_n; font_name_n-- ){  FILE* file;
++     for( ; font_name_n >= 0; font_name_n-- ){  FILE* file;
+                                            int   char_f, char_l;
+        new_font_name[font_name_n] = '\0';
++       if (font_name_n == 0)
++            break;
++
+        `<file = .htf file`>
+        if( file != NULL){
+                                            INTEGER x_char_l;
+@@ -12053,9 +12059,12 @@
+      int css_name_n = (int) strlen((char *)  new_font.name );
+      char * css_file_name = m_alloc(char, css_name_n + 1);
+      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
+-     for( ; css_name_n; css_name_n-- ){
++     for( ; css_name_n >= 0; css_name_n-- ){
+                                                FILE* file;
+        css_file_name[css_name_n] = '\0';
++       if (css_name_n == 0)
++            break;
++
+        `<file = .css file`>
+      }
+      free((void *) css_file_name); 
+@@ -15415,18 +15415,20 @@
+ ;{                                         U_CHAR  *p;
+    p = m_alloc(char, (int) strlen( dir )            +
+                      (base? (int) strlen( base ):0) +
+-                     (int) strlen((char *)  HOME_DIR  )      + 1 );
++                     (HOME_DIR? (int) strlen((char *)  HOME_DIR  ) : 0)      + 1 );
+    *p = '\0';    
+    if( (*(dir+1) == '~') && base ){  
+      if( *base == '~' ){  
+-       (IGNORED) strct(p, HOME_DIR);   
++       if (HOME_DIR)
++            (IGNORED) strct(p, HOME_DIR);   
+        (IGNORED) strct(p, base+1);   
+      } else {
+        (IGNORED) strct(p, base);   
+      } 
+      (IGNORED) strct(p, dir+2);   
+    } else {
+-     (IGNORED) strct(p, HOME_DIR);   
++     if (HOME_DIR)
++            (IGNORED) strct(p, HOME_DIR);   
+      (IGNORED) strct(p, dir+1);   
+    }
+    return p;

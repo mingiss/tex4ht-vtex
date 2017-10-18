@@ -3,117 +3,6 @@ index c777ae5..7a2aa8d 100644
 --- a/Build/source/texk/tex4htk/tex4ht.c
 +++ b/Build/source/texk/tex4htk/tex4ht.c
 
-@@ -7715,6 +7715,9 @@
-                  (size_t) ((font_tbl_size+1)
-                            * sizeof(struct font_entry)))
-             : m_alloc(struct font_entry, 1);
-+
-+   memset(&new_font, 0, sizeof(struct font_entry));
-+
-    if(       (version_id == 
- 5
-
-@@ -7780,7 +7783,7 @@
- {        int i;
--   for( i=font_tbl_size-1; i>0;  i-- )
-+   for( i=font_tbl_size-1; i >= 0;  i-- )
-      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
-
-@@ -7969,7 +7972,7 @@
- {        int i;
--   for( i=font_tbl_size-1; i>0;  i-- )
-+   for( i=font_tbl_size-1; i >= 0;  i-- )
-      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
-
-@@ -8398,9 +8401,12 @@
-      flag = TRUE;
--     for( ; font_name_n; font_name_n-- ){  FILE* file;
-+     for( ; font_name_n >= 0; font_name_n-- ){  FILE* file;
-                                            int   char_f, char_l;
-        new_font_name[font_name_n] = '\0';
-+       if (font_name_n == 0)
-+            break;
-+
-        
- {                              U_CHAR name[256];
-    (IGNORED) sprintf(name, "%s.htf", new_font_name);
-
-@@ -8800,9 +8806,12 @@
-      int css_name_n = (int) strlen((char *)  new_font.name );
-      char * css_file_name = m_alloc(char, css_name_n + 1);
-      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
--     for( ; css_name_n; css_name_n-- ){
-+     for( ; css_name_n >= 0; css_name_n-- ){
-                                                FILE* file;
-        css_file_name[css_name_n] = '\0';
-+       if (css_name_n == 0)
-+            break;
-+
-        
- {                              U_CHAR name[256];
-    (IGNORED) sprintf(name, "%s.%s", css_file_name,
-
-@@ -6144,22 +6144,23 @@
-   case 'h':{ 
- {
-   char trace = *(p+2);
-+  BOOL unkn_opt = TRUE;
-   if (trace == 'A' || trace == 'e') { 
- err_context = TRUE;
- 
-- }
-+ unkn_opt = FALSE; }
-   if (trace == 'A' || trace == 'f') { 
- dump_htf_files = 1;
- 
-- }
-+ unkn_opt = FALSE; }
-   if (trace == 'A' || trace == 'F') { 
- dump_htf_search = TRUE;
- 
-- }
-+ unkn_opt = FALSE; }
-   if (trace == 'A' || trace == 's') { 
- trace_special = TRUE;
- 
-- }
-+ unkn_opt = FALSE; }
-   if (trace == 'A' || trace == 'g') { 
- trace_dvi_P++;
- if( !(   *trace_dvi_del_P || *end_trace_dvi_del_P
-
-@@ -6184,16 +6185,16 @@
-    (IGNORED) strcpy((char *) end_trace_dvi_del_p, "]" );
- }
- 
-- }
-+ unkn_opt = FALSE; }
-   if (trace == 'A' || trace == 'v') { 
- dump_env_files = TRUE;
- 
-- }
-+ unkn_opt = FALSE; }
-   if (trace == 'A' || trace == 'V') { 
- dump_env_search = TRUE;
- 
-- }
--  else { bad_arg; }
-+ unkn_opt = FALSE; }
-+  if (unkn_opt) { bad_arg; }
- }
- 
-   break; }
-
-
-@@ -10804,7 +10804,7 @@
-              { 
-               struct send_back_entry *p, *q, *t=0;
- if( back_id_off ){
--   while( i-- ){ (IGNORED) get_char();  }
-+   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
- } else {
-    p =  m_alloc(struct send_back_entry,1);
-    p->send = get_str( (int)( i - 1 ));
 @@ -1702,16 +1702,21 @@
  #undef SEP
  #endif
@@ -200,3 +89,140 @@ index c777ae5..7a2aa8d 100644
                     /         word_sp
                     +         0.5 );
  }
+@@ -3930,18 +3930,20 @@
+ {                                         U_CHAR  *p;
+    p = m_alloc(char, (int) strlen((char *)  dir )            +
+                      (base? (int) strlen((char *)  base ):0) +
+-                     (int) strlen((char *)  HOME_DIR  )      + 1 );
++                     (HOME_DIR? (int) strlen((char *)  HOME_DIR  ) : 0)      + 1 );
+    *p = '\0';
+    if( (*(dir+1) == '~') && base ){
+      if( *base == '~' ){
+-       (IGNORED) strct(p, HOME_DIR);
++       if (HOME_DIR)
++            (IGNORED) strct(p, HOME_DIR);
+        (IGNORED) strct(p, base+1);
+      } else {
+        (IGNORED) strct(p, base);
+      }
+      (IGNORED) strct(p, dir+2);
+    } else {
+-     (IGNORED) strct(p, HOME_DIR);
++     if (HOME_DIR)
++            (IGNORED) strct(p, HOME_DIR);
+      (IGNORED) strct(p, dir+1);
+    }
+    return p;
+@@ -6144,22 +6144,23 @@
+   case 'h':{ 
+ {
+   char trace = *(p+2);
++  BOOL unkn_opt = TRUE;
+   if (trace == 'A' || trace == 'e') { 
+ err_context = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'f') { 
+ dump_htf_files = 1;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'F') { 
+ dump_htf_search = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 's') { 
+ trace_special = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'g') { 
+ trace_dvi_P++;
+ if( !(   *trace_dvi_del_P || *end_trace_dvi_del_P
+
+@@ -6184,16 +6185,16 @@
+    (IGNORED) strcpy((char *) end_trace_dvi_del_p, "]" );
+ }
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'v') { 
+ dump_env_files = TRUE;
+ 
+- }
++ unkn_opt = FALSE; }
+   if (trace == 'A' || trace == 'V') { 
+ dump_env_search = TRUE;
+ 
+- }
+-  else { bad_arg; }
++ unkn_opt = FALSE; }
++  if (unkn_opt) { bad_arg; }
+ }
+ 
+   break; }
+@@ -7715,6 +7715,9 @@
+                  (size_t) ((font_tbl_size+1)
+                            * sizeof(struct font_entry)))
+             : m_alloc(struct font_entry, 1);
++
++   memset(&new_font, 0, sizeof(struct font_entry));
++
+    if(       (version_id == 
+ 5
+@@ -7780,7 +7783,7 @@
+ {        int i;
+-   for( i=font_tbl_size-1; i>0;  i-- )
++   for( i=font_tbl_size-1; i >= 0;  i-- )
+      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+@@ -7969,7 +7972,7 @@
+ {        int i;
+-   for( i=font_tbl_size-1; i>0;  i-- )
++   for( i=font_tbl_size-1; i >= 0;  i-- )
+      if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+@@ -8398,9 +8401,12 @@
+      flag = TRUE;
+-     for( ; font_name_n; font_name_n-- ){  FILE* file;
++     for( ; font_name_n >= 0; font_name_n-- ){  FILE* file;
+                                            int   char_f, char_l;
+        new_font_name[font_name_n] = '\0';
++       if (font_name_n == 0)
++            break;
++
+        
+ {                              U_CHAR name[256];
+    (IGNORED) sprintf(name, "%s.htf", new_font_name);
+@@ -8800,9 +8806,12 @@
+      int css_name_n = (int) strlen((char *)  new_font.name );
+      char * css_file_name = m_alloc(char, css_name_n + 1);
+      (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
+-     for( ; css_name_n; css_name_n-- ){
++     for( ; css_name_n >= 0; css_name_n-- ){
+                                                FILE* file;
+        css_file_name[css_name_n] = '\0';
++       if (css_name_n == 0)
++            break;
++
+        
+ {                              U_CHAR name[256];
+    (IGNORED) sprintf(name, "%s.%s", css_file_name,
+@@ -10804,7 +10804,7 @@
+              { 
+               struct send_back_entry *p, *q, *t=0;
+ if( back_id_off ){
+-   while( i-- ){ (IGNORED) get_char();  }
++   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
+ } else {
+    p =  m_alloc(struct send_back_entry,1);
+    p->send = get_str( (int)( i - 1 ));
+@@ -12088,7 +12090,7 @@
+ case 
+ 243 
+ : {  idv_char( ch );             file_n++;
+-  for( i=14; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
++  for( i=14 + ch - 243; i; i-- ){  ch = get_char(); idv_char( ch ); file_n++; }
+   i = ch;  i += ch = get_char();  idv_char( ch );        file_n++;
+   while( i-- ){ idv_copy(); }
+   break;  }
