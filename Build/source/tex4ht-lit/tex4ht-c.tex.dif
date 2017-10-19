@@ -1,9 +1,7 @@
-diff --git a/Build/source/tex4ht-lit/tex4ht-c.tex b/Build/source/tex4ht-lit/tex4ht-c.tex
-index bc18b0e..6123ec7 100644
---- a/Build/source/tex4ht-lit/tex4ht-c.tex
-+++ b/Build/source/tex4ht-lit/tex4ht-c.tex
-
-@@ -1514,14 +1514,15 @@
+diff -r 09d75947f4a5 lit/tex4ht-c.tex
+--- a/lit/tex4ht-c.tex	Tue Aug 29 13:45:07 2017 +0300
++++ b/lit/tex4ht-c.tex	Thu Oct 19 13:00:57 2017 +0300
+@@ -1513,14 +1513,15 @@
  \<trace context\><<<
  {
    char trace = *(p+2);
@@ -26,46 +24,63 @@ index bc18b0e..6123ec7 100644
 +  if (unkn_opt) { bad_arg; }
  }
  >>>
-@@ -3085,6 +3085,7 @@
+ 
+@@ -2822,7 +2823,7 @@
+ \<trace h spaces\><<<
+ if( trace_dvi_H && !ch_map_flag ){
+    if( *trace_dvi_del_H != '\0' ){
+-      (IGNORED) fprintf(cur_o_file, "%s%d", trace_dvi_del_H, (int) dx);
++      (IGNORED) fprintf(cur_o_file, "%s%.0f", trace_dvi_del_H, dx);
+    }
+    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_H);
+ }
+@@ -3083,7 +3084,8 @@
+ `[ 
  static INTEGER move_x( d ) 
        register INTEGER  d
- ;{    register long     i, dx;
-+      double sp;
+-;{    register long     i, dx;
++;{    register long     i;
++      double dx, sp;
     x_val += d;
     if( (x_val > max_x_val) && x_val ){
       if( max_x_val == -10000) max_x_val = x_val - d;  
-@@ -3128,7 +3129,9 @@
+@@ -3127,7 +3129,9 @@
+ 
  \<space for llap\><<<
  if( !ignore_spaces ){
 -   i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
 +   i = 0;
 +   if (word_sp > 0.0001)
-+      i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
++      i =  (INTEGER) ( (dx = d) / word_sp + 0.5 );
     if( i<0 ) i=0;
     if( !i ) i = dx>99999L;
     if( i ){ put_char(' '); }
-@@ -3236,8 +3239,11 @@
+@@ -3235,8 +3239,11 @@
+ 
+ 
  \<insert space\><<<
 -i =  (INTEGER) (  (double) (dx = x_val - max_x_val) 
 -            /         (text_on? word_sp : margin_sp)
 +i = 0;
 +sp = (text_on? word_sp : margin_sp);
 +if (sp > 0.0001)
-+    i =  (INTEGER) (  (double) (dx = x_val - max_x_val) 
++    i =  (INTEGER) (  (dx = (double)x_val - (double)max_x_val) 
 +            /         sp
              +         0.5 );
  `<try word space if i=0`>
  if( i<0 ) i=0;
-@@ -3252,7 +3258,8 @@
+@@ -3251,7 +3258,8 @@
+ 
  \<try word space if i=0\><<<
  if( i==0 ){
 -   i =  (INTEGER) (  (double) dx 
 +   if (word_sp > 0.0001)
-+      i =  (INTEGER) (  (double) dx 
++      i =  (INTEGER) (dx 
              /         word_sp 
              +         0.5 );
  }
-@@ -3482,12 +3489,16 @@
+@@ -3481,12 +3489,16 @@
+ 
  \<check alternative space\><<<
           double word_sp;
 +         double sp;
@@ -78,12 +93,12 @@ index bc18b0e..6123ec7 100644
 +i = 0;
 +sp = (text_on? word_sp : margin_sp);
 +if (sp > 0.0001)
-+    i =  (INTEGER) (  (double) dx
++    i =  (INTEGER) (  dx
 +            /         sp
              +         0.5 );
  `<try word space if i=0`>
  if( i>0 ){ i =1; }
-@@ -3707,10 +3718,14 @@
+@@ -3706,10 +3718,14 @@
            || ( !text_on && !ignore_chs )
          )
  ){ 
@@ -100,7 +115,8 @@ index bc18b0e..6123ec7 100644
                     +         0.5 );
     `<try word size if i=0`>
     if( i && !text_on )  try_new_line();
-@@ -3728,7 +3743,8 @@
+@@ -3727,7 +3743,8 @@
+ 
  \<try word size if i=0\><<<
  if( i==0 ){
 -   i =  (INTEGER) (  (double) (x_val + right - max_x_val) 
@@ -109,7 +125,7 @@ index bc18b0e..6123ec7 100644
                     /         word_sp
                     +         0.5 );
  }
-@@ -5871,7 +5871,7 @@
+@@ -5854,7 +5871,7 @@
  case `<def 3 byte font`>: 
  case `<def 2 byte font`>: 
  case `<def 1 byte font`>: {  idv_char( ch );             file_n++;
@@ -118,7 +134,7 @@ index bc18b0e..6123ec7 100644
    i = ch;  i += ch = get_char();  idv_char( ch );        file_n++;
    while( i-- ){ idv_copy(); }
    break;  }
-@@ -7553,7 +7553,7 @@
+@@ -7552,7 +7569,7 @@
  \<send back over token / group\><<<
                struct send_back_entry *p, *q, *t=0;
  if( back_id_off ){
@@ -127,7 +143,7 @@ index bc18b0e..6123ec7 100644
  } else {
     p =  m_alloc(struct send_back_entry,1);
     p->send = get_str( (int)( i - 1 ));
-@@ -8720,6 +8720,9 @@
+@@ -8670,6 +8687,9 @@
                   (size_t) ((font_tbl_size+1)
                             * sizeof(struct font_entry)))
              : m_alloc(struct font_entry, 1);
@@ -137,14 +153,16 @@ index bc18b0e..6123ec7 100644
     if(       (version_id == `<version xdv`>) 
           &&  (ch == `<xdv-native-font-def op`>) 
     ){
-@@ -9353,7 +9356,7 @@
+@@ -9295,7 +9315,7 @@
+ 
  \<first definition of font?\><<<
  {        int i;
 -   for( i=font_tbl_size-1; i>0;  i-- )
 +   for( i=font_tbl_size-1; i >= 0;  i-- )
       if( new_font.num == font_tbl[i].num )  warn_i(10);   }
  >>>
-@@ -10155,9 +10158,12 @@
+ 
+@@ -10054,9 +10074,12 @@
    while( 1 ){                         BOOL flag;
       `<font looping test`>
       flag = TRUE;
@@ -158,7 +176,7 @@ index bc18b0e..6123ec7 100644
         `<file = .htf file`>
         if( file != NULL){
                                             INTEGER x_char_l;
-@@ -12053,9 +12059,12 @@
+@@ -11878,9 +11901,12 @@
       int css_name_n = (int) strlen((char *)  new_font.name );
       char * css_file_name = m_alloc(char, css_name_n + 1);
       (IGNORED) strcpy((char *) css_file_name, (char *) new_font.name);
@@ -172,7 +190,7 @@ index bc18b0e..6123ec7 100644
         `<file = .css file`>
       }
       free((void *) css_file_name); 
-@@ -15415,18 +15415,20 @@
+@@ -15389,18 +15415,20 @@
  ;{                                         U_CHAR  *p;
     p = m_alloc(char, (int) strlen( dir )            +
                       (base? (int) strlen( base ):0) +

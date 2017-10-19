@@ -40,7 +40,7 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
         ppars = &it->second;
     else
     {
-printf(":::: ieškom: %s\n", fnt_name);
+printf(":::: searching for OTF font: %s\n", fnt_name);
         if (strlen(job_name) > PATH_MAX)
             err_i_str(ERR_BUF_OVFL, job_name);
         strcpy(fmap_fname, ".xdvipsk/");

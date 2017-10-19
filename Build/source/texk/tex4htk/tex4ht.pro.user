@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.3.1, 2017-10-18T13:53:18. -->
+<!-- Written by QtCreator 4.3.1, 2017-10-18T18:10:28. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -369,7 +369,7 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{c54cca95-fb60-4ea5-b80e-94e270417ba6}</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">3</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">2</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">F:/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk/build-tex4ht-mingw64-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
@@ -706,16 +706,18 @@
      <value type="int">14</value>
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
+     <value type="QString">PATH=d:\texroot\texlive2010\bin\win32;D:\kp\bin\Qt\5.9.1\msvc2015_64\lib;D:\kp\bin\Qt\5.9.1\msvc2015_64\bin;D:\kp\bin\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw64\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\vtex\thg;C:\vtex\thg\hgbats;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;D:\kp\bin\Git\cmd;d:\kp\bin;d:\bin\perl\bin;d:\texroot\bat;c:\utils;c:\vtex\cvs;D:\bin\python27;D:\kp\bin\GnuWin32\bin;D:\kp\bin\cygwin64\bin;D:\kp\bin\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw64\bin;D:\kp\bin\Microsoft Visual Studio 9.0\VC\bin;D:\kp\bin\Microsoft Visual Studio 9.0\VC</value>
+    </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tex4ht</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">frebm</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:F:/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk/tex4htk/tex4ht.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">frebm -n -cunihtf</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">frebm</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">tex4ht.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseTerminal">false</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory">F:/kp/src/vtex/tex/tex4ht/tasks/done/tex4ht_20171011_1_htpicture/klaidos/ciklinasi/FREBM/test_20171017/current</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory">F:/kp/src/vtex/tex/tex4ht/tasks/done/tex4ht_20171011_1_htpicture/klaidos/20171012_ciklinasi/FREBM/test_20171017/current</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">F:/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk/build-tex4ht-mingw64-Debug</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>

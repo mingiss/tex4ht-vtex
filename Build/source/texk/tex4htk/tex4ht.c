@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-18-14:22), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-18-17:49), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -1753,8 +1753,8 @@ static INTEGER move_x
 ;
 #undef SEP
 #endif
-{    register long     i, dx;
-      double sp;
+{    register long     i;
+      double dx, sp;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
      if (max_x_val == -10000 * 100 / x_fact) max_x_val = x_val - d;
@@ -1762,13 +1762,13 @@ static INTEGER move_x
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
-    i =  (INTEGER) (  (double) (dx = x_val - max_x_val)
+    i =  (INTEGER) (  (dx = (double)x_val - (double)max_x_val)
             /         sp
             +         0.5 );
 
 if( i==0 ){
    if (word_sp > 0.0001)
-      i =  (INTEGER) (  (double) dx
+      i =  (INTEGER) (dx
             /         word_sp
             +         0.5 );
 }
@@ -1831,13 +1831,13 @@ word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
-    i =  (INTEGER) (  (double) dx
+    i =  (INTEGER) (  dx
             /         sp
             +         0.5 );
 
 if( i==0 ){
    if (word_sp > 0.0001)
-      i =  (INTEGER) (  (double) dx
+      i =  (INTEGER) (dx
             /         word_sp
             +         0.5 );
 }
@@ -1855,7 +1855,7 @@ if( i>0 ){ i =1; }
 if( i ){ 
 if( trace_dvi_H && !ch_map_flag ){
    if( *trace_dvi_del_H != '\0' ){
-      (IGNORED) fprintf(cur_o_file, "%s%d", trace_dvi_del_H, (int) dx);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f", trace_dvi_del_H, dx);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_H);
 }
@@ -1894,7 +1894,7 @@ max_x_val = x_val;
 if( !ignore_spaces ){
    i = 0;
    if (word_sp > 0.0001)
-      i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
+      i =  (INTEGER) ( (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
    if( !i ) i = (dx >= 100000L * 100 / x_fact);
    if( i ){ put_char(' '); }
@@ -6428,15 +6428,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-18-14:22 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-18-17:49 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-18-14:22)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-18-17:49)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-18-14:22 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-18-17:49 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-18-14:22 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-18-17:49 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
