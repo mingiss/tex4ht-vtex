@@ -4,10 +4,16 @@ Environment for local corrections of tex4ht tools
 
 Repository structure:
 
-    Designed as a mirror copy of TeX Live (TL) tree structure.
+    Designed as a mirror copy of TeX Live (TL) build tree structure.
 
-    There are problems in running standard TL script trunk/Build/source/reautoconf under MS Windows in MSYS environment,
+    There are problems in running standard TL script Build/source/reautoconf under MS Windows in MSYS environment,
         hence additional set of prepared configure scripts are provided.
+
+    Modified executables and libraries should be copied from repository folder Master/bin to the relevant local TL deployment path,
+        for example, either
+            D:\texroot\texlive2010\bin
+        or
+            /usr/local/texlive/2016/bin
 
 Prerequisites:
 
@@ -40,7 +46,9 @@ Building:
             ./reautoconf            (not for MS Windows MSYS environment)
             ./Build_tex4ht.sh
         resulting binary executables are created here:
-            trunk/Build/source/Work/texk/tex4htk/tex4ht     (tex4ht.exe)
+            Build/source/Work/texk/tex4htk/tex4ht     (tex4ht.exe)
+        and manually copied to the relevant deployment path inside of
+            Master/bin
 
         reautoconf does not work yet under MSYS. Necessary slightly corrected configure scripts are provided here from linux building environment.
 
