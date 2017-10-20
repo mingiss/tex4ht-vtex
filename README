@@ -91,14 +91,14 @@ Add-ons to module tex4ht:
 
         The problem arises in case of baseless sub/superscript, for instance:
                 $a_b{}^c$
-            tex4ht has a mechanism of sub/superscript base searching through sending back initial MathML tags prior to the last printable character.
-            In case, when that character already is inside of a previous tagged structure, such a back insertion ruins the validity of the file.
-            Such back-sending is organized through DVI file specials 't4ht~<*'.
+            tex4ht has a mechanism of sub/superscript base searching through sending back initial MathML tags prior to the last printable
+            character. In case, when that character already is inside of a previous tagged structure, such a back insertion ruins the
+            validity of the file. Such back-sending is organized through DVI file specials 't4ht~<*'.
 
             Following modification implemented: when in between of the last printable character and the sub/superscript there are
-            verbatim insertions 't4ht=', containing tag characters '<' or '>' (XML/HTML/MathML tags hopefully), back sending of the initiating tags
-            is suppressed, resulting in the verbatim insertion of the special 't4ht~<*' contents right in the place, where it was encountered.
-            (The result is like as the special 't4ht~<*' was entered as 't4ht='.)
+            verbatim insertions 't4ht=', containing tag characters '<' or '>' (XML/HTML/MathML tags hopefully), back sending of the
+            initiating tags is suppressed, resulting in the verbatim insertion of the special 't4ht~<*' contents right in the place,
+            where it was encountered. (The result is like as the special 't4ht~<*' was entered as 't4ht='.)
 
 TODO:
     Bug in command line parameters recognition:
