@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-18-17:49), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-19-18:27), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -542,7 +542,7 @@ struct ch_map_rec{
 
 
 struct stack_entry{
-  long  int x_val, y_val;
+  long long x_val, y_val;
   INTEGER dx_1, dx_2, dy_1, dy_2;
   BOOL text_on;
   BOOL 
@@ -769,7 +769,7 @@ static U_CHAR *trace_dvi_del_P,  *end_trace_dvi_del_P,
 static int push_depth=0, push_id=0, push_st[256];
 
 
-static long int x_val = 0, max_x_val = -10000,
+static long long x_val = 0, max_x_val = -10000,
      max_y_val = 0, prev_y_val = 0;
 
 
@@ -777,7 +777,7 @@ static INTEGER dx_1 = 0, dx_2 = 0;
 
 
 static INTEGER  dy_1 = 0, dy_2 = 0;
-static long int y_val = 0;
+static long long y_val = 0;
 
 
 static U_CHAR *eoln_str = (char *)0;
@@ -896,7 +896,7 @@ static BOOL pos_dvi = FALSE;
 static U_CHAR   *pos_body,     * pos_text,     * pos_line,
        *end_pos_body, * end_pos_text;
 static double   pos_x_A, pos_x_B, pos_y_C, pos_y_D, pos_y_E;
-static long int base_pos_x, base_pos_y, min_pos_x,
+static long long base_pos_x, base_pos_y, min_pos_x,
          max_pos_x, min_pos_y, max_pos_y;
 static short rect_pos;
 
@@ -1651,7 +1651,7 @@ static  void set_del
 
 
 static void try_new_line(MYVOID)
-{        long int  v;
+{        long long  v;
          double    dy;
    dy =  (cur_fnt == -1)? 0.0 : (
 (
@@ -1754,7 +1754,8 @@ static INTEGER move_x
 #undef SEP
 #endif
 {    register long     i;
-      double dx, sp;
+      long long dx;
+      double sp;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
      if (max_x_val == -10000 * 100 / x_fact) max_x_val = x_val - d;
@@ -1762,13 +1763,13 @@ static INTEGER move_x
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
-    i =  (INTEGER) (  (dx = (double)x_val - (double)max_x_val)
+    i =  (INTEGER) (  (double) (dx = x_val - max_x_val)
             /         sp
             +         0.5 );
 
 if( i==0 ){
    if (word_sp > 0.0001)
-      i =  (INTEGER) (dx
+      i =  (INTEGER) (  (double) dx
             /         word_sp
             +         0.5 );
 }
@@ -1831,13 +1832,13 @@ word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
-    i =  (INTEGER) (  dx
+    i =  (INTEGER) (  (double) dx
             /         sp
             +         0.5 );
 
 if( i==0 ){
    if (word_sp > 0.0001)
-      i =  (INTEGER) (dx
+      i =  (INTEGER) (  (double) dx
             /         word_sp
             +         0.5 );
 }
@@ -1855,7 +1856,7 @@ if( i>0 ){ i =1; }
 if( i ){ 
 if( trace_dvi_H && !ch_map_flag ){
    if( *trace_dvi_del_H != '\0' ){
-      (IGNORED) fprintf(cur_o_file, "%s%.0f", trace_dvi_del_H, dx);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f", trace_dvi_del_H, (double) dx);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_H);
 }
@@ -1894,7 +1895,7 @@ max_x_val = x_val;
 if( !ignore_spaces ){
    i = 0;
    if (word_sp > 0.0001)
-      i =  (INTEGER) ( (dx = d) / word_sp + 0.5 );
+      i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
    if( !i ) i = (dx >= 100000L * 100 / x_fact);
    if( i ){ put_char(' '); }
@@ -1948,11 +1949,12 @@ static  void rule_x
 ;
 #undef SEP
 #endif
-{    long i, right, up;
-   up = (INTEGER) get_int(4);
-   right = (INTEGER) get_int(4);
+{    long i;
+      long long right, up;
+   up = get_int(4);
+   right = get_int(4);
    if( ch_map_flag ){ 
-   long int  sv_x_val, sv_y_val, sv_right, sv;
+   long long  sv_x_val, sv_y_val, sv_right, sv;
    int  ch;
 sv_x_val = x_val;
 sv_y_val = y_val;
@@ -1983,7 +1985,7 @@ tag
  }
    else if( pos_dvi ){
       
-         long int d;
+         long long d;
 if( (up > 0) && (right > 0) ){
    if(  *pos_line ){
                       double from_x, from_y;
@@ -2052,8 +2054,8 @@ if( i==0 ){
    
 if( trace_dvi_R && !ch_map_flag ){
    if( *trace_dvi_del_R != '\0' ){
-      (IGNORED) fprintf(cur_o_file, "%s%d %d",
-         trace_dvi_del_R, (int) x_val, (int) y_val);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f %.0f",
+         trace_dvi_del_R, (double) x_val, (double) y_val);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_R);
 }
@@ -2068,8 +2070,8 @@ rule_ch_off
    
 if( trace_dvi_R && !ch_map_flag ){
    if( *trace_dvi_del_r != '\0' ){
-      (IGNORED) fprintf(cur_o_file, "%s%d %d",
-         trace_dvi_del_R, (int) right, (int) up);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f %.0f",
+         trace_dvi_del_R, (double) right, (double) up);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_r);
 }
@@ -2085,8 +2087,8 @@ if( trace_dvi_R && !ch_map_flag ){
 
 if( trace_dvi_R && !ch_map_flag ){
    if( *trace_dvi_del_R != '\0' ){
-      (IGNORED) fprintf(cur_o_file, "%s%d %d",
-         trace_dvi_del_R, (int) x_val, (int) y_val);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f %.0f",
+         trace_dvi_del_R, (double) x_val, (double) y_val);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_R);
 }
@@ -2095,8 +2097,8 @@ if( trace_dvi_R && !ch_map_flag ){
 
 if( trace_dvi_R && !ch_map_flag ){
    if( *trace_dvi_del_r != '\0' ){
-      (IGNORED) fprintf(cur_o_file, "%s%d %d",
-         trace_dvi_del_R, (int) right, (int) up);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f %.0f",
+         trace_dvi_del_R, (double) right, (double) up);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_r);
 }
@@ -4774,7 +4776,7 @@ math_class = math_class_of( ch, cur_fnt );
 }  }
 
  
-if( pos_dvi ){       long int d;
+if( pos_dvi ){       long long d;
   if( *pos_text ){
     
 if( no_root_file ){  open_o_file(); }
@@ -6428,15 +6430,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-18-17:49 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-19-18:27 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-18-17:49)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-19-18:27)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-18-17:49 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-19-18:27 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-18-17:49 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-19-18:27 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -6918,7 +6920,7 @@ if( !dot_file ){
    if( HOME_DIR ){
       (IGNORED) sprintf(str,
 #if defined(__DJGPP__)
-  is_forward_slash(HOME_DIR)?  "%s/tex4ht.env" :  "%s\\tex4ht.env"
+  (HOME_DIR && !is_forward_slash(HOME_DIR))?  "%s\\tex4ht.env" : "%s/tex4ht.env"
 #else
   "%s/tex4ht.env"
 #endif
@@ -9399,7 +9401,7 @@ design_size_to_pt(
             * (double) font_tbl[cur_fnt].scale
 
  );
-if( needs_end_accent ){  needs_end_accent = x_val + 9 * width / 10; }
+if( needs_end_accent ){  needs_end_accent = (x_val + 9 * width / 10 != 0); }
 in_accenting = FALSE;
 
 
@@ -12608,10 +12610,10 @@ bop_addr = advance_idv_page( bop_addr, cur_font );
 stack_depth = 0;
 set_loc( 
 143 
-, x_val );
+, (long int)x_val );
 set_loc( 
 157 
-, y_val );
+, (long int)y_val );
 
   break; }
      case '@': { 
@@ -12649,10 +12651,10 @@ bop_addr = advance_idv_page( bop_addr, cur_font );
 stack_depth = 0;
 set_loc( 
 143 
-, x_val );
+, (long int)x_val );
 set_loc( 
 157 
-, y_val );
+, (long int)y_val );
 
   }
 dvi_flag = TRUE;
@@ -12687,9 +12689,9 @@ case
    break; }
 case 
 142 
-: {      INTEGER cur_x, cur_y;
+: {      long long cur_x, cur_y;
    stack_depth--;
-   cur_x = (INTEGER) x_val;  cur_y = (INTEGER) y_val;  pop_stack();
+   cur_x = x_val;  cur_y = y_val;  pop_stack();
    if( dvi_flag ){
       if( stack_depth<0 ){ warn_i_int( 24,  page_n );
                            

@@ -1151,13 +1151,13 @@ tm *tm_ptr = NULL;
             prod_date = KpApp->m_pszProdDate;
         }
         sprintf((char *)out_str,
-#if /* defined(__GNUC__) || */ defined(_USE_32BIT_TIME_T)
-            "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %ld ",
-#else
+// #if /* defined(__GNUC__) || */ defined(_USE_32BIT_TIME_T)
+//          "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %ld ",
+// #else
             "%04d.%02d.%02d %02d:%02d:%02d %s[%05d:%s] %lld ",
-#endif
+// #endif
             1900 + tm_ptr->tm_year, 1 + tm_ptr->tm_mon, tm_ptr->tm_mday, tm_ptr->tm_hour + 2, tm_ptr->tm_min, tm_ptr->tm_sec,
-            prod_name, prod_ver, prod_date, ltime);
+            prod_name, prod_ver, prod_date, (long long)ltime);
 
 // --------------------
         if (p_pszFmt)

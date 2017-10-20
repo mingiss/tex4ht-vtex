@@ -2872,7 +2872,7 @@ static  void set_del( del, end_del )
 \<trace h spaces\><<<
 if( trace_dvi_H && !ch_map_flag ){
    if( *trace_dvi_del_H != '\0' ){
-      (IGNORED) fprintf(cur_o_file, "%s%.0f", trace_dvi_del_H, dx);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f", trace_dvi_del_H, (double) dx);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_H);
 }
@@ -2894,8 +2894,8 @@ if( trace_dvi_V && !ch_map_flag ){
 \<trace x rules\><<<
 if( trace_dvi_R && !ch_map_flag ){
    if( *trace_dvi_del_R != '\0' ){   
-      (IGNORED) fprintf(cur_o_file, "%s%d %d",
-         trace_dvi_del_R, (int) x_val, (int) y_val);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f %.0f",
+         trace_dvi_del_R, (double) x_val, (double) y_val);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_R);
 }
@@ -2905,8 +2905,8 @@ if( trace_dvi_R && !ch_map_flag ){
 \<end trace x rules\><<<
 if( trace_dvi_R && !ch_map_flag ){
    if( *trace_dvi_del_r != '\0' ){   
-      (IGNORED) fprintf(cur_o_file, "%s%d %d",
-         trace_dvi_del_R, (int) right, (int) up);
+      (IGNORED) fprintf(cur_o_file, "%s%.0f %.0f",
+         trace_dvi_del_R, (double) right, (double) up);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_r);
 }
@@ -3008,7 +3008,7 @@ encountered. Spaces are inserted when \`'x_val' is larger than
 \`'max_x_val'. 
 
 \<vars\><<<
-static long int x_val = 0, max_x_val = -10000,
+static long long x_val = 0, max_x_val = -10000,
      max_y_val = 0, prev_y_val = 0;
 >>>
 
@@ -3043,7 +3043,7 @@ static void try_new_line( ARG_I(void) );
 
 \<functions\><<<
 static void try_new_line(MYVOID)
-{        long int  v;
+{        long long  v;
          double    dy;
    dy =  (cur_fnt == -1)? 0.0 : (`<sign of ex`> * `<size of ex`>) ;
    v = y_val - prev_y_val;      
@@ -3135,7 +3135,8 @@ static INTEGER move_x( ARG_I(register INTEGER) );
 static INTEGER move_x( d ) 
       register INTEGER  d
 ;{    register long     i;
-      double dx, sp;
+      long long dx;
+      double sp;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
      if (max_x_val == -10000 * 100 / x_fact) max_x_val = x_val - d;  
@@ -3181,7 +3182,7 @@ The following provides a solution.
 if( !ignore_spaces ){
    i = 0;
    if (word_sp > 0.0001)
-      i =  (INTEGER) ( (dx = d) / word_sp + 0.5 );
+      i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
    if( !i ) i = (dx >= 100000L * 100 / x_fact);
    if( i ){ put_char(' '); }
@@ -3225,7 +3226,7 @@ case `<dy.2 store and mv ver 4-byte`>: {
 
 \<vars\><<<
 static INTEGER  dy_1 = 0, dy_2 = 0;
-static long int y_val = 0;
+static long long y_val = 0;
 >>>
 
 \<header functions\><<<
@@ -3292,7 +3293,7 @@ Spaces are inserted when \`'x_val' is larger than
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
-    i =  (INTEGER) (  (dx = (double)x_val - (double)max_x_val) 
+    i =  (INTEGER) (  (double) (dx = x_val - max_x_val) 
             /         sp
             +         0.5 );
 `<try word space if i=0`>
@@ -3309,7 +3310,7 @@ max_x_val = x_val;
 \<try word space if i=0\><<<
 if( i==0 ){
    if (word_sp > 0.0001)
-      i =  (INTEGER) (dx 
+      i =  (INTEGER) (  (double) dx 
             /         word_sp 
             +         0.5 );
 }
@@ -3547,7 +3548,7 @@ word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
-    i =  (INTEGER) (  dx
+    i =  (INTEGER) (  (double) dx
             /         sp
             +         0.5 );
 `<try word space if i=0`>
@@ -3715,9 +3716,10 @@ static void rule_x( ARG_I(BOOL) );
 `[ 
 static  void rule_x( tag ) 
       BOOL  tag
-;{    long i, right, up;
-   up = (INTEGER) get_int(4);                       
-   right = (INTEGER) get_int(4);
+;{    long i;
+      long long right, up;
+   up = get_int(4);                       
+   right = get_int(4);
    if( ch_map_flag ){ `<ruler into ch map`> }
    else if( pos_dvi ){ 
       `<pos dvi x rule`> 
@@ -5311,7 +5313,7 @@ INTEGER filter_bound_ch( ARG_I(INTEGER) );
 
 
 \<ruler into ch map\><<<
-   long int  sv_x_val, sv_y_val, sv_right, sv;
+   long long  sv_x_val, sv_y_val, sv_right, sv;
    int  ch;
 sv_x_val = x_val;   
 sv_y_val = y_val;
@@ -5836,8 +5838,8 @@ visible_cnt = TRUE;
 visible_cnt = FALSE; 
 bop_addr = advance_idv_page( bop_addr, cur_font );
 stack_depth = 0;
-set_loc( `<mv hor 1-byte`>, x_val );
-set_loc( `<mv ver 1-byte`>, y_val );
+set_loc( `<mv hor 1-byte`>, (long int)x_val );
+set_loc( `<mv ver 1-byte`>, (long int)y_val );
 >>>
 
 
@@ -5870,9 +5872,9 @@ case `<sv loc op`>: {
    stack_depth++;
    cond_idv_char( ch );   
    break; }
-case `<retrieve loc op`>: {      INTEGER cur_x, cur_y;
+case `<retrieve loc op`>: {      long long cur_x, cur_y;
    stack_depth--; 
-   cur_x = (INTEGER) x_val;  cur_y = (INTEGER) y_val;  pop_stack();
+   cur_x = x_val;  cur_y = y_val;  pop_stack();
    if( dvi_flag ){
       if( stack_depth<0 ){ warn_i_int( 24,  page_n );
                            `<push curr state`>     }
@@ -6749,7 +6751,7 @@ static struct stack_entry* stack;
 
 \<types\><<<
 struct stack_entry{
-  long  int x_val, y_val;
+  long long x_val, y_val;
   INTEGER dx_1, dx_2, dy_1, dy_2;
   BOOL text_on;
   BOOL `<BOOl stack accented`>;
@@ -8291,7 +8293,7 @@ measure the dvi dimensions--can be used for applets.
 
 
 \<pos dvi ch\><<< 
-if( pos_dvi ){       long int d;
+if( pos_dvi ){       long long d;
   if( *pos_text ){
     `<open output file`>
     (IGNORED) fprintf(cur_o_file, pos_text,
@@ -8448,7 +8450,7 @@ STYLE="font-size: 100% ;">x</SPAN></SPAN></SPAN>
 
 
 \<pos dvi x rule\><<<
-         long int d;
+         long long d;
 if( (up > 0) && (right > 0) ){
    if(  *pos_line ){
                       double from_x, from_y;
@@ -8543,7 +8545,7 @@ static BOOL pos_dvi = FALSE;
 static U_CHAR   *pos_body,     * pos_text,     * pos_line, 
        *end_pos_body, * end_pos_text;
 static double   pos_x_A, pos_x_B, pos_y_C, pos_y_D, pos_y_E;
-static long int base_pos_x, base_pos_y, min_pos_x, 
+static long long base_pos_x, base_pos_y, min_pos_x, 
          max_pos_x, min_pos_y, max_pos_y;
 static short rect_pos;
 >>>
@@ -12511,7 +12513,7 @@ else if( m_accent_template )
 {  `<accented = true`>  stack[stack_n-1].accented = TRUE; }
 needs_accent_sym = FALSE; 
 width = (INTEGER)( `<(double) char_width( ch )`> );
-if( needs_end_accent ){  needs_end_accent = x_val + 9 * width / 10; }
+if( needs_end_accent ){  needs_end_accent = (x_val + 9 * width / 10 != 0); }
 in_accenting = FALSE;
 >>>
 
@@ -13465,7 +13467,7 @@ if( TEX4HTENV ){
 
 \<"s/tex4ht.env"\><<<
 #if defined(__DJGPP__)
-  is_forward_slash(HOME_DIR)?  "%s/tex4ht.env" :  "%s\\tex4ht.env"
+  (HOME_DIR && !is_forward_slash(HOME_DIR))?  "%s\\tex4ht.env" : "%s/tex4ht.env"
 #else
   "%s/tex4ht.env"
 #endif
