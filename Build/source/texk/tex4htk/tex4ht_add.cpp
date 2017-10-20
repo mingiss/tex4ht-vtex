@@ -4,7 +4,7 @@
  *    add-ons to tex4ht
  *
  * TODO:
- *      all local char* to std::string
+ *      all local char* and char[] to std::string
  */
 
 #include <string.h>
@@ -182,7 +182,7 @@ printf(":::: searching for OTF font: %s\n", fnt_name);
     new_font.design_sz = DEF_DESIGN_SZ;
     new_font.mag = DEF_MAG_VAL;
 
-printf(":::: %s: %d %d\n", fnt_name, ppars->m_ChFirst, ppars->m_ChLast);
+cout << ":::: " << fnt_name << " first: " << ppars->m_ChFirst << " last: " << ppars->m_ChLast << endl;
 }
 
 int /* UniChar */ get_uni_ch(int tex_ch, HANDLE fnt_pars)
