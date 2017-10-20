@@ -25,7 +25,7 @@ Prerequisites:
                     Be prepared to delete these files or use another MinGW distribution, v.5.1.0 for instance:
                             https://sourceforge.net/projects/tdm-gcc/files/latest/download?source=rw_typ_t5
                         (not tested yet)
-                Path of installed bianries
+                Path of installed binaries
                         %ProgramFiles%\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw32\bin
                     should be added to environment variable PATH
         MSYS POSIX shell environment:
@@ -50,7 +50,7 @@ Building:
         and manually copied to the relevant deployment path inside of
             Master/bin
 
-        reautoconf does not work yet under MSYS. Necessary slightly corrected configure scripts are provided here from linux building environment.
+        reautoconf does not work yet under MSYS. Necessary slightly corrected linux building environment configure scripts are provided here.
 
 Add-ons to module tex4ht:
 
@@ -61,7 +61,7 @@ Add-ons to module tex4ht:
             totally cuts off the heuristic algorithm for recognition of spaces in .dvi file;
             spaces then should be generated using some explicit means, for example by inserting commands
                 \special{t4ht=\&\#32;}
-            into the source .tex file using LuaTeX script 4hspship.lua, provided in repository
+            into the source .tex file. It could be done using LuaTeX script 4hspship.lua, provided in repository
                     https://gitlab.vtex.lt/texgr/tex4ht-v2.git
                 subfolder
                     2_spaces/styles
@@ -71,7 +71,7 @@ Add-ons to module tex4ht:
             the percentage of the initial threshold value should be provided:
                 -r100   no change, the algorithm operates as usual;
                 -r50    threshold of spaces generation is increased twice -- resulting amount of spaces decreases;
-                -r200   threshold decreased by half, more spaces.
+                -r200   threshold decreased by half -- more spaces.
 
     OTF font character encoding.
 
@@ -87,17 +87,18 @@ Add-ons to module tex4ht:
                 and
                     Running xdvipsk
 
-    Attempt to solve the problem in MathML sup/subscript tag sending back algorithm.
+    Attempt to solve the problem in MathML sub/superscript tag sending back algorithm.
 
-        The problem arises in case of baseless sup/subscripts, for instance:
+        The problem arises in case of baseless sub/superscript, for instance:
                 $a_b{}^c$
-            tex4ht has a mechanizm of sup/subscript base searching through sending back initial MathML tags prior to the last printable character.
-            In case, when that character allready is inside of a previous tagged structure, such a back insertion ruins the validity of tags.
+            tex4ht has a mechanism of sub/superscript base searching through sending back initial MathML tags prior to the last printable character.
+            In case, when that character already is inside of a previous tagged structure, such a back insertion ruins the validity of the file.
+            Such back-sending is organized through DVI file specials 't4ht~<*'.
 
-            Following modification implemented: when after the last printable character there are verbatim insertions 't4ht=',
-            containing tag characters '<' or '>', back sending of the initiating tags is suppressed,
-            resulting in the verbatim insertion of the special 't4ht~<*' contents right in the place, where it was encountered.
-            (The result is as the special 't4ht~<*' was entered as 't4ht='.)
+            Following modification implemented: when in between of the last printable character and the sub/superscript there are
+            verbatim insertions 't4ht=', containing tag characters '<' or '>' (XML/HTML/MathML tags hopefully), back sending of the initiating tags
+            is suppressed, resulting in the verbatim insertion of the special 't4ht~<*' contents right in the place, where it was encountered.
+            (The result is like as the special 't4ht~<*' was entered as 't4ht='.)
 
 TODO:
     Bug in command line parameters recognition:
@@ -110,6 +111,6 @@ TODO:
 
     reautoconf under MSYS
 
-    MathML sup/subscript tag sending back algorithm:
+    MathML sub/superscript tag sending back algorithm:
         Stepping over is not allowed not just through tags, entered inside of verbatim specials 't4ht='.
         All tag insertion specials, including 't4ht~<*' itself, should be examined as well.
