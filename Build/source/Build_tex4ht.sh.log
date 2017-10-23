@@ -1,36 +1,18 @@
-...... vtex: tlroot: /usr/local/texlive/2016
-...... vtex: PATH: /usr/local/texlive/bin:/usr/local/texlive/bin/dvilayers:/usr/local/texlive/bin/comchk:/usr/local/texlive/2016/bin/x86_64-linux:/usr/local/bin:/usr/bin:/home/mingis/kp/bin:/home/mingis/bin:/home/mingis/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/texlive/bin
-...... vtex: executing: tex tex4ht-c.tex
-This is TeX, Version 3.14159265 (TeX Live 2016) (preloaded format=tex)
-(./tex4ht-c.tex (./common.tex) (/usr/local/texlive/2016/texmf-dist/tex/generic/dratex/DraTex.sty) (/usr/local/texlive/2016/texmf-dist/tex/generic/dratex/AlDraTex.sty) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/tex4ht.sty) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/tex4ht.4ht
-::::::::::::::::::::::::::::::::::::::::::
- TeX4ht info is available in the log file 
-::::::::::::::::::::::::::::::::::::::::::
-(/usr/local/texlive/vtex-dist/tex/generic/tex4ht/tex4ht.usr)) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/tex4ht.sty
---- needs --- tex4ht tex4ht-c ---
-(./tex4ht-c.tmp) (./tex4ht-c.xref) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4-math.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4-math.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/plain.4ht (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4-math.4ht)) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/dratex.4ht (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4-math.4ht)) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/th4.4ht
-(/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4-math.4ht)) [1] (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4.4ht) (/usr/local/texlive/2016/texmf-dist/tex/generic/tex4ht/html4-math.4ht)) (/usr/local/texlive/2016/texmf-dist/tex/latex/protex/ProTex.sty) (/usr/local/texlive/2016/texmf-dist/tex/latex/protex/AlProTex.sty) (./tex4ht-c.4ct) (./tex4ht-c.4ct) (./tex4ht-cpright.tex [1]) [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] (./tex4ht-c.4ct) [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45] [46] [47] (./tex4ht-c.4ct) [48] [49] [50] [51] [52] [53] [54] [55] [56] [57] [58]
-[59] [60] (./tex4ht-c.4ct) [61] [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] (./tex4ht-c.4ct) [76] [77] [78] [79] [80] [81] [82] [83] (./tex4ht-c.4ct) [84] [85] [86] [87] [88] [89] [90] [91] [92] [93] [94] [95] (./tex4ht-c.4ct) [96] [97] [98] [99] [100] (./tex4ht-c.4ct) [101] [102] [103] [104] [105] [106] [107] [108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] [120] [121] [122] [123] (./tex4ht-c.4ct) [124] [125] [126] [127] [128] [129] [130] [131] (./tex4ht-c.4ct) [132] [133] [134] [135] [136] [137] [138] [139] [140] [141] [142] [143] [144] [145] [146] [147] [148] [149] [150] (./tex4ht-c.4ct) [151] [152] [153] [154] [155] [156] [157] [158] [159] [160] [161] [162] [163] [164] [165] [166] [167] [168] [169] [170] [171] [172] [173]
-[174] [175] [176] [177] [178] (./tex4ht-c.4ct) [179] [180] [181] (./tex4ht-c.4ct) [182] [183] [184] [185] [186] [187] [188] [189] (./tex4ht-c.4ct) [190] [191] [192] [193] [194] [195] [196] (./tex4ht-c.4ct) [197] [198] [199] [200] [201] [202] [203] [204] [205] [206] [207] [208] [209] [210] [211] [212] [213] [214] [215] [216] [217] [218] [219] [220] [221] [222] [223] [224] [225] [226] [227] [228] [229] [230] [231] [232] [233] [234] [235] [236] [237] [238] [239] [240] [241] [242] (./tex4ht-c.4ct) [243] [244] [245] [246] [247] [248] [249] [250] [251] [252] [253] [254] (./tex4ht-c.4ct) [255] [256] [257] [258] [259] [260] [261] [262] [263] [264] [265] [266] (./tex4ht-c.4ct)
---- Writing file --- tex4ht.c ---
-(./tex4ht-c.4ct) [267] [268] )
-(see the transcript file for additional information)
-Output written on tex4ht-c.dvi (269 pages, 2666716 bytes).
-Transcript written on tex4ht-c.log.
-configure: creating cache config.cache
-checking build system type... x86_64-pc-linux-gnu
-checking host system type... x86_64-pc-linux-gnu
+mkdir: cannot create directory `Work': File exists
+configure: loading cache config.cache
+checking build system type... i686-pc-mingw32
+checking host system type... i686-pc-mingw32
 checking for gcc... gcc
 checking whether the C compiler works... yes
-checking for C compiler default output file name... a.out
-checking for suffix of executables... 
+checking for C compiler default output file name... a.exe
+checking for suffix of executables... .exe
 checking whether we are cross compiling... no
 checking for suffix of object files... o
 checking whether we are using the GNU C compiler... yes
 checking whether gcc accepts -g... yes
 checking for gcc option to accept ISO C89... none needed
 checking whether gcc understands -c and -o together... yes
-checking for native WIN32 or MINGW32... no
+checking for native WIN32 or MINGW32... mingw32
 configure: Assuming `--enable-autosp=no'
 configure: Assuming `--enable-devnag=no'
 configure: Assuming `--enable-lacheck=no'
@@ -92,7 +74,7 @@ configure: Assuming `libpaper' headers and library from TL tree
 configure: Assuming `zlib' headers and library from TL tree
 configure: Assuming `ptexenc' headers and library from TL tree
 configure: Assuming `kpathsea' headers and library from TL tree
-checking for a BSD-compatible install... /usr/bin/install -c
+checking for a BSD-compatible install... /bin/install -c
 checking whether build environment is sane... yes
 checking for a thread-safe mkdir -p... /bin/mkdir -p
 checking for gawk... gawk
@@ -100,33 +82,33 @@ checking whether make sets $(MAKE)... yes
 checking for style of include used by make... GNU
 checking whether make supports nested variables... yes
 checking how to print strings... printf
-checking for a sed that does not truncate output... /bin/sed
-checking for grep that handles long lines and -e... /bin/grep
-checking for egrep... /bin/grep -E
-checking for fgrep... /bin/grep -F
-checking for ld used by gcc... /usr/bin/ld
-checking if the linker (/usr/bin/ld) is GNU ld... yes
-checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
-checking the name lister (/usr/bin/nm -B) interface... BSD nm
-checking whether ln -s works... yes
-checking the maximum length of command line arguments... 1572864
-checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
-checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
-checking for /usr/bin/ld option to reload object files... -r
+checking for a sed that does not truncate output... /D/kp/bin/GnuWin32/bin/sed
+checking for grep that handles long lines and -e... /D/kp/bin/GnuWin32/bin/grep
+checking for egrep... /D/kp/bin/GnuWin32/bin/grep -E
+checking for fgrep... /D/kp/bin/GnuWin32/bin/grep -F
+checking for ld used by gcc... d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe
+checking if the linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /d/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/nm -B
+checking the name lister (/d/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/nm -B) interface... BSD nm
+checking whether ln -s works... no, using cp -pR
+checking the maximum length of command line arguments... 8192
+checking how to convert i686-pc-mingw32 file names to i686-pc-mingw32 format... func_convert_file_msys_to_w32
+checking how to convert i686-pc-mingw32 file names to toolchain format... func_convert_file_msys_to_w32
+checking for d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe option to reload object files... -r
 checking for objdump... objdump
-checking how to recognize dependent libraries... pass_all
-checking for dlltool... no
-checking how to associate runtime and link libraries... printf %s\n
+checking how to recognize dependent libraries... file_magic ^x86 archive import|^x86 DLL
+checking for dlltool... dlltool
+checking how to associate runtime and link libraries... func_cygming_dll_for_implib
 checking for ar... ar
 checking for archiver @FILE support... @
 checking for strip... strip
 checking for ranlib... ranlib
-checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking command to parse /d/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/nm -B output from gcc object... failed
 checking for sysroot... no
 checking for a working dd... /bin/dd
 checking how to truncate binary pipes... /bin/dd bs=4096 count=1
-checking for mt... mt
-checking if mt is a manifest tool... no
+checking for mt... no
+checking if : is a manifest tool... no
 checking how to run the C preprocessor... gcc -E
 checking for ANSI C header files... yes
 checking for sys/types.h... yes
@@ -138,28 +120,34 @@ checking for strings.h... yes
 checking for inttypes.h... yes
 checking for stdint.h... yes
 checking for unistd.h... yes
-checking for dlfcn.h... yes
+checking for dlfcn.h... no
 checking how to create a pax tar archive... gnutar
 checking dependency style of gcc... gcc3
 checking whether to enable maintainer-specific portions of Makefiles... no
 checking whether the compiler accepts prototypes... yes
-checking what warning flags to pass to the C compiler... -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas
+checking what warning flags to pass to the C compiler... -Wimplicit -Wreturn-type
+checking for as... as
+checking for dlltool... (cached) dlltool
+checking for objdump... (cached) objdump
 checking for objdir... .libs
-checking if gcc supports -fno-rtti -fno-exceptions... no
-checking for gcc option to produce PIC... -fPIC -DPIC
-checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc supports -fno-rtti -fno-exceptions... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+no
+checking for gcc option to produce PIC... -DDLL_EXPORT -DPIC
+checking if gcc PIC flag -DDLL_EXPORT -DPIC works... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if gcc static flag -static works... yes
-checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if gcc supports -c -o file.o... (cached) yes
-checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
-checking dynamic linker characteristics... GNU/Linux ld.so
+checking whether the gcc linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) supports shared libraries... yes
+checking dynamic linker characteristics... Win32 ld.exe
 checking how to hardcode library paths into programs... immediate
 checking whether stripping libraries is possible... yes
 checking if libtool supports shared libraries... yes
 checking whether to build shared libraries... no
 checking whether to build static libraries... yes
 checking for special C compiler options needed for large files... no
-checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... 64
 checking for _LARGEFILE_SOURCE value needed for large files... no
 checking for dirent.h that defines DIR... yes
 checking for library containing opendir... none required
@@ -174,16 +162,16 @@ checking for float.h... yes
 checking limits.h usability... yes
 checking limits.h presence... yes
 checking for limits.h... yes
-checking pwd.h usability... yes
-checking pwd.h presence... yes
-checking for pwd.h... yes
+checking pwd.h usability... no
+checking pwd.h presence... no
+checking for pwd.h... no
 checking for stdlib.h... (cached) yes
 checking sys/param.h usability... yes
 checking sys/param.h presence... yes
 checking for sys/param.h... yes
 checking for putenv... yes
 checking for getcwd... yes
-checking for getwd... yes
+checking for getwd... no
 checking for memcmp... yes
 checking for memcpy... yes
 checking for mkstemp... yes
@@ -196,166 +184,169 @@ checking for size_t... yes
 checking for int64_t... yes
 checking for uint64_t... yes
 checking whether isascii is declared... yes
-checking for struct stat.st_mtim... yes
+checking for struct stat.st_mtim... no
 checking for X... disabled
 checking for g++... g++
 checking whether we are using the GNU C++ compiler... yes
 checking whether g++ accepts -g... yes
 checking dependency style of g++... gcc3
-checking what warning flags to pass to the C++ compiler... -Wreturn-type -Wno-unknown-pragmas -Wno-write-strings
+checking what warning flags to pass to the C++ compiler... -Wreturn-type -Wno-write-strings
 checking how to run the C++ preprocessor... g++ -E
-checking for ld used by g++... /usr/bin/ld -m elf_x86_64
-checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
-checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
-checking for g++ option to produce PIC... -fPIC -DPIC
-checking if g++ PIC flag -fPIC -DPIC works... yes
+checking for ld used by g++... d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe
+checking if the linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) is GNU ld... yes
+checking whether the g++ linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) supports shared libraries... yes
+checking for g++ option to produce PIC... -DDLL_EXPORT -DPIC
+checking if g++ PIC flag -DDLL_EXPORT -DPIC works... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if g++ static flag -static works... yes
-checking if g++ supports -c -o file.o... yes
+checking if g++ supports -c -o file.o... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if g++ supports -c -o file.o... (cached) yes
-checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
-checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking whether the g++ linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) supports shared libraries... yes
+checking dynamic linker characteristics... Win32 ld.exe
 checking how to hardcode library paths into programs... immediate
-checking whether ln -s works... yes
-checking for _access... no
-checking for _open... no
+checking whether ln -s works... no, using cp -pR
+checking for _access... yes
+checking for _open... yes
 checking for TeX specific libraries to build... texk/kpathsea 
-checking for pkg-config... pkg-config
-checking for freetype-config... freetype-config
-Package poppler was not found in the pkg-config search path.
-Perhaps you should add the directory containing `poppler.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'poppler' found
-Package poppler was not found in the pkg-config search path.
-Perhaps you should add the directory containing `poppler.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'poppler' found
+checking for pkg-config... no
+checking for freetype-config... no
 checking for icu-config... no
-configure: updating cache config.cache
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 checking that generated files are newer than configure... done
 configure: creating ./config.status
 config.status: creating Makefile
 config.status: creating doc/Makefile
 config.status: executing depfiles commands
 config.status: executing libtool commands
-=== configuring in auxdir/auxsub (/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/auxdir/auxsub)
-configure: running /bin/bash ../../../auxdir/auxsub/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/x86_64-pc-linux-gnu' '--libdir=${exec_prefix}/lib/x86_64-pc-linux-gnu' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../../config.cache --srcdir=../../../auxdir/auxsub
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 75: unknown command: `"'
+=== configuring in auxdir/auxsub (/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/auxdir/auxsub)
+configure: running /bin/sh ../../../auxdir/auxsub/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/i686-pc-mingw32' '--libdir=${exec_prefix}/lib/i686-pc-mingw32' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../../config.cache --srcdir=../../../auxdir/auxsub
 configure: loading cache ../../config.cache
-checking for a BSD-compatible install... (cached) /usr/bin/install -c
+checking for a BSD-compatible install... /bin/install -c
 checking whether build environment is sane... yes
-checking for a thread-safe mkdir -p... (cached) /bin/mkdir -p
-checking for gawk... (cached) gawk
-checking whether make sets $(MAKE)... (cached) yes
-checking whether make supports nested variables... (cached) yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether make supports nested variables... yes
 checking whether to enable maintainer-specific portions of Makefiles... no
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 checking that generated files are newer than configure... done
 configure: creating ./config.status
 config.status: creating Makefile
-=== configuring in libs (/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs)
-configure: running /bin/bash ../../libs/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/x86_64-pc-linux-gnu' '--libdir=${exec_prefix}/lib/x86_64-pc-linux-gnu' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../config.cache --srcdir=../../libs
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+=== configuring in libs (/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs)
+configure: running /bin/sh ../../libs/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/i686-pc-mingw32' '--libdir=${exec_prefix}/lib/i686-pc-mingw32' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../config.cache --srcdir=../../libs
 configure: loading cache ../config.cache
-checking build system type... (cached) x86_64-pc-linux-gnu
-checking host system type... (cached) x86_64-pc-linux-gnu
-checking for gcc... (cached) gcc
+checking build system type... i686-pc-mingw32
+checking host system type... i686-pc-mingw32
+checking for gcc... gcc
 checking whether the C compiler works... yes
-checking for C compiler default output file name... a.out
-checking for suffix of executables... 
+checking for C compiler default output file name... a.exe
+checking for suffix of executables... .exe
 checking whether we are cross compiling... no
-checking for suffix of object files... (cached) o
-checking whether we are using the GNU C compiler... (cached) yes
-checking whether gcc accepts -g... (cached) yes
-checking for gcc option to accept ISO C89... (cached) none needed
-checking whether gcc understands -c and -o together... (cached) yes
-checking for native WIN32 or MINGW32... (cached) no
-checking for a BSD-compatible install... (cached) /usr/bin/install -c
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking for native WIN32 or MINGW32... mingw32
+checking for a BSD-compatible install... /bin/install -c
 checking whether build environment is sane... yes
-checking for a thread-safe mkdir -p... (cached) /bin/mkdir -p
-checking for gawk... (cached) gawk
-checking whether make sets $(MAKE)... (cached) yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
 checking for style of include used by make... GNU
-checking whether make supports nested variables... (cached) yes
-checking dependency style of gcc... (cached) gcc3
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
 checking whether to enable maintainer-specific portions of Makefiles... no
-checking whether the compiler accepts prototypes... (cached) yes
-checking what warning flags to pass to the C compiler... (cached) -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas
+checking whether the compiler accepts prototypes... yes
+checking what warning flags to pass to the C compiler... -Wimplicit -Wreturn-type
 checking for generic libraries to build... 
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 checking that generated files are newer than configure... done
 configure: creating ./config.status
 config.status: creating Makefile
 config.status: executing depfiles commands
-=== configuring in utils (/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils)
-configure: running /bin/bash ../../utils/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/x86_64-pc-linux-gnu' '--libdir=${exec_prefix}/lib/x86_64-pc-linux-gnu' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../config.cache --srcdir=../../utils
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+=== configuring in utils (/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils)
+configure: running /bin/sh ../../utils/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/i686-pc-mingw32' '--libdir=${exec_prefix}/lib/i686-pc-mingw32' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../config.cache --srcdir=../../utils
 configure: loading cache ../config.cache
-checking build system type... (cached) x86_64-pc-linux-gnu
-checking host system type... (cached) x86_64-pc-linux-gnu
-checking for gcc... (cached) gcc
+checking build system type... i686-pc-mingw32
+checking host system type... i686-pc-mingw32
+checking for gcc... gcc
 checking whether the C compiler works... yes
-checking for C compiler default output file name... a.out
-checking for suffix of executables... 
+checking for C compiler default output file name... a.exe
+checking for suffix of executables... .exe
 checking whether we are cross compiling... no
-checking for suffix of object files... (cached) o
-checking whether we are using the GNU C compiler... (cached) yes
-checking whether gcc accepts -g... (cached) yes
-checking for gcc option to accept ISO C89... (cached) none needed
-checking whether gcc understands -c and -o together... (cached) yes
-checking for native WIN32 or MINGW32... (cached) no
-checking for a BSD-compatible install... (cached) /usr/bin/install -c
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking for native WIN32 or MINGW32... mingw32
+checking for a BSD-compatible install... /bin/install -c
 checking whether build environment is sane... yes
-checking for a thread-safe mkdir -p... (cached) /bin/mkdir -p
-checking for gawk... (cached) gawk
-checking whether make sets $(MAKE)... (cached) yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
 checking for style of include used by make... GNU
-checking whether make supports nested variables... (cached) yes
-checking dependency style of gcc... (cached) gcc3
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
 checking whether to enable maintainer-specific portions of Makefiles... no
-checking whether the compiler accepts prototypes... (cached) yes
-checking what warning flags to pass to the C compiler... (cached) -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas
+checking whether the compiler accepts prototypes... yes
+checking what warning flags to pass to the C compiler... -Wimplicit -Wreturn-type
 checking for Utils programs to build... 
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 checking that generated files are newer than configure... done
 configure: creating ./config.status
 config.status: creating Makefile
 config.status: executing depfiles commands
-=== configuring in texk (/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk)
-configure: running /bin/bash ../../texk/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/x86_64-pc-linux-gnu' '--libdir=${exec_prefix}/lib/x86_64-pc-linux-gnu' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../config.cache --srcdir=../../texk
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+=== configuring in texk (/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk)
+configure: running /bin/sh ../../texk/configure --disable-option-checking '--prefix=/usr/local'  '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/i686-pc-mingw32' '--libdir=${exec_prefix}/lib/i686-pc-mingw32' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' --cache-file=../config.cache --srcdir=../../texk
 configure: loading cache ../config.cache
-checking build system type... (cached) x86_64-pc-linux-gnu
-checking host system type... (cached) x86_64-pc-linux-gnu
-checking for gcc... (cached) gcc
+checking build system type... i686-pc-mingw32
+checking host system type... i686-pc-mingw32
+checking for gcc... gcc
 checking whether the C compiler works... yes
-checking for C compiler default output file name... a.out
-checking for suffix of executables... 
+checking for C compiler default output file name... a.exe
+checking for suffix of executables... .exe
 checking whether we are cross compiling... no
-checking for suffix of object files... (cached) o
-checking whether we are using the GNU C compiler... (cached) yes
-checking whether gcc accepts -g... (cached) yes
-checking for gcc option to accept ISO C89... (cached) none needed
-checking whether gcc understands -c and -o together... (cached) yes
-checking for native WIN32 or MINGW32... (cached) no
-checking for a BSD-compatible install... (cached) /usr/bin/install -c
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking whether gcc understands -c and -o together... yes
+checking for native WIN32 or MINGW32... mingw32
+checking for a BSD-compatible install... /bin/install -c
 checking whether build environment is sane... yes
-checking for a thread-safe mkdir -p... (cached) /bin/mkdir -p
-checking for gawk... (cached) gawk
-checking whether make sets $(MAKE)... (cached) yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
 checking for style of include used by make... GNU
-checking whether make supports nested variables... (cached) yes
-checking dependency style of gcc... (cached) gcc3
+checking whether make supports nested variables... yes
+checking dependency style of gcc... gcc3
 checking whether to enable maintainer-specific portions of Makefiles... no
-checking whether the compiler accepts prototypes... (cached) yes
-checking what warning flags to pass to the C compiler... (cached) -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas
+checking whether the compiler accepts prototypes... yes
+checking what warning flags to pass to the C compiler... -Wimplicit -Wreturn-type
 checking for TeXk programs to build...  tex4htk
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 checking that generated files are newer than configure... done
 configure: creating ./config.status
 config.status: creating Makefile
 config.status: executing depfiles commands
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 
 ** Configuration summary for TeX Live 2016-05-23 (2017):
 
-   compiling for x86_64-pc-linux-gnu
-      in /home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work
-      from sources in /home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source
+   compiling for i686-pc-mingw32
+      in /F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work
+      from sources in /F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source
 
-   C compiler (CC):              gcc (gcc (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609)
-   C++ compiler (CXX):           g++ (g++ (Ubuntu 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609)
-   PATH:                         /home/mingis/kp/bin:/home/mingis/bin:/home/mingis/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/texlive/bin
+   C compiler (CC):              gcc (gcc.exe (x86_64-win32-seh-rev0, Built by MinGW-W64 project) 7.1.0)
+   C++ compiler (CXX):           g++ (g++.exe (x86_64-win32-seh-rev0, Built by MinGW-W64 project) 7.1.0)
+   PATH:                         /home/mindaugas.piesina/kp/bin:/D/kp/bin/GnuWin32/bin:/D/bin/python27:/D/texroot/bat:/D/texroot/bin:/D/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw32/bin:.:/usr/local/bin:/mingw/bin:/bin:/c/Program Files (x86)/Intel/iCLS Client/:/c/Program Files/Intel/iCLS Client/:/c/ProgramData/Oracle/Java/javapath:/c/windows/system32:/c/windows:/c/windows/System32/Wbem:/c/windows/System32/WindowsPowerShell/v1.0/:/c/vtex/thg:/c/vtex/thg/hgbats:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files/Microsoft SQL Server/120/Tools/Binn/:/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/d/kp/bin/Git/cmd:/d/kp/bin:/d/bin/perl/bin:/d/texroot/bat:/c/utils:/c/vtex/cvs:/d/bin/python27:/d/kp/bin/GnuWin32/bin:/d/kp/bin/cygwin64/bin:/d/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin:/d/kp/bin/Microsoft Visual Studio 9.0/VC/bin:/d/kp/bin/Microsoft Visual Studio 9.0/VC
 
    enable_native_texlive_build:  yes
    enable_largefile:             yes
@@ -371,12 +362,14 @@ config.status: executing depfiles commands
    mandir:                       ${prefix}/texmf-dist/doc/man
    infodir:                      ${prefix}/texmf-dist/doc/info
    exec_prefix:                  ${prefix}
-   bindir:                       ${exec_prefix}/bin/x86_64-pc-linux-gnu
-   libdir:                       ${exec_prefix}/lib/x86_64-pc-linux-gnu
+   bindir:                       ${exec_prefix}/bin/i686-pc-mingw32
+   libdir:                       ${exec_prefix}/lib/i686-pc-mingw32
 
 ** Next run `make' to configure and build each library and program.
 
-checking for a BSD-compatible install... /usr/bin/install -c
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+mkdir: cannot create directory `texk/tex4htk': File exists
+checking for a BSD-compatible install... /bin/install -c
 checking whether build environment is sane... yes
 checking for a thread-safe mkdir -p... /bin/mkdir -p
 checking for gawk... gawk
@@ -385,8 +378,8 @@ checking whether make supports nested variables... yes
 checking for style of include used by make... GNU
 checking for gcc... gcc
 checking whether the C compiler works... yes
-checking for C compiler default output file name... a.out
-checking for suffix of executables... 
+checking for C compiler default output file name... a.exe
+checking for suffix of executables... .exe
 checking whether we are cross compiling... no
 checking for suffix of object files... o
 checking whether we are using the GNU C compiler... yes
@@ -394,36 +387,36 @@ checking whether gcc accepts -g... yes
 checking for gcc option to accept ISO C89... none needed
 checking whether gcc understands -c and -o together... yes
 checking dependency style of gcc... gcc3
-checking build system type... x86_64-pc-linux-gnu
-checking host system type... x86_64-pc-linux-gnu
+checking build system type... i686-pc-mingw32
+checking host system type... i686-pc-mingw32
 checking how to print strings... printf
-checking for a sed that does not truncate output... /bin/sed
-checking for grep that handles long lines and -e... /bin/grep
-checking for egrep... /bin/grep -E
-checking for fgrep... /bin/grep -F
-checking for ld used by gcc... /usr/bin/ld
-checking if the linker (/usr/bin/ld) is GNU ld... yes
-checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
-checking the name lister (/usr/bin/nm -B) interface... BSD nm
-checking whether ln -s works... yes
-checking the maximum length of command line arguments... 1572864
-checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... func_convert_file_noop
-checking how to convert x86_64-pc-linux-gnu file names to toolchain format... func_convert_file_noop
-checking for /usr/bin/ld option to reload object files... -r
+checking for a sed that does not truncate output... /D/kp/bin/GnuWin32/bin/sed
+checking for grep that handles long lines and -e... /D/kp/bin/GnuWin32/bin/grep
+checking for egrep... /D/kp/bin/GnuWin32/bin/grep -E
+checking for fgrep... /D/kp/bin/GnuWin32/bin/grep -F
+checking for ld used by gcc... d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe
+checking if the linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /d/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/nm -B
+checking the name lister (/d/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/nm -B) interface... BSD nm
+checking whether ln -s works... no, using cp -pR
+checking the maximum length of command line arguments... 8192
+checking how to convert i686-pc-mingw32 file names to i686-pc-mingw32 format... func_convert_file_msys_to_w32
+checking how to convert i686-pc-mingw32 file names to toolchain format... func_convert_file_msys_to_w32
+checking for d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe option to reload object files... -r
 checking for objdump... objdump
-checking how to recognize dependent libraries... pass_all
-checking for dlltool... no
-checking how to associate runtime and link libraries... printf %s\n
+checking how to recognize dependent libraries... file_magic ^x86 archive import|^x86 DLL
+checking for dlltool... dlltool
+checking how to associate runtime and link libraries... func_cygming_dll_for_implib
 checking for ar... ar
 checking for archiver @FILE support... @
 checking for strip... strip
 checking for ranlib... ranlib
-checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking command to parse /d/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/nm -B output from gcc object... failed
 checking for sysroot... no
 checking for a working dd... /bin/dd
 checking how to truncate binary pipes... /bin/dd bs=4096 count=1
-checking for mt... mt
-checking if mt is a manifest tool... no
+checking for mt... no
+checking if : is a manifest tool... no
 checking how to run the C preprocessor... gcc -E
 checking for ANSI C header files... yes
 checking for sys/types.h... yes
@@ -435,26 +428,32 @@ checking for strings.h... yes
 checking for inttypes.h... yes
 checking for stdint.h... yes
 checking for unistd.h... yes
-checking for dlfcn.h... yes
+checking for dlfcn.h... no
 checking whether to enable maintainer-specific portions of Makefiles... no
 checking whether the compiler accepts prototypes... yes
-checking what warning flags to pass to the C compiler... -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas
+checking what warning flags to pass to the C compiler... -Wimplicit -Wreturn-type
+checking for as... as
+checking for dlltool... (cached) dlltool
+checking for objdump... (cached) objdump
 checking for objdir... .libs
-checking if gcc supports -fno-rtti -fno-exceptions... no
-checking for gcc option to produce PIC... -fPIC -DPIC
-checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc supports -fno-rtti -fno-exceptions... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+no
+checking for gcc option to produce PIC... -DDLL_EXPORT -DPIC
+checking if gcc PIC flag -DDLL_EXPORT -DPIC works... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if gcc static flag -static works... yes
-checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if gcc supports -c -o file.o... (cached) yes
-checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
-checking dynamic linker characteristics... GNU/Linux ld.so
+checking whether the gcc linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) supports shared libraries... yes
+checking dynamic linker characteristics... Win32 ld.exe
 checking how to hardcode library paths into programs... immediate
 checking whether stripping libraries is possible... yes
 checking if libtool supports shared libraries... yes
 checking whether to build shared libraries... no
 checking whether to build static libraries... yes
 checking for special C compiler options needed for large files... no
-checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... 64
 checking for _LARGEFILE_SOURCE value needed for large files... no
 checking for dirent.h that defines DIR... yes
 checking for library containing opendir... none required
@@ -469,16 +468,16 @@ checking for float.h... yes
 checking limits.h usability... yes
 checking limits.h presence... yes
 checking for limits.h... yes
-checking pwd.h usability... yes
-checking pwd.h presence... yes
-checking for pwd.h... yes
+checking pwd.h usability... no
+checking pwd.h presence... no
+checking for pwd.h... no
 checking for stdlib.h... (cached) yes
 checking sys/param.h usability... yes
 checking sys/param.h presence... yes
 checking for sys/param.h... yes
 checking for putenv... yes
 checking for getcwd... yes
-checking for getwd... yes
+checking for getwd... no
 checking for memcmp... yes
 checking for memcpy... yes
 checking for mkstemp... yes
@@ -491,503 +490,130 @@ checking for size_t... yes
 checking for int64_t... yes
 checking for uint64_t... yes
 checking whether isascii is declared... yes
-checking for struct stat.st_mtim... yes
+checking for struct stat.st_mtim... no
 checking size of int... 4
 configure: creating ./config.lt
 config.lt: creating libtool
-checking for pkg-config... pkg-config
-checking if libkpathsea supports debugging... no
+checking for pkg-config... no
+checking if libkpathsea supports debugging... yes
 checking for g++... g++
 checking whether we are using the GNU C++ compiler... yes
 checking whether g++ accepts -g... yes
 checking dependency style of g++... gcc3
-checking what warning flags to pass to the C++ compiler... -Wreturn-type -Wno-unknown-pragmas -Wno-write-strings
+checking what warning flags to pass to the C++ compiler... -Wreturn-type -Wno-write-strings
 checking how to run the C++ preprocessor... g++ -E
-checking for ld used by g++... /usr/bin/ld -m elf_x86_64
-checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
-checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
-checking for g++ option to produce PIC... -fPIC -DPIC
-checking if g++ PIC flag -fPIC -DPIC works... yes
+checking for ld used by g++... d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe
+checking if the linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) is GNU ld... yes
+checking whether the g++ linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) supports shared libraries... yes
+checking for g++ option to produce PIC... -DDLL_EXPORT -DPIC
+checking if g++ PIC flag -DDLL_EXPORT -DPIC works... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if g++ static flag -static works... yes
-checking if g++ supports -c -o file.o... yes
+checking if g++ supports -c -o file.o... d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
+yes
 checking if g++ supports -c -o file.o... (cached) yes
-checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
-checking dynamic linker characteristics... (cached) GNU/Linux ld.so
+checking whether the g++ linker (d:/kp/bin/mingw-w64/i686-7.1.0-posix-dwarf-rt_v5-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.1.0/../../../../x86_64-w64-mingw32/bin/ld.exe) supports shared libraries... yes
+checking dynamic linker characteristics... Win32 ld.exe
 checking how to hardcode library paths into programs... immediate
-checking for native WIN32 or MINGW32... no
-checking for WIN64... no
+checking for native WIN32 or MINGW32... mingw32
+checking for WIN64... yes
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 checking that generated files are newer than configure... done
 configure: creating ./config.status
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 config.status: creating Makefile
 config.status: creating c-auto.h
+config.status: c-auto.h is unchanged
 config.status: executing depfiles commands
 config.status: executing libtool commands
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 2: extra characters after command
 Making all in .
-make[1]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work'
-=== configuring in texk/kpathsea (/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea)
-make: running /bin/bash '../../../texk/kpathsea/configure'  '--disable-option-checking' '--prefix=/usr/local' '--disable-all-pkgs' '--without-x' '--disable-xetex' '--disable-xindy' '--enable-tex4htk' 'CFLAGS=-g' 'CXXFLAGS=-g' '--enable-native-texlive-build' '--enable-largefile' '--disable-silent-rules' '--enable-multiplatform=yes' '--enable-cxx-runtime-hack=yes' '--enable-libtool-hack=yes' '--disable-shared' '--enable-texlive-build' '--bindir=${exec_prefix}/bin/x86_64-pc-linux-gnu' '--libdir=${exec_prefix}/lib/x86_64-pc-linux-gnu' '--enable-autosp=no' '--enable-devnag=no' '--enable-lacheck=no' '--enable-m-tx=no' '--enable-pmx=no' '--enable-ps2eps=no' '--enable-t1utils=no' '--enable-texdoctk=no' '--enable-tpic2pdftex=no' '--enable-vlna=no' '--with-clisp-runtime=default' '--disable-xpdfopen' '--enable-web2c=no' '--enable-afm2pl=no' '--enable-bibtex-x=no' '--enable-chktex=no' '--enable-cjkutils=no' '--enable-detex=no' '--enable-dtl=no' '--enable-dvi2tty=no' '--enable-dvidvi=no' '--enable-dviljk=no' '--enable-dvipdfm-x=no' '--enable-dvipng=no' '--enable-dvipos=no' '--enable-dvipsk=no' '--enable-dvisvgm=no' '--enable-gregorio=no' '--enable-gsftopk=no' '--enable-lcdf-typetools=no' '--enable-makeindexk=no' '--enable-makejvf=no' '--enable-mendexk=no' '--enable-musixtnt=no' '--enable-ps2pk=no' '--enable-psutils=no' '--enable-seetexk=no' '--enable-ttf2pk2=no' '--enable-ttfdump=no' '--enable-upmendex=no' '--disable-xdvik' '--enable-texlive=no' '--with-system-harfbuzz=no' '--with-system-icu=no' '--with-system-teckit=no' '--with-system-graphite2=no' '--with-system-zziplib=no' '--with-system-xpdf=no' '--with-system-poppler=no' '--with-system-mpfr=no' '--with-system-gmp=no' '--with-system-cairo=no' '--with-system-pixman=no' '--with-system-potrace=no' '--with-system-gd=no' '--with-system-freetype2=no' '--with-system-libpng=no' '--with-system-libpaper=no' '--with-system-zlib=no' '--with-system-ptexenc=no' '--with-system-kpathsea=no' '--datarootdir=${prefix}' '--mandir=${prefix}/texmf-dist/doc/man' '--infodir=${prefix}/texmf-dist/doc/info' '--cache-file=../../config.cache' '--srcdir=../../../texk/kpathsea'
-configure: loading cache ../../config.cache
-checking for a BSD-compatible install... (cached) /usr/bin/install -c
-checking whether build environment is sane... yes
-checking for a thread-safe mkdir -p... (cached) /bin/mkdir -p
-checking for gawk... (cached) gawk
-checking whether make sets $(MAKE)... (cached) yes
-checking whether make supports nested variables... (cached) yes
-checking for style of include used by make... GNU
-checking for gcc... (cached) gcc
-checking whether the C compiler works... yes
-checking for C compiler default output file name... a.out
-checking for suffix of executables... 
-checking whether we are cross compiling... no
-checking for suffix of object files... (cached) o
-checking whether we are using the GNU C compiler... (cached) yes
-checking whether gcc accepts -g... (cached) yes
-checking for gcc option to accept ISO C89... (cached) none needed
-checking whether gcc understands -c and -o together... (cached) yes
-checking dependency style of gcc... (cached) gcc3
-checking build system type... (cached) x86_64-pc-linux-gnu
-checking host system type... (cached) x86_64-pc-linux-gnu
-checking how to print strings... printf
-checking for a sed that does not truncate output... (cached) /bin/sed
-checking for grep that handles long lines and -e... (cached) /bin/grep
-checking for egrep... (cached) /bin/grep -E
-checking for fgrep... (cached) /bin/grep -F
-checking for ld used by gcc... (cached) /usr/bin/ld
-checking if the linker (/usr/bin/ld) is GNU ld... (cached) yes
-checking for BSD- or MS-compatible name lister (nm)... (cached) /usr/bin/nm -B
-checking the name lister (/usr/bin/nm -B) interface... (cached) BSD nm
-checking whether ln -s works... yes
-checking the maximum length of command line arguments... (cached) 1572864
-checking how to convert x86_64-pc-linux-gnu file names to x86_64-pc-linux-gnu format... (cached) func_convert_file_noop
-checking how to convert x86_64-pc-linux-gnu file names to toolchain format... (cached) func_convert_file_noop
-checking for /usr/bin/ld option to reload object files... (cached) -r
-checking for objdump... (cached) objdump
-checking how to recognize dependent libraries... (cached) pass_all
-checking for dlltool... no
-checking how to associate runtime and link libraries... (cached) printf %s\n
-checking for ar... (cached) ar
-checking for archiver @FILE support... (cached) @
-checking for strip... (cached) strip
-checking for ranlib... (cached) ranlib
-checking command to parse /usr/bin/nm -B output from gcc object... (cached) ok
-checking for sysroot... no
-checking for a working dd... (cached) /bin/dd
-checking how to truncate binary pipes... (cached) /bin/dd bs=4096 count=1
-checking for mt... (cached) mt
-checking if mt is a manifest tool... (cached) no
-checking how to run the C preprocessor... (cached) gcc -E
-checking for ANSI C header files... (cached) yes
-checking for sys/types.h... (cached) yes
-checking for sys/stat.h... (cached) yes
-checking for stdlib.h... (cached) yes
-checking for string.h... (cached) yes
-checking for memory.h... (cached) yes
-checking for strings.h... (cached) yes
-checking for inttypes.h... (cached) yes
-checking for stdint.h... (cached) yes
-checking for unistd.h... (cached) yes
-checking for dlfcn.h... (cached) yes
-checking whether to enable maintainer-specific portions of Makefiles... no
-checking whether the compiler accepts prototypes... (cached) yes
-checking what warning flags to pass to the C compiler... (cached) -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas
-checking for objdir... (cached) .libs
-checking if gcc supports -fno-rtti -fno-exceptions... (cached) no
-checking for gcc option to produce PIC... (cached) -fPIC -DPIC
-checking if gcc PIC flag -fPIC -DPIC works... (cached) yes
-checking if gcc static flag -static works... (cached) yes
-checking if gcc supports -c -o file.o... (cached) yes
-checking if gcc supports -c -o file.o... (cached) yes
-checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
-checking dynamic linker characteristics... (cached) GNU/Linux ld.so
-checking how to hardcode library paths into programs... immediate
-checking whether stripping libraries is possible... yes
-checking if libtool supports shared libraries... yes
-checking whether to build shared libraries... no
-checking whether to build static libraries... yes
-checking for special C compiler options needed for large files... (cached) no
-checking for _FILE_OFFSET_BITS value needed for large files... (cached) no
-checking for _LARGEFILE_SOURCE value needed for large files... (cached) no
-checking for dirent.h that defines DIR... (cached) yes
-checking for library containing opendir... (cached) none required
-checking for ANSI C header files... (cached) yes
-checking whether closedir returns void... (cached) no
-checking for assert.h... (cached) yes
-checking for float.h... (cached) yes
-checking for limits.h... (cached) yes
-checking for pwd.h... (cached) yes
-checking for stdlib.h... (cached) yes
-checking for sys/param.h... (cached) yes
-checking for putenv... (cached) yes
-checking for getcwd... (cached) yes
-checking for getwd... (cached) yes
-checking for memcmp... (cached) yes
-checking for memcpy... (cached) yes
-checking for mkstemp... (cached) yes
-checking for mktemp... (cached) yes
-checking for strchr... (cached) yes
-checking for strrchr... (cached) yes
-checking for an ANSI C-conforming const... (cached) yes
-checking for inline... (cached) inline
-checking for size_t... (cached) yes
-checking for int64_t... (cached) yes
-checking for uint64_t... (cached) yes
-checking whether isascii is declared... (cached) yes
-checking for struct stat.st_mtim... (cached) yes
-checking for gawk... (cached) gawk
-checking size of long... 8
-checking whether putenv is declared... yes
-checking for putenv... (cached) yes
-checking whether getcwd uses fork or vfork... no
-checking for native WIN32 or MINGW32... (cached) no
-checking for snprintf and vsnprintf... yes
-checking if we need (v)snprintf wrapper functions... no
-configure: updating cache ../../config.cache
-checking that generated files are newer than configure... done
-configure: creating ./config.status
-config.status: creating Makefile
-config.status: creating doc/Makefile
-config.status: creating man/Makefile
-config.status: creating win32/Makefile
-config.status: creating kpathsea.pc
-config.status: creating c-auto.h
-config.status: executing depfiles commands
-config.status: executing libtool commands
+make[1]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work'
+make[1]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work'
+Making all in doc
+make[1]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/doc'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/doc'
 Making all in texk/kpathsea
-make[2]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-echo a | grep -v b >/dev/null || { echo "*** grep broken, goodbye."; exit 1; }
-echo "/* paths.h: Generated from texmf.cnf. */" >paths.tmp
-gawk -f ../../../texk/kpathsea/bsnl.awk ../../../texk/kpathsea/texmf.cnf \
-| sed -e 's/%.*//' -e 's/^[ 	]*//' -e 's/[ 	]*$//' \
-| gawk -f ../../../texk/kpathsea/cnf-to-paths.awk \
->>paths.tmp
-cp paths.tmp paths.h
-rm -f paths.tmp
-date >stamp-paths
+make[1]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
 make  all-recursive
-make[3]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
+make[2]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
 Making all in .
-make[4]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-rm -f stamp-kpathsea; \
-( echo '/* This is a generated file */'; \
-  echo '/* collecting all public kpathsea headers. */'; \
-  for f in config.h paths.h absolute.h c-dir.h c-fopen.h c-namemx.h c-pathch.h c-pathmx.h c-stat.h cnf.h concatn.h expand.h getopt.h line.h magstep.h pathsearch.h proginit.h readable.h tex-glyph.h tex-hush.h tex-make.h variable.h version.h; do \
-    echo "#include <kpathsea/$f>"; \
-  done ) >kpathsea.tmp && \
-if cmp -s kpathsea.h kpathsea.tmp 2>/dev/null; then \
-  echo "kpathsea.h is unchanged"; \
-else \
-  echo "generated kpathsea.h"; \
-  cp kpathsea.tmp kpathsea.h; \
-fi && rm -f kpathsea.tmp && date >stamp-kpathsea
-generated kpathsea.h
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-file.lo -MD -MP -MF .deps/libkpathsea_la-tex-file.Tpo -c -o libkpathsea_la-tex-file.lo `test -f 'tex-file.c' || echo '../../../texk/kpathsea/'`tex-file.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-file.lo -MD -MP -MF .deps/libkpathsea_la-tex-file.Tpo -c ../../../texk/kpathsea/tex-file.c -o libkpathsea_la-tex-file.o
-mv -f .deps/libkpathsea_la-tex-file.Tpo .deps/libkpathsea_la-tex-file.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-absolute.lo -MD -MP -MF .deps/libkpathsea_la-absolute.Tpo -c -o libkpathsea_la-absolute.lo `test -f 'absolute.c' || echo '../../../texk/kpathsea/'`absolute.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-absolute.lo -MD -MP -MF .deps/libkpathsea_la-absolute.Tpo -c ../../../texk/kpathsea/absolute.c -o libkpathsea_la-absolute.o
-mv -f .deps/libkpathsea_la-absolute.Tpo .deps/libkpathsea_la-absolute.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-atou.lo -MD -MP -MF .deps/libkpathsea_la-atou.Tpo -c -o libkpathsea_la-atou.lo `test -f 'atou.c' || echo '../../../texk/kpathsea/'`atou.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-atou.lo -MD -MP -MF .deps/libkpathsea_la-atou.Tpo -c ../../../texk/kpathsea/atou.c -o libkpathsea_la-atou.o
-mv -f .deps/libkpathsea_la-atou.Tpo .deps/libkpathsea_la-atou.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-cnf.lo -MD -MP -MF .deps/libkpathsea_la-cnf.Tpo -c -o libkpathsea_la-cnf.lo `test -f 'cnf.c' || echo '../../../texk/kpathsea/'`cnf.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-cnf.lo -MD -MP -MF .deps/libkpathsea_la-cnf.Tpo -c ../../../texk/kpathsea/cnf.c -o libkpathsea_la-cnf.o
-mv -f .deps/libkpathsea_la-cnf.Tpo .deps/libkpathsea_la-cnf.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-concat.lo -MD -MP -MF .deps/libkpathsea_la-concat.Tpo -c -o libkpathsea_la-concat.lo `test -f 'concat.c' || echo '../../../texk/kpathsea/'`concat.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-concat.lo -MD -MP -MF .deps/libkpathsea_la-concat.Tpo -c ../../../texk/kpathsea/concat.c -o libkpathsea_la-concat.o
-mv -f .deps/libkpathsea_la-concat.Tpo .deps/libkpathsea_la-concat.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-concat3.lo -MD -MP -MF .deps/libkpathsea_la-concat3.Tpo -c -o libkpathsea_la-concat3.lo `test -f 'concat3.c' || echo '../../../texk/kpathsea/'`concat3.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-concat3.lo -MD -MP -MF .deps/libkpathsea_la-concat3.Tpo -c ../../../texk/kpathsea/concat3.c -o libkpathsea_la-concat3.o
-mv -f .deps/libkpathsea_la-concat3.Tpo .deps/libkpathsea_la-concat3.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-concatn.lo -MD -MP -MF .deps/libkpathsea_la-concatn.Tpo -c -o libkpathsea_la-concatn.lo `test -f 'concatn.c' || echo '../../../texk/kpathsea/'`concatn.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-concatn.lo -MD -MP -MF .deps/libkpathsea_la-concatn.Tpo -c ../../../texk/kpathsea/concatn.c -o libkpathsea_la-concatn.o
-mv -f .deps/libkpathsea_la-concatn.Tpo .deps/libkpathsea_la-concatn.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-db.lo -MD -MP -MF .deps/libkpathsea_la-db.Tpo -c -o libkpathsea_la-db.lo `test -f 'db.c' || echo '../../../texk/kpathsea/'`db.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-db.lo -MD -MP -MF .deps/libkpathsea_la-db.Tpo -c ../../../texk/kpathsea/db.c -o libkpathsea_la-db.o
-mv -f .deps/libkpathsea_la-db.Tpo .deps/libkpathsea_la-db.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-debug.lo -MD -MP -MF .deps/libkpathsea_la-debug.Tpo -c -o libkpathsea_la-debug.lo `test -f 'debug.c' || echo '../../../texk/kpathsea/'`debug.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-debug.lo -MD -MP -MF .deps/libkpathsea_la-debug.Tpo -c ../../../texk/kpathsea/debug.c -o libkpathsea_la-debug.o
-mv -f .deps/libkpathsea_la-debug.Tpo .deps/libkpathsea_la-debug.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-dir.lo -MD -MP -MF .deps/libkpathsea_la-dir.Tpo -c -o libkpathsea_la-dir.lo `test -f 'dir.c' || echo '../../../texk/kpathsea/'`dir.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-dir.lo -MD -MP -MF .deps/libkpathsea_la-dir.Tpo -c ../../../texk/kpathsea/dir.c -o libkpathsea_la-dir.o
-mv -f .deps/libkpathsea_la-dir.Tpo .deps/libkpathsea_la-dir.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-elt-dirs.lo -MD -MP -MF .deps/libkpathsea_la-elt-dirs.Tpo -c -o libkpathsea_la-elt-dirs.lo `test -f 'elt-dirs.c' || echo '../../../texk/kpathsea/'`elt-dirs.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-elt-dirs.lo -MD -MP -MF .deps/libkpathsea_la-elt-dirs.Tpo -c ../../../texk/kpathsea/elt-dirs.c -o libkpathsea_la-elt-dirs.o
-mv -f .deps/libkpathsea_la-elt-dirs.Tpo .deps/libkpathsea_la-elt-dirs.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-expand.lo -MD -MP -MF .deps/libkpathsea_la-expand.Tpo -c -o libkpathsea_la-expand.lo `test -f 'expand.c' || echo '../../../texk/kpathsea/'`expand.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-expand.lo -MD -MP -MF .deps/libkpathsea_la-expand.Tpo -c ../../../texk/kpathsea/expand.c -o libkpathsea_la-expand.o
-mv -f .deps/libkpathsea_la-expand.Tpo .deps/libkpathsea_la-expand.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-extend-fname.lo -MD -MP -MF .deps/libkpathsea_la-extend-fname.Tpo -c -o libkpathsea_la-extend-fname.lo `test -f 'extend-fname.c' || echo '../../../texk/kpathsea/'`extend-fname.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-extend-fname.lo -MD -MP -MF .deps/libkpathsea_la-extend-fname.Tpo -c ../../../texk/kpathsea/extend-fname.c -o libkpathsea_la-extend-fname.o
-mv -f .deps/libkpathsea_la-extend-fname.Tpo .deps/libkpathsea_la-extend-fname.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-file-p.lo -MD -MP -MF .deps/libkpathsea_la-file-p.Tpo -c -o libkpathsea_la-file-p.lo `test -f 'file-p.c' || echo '../../../texk/kpathsea/'`file-p.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-file-p.lo -MD -MP -MF .deps/libkpathsea_la-file-p.Tpo -c ../../../texk/kpathsea/file-p.c -o libkpathsea_la-file-p.o
-mv -f .deps/libkpathsea_la-file-p.Tpo .deps/libkpathsea_la-file-p.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-find-suffix.lo -MD -MP -MF .deps/libkpathsea_la-find-suffix.Tpo -c -o libkpathsea_la-find-suffix.lo `test -f 'find-suffix.c' || echo '../../../texk/kpathsea/'`find-suffix.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-find-suffix.lo -MD -MP -MF .deps/libkpathsea_la-find-suffix.Tpo -c ../../../texk/kpathsea/find-suffix.c -o libkpathsea_la-find-suffix.o
-mv -f .deps/libkpathsea_la-find-suffix.Tpo .deps/libkpathsea_la-find-suffix.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-fn.lo -MD -MP -MF .deps/libkpathsea_la-fn.Tpo -c -o libkpathsea_la-fn.lo `test -f 'fn.c' || echo '../../../texk/kpathsea/'`fn.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-fn.lo -MD -MP -MF .deps/libkpathsea_la-fn.Tpo -c ../../../texk/kpathsea/fn.c -o libkpathsea_la-fn.o
-mv -f .deps/libkpathsea_la-fn.Tpo .deps/libkpathsea_la-fn.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-fontmap.lo -MD -MP -MF .deps/libkpathsea_la-fontmap.Tpo -c -o libkpathsea_la-fontmap.lo `test -f 'fontmap.c' || echo '../../../texk/kpathsea/'`fontmap.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-fontmap.lo -MD -MP -MF .deps/libkpathsea_la-fontmap.Tpo -c ../../../texk/kpathsea/fontmap.c -o libkpathsea_la-fontmap.o
-mv -f .deps/libkpathsea_la-fontmap.Tpo .deps/libkpathsea_la-fontmap.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-hash.lo -MD -MP -MF .deps/libkpathsea_la-hash.Tpo -c -o libkpathsea_la-hash.lo `test -f 'hash.c' || echo '../../../texk/kpathsea/'`hash.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-hash.lo -MD -MP -MF .deps/libkpathsea_la-hash.Tpo -c ../../../texk/kpathsea/hash.c -o libkpathsea_la-hash.o
-mv -f .deps/libkpathsea_la-hash.Tpo .deps/libkpathsea_la-hash.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-kdefault.lo -MD -MP -MF .deps/libkpathsea_la-kdefault.Tpo -c -o libkpathsea_la-kdefault.lo `test -f 'kdefault.c' || echo '../../../texk/kpathsea/'`kdefault.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-kdefault.lo -MD -MP -MF .deps/libkpathsea_la-kdefault.Tpo -c ../../../texk/kpathsea/kdefault.c -o libkpathsea_la-kdefault.o
-mv -f .deps/libkpathsea_la-kdefault.Tpo .deps/libkpathsea_la-kdefault.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-kpathsea.lo -MD -MP -MF .deps/libkpathsea_la-kpathsea.Tpo -c -o libkpathsea_la-kpathsea.lo `test -f 'kpathsea.c' || echo '../../../texk/kpathsea/'`kpathsea.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-kpathsea.lo -MD -MP -MF .deps/libkpathsea_la-kpathsea.Tpo -c ../../../texk/kpathsea/kpathsea.c -o libkpathsea_la-kpathsea.o
-mv -f .deps/libkpathsea_la-kpathsea.Tpo .deps/libkpathsea_la-kpathsea.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-line.lo -MD -MP -MF .deps/libkpathsea_la-line.Tpo -c -o libkpathsea_la-line.lo `test -f 'line.c' || echo '../../../texk/kpathsea/'`line.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-line.lo -MD -MP -MF .deps/libkpathsea_la-line.Tpo -c ../../../texk/kpathsea/line.c -o libkpathsea_la-line.o
-mv -f .deps/libkpathsea_la-line.Tpo .deps/libkpathsea_la-line.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-magstep.lo -MD -MP -MF .deps/libkpathsea_la-magstep.Tpo -c -o libkpathsea_la-magstep.lo `test -f 'magstep.c' || echo '../../../texk/kpathsea/'`magstep.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-magstep.lo -MD -MP -MF .deps/libkpathsea_la-magstep.Tpo -c ../../../texk/kpathsea/magstep.c -o libkpathsea_la-magstep.o
-mv -f .deps/libkpathsea_la-magstep.Tpo .deps/libkpathsea_la-magstep.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-make-suffix.lo -MD -MP -MF .deps/libkpathsea_la-make-suffix.Tpo -c -o libkpathsea_la-make-suffix.lo `test -f 'make-suffix.c' || echo '../../../texk/kpathsea/'`make-suffix.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-make-suffix.lo -MD -MP -MF .deps/libkpathsea_la-make-suffix.Tpo -c ../../../texk/kpathsea/make-suffix.c -o libkpathsea_la-make-suffix.o
-mv -f .deps/libkpathsea_la-make-suffix.Tpo .deps/libkpathsea_la-make-suffix.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-path-elt.lo -MD -MP -MF .deps/libkpathsea_la-path-elt.Tpo -c -o libkpathsea_la-path-elt.lo `test -f 'path-elt.c' || echo '../../../texk/kpathsea/'`path-elt.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-path-elt.lo -MD -MP -MF .deps/libkpathsea_la-path-elt.Tpo -c ../../../texk/kpathsea/path-elt.c -o libkpathsea_la-path-elt.o
-mv -f .deps/libkpathsea_la-path-elt.Tpo .deps/libkpathsea_la-path-elt.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-pathsearch.lo -MD -MP -MF .deps/libkpathsea_la-pathsearch.Tpo -c -o libkpathsea_la-pathsearch.lo `test -f 'pathsearch.c' || echo '../../../texk/kpathsea/'`pathsearch.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-pathsearch.lo -MD -MP -MF .deps/libkpathsea_la-pathsearch.Tpo -c ../../../texk/kpathsea/pathsearch.c -o libkpathsea_la-pathsearch.o
-mv -f .deps/libkpathsea_la-pathsearch.Tpo .deps/libkpathsea_la-pathsearch.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-proginit.lo -MD -MP -MF .deps/libkpathsea_la-proginit.Tpo -c -o libkpathsea_la-proginit.lo `test -f 'proginit.c' || echo '../../../texk/kpathsea/'`proginit.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-proginit.lo -MD -MP -MF .deps/libkpathsea_la-proginit.Tpo -c ../../../texk/kpathsea/proginit.c -o libkpathsea_la-proginit.o
-mv -f .deps/libkpathsea_la-proginit.Tpo .deps/libkpathsea_la-proginit.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-progname.lo -MD -MP -MF .deps/libkpathsea_la-progname.Tpo -c -o libkpathsea_la-progname.lo `test -f 'progname.c' || echo '../../../texk/kpathsea/'`progname.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-progname.lo -MD -MP -MF .deps/libkpathsea_la-progname.Tpo -c ../../../texk/kpathsea/progname.c -o libkpathsea_la-progname.o
-mv -f .deps/libkpathsea_la-progname.Tpo .deps/libkpathsea_la-progname.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-readable.lo -MD -MP -MF .deps/libkpathsea_la-readable.Tpo -c -o libkpathsea_la-readable.lo `test -f 'readable.c' || echo '../../../texk/kpathsea/'`readable.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-readable.lo -MD -MP -MF .deps/libkpathsea_la-readable.Tpo -c ../../../texk/kpathsea/readable.c -o libkpathsea_la-readable.o
-mv -f .deps/libkpathsea_la-readable.Tpo .deps/libkpathsea_la-readable.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-rm-suffix.lo -MD -MP -MF .deps/libkpathsea_la-rm-suffix.Tpo -c -o libkpathsea_la-rm-suffix.lo `test -f 'rm-suffix.c' || echo '../../../texk/kpathsea/'`rm-suffix.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-rm-suffix.lo -MD -MP -MF .deps/libkpathsea_la-rm-suffix.Tpo -c ../../../texk/kpathsea/rm-suffix.c -o libkpathsea_la-rm-suffix.o
-mv -f .deps/libkpathsea_la-rm-suffix.Tpo .deps/libkpathsea_la-rm-suffix.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-str-list.lo -MD -MP -MF .deps/libkpathsea_la-str-list.Tpo -c -o libkpathsea_la-str-list.lo `test -f 'str-list.c' || echo '../../../texk/kpathsea/'`str-list.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-str-list.lo -MD -MP -MF .deps/libkpathsea_la-str-list.Tpo -c ../../../texk/kpathsea/str-list.c -o libkpathsea_la-str-list.o
-mv -f .deps/libkpathsea_la-str-list.Tpo .deps/libkpathsea_la-str-list.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-str-llist.lo -MD -MP -MF .deps/libkpathsea_la-str-llist.Tpo -c -o libkpathsea_la-str-llist.lo `test -f 'str-llist.c' || echo '../../../texk/kpathsea/'`str-llist.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-str-llist.lo -MD -MP -MF .deps/libkpathsea_la-str-llist.Tpo -c ../../../texk/kpathsea/str-llist.c -o libkpathsea_la-str-llist.o
-mv -f .deps/libkpathsea_la-str-llist.Tpo .deps/libkpathsea_la-str-llist.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-glyph.lo -MD -MP -MF .deps/libkpathsea_la-tex-glyph.Tpo -c -o libkpathsea_la-tex-glyph.lo `test -f 'tex-glyph.c' || echo '../../../texk/kpathsea/'`tex-glyph.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-glyph.lo -MD -MP -MF .deps/libkpathsea_la-tex-glyph.Tpo -c ../../../texk/kpathsea/tex-glyph.c -o libkpathsea_la-tex-glyph.o
-mv -f .deps/libkpathsea_la-tex-glyph.Tpo .deps/libkpathsea_la-tex-glyph.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-hush.lo -MD -MP -MF .deps/libkpathsea_la-tex-hush.Tpo -c -o libkpathsea_la-tex-hush.lo `test -f 'tex-hush.c' || echo '../../../texk/kpathsea/'`tex-hush.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-hush.lo -MD -MP -MF .deps/libkpathsea_la-tex-hush.Tpo -c ../../../texk/kpathsea/tex-hush.c -o libkpathsea_la-tex-hush.o
-mv -f .deps/libkpathsea_la-tex-hush.Tpo .deps/libkpathsea_la-tex-hush.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-make.lo -MD -MP -MF .deps/libkpathsea_la-tex-make.Tpo -c -o libkpathsea_la-tex-make.lo `test -f 'tex-make.c' || echo '../../../texk/kpathsea/'`tex-make.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tex-make.lo -MD -MP -MF .deps/libkpathsea_la-tex-make.Tpo -c ../../../texk/kpathsea/tex-make.c -o libkpathsea_la-tex-make.o
-mv -f .deps/libkpathsea_la-tex-make.Tpo .deps/libkpathsea_la-tex-make.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tilde.lo -MD -MP -MF .deps/libkpathsea_la-tilde.Tpo -c -o libkpathsea_la-tilde.lo `test -f 'tilde.c' || echo '../../../texk/kpathsea/'`tilde.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-tilde.lo -MD -MP -MF .deps/libkpathsea_la-tilde.Tpo -c ../../../texk/kpathsea/tilde.c -o libkpathsea_la-tilde.o
-mv -f .deps/libkpathsea_la-tilde.Tpo .deps/libkpathsea_la-tilde.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-uppercasify.lo -MD -MP -MF .deps/libkpathsea_la-uppercasify.Tpo -c -o libkpathsea_la-uppercasify.lo `test -f 'uppercasify.c' || echo '../../../texk/kpathsea/'`uppercasify.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-uppercasify.lo -MD -MP -MF .deps/libkpathsea_la-uppercasify.Tpo -c ../../../texk/kpathsea/uppercasify.c -o libkpathsea_la-uppercasify.o
-mv -f .deps/libkpathsea_la-uppercasify.Tpo .deps/libkpathsea_la-uppercasify.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-variable.lo -MD -MP -MF .deps/libkpathsea_la-variable.Tpo -c -o libkpathsea_la-variable.lo `test -f 'variable.c' || echo '../../../texk/kpathsea/'`variable.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-variable.lo -MD -MP -MF .deps/libkpathsea_la-variable.Tpo -c ../../../texk/kpathsea/variable.c -o libkpathsea_la-variable.o
-mv -f .deps/libkpathsea_la-variable.Tpo .deps/libkpathsea_la-variable.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-version.lo -MD -MP -MF .deps/libkpathsea_la-version.Tpo -c -o libkpathsea_la-version.lo `test -f 'version.c' || echo '../../../texk/kpathsea/'`version.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-version.lo -MD -MP -MF .deps/libkpathsea_la-version.Tpo -c ../../../texk/kpathsea/version.c -o libkpathsea_la-version.o
-mv -f .deps/libkpathsea_la-version.Tpo .deps/libkpathsea_la-version.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xbasename.lo -MD -MP -MF .deps/libkpathsea_la-xbasename.Tpo -c -o libkpathsea_la-xbasename.lo `test -f 'xbasename.c' || echo '../../../texk/kpathsea/'`xbasename.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xbasename.lo -MD -MP -MF .deps/libkpathsea_la-xbasename.Tpo -c ../../../texk/kpathsea/xbasename.c -o libkpathsea_la-xbasename.o
-mv -f .deps/libkpathsea_la-xbasename.Tpo .deps/libkpathsea_la-xbasename.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xcalloc.lo -MD -MP -MF .deps/libkpathsea_la-xcalloc.Tpo -c -o libkpathsea_la-xcalloc.lo `test -f 'xcalloc.c' || echo '../../../texk/kpathsea/'`xcalloc.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xcalloc.lo -MD -MP -MF .deps/libkpathsea_la-xcalloc.Tpo -c ../../../texk/kpathsea/xcalloc.c -o libkpathsea_la-xcalloc.o
-mv -f .deps/libkpathsea_la-xcalloc.Tpo .deps/libkpathsea_la-xcalloc.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xdirname.lo -MD -MP -MF .deps/libkpathsea_la-xdirname.Tpo -c -o libkpathsea_la-xdirname.lo `test -f 'xdirname.c' || echo '../../../texk/kpathsea/'`xdirname.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xdirname.lo -MD -MP -MF .deps/libkpathsea_la-xdirname.Tpo -c ../../../texk/kpathsea/xdirname.c -o libkpathsea_la-xdirname.o
-mv -f .deps/libkpathsea_la-xdirname.Tpo .deps/libkpathsea_la-xdirname.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xfopen.lo -MD -MP -MF .deps/libkpathsea_la-xfopen.Tpo -c -o libkpathsea_la-xfopen.lo `test -f 'xfopen.c' || echo '../../../texk/kpathsea/'`xfopen.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xfopen.lo -MD -MP -MF .deps/libkpathsea_la-xfopen.Tpo -c ../../../texk/kpathsea/xfopen.c -o libkpathsea_la-xfopen.o
-mv -f .deps/libkpathsea_la-xfopen.Tpo .deps/libkpathsea_la-xfopen.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xfseek.lo -MD -MP -MF .deps/libkpathsea_la-xfseek.Tpo -c -o libkpathsea_la-xfseek.lo `test -f 'xfseek.c' || echo '../../../texk/kpathsea/'`xfseek.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xfseek.lo -MD -MP -MF .deps/libkpathsea_la-xfseek.Tpo -c ../../../texk/kpathsea/xfseek.c -o libkpathsea_la-xfseek.o
-mv -f .deps/libkpathsea_la-xfseek.Tpo .deps/libkpathsea_la-xfseek.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xftell.lo -MD -MP -MF .deps/libkpathsea_la-xftell.Tpo -c -o libkpathsea_la-xftell.lo `test -f 'xftell.c' || echo '../../../texk/kpathsea/'`xftell.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xftell.lo -MD -MP -MF .deps/libkpathsea_la-xftell.Tpo -c ../../../texk/kpathsea/xftell.c -o libkpathsea_la-xftell.o
-mv -f .deps/libkpathsea_la-xftell.Tpo .deps/libkpathsea_la-xftell.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xgetcwd.lo -MD -MP -MF .deps/libkpathsea_la-xgetcwd.Tpo -c -o libkpathsea_la-xgetcwd.lo `test -f 'xgetcwd.c' || echo '../../../texk/kpathsea/'`xgetcwd.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xgetcwd.lo -MD -MP -MF .deps/libkpathsea_la-xgetcwd.Tpo -c ../../../texk/kpathsea/xgetcwd.c -o libkpathsea_la-xgetcwd.o
-mv -f .deps/libkpathsea_la-xgetcwd.Tpo .deps/libkpathsea_la-xgetcwd.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xmalloc.lo -MD -MP -MF .deps/libkpathsea_la-xmalloc.Tpo -c -o libkpathsea_la-xmalloc.lo `test -f 'xmalloc.c' || echo '../../../texk/kpathsea/'`xmalloc.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xmalloc.lo -MD -MP -MF .deps/libkpathsea_la-xmalloc.Tpo -c ../../../texk/kpathsea/xmalloc.c -o libkpathsea_la-xmalloc.o
-mv -f .deps/libkpathsea_la-xmalloc.Tpo .deps/libkpathsea_la-xmalloc.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xopendir.lo -MD -MP -MF .deps/libkpathsea_la-xopendir.Tpo -c -o libkpathsea_la-xopendir.lo `test -f 'xopendir.c' || echo '../../../texk/kpathsea/'`xopendir.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xopendir.lo -MD -MP -MF .deps/libkpathsea_la-xopendir.Tpo -c ../../../texk/kpathsea/xopendir.c -o libkpathsea_la-xopendir.o
-mv -f .deps/libkpathsea_la-xopendir.Tpo .deps/libkpathsea_la-xopendir.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xputenv.lo -MD -MP -MF .deps/libkpathsea_la-xputenv.Tpo -c -o libkpathsea_la-xputenv.lo `test -f 'xputenv.c' || echo '../../../texk/kpathsea/'`xputenv.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xputenv.lo -MD -MP -MF .deps/libkpathsea_la-xputenv.Tpo -c ../../../texk/kpathsea/xputenv.c -o libkpathsea_la-xputenv.o
-mv -f .deps/libkpathsea_la-xputenv.Tpo .deps/libkpathsea_la-xputenv.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xrealloc.lo -MD -MP -MF .deps/libkpathsea_la-xrealloc.Tpo -c -o libkpathsea_la-xrealloc.lo `test -f 'xrealloc.c' || echo '../../../texk/kpathsea/'`xrealloc.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xrealloc.lo -MD -MP -MF .deps/libkpathsea_la-xrealloc.Tpo -c ../../../texk/kpathsea/xrealloc.c -o libkpathsea_la-xrealloc.o
-mv -f .deps/libkpathsea_la-xrealloc.Tpo .deps/libkpathsea_la-xrealloc.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xstat.lo -MD -MP -MF .deps/libkpathsea_la-xstat.Tpo -c -o libkpathsea_la-xstat.lo `test -f 'xstat.c' || echo '../../../texk/kpathsea/'`xstat.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xstat.lo -MD -MP -MF .deps/libkpathsea_la-xstat.Tpo -c ../../../texk/kpathsea/xstat.c -o libkpathsea_la-xstat.o
-mv -f .deps/libkpathsea_la-xstat.Tpo .deps/libkpathsea_la-xstat.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xstrdup.lo -MD -MP -MF .deps/libkpathsea_la-xstrdup.Tpo -c -o libkpathsea_la-xstrdup.lo `test -f 'xstrdup.c' || echo '../../../texk/kpathsea/'`xstrdup.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xstrdup.lo -MD -MP -MF .deps/libkpathsea_la-xstrdup.Tpo -c ../../../texk/kpathsea/xstrdup.c -o libkpathsea_la-xstrdup.o
-mv -f .deps/libkpathsea_la-xstrdup.Tpo .deps/libkpathsea_la-xstrdup.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-getopt.lo -MD -MP -MF .deps/libkpathsea_la-getopt.Tpo -c -o libkpathsea_la-getopt.lo `test -f 'getopt.c' || echo '../../../texk/kpathsea/'`getopt.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-getopt.lo -MD -MP -MF .deps/libkpathsea_la-getopt.Tpo -c ../../../texk/kpathsea/getopt.c -o libkpathsea_la-getopt.o
-mv -f .deps/libkpathsea_la-getopt.Tpo .deps/libkpathsea_la-getopt.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-getopt1.lo -MD -MP -MF .deps/libkpathsea_la-getopt1.Tpo -c -o libkpathsea_la-getopt1.lo `test -f 'getopt1.c' || echo '../../../texk/kpathsea/'`getopt1.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-getopt1.lo -MD -MP -MF .deps/libkpathsea_la-getopt1.Tpo -c ../../../texk/kpathsea/getopt1.c -o libkpathsea_la-getopt1.o
-mv -f .deps/libkpathsea_la-getopt1.Tpo .deps/libkpathsea_la-getopt1.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xfseeko.lo -MD -MP -MF .deps/libkpathsea_la-xfseeko.Tpo -c -o libkpathsea_la-xfseeko.lo `test -f 'xfseeko.c' || echo '../../../texk/kpathsea/'`xfseeko.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xfseeko.lo -MD -MP -MF .deps/libkpathsea_la-xfseeko.Tpo -c ../../../texk/kpathsea/xfseeko.c -o libkpathsea_la-xfseeko.o
-mv -f .deps/libkpathsea_la-xfseeko.Tpo .deps/libkpathsea_la-xfseeko.Plo
-/bin/bash ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL   -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xftello.lo -MD -MP -MF .deps/libkpathsea_la-xftello.Tpo -c -o libkpathsea_la-xftello.lo `test -f 'xftello.c' || echo '../../../texk/kpathsea/'`xftello.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea -I./.. -I../../../texk/kpathsea/.. -DMAKE_KPSE_DLL -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT libkpathsea_la-xftello.lo -MD -MP -MF .deps/libkpathsea_la-xftello.Tpo -c ../../../texk/kpathsea/xftello.c -o libkpathsea_la-xftello.o
-mv -f .deps/libkpathsea_la-xftello.Tpo .deps/libkpathsea_la-xftello.Plo
-/bin/bash ./libtool  --tag=CC   --mode=link gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -bindir /usr/local/bin/x86_64-pc-linux-gnu -no-undefined -version-info 8:3:2  -o libkpathsea.la -rpath /usr/local/lib/x86_64-pc-linux-gnu libkpathsea_la-tex-file.lo libkpathsea_la-absolute.lo libkpathsea_la-atou.lo libkpathsea_la-cnf.lo libkpathsea_la-concat.lo libkpathsea_la-concat3.lo libkpathsea_la-concatn.lo libkpathsea_la-db.lo libkpathsea_la-debug.lo libkpathsea_la-dir.lo libkpathsea_la-elt-dirs.lo libkpathsea_la-expand.lo libkpathsea_la-extend-fname.lo libkpathsea_la-file-p.lo libkpathsea_la-find-suffix.lo libkpathsea_la-fn.lo libkpathsea_la-fontmap.lo libkpathsea_la-hash.lo libkpathsea_la-kdefault.lo libkpathsea_la-kpathsea.lo libkpathsea_la-line.lo libkpathsea_la-magstep.lo libkpathsea_la-make-suffix.lo libkpathsea_la-path-elt.lo libkpathsea_la-pathsearch.lo libkpathsea_la-proginit.lo libkpathsea_la-progname.lo libkpathsea_la-readable.lo libkpathsea_la-rm-suffix.lo libkpathsea_la-str-list.lo libkpathsea_la-str-llist.lo libkpathsea_la-tex-glyph.lo libkpathsea_la-tex-hush.lo libkpathsea_la-tex-make.lo libkpathsea_la-tilde.lo libkpathsea_la-uppercasify.lo libkpathsea_la-variable.lo libkpathsea_la-version.lo libkpathsea_la-xbasename.lo libkpathsea_la-xcalloc.lo libkpathsea_la-xdirname.lo libkpathsea_la-xfopen.lo libkpathsea_la-xfseek.lo libkpathsea_la-xftell.lo libkpathsea_la-xgetcwd.lo libkpathsea_la-xmalloc.lo libkpathsea_la-xopendir.lo libkpathsea_la-xputenv.lo libkpathsea_la-xrealloc.lo libkpathsea_la-xstat.lo libkpathsea_la-xstrdup.lo libkpathsea_la-getopt.lo libkpathsea_la-getopt1.lo    libkpathsea_la-xfseeko.lo libkpathsea_la-xftello.lo  
-libtool: link: ar cru .libs/libkpathsea.a  libkpathsea_la-tex-file.o libkpathsea_la-absolute.o libkpathsea_la-atou.o libkpathsea_la-cnf.o libkpathsea_la-concat.o libkpathsea_la-concat3.o libkpathsea_la-concatn.o libkpathsea_la-db.o libkpathsea_la-debug.o libkpathsea_la-dir.o libkpathsea_la-elt-dirs.o libkpathsea_la-expand.o libkpathsea_la-extend-fname.o libkpathsea_la-file-p.o libkpathsea_la-find-suffix.o libkpathsea_la-fn.o libkpathsea_la-fontmap.o libkpathsea_la-hash.o libkpathsea_la-kdefault.o libkpathsea_la-kpathsea.o libkpathsea_la-line.o libkpathsea_la-magstep.o libkpathsea_la-make-suffix.o libkpathsea_la-path-elt.o libkpathsea_la-pathsearch.o libkpathsea_la-proginit.o libkpathsea_la-progname.o libkpathsea_la-readable.o libkpathsea_la-rm-suffix.o libkpathsea_la-str-list.o libkpathsea_la-str-llist.o libkpathsea_la-tex-glyph.o libkpathsea_la-tex-hush.o libkpathsea_la-tex-make.o libkpathsea_la-tilde.o libkpathsea_la-uppercasify.o libkpathsea_la-variable.o libkpathsea_la-version.o libkpathsea_la-xbasename.o libkpathsea_la-xcalloc.o libkpathsea_la-xdirname.o libkpathsea_la-xfopen.o libkpathsea_la-xfseek.o libkpathsea_la-xftell.o libkpathsea_la-xgetcwd.o libkpathsea_la-xmalloc.o libkpathsea_la-xopendir.o libkpathsea_la-xputenv.o libkpathsea_la-xrealloc.o libkpathsea_la-xstat.o libkpathsea_la-xstrdup.o libkpathsea_la-getopt.o libkpathsea_la-getopt1.o libkpathsea_la-xfseeko.o libkpathsea_la-xftello.o
-ar: `u' modifier ignored since `D' is the default (see `U')
-libtool: link: ranlib .libs/libkpathsea.a
-libtool: link: ( cd ".libs" && rm -f "libkpathsea.la" && ln -s "../libkpathsea.la" "libkpathsea.la" )
-depbase=`echo access.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/..  -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT access.o -MD -MP -MF $depbase.Tpo -c -o access.o ../../../texk/kpathsea/access.c &&\
-mv -f $depbase.Tpo $depbase.Po
-/bin/bash ./libtool  --tag=CC   --mode=link gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g   -o kpseaccess access.o  
-libtool: link: gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -o kpseaccess access.o 
-depbase=`echo readlink.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/..  -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT readlink.o -MD -MP -MF $depbase.Tpo -c -o readlink.o ../../../texk/kpathsea/readlink.c &&\
-mv -f $depbase.Tpo $depbase.Po
-/bin/bash ./libtool  --tag=CC   --mode=link gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g   -o kpsereadlink readlink.o  
-libtool: link: gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -o kpsereadlink readlink.o 
-depbase=`echo kpsestat.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/..  -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT kpsestat.o -MD -MP -MF $depbase.Tpo -c -o kpsestat.o ../../../texk/kpathsea/kpsestat.c &&\
-mv -f $depbase.Tpo $depbase.Po
-/bin/bash ./libtool  --tag=CC   --mode=link gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g   -o kpsestat kpsestat.o  
-libtool: link: gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -o kpsestat kpsestat.o 
-depbase=`echo kpsewhich.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-gcc -DHAVE_CONFIG_H -I. -I../../../texk/kpathsea  -I./.. -I../../../texk/kpathsea/..  -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT kpsewhich.o -MD -MP -MF $depbase.Tpo -c -o kpsewhich.o ../../../texk/kpathsea/kpsewhich.c &&\
-mv -f $depbase.Tpo $depbase.Po
-/bin/bash ./libtool  --tag=CC   --mode=link gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g   -o kpsewhich kpsewhich.o libkpathsea.la 
-libtool: link: gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -o kpsewhich kpsewhich.o  ./.libs/libkpathsea.a
-make[4]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
+make[3]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
 Making all in doc
-make[4]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/doc'
-make[4]: Nothing to be done for 'all'.
-make[4]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/doc'
+make[3]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/doc'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/doc'
 Making all in man
-make[4]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/man'
-( \
-  sed -n -e '/^#define/s/#define[ 	][ 	]*\([A-Z_a-z][A-Z_a-z]*\)[ 	][ 	]*\(.*\)/s%@\1@%\2%/p' \
-  	../../kpathsea/paths.h \
-    | sed -e 's/"//g' -e 's/[ 	]*\/\*[^*]*\*\///g'; \
-  echo 's%@VER''SION@%6.2.3%'; \
-  echo 's%@BINDIR@%/usr/local/bin/x86_64-pc-linux-gnu%'; \
-  echo 's%@INFODIR@%/usr/local/texmf-dist/doc/info%'; \
-  echo 's%@TEXINPUTDIR@%%'; \
-  echo 's%@MFINPUTDIR@%%'; \
-  echo 's%@MPINPUTDIR@%%'; \
-  echo 's%@FONTDIR@%%'; \
-  echo 's%@FMTDIR@%%'; \
-  echo 's%@BASEDIR@%%'; \
-  echo 's%@MEMDIR@%%'; \
-  echo 's%@TEXPOOLDIR@%%'; \
-  echo 's%@MFPOOLDIR@%%'; \
-  echo 's%@MPPOOLDIR@%%'; \
-  echo 's%@FONTMAPDIR@%%'; \
-  echo 's%@LOCALMODES@%%')	>sedscript
-sed -f sedscript ../../../../texk/kpathsea/man/kpseaccess.man >kpseaccess.1
-sed -f sedscript ../../../../texk/kpathsea/man/kpsereadlink.man >kpsereadlink.1
-sed -f sedscript ../../../../texk/kpathsea/man/kpsestat.man >kpsestat.1
-sed -f sedscript ../../../../texk/kpathsea/man/kpsewhich.man >kpsewhich.1
-sed -f sedscript ../../../../texk/kpathsea/man/mktexlsr.man >mktexlsr.1
-sed -f sedscript ../../../../texk/kpathsea/man/mktexmf.man >mktexmf.1
-sed -f sedscript ../../../../texk/kpathsea/man/mktexpk.man >mktexpk.1
-sed -f sedscript ../../../../texk/kpathsea/man/mktextfm.man >mktextfm.1
-make[4]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/man'
-make[3]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-make[2]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-make[1]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work'
-Making all in doc
-make[1]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/doc'
-make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/doc'
-Making all in texk/kpathsea
-make[1]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-make  all-recursive
-make[2]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-Making all in .
-make[3]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-make[3]: Nothing to be done for 'all-am'.
-make[3]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-Making all in doc
-make[3]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/doc'
-make[3]: Nothing to be done for 'all'.
-make[3]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/doc'
-Making all in man
-make[3]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/man'
-make[3]: Nothing to be done for 'all'.
-make[3]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/man'
-make[2]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
-make[1]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
+make[3]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/man'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/man'
+Making all in win32
+make[3]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/win32'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/win32'
+make[2]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
+make[1]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea'
 Making all in libs
-make[1]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
+make[1]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
 Making all in .
-make[2]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
-make[2]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
-make[1]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
+make[2]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
+make[2]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
+make[1]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/libs'
 Making all in utils
-make[1]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
+make[1]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
 Making all in .
-make[2]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
-make[2]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
-make[1]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
+make[2]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
+make[2]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
+make[1]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/utils'
 Making all in texk
-make[1]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'
+make[1]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'
 Making all in .
-make[2]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'
-make[2]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'
+make[2]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'
+make[2]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'
 Making all in tex4htk
-make[2]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
+make[2]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
 make  all-am
-make[3]: Entering directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
-depbase=`echo t4ht.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-gcc -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA  -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT t4ht.o -MD -MP -MF $depbase.Tpo -c -o t4ht.o ../../../texk/tex4htk/t4ht.c &&\
-mv -f $depbase.Tpo $depbase.Po
-/bin/bash ./libtool  --tag=CC   --mode=link gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g   -o t4ht t4ht.o /home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/libkpathsea.la 
-libtool: link: gcc -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -o t4ht t4ht.o  /home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/.libs/libkpathsea.a
+make[3]: Entering directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
 depbase=`echo tex4ht.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-gcc -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA  -Wimplicit -Wreturn-type -Wdeclaration-after-statement -Wno-unknown-pragmas -g -MT tex4ht.o -MD -MP -MF $depbase.Tpo -c -o tex4ht.o ../../../texk/tex4htk/tex4ht.c &&\
-mv -f $depbase.Tpo $depbase.Po
-depbase=`echo tex4ht_add.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT tex4ht_add.o -MD -MP -MF $depbase.Tpo -c -o tex4ht_add.o ../../../texk/tex4htk/tex4ht_add.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
-depbase=`echo ../../libs/kplib/src/kpstring.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpstring.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpstring.o ../../../texk/tex4htk/../../libs/kplib/src/kpstring.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
+	gcc -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA  -Wimplicit -Wreturn-type -g -MT tex4ht.o -MD -MP -MF $depbase.Tpo -c -o tex4ht.o ../../../texk/tex4htk/tex4ht.c &&\
+	mv -f $depbase.Tpo $depbase.Po
 depbase=`echo ../../libs/kplib/src/kpstdlib.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpstdlib.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpstdlib.o ../../../texk/tex4htk/../../libs/kplib/src/kpstdlib.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
+	g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpstdlib.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpstdlib.o ../../../texk/tex4htk/../../libs/kplib/src/kpstdlib.cpp &&\
+	mv -f $depbase.Tpo $depbase.Po
 depbase=`echo ../../libs/kplib/src/kpstdio.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpstdio.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpstdio.o ../../../texk/tex4htk/../../libs/kplib/src/kpstdio.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
+	g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpstdio.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpstdio.o ../../../texk/tex4htk/../../libs/kplib/src/kpstdio.cpp &&\
+	mv -f $depbase.Tpo $depbase.Po
 depbase=`echo ../../libs/kplib/src/kpctype.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpctype.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpctype.o ../../../texk/tex4htk/../../libs/kplib/src/kpctype.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
+	g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpctype.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpctype.o ../../../texk/tex4htk/../../libs/kplib/src/kpctype.cpp &&\
+	mv -f $depbase.Tpo $depbase.Po
 depbase=`echo ../../libs/kplib/src/kperr.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kperr.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kperr.o ../../../texk/tex4htk/../../libs/kplib/src/kperr.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
+	g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kperr.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kperr.o ../../../texk/tex4htk/../../libs/kplib/src/kperr.cpp &&\
+	mv -f $depbase.Tpo $depbase.Po
 depbase=`echo ../../libs/kplib/src/kpsort.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpsort.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpsort.o ../../../texk/tex4htk/../../libs/kplib/src/kpsort.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
+	g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpsort.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpsort.o ../../../texk/tex4htk/../../libs/kplib/src/kpsort.cpp &&\
+	mv -f $depbase.Tpo $depbase.Po
 depbase=`echo ../../libs/kplib/src/kpcapp.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpcapp.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpcapp.o ../../../texk/tex4htk/../../libs/kplib/src/kpcapp.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
+	g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/kpcapp.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/kpcapp.o ../../../texk/tex4htk/../../libs/kplib/src/kpcapp.cpp &&\
+	mv -f $depbase.Tpo $depbase.Po
 depbase=`echo ../../libs/kplib/src/win/kpwindow.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
-g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/win/kpwindow.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/win/kpwindow.o ../../../texk/tex4htk/../../libs/kplib/src/win/kpwindow.cpp &&\
-mv -f $depbase.Tpo $depbase.Po
-/bin/bash ./libtool  --tag=CXX   --mode=link g++  -g -Wl,-Map,tex4ht.map -ggdb  -o tex4ht tex4ht.o tex4ht_add.o ../../libs/kplib/src/kpstring.o ../../libs/kplib/src/kpstdlib.o ../../libs/kplib/src/kpstdio.o ../../libs/kplib/src/kpctype.o ../../libs/kplib/src/kperr.o ../../libs/kplib/src/kpsort.o ../../libs/kplib/src/kpcapp.o ../../libs/kplib/src/win/kpwindow.o /home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/libkpathsea.la 
-libtool: link: g++ -g -Wl,-Map -Wl,tex4ht.map -ggdb -o tex4ht tex4ht.o tex4ht_add.o ../../libs/kplib/src/kpstring.o ../../libs/kplib/src/kpstdlib.o ../../libs/kplib/src/kpstdio.o ../../libs/kplib/src/kpctype.o ../../libs/kplib/src/kperr.o ../../libs/kplib/src/kpsort.o ../../libs/kplib/src/kpcapp.o ../../libs/kplib/src/win/kpwindow.o  /home/mingis/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/.libs/libkpathsea.a
-make[3]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
-make[2]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
-make[1]: Leaving directory '/media/mingis/SAMSUNG/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'
+	g++ -DHAVE_CONFIG_H -I. -I../../../texk/tex4htk  -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk -I/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk -DNO_DEBUG -I../../../libs/kplib/include -I../../../libs/kplib/src -I../../../libs/kplib/src/net -DANSI -DKPATHSEA   -g -MT ../../libs/kplib/src/win/kpwindow.o -MD -MP -MF $depbase.Tpo -c -o ../../libs/kplib/src/win/kpwindow.o ../../../texk/tex4htk/../../libs/kplib/src/win/kpwindow.cpp &&\
+	mv -f $depbase.Tpo $depbase.Po
+/bin/sh ./libtool  --tag=CXX   --mode=link g++  -g -Wl,-Map,tex4ht.exe.map -ggdb  -o tex4ht.exe tex4ht.o tex4ht_add.o ../../libs/kplib/src/kpstring.o ../../libs/kplib/src/kpstdlib.o ../../libs/kplib/src/kpstdio.o ../../libs/kplib/src/kpctype.o ../../libs/kplib/src/kperr.o ../../libs/kplib/src/kpsort.o ../../libs/kplib/src/kpcapp.o ../../libs/kplib/src/win/kpwindow.o /F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/libkpathsea.la 
+d:\kp\bin\GnuWin32\bin\sed.exe: -e expression #1, char 10: unknown option to `s'
+libtool: link: g++ -g -Wl,-Map -Wl,tex4ht.exe.map -ggdb -o tex4ht.exe tex4ht.o tex4ht_add.o ../../libs/kplib/src/kpstring.o ../../libs/kplib/src/kpstdlib.o ../../libs/kplib/src/kpstdio.o ../../libs/kplib/src/kpctype.o ../../libs/kplib/src/kperr.o ../../libs/kplib/src/kpsort.o ../../libs/kplib/src/kpcapp.o ../../libs/kplib/src/win/kpwindow.o  /F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/kpathsea/.libs/libkpathsea.a
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe mk4ht.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe ht.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe htcontext.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe htlatex.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe htmex.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe httex.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe httexi.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe htxelatex.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe htxetex.exe
+cp -pR ../../../texk/tex4htk/../../texk/texlive/w64_wrapper/runscript.exe xhlatex.exe
+make[3]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
+make[2]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk/tex4htk'
+make[1]: Leaving directory `/F/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/Work/texk'

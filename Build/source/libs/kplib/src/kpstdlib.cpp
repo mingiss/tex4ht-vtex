@@ -14,8 +14,10 @@
 #include <string.h>
 #include <vector>
 #include <stdio.h>
+#ifndef __WIN32__
 // #include <regex>
 #include <regex.h>
+#endif
 #include <iostream>
 #include <math.h>
 #ifdef __WIN32__
@@ -212,6 +214,7 @@ return(angle);
 // expansion of environment variables inside a string
 // https://stackoverflow.com/questions/1902681/expand-file-names-that-have-environment-variables-in-their-path
 
+#ifndef __WIN32__
 // Update the input string.
 void autoExpandEnvironmentVariables(string &text, LPCTSTR rexp,
                                       int nPrefixLen, int nPostfixLen)
@@ -259,3 +262,4 @@ string expandEnvironmentVariables(const string &input)
     autoExpandEnvironmentVariables(text, _T("\\%(.+)\\%"), 1, 1);
     return text;
 }
+#endif
