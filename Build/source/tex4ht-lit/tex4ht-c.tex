@@ -17236,12 +17236,12 @@ static const U_CHAR *warn_err_mssg[]={ `<warn and err messages`> "" };
 
 
 \<header functions\><<<
-static void warn_i_int( ARG_II(int,int) );
+/* static */ void warn_i_int( ARG_II(int,int) );
 >>>
 
 \<functions\><<<
 `[
-static void warn_i_int(n,i)   int  n`; int i
+/* static */ void warn_i_int(n,i)   int  n`; int i
 
 ;{  (IGNORED) fprintf(stderr,"--- warning --- ");
    (IGNORED) fprintf(stderr, warn_err_mssg[n], i);

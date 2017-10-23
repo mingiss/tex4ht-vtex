@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-19-18:27), generated from tex4ht-c.tex
+/* tex4ht.c (2017-10-23-11:36), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -1423,7 +1423,7 @@ static long cond_int( ARG_I(register  INTEGER) );
 /* static */ void warn_i( ARG_I(int) );
 
 
-static void warn_i_int( ARG_II(int,int) );
+/* static */ void warn_i_int( ARG_II(int,int) );
 
 
 static void warn_i_int_2( ARG_III(int,int,int) );
@@ -6088,7 +6088,7 @@ static long cond_int
 
 
 
-static void warn_i_int
+/* static */ void warn_i_int
 #ifdef ANSI
 #define SEP ,
 (   int  n SEP  int i
@@ -6430,15 +6430,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-19-18:27 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-23-11:36 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-19-18:27)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-23-11:36)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-19-18:27 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-10-23-11:36 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-19-18:27 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-10-23-11:36 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){

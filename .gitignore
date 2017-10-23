@@ -18,10 +18,12 @@ Build/source/*
 !Build/source/configure*
 !Build/source/Makefile.in
 !Build/source/aclocal.m4
+!Build/source/reautoconf.log
 
 !Build/source/m4
 Build/source/m4/*
 !Build/source/m4/kpse-freetype2-flags.m4*
+!Build/source/m4/kpse-pkgs.m4
 
 !Build/source/libs
 Build/source/libs/*

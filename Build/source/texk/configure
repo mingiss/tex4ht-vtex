@@ -7835,7 +7835,7 @@ if test "$no_create" != yes; then
   test "$silent" = yes &&
     ac_config_status_args="$ac_config_status_args --quiet"
   exec 5>/dev/null
-  cp $CONFIG_STATUS $CONFIG_STATUS.tmp; python ../../cvt_config.py < $CONFIG_STATUS.tmp > $CONFIG_STATUS; $SHELL $CONFIG_STATUS $ac_config_status_args || ac_cs_success=false
+  $SHELL $CONFIG_STATUS $ac_config_status_args || ac_cs_success=false
   exec 5>>config.log
   # Use ||, not &&, to avoid exiting from the if with $? = 1, which
   # would make configure fail if this is the last instruction.

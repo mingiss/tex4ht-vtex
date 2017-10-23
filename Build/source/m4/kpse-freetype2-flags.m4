@@ -16,7 +16,7 @@ AC_REQUIRE([KPSE_ZLIB_FLAGS])[]dnl
 _KPSE_LIB_FLAGS([freetype2], [freetype], [],
                 [-IBLD/libs/freetype2/freetype2],
                 [BLD/libs/freetype2/libfreetype.a], [],
-                [], [${top_builddir}/../../libs/freetype2/freetype2/ft2build.h])[]dnl
+                [], [${top_srcdir}/../../libs/freetype2/freetype-src/include/ft2build.h])[]dnl
 ]) # KPSE_FREETYPE2_FLAGS
 
 # KPSE_FREETYPE2_OPTIONS([WITH-SYSTEM])
