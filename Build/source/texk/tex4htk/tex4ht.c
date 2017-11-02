@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-10-23-11:36), generated from tex4ht-c.tex
+/* tex4ht.c (2017-11-02-11:57), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -723,6 +723,10 @@ static BOOL no_spaces;
 // set by command line parameter -r
 static long x_fact = 100;
 
+// flag for math variant conversion
+// set by command line parameter -m
+static BOOL cvt_to_math_var;
+
 static FILE*  dot_file;
 
 
@@ -1100,6 +1104,7 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-xs]           ms-dos file names for automatically generated gifs\n"
 "   [-n]            no space recognition\n"
 "   [-r<factor>]    factor for threshold of spaces recognition, in percents\n"
+"   [-m]            convert math unicode characters to their latin equivalents, enveloped into math variant MathML tags\n"
 
 ,                            
 "Can't find/open file `%s'\n",                       
@@ -4928,10 +4933,16 @@ if( keepChar ){
 
 if (font_tbl[cur_fnt].pars)
 {
-    chr = get_uni_ch(ch, font_tbl[cur_fnt].pars);
-    if (chr < 256)
+#define WCH_BUF_SIZE 1024
+    int wch_buf[WCH_BUF_SIZE];
+    memset(wch_buf, 0, sizeof(wch_buf));
+    get_uni_ch(wch_buf, WCH_BUF_SIZE, ch, font_tbl[cur_fnt].pars, cvt_to_math_var);
+    for (int *pwch = wch_buf; *pwch; pwch++)
     {
-        
+        if (*pwch < 256)
+        {
+            chr = *pwch;
+            
 if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);
 } else{ 
 
@@ -5012,12 +5023,13 @@ if( end_span[gif_flag] )
  }
 
 
-    }
-    else
-    {
-        char str_buf[10];
-        sprintf(str_buf, "&#x%04x;", chr);
-        print_f(str_buf);
+        }
+        else
+        {
+            char str_buf[20];
+            sprintf(str_buf, "&#x%04x;", *pwch);
+            print_f(str_buf);
+        }
     }
 }
 else
@@ -5348,10 +5360,16 @@ if( no_root_file ){  open_o_file(); }
 
 if (font_tbl[cur_fnt].pars)
 {
-    chr = get_uni_ch(ch, font_tbl[cur_fnt].pars);
-    if (chr < 256)
+#define WCH_BUF_SIZE 1024
+    int wch_buf[WCH_BUF_SIZE];
+    memset(wch_buf, 0, sizeof(wch_buf));
+    get_uni_ch(wch_buf, WCH_BUF_SIZE, ch, font_tbl[cur_fnt].pars, cvt_to_math_var);
+    for (int *pwch = wch_buf; *pwch; pwch++)
     {
-        
+        if (*pwch < 256)
+        {
+            chr = *pwch;
+            
 if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);
 } else{ 
 
@@ -5432,12 +5450,13 @@ if( end_span[gif_flag] )
  }
 
 
-    }
-    else
-    {
-        char str_buf[10];
-        sprintf(str_buf, "&#x%04x;", chr);
-        print_f(str_buf);
+        }
+        else
+        {
+            char str_buf[20];
+            sprintf(str_buf, "&#x%04x;", *pwch);
+            print_f(str_buf);
+        }
     }
 }
 else
@@ -6430,15 +6449,15 @@ CDECL
 (IGNORED) printf("----------------------------\n");
 #ifndef KPATHSEA
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-23-11:36 %s)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-11-02-11:57 %s)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-23-11:36)\n");
+   (IGNORED) printf("tex4ht.c (2017-11-02-11:57)\n");
 #endif
 #else
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-10-23-11:36 %s kpathsea)\n",PLATFORM);
+   (IGNORED) printf("tex4ht.c (2017-11-02-11:57 %s kpathsea)\n",PLATFORM);
 #else
-   (IGNORED) printf("tex4ht.c (2017-10-23-11:36 kpathsea)\n");
+   (IGNORED) printf("tex4ht.c (2017-11-02-11:57 kpathsea)\n");
 #endif
 #endif
 for(i=0; i<argc; i++){
@@ -6748,6 +6767,10 @@ if (fact >= 1)
 }
 else
     err_i_int(ERR_PAR_R, fact);
+
+  break; }
+  case 'm':{ 
+cvt_to_math_var = TRUE;
 
   break; }
    default:{ bad_arg; }

@@ -1410,6 +1410,10 @@ static BOOL no_spaces;
 // set by command line parameter -r
 static long x_fact = 100;
 
+// flag for math variant conversion
+// set by command line parameter -m
+static BOOL cvt_to_math_var;
+
 static FILE*  dot_file;
 >>>
 
@@ -1520,6 +1524,7 @@ switch( *(p+1) ){
   case '.':{ `<default extension`>  break; }
   case 'n':{ `<no spaces`>  break; }
   case 'r':{ `<space factor`>  break; }
+  case 'm':{ `<switch on math variant converter`>  break; }
    default:{ bad_arg; }
 }
 >>>
@@ -1583,6 +1588,7 @@ The following is incomplete!!!
 "   [-xs]           ms-dos file names for automatically generated gifs\n"
 "   [-n]            no space recognition\n"
 "   [-r<factor>]    factor for threshold of spaces recognition, in percents\n"
+"   [-m]            convert math unicode characters to their latin equivalents, enveloped into math variant MathML tags\n"
 >>>
 
 
@@ -1686,6 +1692,11 @@ if (fact >= 1)
 }
 else
     err_i_int(ERR_PAR_R, fact);
+>>>
+
+
+\<switch on math variant converter\><<<
+cvt_to_math_var = TRUE;
 >>>
 
 
@@ -10870,16 +10881,23 @@ Does \`'verb_ch' correspond to \''\Char'?
 
 if (font_tbl[cur_fnt].pars)
 {
-    chr = get_uni_ch(ch, font_tbl[cur_fnt].pars);
-    if (chr < 256)
+#define WCH_BUF_SIZE 1024
+    int wch_buf[WCH_BUF_SIZE];
+    memset(wch_buf, 0, sizeof(wch_buf));
+    get_uni_ch(wch_buf, WCH_BUF_SIZE, ch, font_tbl[cur_fnt].pars, cvt_to_math_var);
+    for (int *pwch = wch_buf; *pwch; pwch++)
     {
-        `<insert standard char`>
-    }
-    else
-    {
-        char str_buf[10];
-        sprintf(str_buf, "&#x%04x;", chr);
-        print_f(str_buf);
+        if (*pwch < 256)
+        {
+            chr = *pwch;
+            `<insert standard char`>
+        }
+        else
+        {
+            char str_buf[20];
+            sprintf(str_buf, "&#x%04x;", *pwch);
+            print_f(str_buf);
+        }
     }
 }
 else

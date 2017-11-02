@@ -14,6 +14,10 @@
 #ifndef KPTT_INCLUDED
 #define KPTT_INCLUDED
 
+#ifdef __cplusplus
+#include <vector>
+#endif
+
 /* =================================================== */
 #define KPT_NoCodeTable   (-1)   /* No code table – value for undefined font table */
                                  /*    entry                                       */
@@ -56,6 +60,15 @@
 // typedef unsigned short WCHAR;
 #endif
 typedef WCHAR UniChar;
+
+#ifdef __cplusplus
+// ilgų Unicode kodų sekų saugojimui
+typedef vector<unsigned int /* UniChar */> UniStr;
+
+extern void encode_utf16_pair(unsigned int character, UniChar units[2]);
+extern unsigned int decode_utf16_pair(const UniChar units[2]);
+extern void Utf16ToUniStr(const UniStr& Utf16_str, UniStr& Uni_str);
+#endif
 
 // -----------------------
 extern int LangToCtbl[KpNumOfLangs]; // naudoti LangToCtbl[iMsgLangOff] 

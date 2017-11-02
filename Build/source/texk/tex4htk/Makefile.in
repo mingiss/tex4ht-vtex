@@ -135,6 +135,7 @@ am_tex4ht_OBJECTS = tex4ht.$(OBJEXT) tex4ht_add.$(OBJEXT) \
 	../../libs/kplib/src/kperr.$(OBJEXT) \
 	../../libs/kplib/src/kpsort.$(OBJEXT) \
 	../../libs/kplib/src/kpcapp.$(OBJEXT) \
+	../../libs/kplib/src/chr/kptt.$(OBJEXT) \
 	../../libs/kplib/src/win/kpwindow.$(OBJEXT)
 tex4ht_OBJECTS = $(am_tex4ht_OBJECTS)
 tex4ht_LDADD = $(LDADD)
@@ -442,7 +443,11 @@ AM_CPPFLAGS = $(KPATHSEA_INCLUDES) -I../../../libs/kplib/include -I../../../libs
 # AM_CPPFLAGS += -std=c++11
 AM_CFLAGS = $(WARNING_CFLAGS)
 t4ht_SOURCES = t4ht.c
-tex4ht_SOURCES = tex4ht.c tex4ht_add.cpp ../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp ../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp ../../libs/kplib/src/win/kpwindow.cpp
+tex4ht_SOURCES = tex4ht.c tex4ht_add.cpp \
+	../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp \
+	../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp \
+	../../libs/kplib/src/chr/kptt.cpp ../../libs/kplib/src/win/kpwindow.cpp
+
 LDADD = $(KPATHSEA_LIBS)
 tex4ht_LDFLAGS = -Wl,-Map,tex4ht$(EXEEXT).map -ggdb
 perl_scripts = mk4ht
@@ -592,6 +597,15 @@ t4ht$(EXEEXT): $(t4ht_OBJECTS) $(t4ht_DEPENDENCIES) $(EXTRA_t4ht_DEPENDENCIES)
 ../../libs/kplib/src/kpcapp.$(OBJEXT):  \
 	../../libs/kplib/src/$(am__dirstamp) \
 	../../libs/kplib/src/$(DEPDIR)/$(am__dirstamp)
+../../libs/kplib/src/chr/$(am__dirstamp):
+	@$(MKDIR_P) ../../libs/kplib/src/chr
+	@: > ../../libs/kplib/src/chr/$(am__dirstamp)
+../../libs/kplib/src/chr/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ../../libs/kplib/src/chr/$(DEPDIR)
+	@: > ../../libs/kplib/src/chr/$(DEPDIR)/$(am__dirstamp)
+../../libs/kplib/src/chr/kptt.$(OBJEXT):  \
+	../../libs/kplib/src/chr/$(am__dirstamp) \
+	../../libs/kplib/src/chr/$(DEPDIR)/$(am__dirstamp)
 ../../libs/kplib/src/win/$(am__dirstamp):
 	@$(MKDIR_P) ../../libs/kplib/src/win
 	@: > ../../libs/kplib/src/win/$(am__dirstamp)
@@ -714,6 +728,7 @@ uninstall-nodist_binSCRIPTS:
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f ../../libs/kplib/src/*.$(OBJEXT)
+	-rm -f ../../libs/kplib/src/chr/*.$(OBJEXT)
 	-rm -f ../../libs/kplib/src/win/*.$(OBJEXT)
 
 distclean-compile:
@@ -726,6 +741,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@../../libs/kplib/src/$(DEPDIR)/kpstdio.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@../../libs/kplib/src/$(DEPDIR)/kpstdlib.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@../../libs/kplib/src/$(DEPDIR)/kpstring.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@../../libs/kplib/src/chr/$(DEPDIR)/kptt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@../../libs/kplib/src/win/$(DEPDIR)/kpwindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/t4ht.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tex4ht.Po@am__quote@
@@ -1049,6 +1065,8 @@ distclean-generic:
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
 	-rm -f ../../libs/kplib/src/$(DEPDIR)/$(am__dirstamp)
 	-rm -f ../../libs/kplib/src/$(am__dirstamp)
+	-rm -f ../../libs/kplib/src/chr/$(DEPDIR)/$(am__dirstamp)
+	-rm -f ../../libs/kplib/src/chr/$(am__dirstamp)
 	-rm -f ../../libs/kplib/src/win/$(DEPDIR)/$(am__dirstamp)
 	-rm -f ../../libs/kplib/src/win/$(am__dirstamp)
 
@@ -1061,7 +1079,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf ../../libs/kplib/src/$(DEPDIR) ../../libs/kplib/src/win/$(DEPDIR) ./$(DEPDIR)
+	-rm -rf ../../libs/kplib/src/$(DEPDIR) ../../libs/kplib/src/chr/$(DEPDIR) ../../libs/kplib/src/win/$(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -1111,7 +1129,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf ../../libs/kplib/src/$(DEPDIR) ../../libs/kplib/src/win/$(DEPDIR) ./$(DEPDIR)
+	-rm -rf ../../libs/kplib/src/$(DEPDIR) ../../libs/kplib/src/chr/$(DEPDIR) ../../libs/kplib/src/win/$(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

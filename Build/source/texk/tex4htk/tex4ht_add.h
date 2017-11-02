@@ -160,8 +160,8 @@ extern PLAIN_C void warn_i_int(/* enum err_codes */ int nErrCode, int nSupplErrC
 // ------------------------------
 #ifdef __cplusplus
 // conversion table from TeX character codes to unicode
-// indexes -- TeX char codes as provided in .dvi file, values -- unicode equivalent
-typedef map<int, int /* UniChar */> HTable;
+// indexes -- TeX char codes as provided in .dvi file, values -- unicode equivalent arrays (multiple elements means encoding to string of unicode characters, "ffl", for example)
+typedef map<int, UniStr> TexUniTable;
 
 // structure of .otf font attributes
 class HFontPars
@@ -169,7 +169,7 @@ class HFontPars
 public:
     int m_ChFirst;  // TeX char code of the first character in font
     int m_ChLast;   // last TeX char code
-    HTable m_mHTable; // TeX to unicode conversion table
+    TexUniTable m_mapTexUniTable; // TeX to unicode conversion table
 
     HFontPars();
 };
@@ -178,7 +178,19 @@ public:
 // index -- internal TeX decorated font name as provided in .dvi file
 // ("[DGMetaSerifScience-Regular.otf]:mode=node;script=latn;language=DFLT;+tlig;" for example)
 typedef map<string, HFontPars> HFontParMap;
-extern HFontParMap mapHFontParMap;
+
+typedef map<int /* WCHAR */, string> MathVarMap;
+
+// main data object of the add-ons package
+class COtfAdds
+{
+public:
+    HFontParMap m_mapHFontParMap;
+    MathVarMap m_mapMathVars;
+    COtfAdds();
+};
+extern COtfAdds theOtfAdds;
+
 #endif
 
 // ------------------------------
@@ -191,4 +203,4 @@ extern PLAIN_C void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job
 // converts TeX character code to unicode
 // tex_ch -- TeX character code
 // fnt_pars -- pointer to current font HFontPars object
-extern PLAIN_C int /* UniChar */ get_uni_ch(int tex_ch, HANDLE fnt_pars);
+extern PLAIN_C void get_uni_ch(int /* UniChar */ *wch_buf, unsigned int wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var);

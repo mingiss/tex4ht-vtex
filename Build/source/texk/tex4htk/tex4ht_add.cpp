@@ -15,7 +15,12 @@
 using namespace std;
 
 // ------------------------------
-HFontParMap mapHFontParMap;
+COtfAdds theOtfAdds;
+
+COtfAdds::COtfAdds()
+{
+#include "tex4ht_mathvar_init.cpp"
+}
 
 // ------------------------------
 HFontPars::HFontPars()
@@ -37,9 +42,9 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
     char *pnts = NULL;
 
 
-    HFontParMap::const_iterator it = mapHFontParMap.find(fnt_name);
+    HFontParMap::const_iterator it = theOtfAdds.m_mapHFontParMap.find(fnt_name);
     const HFontPars *ppars = NULL;
-    if (it != mapHFontParMap.end())
+    if (it != theOtfAdds.m_mapHFontParMap.end())
         ppars = &it->second;
     else
     {
@@ -160,9 +165,20 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
                             if (tex_code > pars.m_ChLast)
                                 pars.m_ChLast = tex_code;
 
-                            int /* UniChar */ uni_code = 0;
-                            if (sscanf(codes[2], "%x", &uni_code) == 1)
-                                pars.m_mHTable[tex_code] = uni_code;
+                            UniStr utf16_str;
+                            for (int cpos = 0; cpos < codes[2].length(); cpos += 4)
+                            {
+                                string cstr = "0000";
+                                cstr += codes[2].substr(cpos, 4);
+                                int /* UniChar */ uni_code = 0;
+                                if (sscanf(cstr.c_str(), "%x", &uni_code) == 1)
+                                    utf16_str.push_back(uni_code);
+                            }
+
+                            UniStr uni_str;
+                            Utf16ToUniStr(utf16_str, uni_str);
+
+                            pars.m_mapTexUniTable[tex_code] = uni_str;
                         }
                     }
 
@@ -174,7 +190,7 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
                 warn_i_str(ERR_FILE_NFOUND, enc_fname);
         }
 
-        ppars = &(mapHFontParMap[fnt_name] = pars);
+        ppars = &(theOtfAdds.m_mapHFontParMap[fnt_name] = pars);
     }
 
     if (ppars == NULL)
@@ -204,13 +220,42 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
 cout << ":::: " << fnt_name << " first: " << ppars->m_ChFirst << " last: " << ppars->m_ChLast << endl;
 }
 
-int /* UniChar */ get_uni_ch(int tex_ch, HANDLE fnt_pars)
+void get_uni_ch(int /* UniChar */ *wch_buf, unsigned int wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var)
 {
+    if ((!wch_buf) || (wch_buf_size == 0))
+        return;
+    wch_buf[0] = 0;
     HFontPars *ppars = (HFontPars *)fnt_pars;
     if (!ppars)
-        return 0;
-    HTable::const_iterator it = ppars->m_mHTable.find(tex_ch);
-    if (it == ppars->m_mHTable.end())
-        return 0;
-    return (it->second);
+        return;
+
+    TexUniTable::const_iterator it = ppars->m_mapTexUniTable.find(tex_ch);
+    if (it == ppars->m_mapTexUniTable.end())
+        return;
+
+    int ix = 0;
+    for (UniStr::const_iterator is = it->second.begin(); is != it->second.end(); is++)
+    {
+        const char *ch_str = NULL;
+        if (cvt_to_math_var)
+        {
+            MathVarMap::const_iterator itv = theOtfAdds.m_mapMathVars.find(*is);
+            if (itv != theOtfAdds.m_mapMathVars.end())
+                ch_str = itv->second.c_str();
+        }
+
+        if (ch_str)
+        {
+            for (; ix < wch_buf_size - 1; ix++)
+            {
+                if (ch_str[ix] == '\0')
+                    break;
+                wch_buf[ix] = ch_str[ix];
+            }
+        }
+        else
+            if (ix < wch_buf_size - 1)
+                wch_buf[ix++] = *is;
+    }
+    wch_buf[ix++] = 0;
 }
