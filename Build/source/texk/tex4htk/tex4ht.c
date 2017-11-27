@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-11-02-11:57), generated from tex4ht-c.tex
+/* tex4ht.c (2017-11-27-11:51), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -229,7 +229,10 @@
 #include <setjmp.h>
 #endif 
 
+#include "tex4ht.h"
+#ifdef VTEX_OTF_ADDONS
 #include "tex4ht_add.h"
+#endif
 
 
 
@@ -294,19 +297,6 @@
 #endif
 
 
-#if INT_MAX < 2147483647L  
-#define LONG L
-#endif
-
-
-#ifdef LONG
-#define INTEGER long
-#else
-#define INTEGER int
-#endif
-#define U_CHAR char
-
-
 #define m_alloc(typ,n) (typ *) malloc_chk((int) ((n) * sizeof(typ)))
 
 
@@ -359,16 +349,6 @@ struct halign_rec{
 
 #define design_size_to_pt(n)    ((double)n / (double)(1L<<20))
 
-
-#define new_font   font_tbl[font_tbl_size]
-
-
-// #define DEF_CHAR_F 2
-// #define DEF_CHAR_L 1
-
-
-// #define DEF_WORD_SP 999999.0
-#define WORD_SP_XDV 350000
 
 #ifdef LONG
 #define MARGINSP 344061L        
@@ -606,7 +586,7 @@ struct group_path{
 };
 
 
-/*
+#ifndef VTEX_OTF_ADDONS
 struct font_entry {
  INTEGER num;
  INTEGER scale;
@@ -654,7 +634,9 @@ unsigned long rgba_color;
 
 
 };
-*/
+#else
+// moved to tex4ht_add.h
+#endif
 
 
 struct html_font_rec{  char* name;
@@ -715,6 +697,7 @@ static BOOL dos_file_names =
 ;
 
 
+#ifdef VTEX_SPACING_ADDONS
 // flag for no spaces recognition
 // set by command line parameter -n
 static BOOL no_spaces;
@@ -722,10 +705,19 @@ static BOOL no_spaces;
 // factor for threshold of spaces recognition max_x_val, in percents
 // set by command line parameter -r
 static long x_fact = 100;
+#endif
 
+#ifdef VTEX_OTF_ADDONS
 // flag for math variant conversion
 // set by command line parameter -m
 static BOOL cvt_to_math_var;
+#endif
+
+#ifdef VTEX_SSCRIPT_ADDONS
+// flag for sending back base tags of sub- / superscripts
+// set by command line parameter -p
+static BOOL dont_send_base_back;
+#endif
 
 static FILE*  dot_file;
 
@@ -773,7 +765,7 @@ static U_CHAR *trace_dvi_del_P,  *end_trace_dvi_del_P,
 static int push_depth=0, push_id=0, push_st[256];
 
 
-static long long x_val = 0, max_x_val = -10000,
+static long long x_val = 0, max_x_val = DEF_MAX_X_VAL,
      max_y_val = 0, prev_y_val = 0;
 
 
@@ -888,9 +880,11 @@ static struct del_stack_entry  *del_stack;
 
 
 static int ch_id, sv_id, id_latex, back_id_off;
+#ifdef VTEX_SSCRIPT_ADDONS
 BOOL ch_fl; // flag for no xml tags after the last printable character
             // used for cutting off any further back sendings after verbatims with xml tags
             // in contrast with ch_token it should be equally functional during both runs of group_dvi
+#endif
 
 
 static struct send_back_entry *back_token, *back_group;
@@ -1102,9 +1096,16 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-utf8]              utf-8 encoding for unicode characters\n"
 "   [-v<idv version>]    replacement for the given dvi version\n"
 "   [-xs]           ms-dos file names for automatically generated gifs\n"
+#ifdef VTEX_SPACING_ADDONS
 "   [-n]            no space recognition\n"
 "   [-r<factor>]    factor for threshold of spaces recognition, in percents\n"
+#endif
+#ifdef VTEX_OTF_ADDONS
 "   [-m]            convert math unicode characters to their latin equivalents, enveloped into math variant MathML tags\n"
+#endif
+#ifdef VTEX_SSCRIPT_ADDONS
+"   [-p]            switch off sending back of base tags for sub- / superscripts estimated as being baseless\n"
+#endif
 
 ,                            
 "Can't find/open file `%s'\n",                       
@@ -1167,7 +1168,9 @@ static const U_CHAR *warn_err_mssg[]={
 "Can't back from file `%s\n'",                        
 "\\special{t4ht%s}?\n",                               
 "Improper -v option\n",               // ERR_PAR_V    
+#ifdef VTEX_SPACING_ADDONS
 "Option -r value out of range: %d\n", // ERR_PAR_R
+#endif
 "Buffer overflow: %s\n",              // ERR_BUF_OVFL
 "File not found: %s\n",               // ERR_FILE_NFOUND
 "File read error: %s\n",              // ERR_FILE_READ
@@ -1703,7 +1706,11 @@ rule_ch_off
  ){  put_char('\n'); }
 }
 
-  max_x_val = -10000 * 100 / x_fact;
+  max_x_val = DEF_MAX_X_VAL
+#ifdef VTEX_SPACING_ADDONS
+            * 100 / x_fact
+#endif
+                ;
         prev_y_val = max_y_val  = stack_n? y_val : 0;
      }
    }else{
@@ -1763,7 +1770,11 @@ static INTEGER move_x
       double sp;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
-     if (max_x_val == -10000 * 100 / x_fact) max_x_val = x_val - d;
+     if (max_x_val == DEF_MAX_X_VAL
+#ifdef VTEX_SPACING_ADDONS
+        * 100 / x_fact
+#endif
+            ) max_x_val = x_val - d;
      
 i = 0;
 sp = (text_on? word_sp : margin_sp);
@@ -1891,7 +1902,11 @@ needs_accented_sym--;
 
 
    while( i-- ) { text_on=TRUE;  put_char(' '); }
-} else { if (!no_spaces) recover_spaces = (int) i; }
+} else {
+#ifdef VTEX_SPACING_ADDONS
+    if (!no_spaces)
+#endif
+        recover_spaces = (int) i; }
 max_x_val = x_val;
 
 
@@ -1902,7 +1917,12 @@ if( !ignore_spaces ){
    if (word_sp > 0.0001)
       i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
-   if( !i ) i = (dx >= 100000L * 100 / x_fact);
+   if( !i ) i =
+#ifdef VTEX_SPACING_ADDONS
+        (dx >= 100000L * 100 / x_fact);
+#else
+        dx>99999L;
+#endif
    if( i ){ put_char(' '); }
 }
 
@@ -2038,7 +2058,11 @@ if( (x_val + right)  &&
         )
 ){
    double sp;
-   if ( (max_x_val == -10000 * 100 / x_fact) || ((x_val + right) <= max_x_val) )
+   if ( (max_x_val == DEF_MAX_X_VAL
+#ifdef VTEX_SPACING_ADDONS
+        * 100 / x_fact
+#endif
+            ) || ((x_val + right) <= max_x_val) )
    {  max_x_val = x_val;  }
    i = 0;
    sp = (text_on? word_sp : margin_sp);
@@ -2739,7 +2763,9 @@ static  struct del_stack_entry* pop_del
              == del_stack->ch) ){
                                              struct del_stack_entry  * p;
          if( !id_hide && !id_latex ){  sv_id = del_stack->id;
+#ifdef VTEX_SSCRIPT_ADDONS
 //                                     ch_fl = FALSE;
+#endif
          }
          del_stack = (p = del_stack)->next;  free((void *)  p );
    }  }
@@ -4931,6 +4957,7 @@ if( keepChar ){
    int chr, r_ch;
    BOOL ch_str_flag = FALSE;
 
+#ifdef VTEX_OTF_ADDONS
 if (font_tbl[cur_fnt].pars)
 {
 #define WCH_BUF_SIZE 1024
@@ -5033,6 +5060,7 @@ if( end_span[gif_flag] )
     }
 }
 else
+#endif
 {
 r_ch = ch - font_tbl[cur_fnt].char_f;
 
@@ -5358,6 +5386,7 @@ if( no_root_file ){  open_o_file(); }
    int chr, r_ch;
    BOOL ch_str_flag = FALSE;
 
+#ifdef VTEX_OTF_ADDONS
 if (font_tbl[cur_fnt].pars)
 {
 #define WCH_BUF_SIZE 1024
@@ -5460,6 +5489,7 @@ if( end_span[gif_flag] )
     }
 }
 else
+#endif
 {
 r_ch = ch - font_tbl[cur_fnt].char_f;
 
@@ -6447,19 +6477,46 @@ CDECL
 
    
 (IGNORED) printf("----------------------------\n");
-#ifndef KPATHSEA
+#ifdef KPATHSEA
+#define KPATHSEA_SIG " kpathsea"
+#else
+#define KPATHSEA_SIG ""
+#endif
+
 #ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-11-02-11:57 %s)\n",PLATFORM);
+#define PLATFORM_SIG " "PLATFORM
 #else
-   (IGNORED) printf("tex4ht.c (2017-11-02-11:57)\n");
+#define PLATFORM_SIG ""
 #endif
+
+#define VTEX_ADDONS_SIG ""
+
+#ifdef VTEX_SPACING_ADDONS
+#undef VTEX_ADDONS_SIG
+#define VTEX_ADDONS_SIG " vtex:"
+#define VTEX_SPACING_ADDONS_SIG " spacing"
 #else
-#ifdef PLATFORM
-   (IGNORED) printf("tex4ht.c (2017-11-02-11:57 %s kpathsea)\n",PLATFORM);
+#define VTEX_SPACING_ADDONS_SIG ""
+#endif
+
+#ifdef VTEX_OTF_ADDONS
+#undef VTEX_ADDONS_SIG
+#define VTEX_ADDONS_SIG " vtex:"
+#define VTEX_OTF_ADDONS_SIG " otf"
 #else
-   (IGNORED) printf("tex4ht.c (2017-11-02-11:57 kpathsea)\n");
+#define VTEX_OTF_ADDONS_SIG ""
 #endif
+
+#ifdef VTEX_SSCRIPT_ADDONS
+#undef VTEX_ADDONS_SIG
+#define VTEX_ADDONS_SIG " vtex:"
+#define VTEX_SSCRIPT_ADDONS_SIG " sscript"
+#else
+#define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
+
+(IGNORED) printf("tex4ht.c (2017-11-27-11:51%s%s%s%s%s%s)\n",PLATFORM_SIG, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
 (IGNORED) printf("\n");
@@ -6501,7 +6558,9 @@ del_stack = (struct del_stack_entry  *) 0;
 
 
 back_id_off = 1;  id_latex = 0;
+#ifdef VTEX_SSCRIPT_ADDONS
 ch_fl = FALSE;
+#endif
 
 
 back_token = back_group = m_alloc(struct send_back_entry,1);
@@ -6754,25 +6813,43 @@ switch( *(p+2) ){
 ext = p+1;
 
   break; }
+#ifdef VTEX_SPACING_ADDONS
   case 'n':{ 
+#ifdef VTEX_SPACING_ADDONS
 ignore_spaces = no_spaces = TRUE;
+#endif
 
   break; }
   case 'r':{ 
+#ifdef VTEX_SPACING_ADDONS
 long fact = atol(p + 2);
 if (fact >= 1)
 {
     x_fact = fact;
-    max_x_val = -10000 * 100 / x_fact;
+    max_x_val = DEF_MAX_X_VAL * 100 / x_fact;
 }
 else
     err_i_int(ERR_PAR_R, fact);
+#endif
 
   break; }
+#endif
+#ifdef VTEX_OTF_ADDONS
   case 'm':{ 
+#ifdef VTEX_OTF_ADDONS
 cvt_to_math_var = TRUE;
+#endif
 
   break; }
+#endif
+#ifdef VTEX_SSCRIPT_ADDONS
+  case 'p':{ 
+#ifdef VTEX_SSCRIPT_ADDONS
+dont_send_base_back = TRUE;
+#endif
+
+  break; }
+#endif
    default:{ bad_arg; }
 }
 
@@ -7395,7 +7472,9 @@ char ** fontset=0;
 
 
        BOOL missing_fonts;
+#ifdef VTEX_OTF_ADDONS
        HANDLE otf_pars = NULL;
+#endif
 #ifndef KPATHSEA
        
 U_CHAR files_cache[PATH_MAX];
@@ -8045,7 +8124,6 @@ new_font.design_sz = (INTEGER) get_unt(4);
 
 {       FILE *font_file;
         U_CHAR  file_name[256];
-
    
 {                        
    font_file = NULL;
@@ -8121,18 +8199,28 @@ for( cur_cache_font = cache_font;
 }
 
 
+#ifdef VTEX_OTF_ADDONS
    otf_pars = NULL;
+#endif
    if (font_file == NULL)
+#ifdef VTEX_OTF_ADDONS
       get_otf_fm(new_font_name, job_name, &otf_pars);
 
-   if((font_file == NULL) && (otf_pars == NULL)){
+   if((font_file == NULL) && (otf_pars == NULL))
+#endif
+   {
       dump_env();      err_i_str(1,file_name);
       missing_fonts = TRUE;
       new_font.char_f = DEF_CHAR_F;
       new_font.char_l = DEF_CHAR_L;
    }
 
-   if (font_file) {
+#ifdef VTEX_OTF_ADDONS
+   if (font_file)
+#else
+   else
+#endif
+   {
       
 {       
  INTEGER  file_length;     
@@ -8157,7 +8245,7 @@ lig_kern_table_length          = (int) fget_int(font_file,2);
 kern_table_length              = (int) fget_int(font_file,2);
 extensible_char_table_length   = (int) fget_int(font_file,2);
 num_font_parameters            = (int) fget_int(font_file,2);
-if (file_length != ( 6                + header_length
+if( file_length != ( 6                + header_length
      - new_font.char_f              + new_font.char_l + 1
      + new_font.wtbl_n              + new_font.htbl_n
      + new_font.dtbl_n              + it_correction_table_length
@@ -8391,10 +8479,12 @@ loopName[0] = '\0';
    new_font.accented_array = (unsigned int *) 0;
    new_font.accent_N = new_font.accented_N = 0;
 
+#ifdef VTEX_OTF_ADDONS
    new_font.pars = otf_pars;
 
 // ------------------------------------------------------------
    if (!otf_pars)
+#endif
    {
 
    
@@ -8803,7 +8893,11 @@ if( dump_htf_files ){
      } }
      if( flag ){ break; }
   }
-  if( (font_name_n == 0) && (new_font.pars == NULL) ){
+  if( (font_name_n == 0)
+#ifdef VTEX_OTF_ADDONS
+        && (new_font.pars == NULL)
+#endif
+            ){
      if( errCode == 0 ){ errCode= 21; }
      warn_i_str(21,search_font_name);
      (IGNORED) fprintf(stderr,
@@ -8814,7 +8908,6 @@ if( dump_env_files ){ dump_env(); }
 
  }
 }
-
 
 
    new_font.str = (unsigned U_CHAR **) r_alloc((void *)   new_font.str,
@@ -9230,7 +9323,11 @@ for( i= get_char(); i>0; i-- ) ch = get_char();
   while( unread_pages-- ){
     (IGNORED) printf("[%d", dis_pages - unread_pages);
     
-x_val = dx_1 = dx_2 = 0;  max_x_val = -10000 * 100 / x_fact; 
+x_val = dx_1 = dx_2 = 0;  max_x_val = DEF_MAX_X_VAL
+#ifdef VTEX_SPACING_ADDONS
+    * 100 / x_fact
+#endif
+        ; 
 y_val = max_y_val = prev_y_val = dy_1 = dy_2 = 0;
 
 
@@ -9477,7 +9574,9 @@ set_ch_class(ch_1)
 
                             : insert_ch(ch_1);       
       if(  max_x_val < x_val ) max_x_val = x_val;
+#ifdef VTEX_SSCRIPT_ADDONS
       ch_fl = TRUE; // printable character -- ready for sending back specials
+#endif
    } else switch( ch ) {
       case 133: case 134: case 135: case 136: {
            INTEGER w;
@@ -10675,8 +10774,10 @@ while( special_n-- > 0 ){
         BOOL flag;
         struct hcode_repl_typ *q;
    ch = get_char();
+#ifdef VTEX_SSCRIPT_ADDONS
    if ((ch == '<') || (ch == '>'))
         ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+#endif
    q = hcode_repl;
    flag = FALSE;
    while( q != (struct hcode_repl_typ*) 0 ){
@@ -11135,10 +11236,11 @@ if( p->action == '>' ){
 }  }
 
 
+#ifdef VTEX_SSCRIPT_ADDONS
 } else if( in_ch == '<' ) {
     in_ch = get_char();
     special_n -= 2;
-    if ((in_ch == '*') && (!ch_fl)) // supressed back sending special -- placing it right here
+    if ((in_ch == '*') && (!ch_fl) && dont_send_base_back) // supressed back sending special -- placing it right here
     {
         
 while( special_n-- > 0 ){
@@ -11146,8 +11248,10 @@ while( special_n-- > 0 ){
         BOOL flag;
         struct hcode_repl_typ *q;
    ch = get_char();
+#ifdef VTEX_SSCRIPT_ADDONS
    if ((ch == '<') || (ch == '>'))
         ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+#endif
    q = hcode_repl;
    flag = FALSE;
    while( q != (struct hcode_repl_typ*) 0 ){
@@ -11168,6 +11272,7 @@ while( special_n-- > 0 ){
 1
 );
     special_n = 0;
+#endif
 } else {
   if( !group_dvi ){ warn_i(42); }
   (IGNORED) fseek(dvi_file, (long) --special_n,
@@ -11198,7 +11303,9 @@ ch_id = 0;
 
 
 id_hide = 0;    ch_token = TRUE;
+#ifdef VTEX_SSCRIPT_ADDONS
 ch_fl = FALSE;
+#endif
 while( del_stack != (struct del_stack_entry*) 0 ){
                                   struct del_stack_entry* p;
   del_stack = (p = del_stack)->next;
@@ -11206,7 +11313,9 @@ while( del_stack != (struct del_stack_entry*) 0 ){
 }
 
   stack_id = 0;
+#ifdef VTEX_SSCRIPT_ADDONS
   ch_fl = FALSE;
+#endif
   curr_pos = ftell(dvi_file);  sv_stack_n = stack_n;
   
 while( group_dvi ){
@@ -11221,7 +11330,9 @@ case 134: case 135: case 136: {
 ch_id++;
 if(!back_id_off ){
    if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id;
+#ifdef VTEX_SSCRIPT_ADDONS
                     ch_fl = TRUE; // printable character -- ready for sending back specials
+#endif
    }
    switch( math_class_of( ch, cr_fnt ) ){
      case 
@@ -11445,7 +11556,11 @@ case
 : {
    stack_n--;  
 if( !back_id_off ){
-   if( !id_hide ){ /* ch_fl = */ ch_token = FALSE;
+   if( !id_hide ){
+#ifdef VTEX_SSCRIPT_ADDONS
+                 /* ch_fl = */
+#endif
+                        ch_token = FALSE;
                     sv_id = stack[stack_n].stack_id; }
    while( del_stack != (struct del_stack_entry*) 0 ){
                                      struct del_stack_entry* p;
@@ -11486,7 +11601,10 @@ if( i==0 ){
              { 
               struct send_back_entry *p, *q, *t=0;
 if( back_id_off
-        || (!ch_fl)){ // there were xml tags after the last character -- ignoring back sending special -- on second run it will be placed right here as a verbatim special
+#ifdef VTEX_SSCRIPT_ADDONS                      // there were xml tags after the last character -- ignoring back sending special --
+        || ((!ch_fl) && dont_send_base_back)    // on the second run it will be placed right here as a verbatim special
+#endif
+            ){
    while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
 } else {
    p =  m_alloc(struct send_back_entry,1);
@@ -11575,6 +11693,7 @@ while( --i ) *q++ = get_char();
 } }
 
 
+#ifdef VTEX_SSCRIPT_ADDONS
      } else if (ch == '='){
         while (i--)
         {
@@ -11582,6 +11701,7 @@ while( --i ) *q++ = get_char();
             if ((ch == '<') || (ch == '>'))
                 ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
         }
+#endif
      } else {
        (IGNORED) fseek(dvi_file, (long) i, 
 1
@@ -11644,7 +11764,9 @@ default: {
 ch_id++;
 if(!back_id_off ){
    if( !id_hide ){  ch_token = TRUE;  sv_id = ch_id;
+#ifdef VTEX_SSCRIPT_ADDONS
                     ch_fl = TRUE; // printable character -- ready for sending back specials
+#endif
    }
    switch( math_class_of( ch, cr_fnt ) ){
      case 
@@ -11697,7 +11819,9 @@ ch_id = 0;
 0
 );
   group_dvi = TRUE;  stack_n = sv_stack_n;    stack_id = 0;
+#ifdef VTEX_SSCRIPT_ADDONS
   ch_fl = FALSE;
+#endif
 } else { 
 {              int stack_n;
   for( stack_n=
@@ -12346,7 +12470,11 @@ if( stack[stack_n].halign_info )
 
 
 pop_stack();
-if ( (!no_spaces) && ((x_val+0.6*word_sp) <  stack[stack_n].x_val) )  put_char(' ');
+if (
+#ifdef VTEX_SPACING_ADDONS
+    (!no_spaces) &&
+#endif
+        ((x_val+0.6*word_sp) <  stack[stack_n].x_val) )  put_char(' ');
 text_on = stack[stack_n].text_on;
 
   break; }

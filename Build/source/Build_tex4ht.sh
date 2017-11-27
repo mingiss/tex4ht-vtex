@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# ./reautoconf > reautoconf.log 2>&1
+# ./reautoconf > reautoconf.log 2>&1    -- not for Windows
 # ./Build_tex4ht.sh > Build_tex4ht.sh.log 2>&1
 
 if [ "x$WINDIR" == "x" ]; then

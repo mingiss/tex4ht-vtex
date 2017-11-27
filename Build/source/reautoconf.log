@@ -5,724 +5,72 @@
 ./reautoconf:       if you want to use different versions, set TL_AUTOCONF,
 ./reautoconf:               TL_AUTOHEADER, TL_AUTOMAKE, and/or TL_ACLOCAL.
 ./reautoconf: running "autoreconf -v --no-recursive ."
-autoreconf: Entering directory `.'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `.'
 ./reautoconf: running "autoreconf -v --no-recursive auxdir/auxsub"
-autoreconf: Entering directory `auxdir/auxsub'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `auxdir/auxsub'
 ./reautoconf: running "autoreconf -v --no-recursive libs"
-autoreconf: Entering directory `libs'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs'
 ./reautoconf: running "autoreconf -v --no-recursive utils"
-autoreconf: Entering directory `utils'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils'
 ./reautoconf: running "autoreconf -v --no-recursive texk"
-autoreconf: Entering directory `texk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk'
 ./reautoconf: running "autoreconf -v --no-recursive libs/cairo"
-autoreconf: Entering directory `libs/cairo'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/cairo'
 ./reautoconf: running "autoreconf -v --no-recursive libs/freetype2"
-autoreconf: Entering directory `libs/freetype2'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/freetype2'
 ./reautoconf: running "autoreconf -v --no-recursive libs/gd"
-autoreconf: Entering directory `libs/gd'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/gd'
 ./reautoconf: running "autoreconf -v --no-recursive libs/gmp libs/gmp/native"
-autoreconf: Entering directory `libs/gmp'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/gmp'
-autoreconf: Entering directory `libs/gmp/native'
-autoreconf: Leaving directory `libs/gmp/native'
 ./reautoconf: running "autoreconf -v --no-recursive libs/graphite2"
-autoreconf: Entering directory `libs/graphite2'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/graphite2'
 ./reautoconf: running "autoreconf -v --no-recursive libs/harfbuzz"
-autoreconf: Entering directory `libs/harfbuzz'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/harfbuzz'
 ./reautoconf: running "autoreconf -v --no-recursive libs/icu"
-autoreconf: Entering directory `libs/icu'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/icu'
 ./reautoconf: running "autoreconf -v --no-recursive libs/libpaper"
-autoreconf: Entering directory `libs/libpaper'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/libpaper'
 ./reautoconf: running "autoreconf -v --no-recursive libs/libpng"
-autoreconf: Entering directory `libs/libpng'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/libpng'
 ./reautoconf: running "autoreconf -v --no-recursive libs/lua52"
-autoreconf: Entering directory `libs/lua52'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/lua52'
 ./reautoconf: running "autoreconf -v --no-recursive libs/luajit libs/luajit/native"
-autoreconf: Entering directory `libs/luajit'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/luajit'
-autoreconf: Entering directory `libs/luajit/native'
-autoreconf: configure.ac: not using Libtool
-autoreconf: Leaving directory `libs/luajit/native'
 ./reautoconf: running "autoreconf -v --no-recursive libs/mpfr"
-autoreconf: Entering directory `libs/mpfr'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/mpfr'
 ./reautoconf: running "autoreconf -v --no-recursive libs/pixman"
-autoreconf: Entering directory `libs/pixman'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/pixman'
 ./reautoconf: running "autoreconf -v --no-recursive libs/poppler"
-autoreconf: Entering directory `libs/poppler'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/poppler'
 ./reautoconf: running "autoreconf -v --no-recursive libs/potrace"
-autoreconf: Entering directory `libs/potrace'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/potrace'
 ./reautoconf: running "autoreconf -v --no-recursive libs/teckit"
-autoreconf: Entering directory `libs/teckit'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/teckit'
 ./reautoconf: running "autoreconf -v --no-recursive libs/xpdf"
-autoreconf: Entering directory `libs/xpdf'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal -I ../../m4
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/xpdf'
 ./reautoconf: running "autoreconf -v --no-recursive libs/zlib"
-autoreconf: Entering directory `libs/zlib'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/zlib'
 ./reautoconf: running "autoreconf -v --no-recursive libs/zziplib"
-autoreconf: Entering directory `libs/zziplib'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `libs/zziplib'
 ./reautoconf: running "autoreconf -v --no-recursive utils/autosp"
-autoreconf: Entering directory `utils/autosp'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/autosp'
 ./reautoconf: running "autoreconf -v --no-recursive utils/devnag"
-autoreconf: Entering directory `utils/devnag'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/devnag'
 ./reautoconf: running "autoreconf -v --no-recursive utils/lacheck"
-autoreconf: Entering directory `utils/lacheck'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/lacheck'
 ./reautoconf: running "autoreconf -v --no-recursive utils/m-tx"
-autoreconf: Entering directory `utils/m-tx'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/m-tx'
 ./reautoconf: running "autoreconf -v --no-recursive utils/pmx"
-autoreconf: Entering directory `utils/pmx'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/pmx'
 ./reautoconf: running "autoreconf -v --no-recursive utils/ps2eps"
-autoreconf: Entering directory `utils/ps2eps'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/ps2eps'
 ./reautoconf: running "autoreconf -v --no-recursive utils/t1utils"
-autoreconf: Entering directory `utils/t1utils'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/t1utils'
 ./reautoconf: running "autoreconf -v --no-recursive utils/texdoctk"
-autoreconf: Entering directory `utils/texdoctk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/texdoctk'
 ./reautoconf: running "autoreconf -v --no-recursive utils/tpic2pdftex"
-autoreconf: Entering directory `utils/tpic2pdftex'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/tpic2pdftex'
 ./reautoconf: running "autoreconf -v --no-recursive utils/vlna"
-autoreconf: Entering directory `utils/vlna'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/vlna'
 ./reautoconf: running "autoreconf -v --no-recursive utils/xindy"
-autoreconf: Entering directory `utils/xindy'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/xindy'
 ./reautoconf: running "autoreconf -v --no-recursive utils/xpdfopen"
-autoreconf: Entering directory `utils/xpdfopen'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `utils/xpdfopen'
 ./reautoconf: running "autoreconf -v --no-recursive texk/kpathsea"
-autoreconf: Entering directory `texk/kpathsea'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/kpathsea'
 ./reautoconf: running "autoreconf -v --no-recursive texk/afm2pl"
-autoreconf: Entering directory `texk/afm2pl'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/afm2pl'
 ./reautoconf: running "autoreconf -v --no-recursive texk/bibtex-x"
-autoreconf: Entering directory `texk/bibtex-x'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/bibtex-x'
 ./reautoconf: running "autoreconf -v --no-recursive texk/chktex"
-autoreconf: Entering directory `texk/chktex'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/chktex'
 ./reautoconf: running "autoreconf -v --no-recursive texk/cjkutils"
-autoreconf: Entering directory `texk/cjkutils'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/cjkutils'
 ./reautoconf: running "autoreconf -v --no-recursive texk/detex"
-autoreconf: Entering directory `texk/detex'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/detex'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dtl"
-autoreconf: Entering directory `texk/dtl'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dtl'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dvi2tty"
-autoreconf: Entering directory `texk/dvi2tty'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dvi2tty'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dvidvi"
-autoreconf: Entering directory `texk/dvidvi'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dvidvi'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dviljk"
-autoreconf: Entering directory `texk/dviljk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dviljk'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dvipdfm-x"
-autoreconf: Entering directory `texk/dvipdfm-x'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dvipdfm-x'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dvipng"
-autoreconf: Entering directory `texk/dvipng'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dvipng'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dvipos"
-autoreconf: Entering directory `texk/dvipos'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dvipos'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dvipsk texk/dvipsk/squeeze"
-autoreconf: Entering directory `texk/dvipsk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dvipsk'
-autoreconf: Entering directory `texk/dvipsk/squeeze'
-autoreconf: configure.ac: not using Libtool
-autoreconf: configure.ac: not using Autoheader
-autoreconf: Leaving directory `texk/dvipsk/squeeze'
 ./reautoconf: running "autoreconf -v --no-recursive texk/dvisvgm"
-autoreconf: Entering directory `texk/dvisvgm'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/dvisvgm'
 ./reautoconf: running "autoreconf -v --no-recursive texk/gregorio"
-autoreconf: Entering directory `texk/gregorio'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/gregorio'
 ./reautoconf: running "autoreconf -v --no-recursive texk/gsftopk"
-autoreconf: Entering directory `texk/gsftopk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/gsftopk'
 ./reautoconf: running "autoreconf -v --no-recursive texk/lcdf-typetools"
-autoreconf: Entering directory `texk/lcdf-typetools'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/lcdf-typetools'
 ./reautoconf: running "autoreconf -v --no-recursive texk/makeindexk"
-autoreconf: Entering directory `texk/makeindexk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/makeindexk'
 ./reautoconf: running "autoreconf -v --no-recursive texk/makejvf"
-autoreconf: Entering directory `texk/makejvf'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/makejvf'
 ./reautoconf: running "autoreconf -v --no-recursive texk/mendexk"
-autoreconf: Entering directory `texk/mendexk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/mendexk'
 ./reautoconf: running "autoreconf -v --no-recursive texk/musixtnt"
-autoreconf: Entering directory `texk/musixtnt'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/musixtnt'
 ./reautoconf: running "autoreconf -v --no-recursive texk/ps2pk"
-autoreconf: Entering directory `texk/ps2pk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/ps2pk'
 ./reautoconf: running "autoreconf -v --no-recursive texk/psutils"
-autoreconf: Entering directory `texk/psutils'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/psutils'
 ./reautoconf: running "autoreconf -v --no-recursive texk/ptexenc"
-autoreconf: Entering directory `texk/ptexenc'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/ptexenc'
 ./reautoconf: running "autoreconf -v --no-recursive texk/seetexk"
-autoreconf: Entering directory `texk/seetexk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/seetexk'
 ./reautoconf: running "autoreconf -v --no-recursive texk/tex4htk"
-autoreconf: Entering directory `texk/tex4htk'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-configure.ac:24: warning: LT_OUTPUT was called before LT_LANG
-../../m4/libtool.m4:823: LT_LANG is expanded from...
-configure.ac:24: the top level
-autoreconf: configure.ac: tracing
-configure.ac:24: warning: LT_OUTPUT was called before LT_LANG
-../../m4/libtool.m4:823: LT_LANG is expanded from...
-configure.ac:24: the top level
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-configure.ac:24: warning: LT_OUTPUT was called before LT_LANG
-../../m4/libtool.m4:823: LT_LANG is expanded from...
-configure.ac:24: the top level
-autoreconf: running: autoheader
-configure.ac:24: warning: LT_OUTPUT was called before LT_LANG
-../../m4/libtool.m4:823: LT_LANG is expanded from...
-configure.ac:24: the top level
-autoreconf: running: automake --no-force
-configure.ac:24: warning: LT_OUTPUT was called before LT_LANG
-../../m4/libtool.m4:823: LT_LANG is expanded from...
-configure.ac:24: the top level
-autoreconf: Leaving directory `texk/tex4htk'
 ./reautoconf: running "autoreconf -v --no-recursive texk/texlive"
-autoreconf: Entering directory `texk/texlive'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not using Libtool
-autoreconf: running: autoconf
-autoreconf: configure.ac: not using Autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/texlive'
 ./reautoconf: running "autoreconf -v --no-recursive texk/ttf2pk2"
-autoreconf: Entering directory `texk/ttf2pk2'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/ttf2pk2'
 ./reautoconf: running "autoreconf -v --no-recursive texk/ttfdump"
-autoreconf: Entering directory `texk/ttfdump'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/ttfdump'
 ./reautoconf: running "autoreconf -v --no-recursive texk/upmendex"
-autoreconf: Entering directory `texk/upmendex'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/upmendex'
 ./reautoconf: running "autoreconf -v --no-recursive texk/web2c texk/web2c/web2c"
-autoreconf: Entering directory `texk/web2c'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/web2c'
-autoreconf: Entering directory `texk/web2c/web2c'
-autoreconf: Leaving directory `texk/web2c/web2c'
-./reautoconf: texk/web2c/synctexdir/configure.ac: no such file, skipping.
 ./reautoconf: running "autoreconf -v --no-recursive texk/xdvik texk/xdvik/squeeze"
-autoreconf: Entering directory `texk/xdvik'
-autoreconf: configure.ac: not using Gettext
-autoreconf: running: aclocal 
-autoreconf: configure.ac: tracing
-autoreconf: configure.ac: not running libtoolize: --install not given
-autoreconf: running: autoconf
-autoreconf: running: autoheader
-autoreconf: running: automake --no-force
-autoreconf: Leaving directory `texk/xdvik'
-autoreconf: Entering directory `texk/xdvik/squeeze'
-autoreconf: configure.ac: not using Libtool
-autoreconf: configure.ac: not using Autoheader
-autoreconf: Leaving directory `texk/xdvik/squeeze'
 ./reautoconf: done.

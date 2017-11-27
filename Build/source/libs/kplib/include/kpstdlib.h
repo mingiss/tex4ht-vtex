@@ -38,6 +38,10 @@
 #endif
 #endif
 
+#ifdef __WIN32__
+#include <windows.h>
+#endif
+
 #ifdef __cplusplus
 using namespace std;
 #endif

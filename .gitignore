@@ -103,7 +103,7 @@ Master/bin/*
 !Master/bin/win32
 Master/bin/win32/*
 !Master/bin/win32/kpathsea623.dll
-!Master/bin/win32/tex4ht.exe
+!Master/bin/win32/tex4ht*.exe
 !Master/bin/win32/t4ht.exe
 !Master/bin/win32/libgcc_s_seh-1.dll
 !Master/bin/win32/libstdc++-6.dll
