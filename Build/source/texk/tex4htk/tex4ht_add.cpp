@@ -1,7 +1,7 @@
 /* ------------------------------
  * tex4ht_add.cpp
  *
- *    add-ons to tex4ht
+ *    vtex add-ons to tex4ht
  *
  * TODO:
  *      all local char* and char[] to std::string
@@ -10,7 +10,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <iostream>
-#include "tex4ht.h"
 #include "tex4ht_add.h"
 
 using namespace std;

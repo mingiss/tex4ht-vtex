@@ -5,6 +5,9 @@
  *
  */
 
+#ifndef TEX4HT_ADD_H_INCLUDED
+#define TEX4HT_ADD_H_INCLUDED
+
 #include <limits.h>
 #include <stdio.h>
 
@@ -18,6 +21,8 @@ using namespace std;
 #include "kpstdlib.h"
 #include "kpstring.h"
 #include "kpstdio.h"
+
+#include "tex4ht.h"
 
 #define STR_BUF_LEN 1024
 
@@ -105,3 +110,5 @@ extern PLAIN_C void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job
 // tex_ch -- TeX character code
 // fnt_pars -- pointer to current font HFontPars object
 extern PLAIN_C void get_uni_ch(int /* UniChar */ *wch_buf, unsigned int wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var);
+
+#endif // #ifndef TEX4HT_H_ADD_INCLUDED

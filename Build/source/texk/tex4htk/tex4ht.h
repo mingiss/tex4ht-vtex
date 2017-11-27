@@ -2,6 +2,9 @@
  * tex4ht common definitions
  */
 
+#ifndef TEX4HT_H_INCLUDED
+#define TEX4HT_H_INCLUDED
+
 // ------------------------------
 // definitions to manipulate tex4ht VTEX add-ons compilation
 #define VTEX_SPACING_ADDONS     // add-ons for space generator
@@ -114,3 +117,5 @@ ERR_FILE_NFOUND,
 ERR_FILE_READ,
 ERR_FILE_FORMAT
 };
+
+#endif // #ifndef TEX4HT_ADD_H_INCLUDED
