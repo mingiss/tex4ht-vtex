@@ -2,7 +2,7 @@ TEMPLATE = app
 
 DEFINES -= UNICODE
 DEFINES += DEBUG Debug
-DEFINES += KPATHSEA
+# DEFINES += KPATHSEA
 
 CONFIG += console
 CONFIG -= app_bundle
@@ -13,6 +13,7 @@ SOURCES += tex4ht.c \
     ../../libs/kplib/src/kpcapp.cpp \
     ../../libs/kplib/src/KpCharWgt.cpp \
     ../../libs/kplib/src/kpctype.cpp \
+    ../../libs/kplib/src/chr/kptt.cpp \
     ../../libs/kplib/src/kperr.cpp \
     ../../libs/kplib/src/kpsort.cpp \
     ../../libs/kplib/src/kpstdio.cpp \
@@ -76,60 +77,60 @@ HEADERS += \
     ../../libs/kplib/src/kpmsg_en.h \
     ../../libs/kplib/src/kpsort.h \
     ../../libs/kplib/src/kptree.h \
-    tex4ht_add.h \
-    kpathsea/config.h \
-    ../kpathsea/fn.h \
-    ../kpathsea/variable.h \
-    ../kpathsea/absolute.h \
-    ../kpathsea/c-ctype.h \
-    ../kpathsea/c-dir.h \
-    ../kpathsea/c-errno.h \
-    ../kpathsea/c-fopen.h \
-    ../kpathsea/c-limits.h \
-    ../kpathsea/c-memstr.h \
-    ../kpathsea/c-minmax.h \
-    ../kpathsea/c-namemx.h \
-    ../kpathsea/cnf.h \
-    ../kpathsea/concatn.h \
-    ../kpathsea/config.h \
-    ../kpathsea/c-pathch.h \
-    ../kpathsea/c-pathmx.h \
-    ../kpathsea/c-proto.h \
-    ../kpathsea/c-stat.h \
-    ../kpathsea/c-std.h \
-    ../kpathsea/c-unistd.h \
-    ../kpathsea/db.h \
-    ../kpathsea/debug.h \
-    ../kpathsea/default.h \
-    ../kpathsea/expand.h \
-    ../kpathsea/fn.h \
-    ../kpathsea/fontmap.h \
-    ../kpathsea/getopt.h \
-    ../kpathsea/hash.h \
-    ../kpathsea/knj.h \
-    ../kpathsea/lib.h \
-    ../kpathsea/line.h \
-    ../kpathsea/magstep.h \
-    ../kpathsea/mingw32.h \
-    ../kpathsea/pathsearch.h \
-    ../kpathsea/proginit.h \
-    ../kpathsea/progname.h \
-    ../kpathsea/readable.h \
-    ../kpathsea/simpletypes.h \
-    ../kpathsea/str-list.h \
-    ../kpathsea/str-llist.h \
-    ../kpathsea/systypes.h \
-    ../kpathsea/tex-file.h \
-    ../kpathsea/tex-glyph.h \
-    ../kpathsea/tex-hush.h \
-    ../kpathsea/tex-make.h \
-    ../kpathsea/tilde.h \
-    ../kpathsea/types.h \
-    ../kpathsea/variable.h \
-    ../kpathsea/version.h \
-    ../kpathsea/win32lib.h \
-    ../kpathsea/xopendir.h \
-    ../kpathsea/xstat.h
+    tex4ht_add.h # \
+#    kpathsea/config.h \
+#    ../kpathsea/fn.h \
+#    ../kpathsea/variable.h \
+#    ../kpathsea/absolute.h \
+#    ../kpathsea/c-ctype.h \
+#    ../kpathsea/c-dir.h \
+#    ../kpathsea/c-errno.h \
+#    ../kpathsea/c-fopen.h \
+#    ../kpathsea/c-limits.h \
+#    ../kpathsea/c-memstr.h \
+#    ../kpathsea/c-minmax.h \
+#    ../kpathsea/c-namemx.h \
+#    ../kpathsea/cnf.h \
+#    ../kpathsea/concatn.h \
+#    ../kpathsea/config.h \
+#    ../kpathsea/c-pathch.h \
+#    ../kpathsea/c-pathmx.h \
+#    ../kpathsea/c-proto.h \
+#    ../kpathsea/c-stat.h \
+#    ../kpathsea/c-std.h \
+#    ../kpathsea/c-unistd.h \
+#    ../kpathsea/db.h \
+#    ../kpathsea/debug.h \
+#    ../kpathsea/default.h \
+#    ../kpathsea/expand.h \
+#    ../kpathsea/fn.h \
+#    ../kpathsea/fontmap.h \
+#    ../kpathsea/getopt.h \
+#    ../kpathsea/hash.h \
+#    ../kpathsea/knj.h \
+#    ../kpathsea/lib.h \
+#    ../kpathsea/line.h \
+#    ../kpathsea/magstep.h \
+#    ../kpathsea/mingw32.h \
+#    ../kpathsea/pathsearch.h \
+#    ../kpathsea/proginit.h \
+#    ../kpathsea/progname.h \
+#    ../kpathsea/readable.h \
+#    ../kpathsea/simpletypes.h \
+#    ../kpathsea/str-list.h \
+#    ../kpathsea/str-llist.h \
+#    ../kpathsea/systypes.h \
+#    ../kpathsea/tex-file.h \
+#    ../kpathsea/tex-glyph.h \
+#    ../kpathsea/tex-hush.h \
+#    ../kpathsea/tex-make.h \
+#    ../kpathsea/tilde.h \
+#    ../kpathsea/types.h \
+#    ../kpathsea/variable.h \
+#    ../kpathsea/version.h \
+#    ../kpathsea/win32lib.h \
+#    ../kpathsea/xopendir.h \
+#    ../kpathsea/xstat.h
 
 INCLUDEPATH += . ../../Work/texk/tex4htk .. ../../Work/texk \
     ../../libs/kplib/include ../../libs/kplib/src ../../libs/kplib/src/net ../../libs/kplib/src/win
@@ -143,4 +144,4 @@ INCLUDEPATH += . ../../Work/texk/tex4htk .. ../../Work/texk \
 # QMAKE_CXXFLAGS -= -DUNICODE
 # QMAKE_CFLAGS -= -DUNICODE
 
-LIBS += ../../Work/texk/kpathsea/.libs/libkpathsea.a
+# LIBS += ../../Work/texk/kpathsea/.libs/libkpathsea.a

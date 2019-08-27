@@ -105,8 +105,10 @@ Master/bin/win32/*
 !Master/bin/win32/kpathsea623.dll
 !Master/bin/win32/tex4ht*.exe
 !Master/bin/win32/t4ht.exe
-!Master/bin/win32/libgcc_s_seh-1.dll
-!Master/bin/win32/libstdc++-6.dll
+!Master/bin/win32/mingw-w64_i686-7.1.0-posix-dwarf-rt_v5-rev0
+!Master/bin/win32/mingw-w64_i686-7.1.0-posix-dwarf-rt_v5-rev0/*
+!Master/bin/win32/mingw53_32
+!Master/bin/win32/mingw53_32/*
 !Master/bin/x86_64-darwin
 Master/bin/x86_64-darwin/*
 !Master/bin/x86_64-darwin/tex4ht
