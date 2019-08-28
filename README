@@ -6,35 +6,39 @@ Repository structure:
 
     Designed as a mirror copy of TeX Live (TL) build tree structure.
 
-    There are problems in running standard TL script Build/source/reautoconf under MS Windows in MSYS environment,
-        hence additional set of prepared configure scripts are provided.
+    There are problems in running standard TL script Build/source/reautoconf under MS Windows
+        in MSYS environment, hence additional set of prepared configure scripts are provided.
 
-    Modified executables and libraries should be copied from repository folder Master/bin to the relevant local TL deployment path,
-        for example, either
+    Modified executables and libraries should be copied from repository folder Master/bin to
+        the relevant local TL deployment path, for example, either
             D:\texroot\texlive2010\bin
         or
             /usr/local/texlive/2016/bin
 
 Prerequisites:
 
-    For use of the GNU Automake environment under MS Windows following tools should be additionally installed:
-        MinGW gcc compiler:
-            https://sourceforge.net/projects/mingw-w64/files/latest/download?source=files
-                Be careful -- Bitdefender antivirus complains about MinGW v.7.1.0 build 4.3.0 distribution package of 05.03.2017 --
-                    files mingw32\opt\bin\python*.exe and mingw32\bin\gdb.exe are recognized as infected by malware Gen:Variant.Razy.191694
-                    Be prepared to delete these files or use another MinGW distribution, v.5.1.0 for instance:
-                            https://sourceforge.net/projects/tdm-gcc/files/latest/download?source=rw_typ_t5
-                        (not tested yet)
-                Path of installed bianries
-                        %ProgramFiles%\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw32\bin
-                    should be added to environment variable PATH
-        MSYS POSIX shell environment:
-            https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip/download
-        GNU Autoconf / Automake:
-            http://gnuwin32.sourceforge.net/packages/automake.htm
-            http://gnuwin32.sourceforge.net/packages/autoconf.htm
-            http://gnuwin32.sourceforge.net/packages/m4.htm
-            http://gnuwin32.sourceforge.net/packages/regex.htm
+    For use of the GNU Automake environment under MS Windows following tools should be
+        additionally installed:
+            MinGW gcc compiler:
+                https://sourceforge.net/projects/mingw-w64/files/latest/download?source=files
+                    Be careful -- Bitdefender antivirus complains about
+                        MinGW v.7.1.0 build 4.3.0 distribution package of 05.03.2017 --
+                        files mingw32\opt\bin\python*.exe and mingw32\bin\gdb.exe are
+                        recognized as infected by malware Gen:Variant.Razy.191694
+                        Be prepared to delete these files or use another MinGW distribution,
+                            v.5.1.0 for instance:
+                                https://sourceforge.net/projects/tdm-gcc/files/latest/download?source=rw_typ_t5
+                            (not tested yet)
+                    Path of installed binaries
+                            %ProgramFiles%\mingw-w64\i686-7.1.0-posix-dwarf-rt_v5-rev0\mingw32\bin
+                        should be added to environment variable PATH
+            MSYS POSIX shell environment:
+                https://sourceforge.net/projects/mingw-w64/files/External%20binary%20packages%20%28Win64%20hosted%29/MSYS%20%2832-bit%29/MSYS-20111123.zip/download
+            GNU Autoconf / Automake:
+                http://gnuwin32.sourceforge.net/packages/automake.htm
+                http://gnuwin32.sourceforge.net/packages/autoconf.htm
+                http://gnuwin32.sourceforge.net/packages/m4.htm
+                http://gnuwin32.sourceforge.net/packages/regex.htm
 
 Building:
 
@@ -50,18 +54,22 @@ Building:
         and manually copied to the relevant deployment path inside of
             Master/bin
 
-        reautoconf does not work yet under MSYS. Necessary slightly corrected configure scripts are provided here from linux building environment.
+        reautoconf does not work yet under MSYS. Necessary slightly corrected linux building
+            environment configure scripts are provided here.
 
 Add-ons to module tex4ht:
 
-    Following are attempts to deal with the problem, that original heuristic recognition of spaces in tex4ht doesn't work correctly enough --
-        there are situations, when spaces disappear or are duplicated.
+    Following are attempts to deal with the problem, that original heuristic recognition of
+        spaces in tex4ht doesn't work correctly enough -- there are situations, when spaces
+        disappear or are duplicated.
 
         command line switch -n
             totally cuts off the heuristic algorithm for recognition of spaces in .dvi file;
-            spaces then should be generated using some explicit means, for example by inserting commands
+            spaces then should be generated using some explicit means, for example by
+            inserting commands
                 \special{t4ht=\&\#32;}
-            into the source .tex file using LuaTeX script 4hspship.lua, provided in repository
+            into the source .tex file. It could be done using LuaTeX script 4hspship.lua,
+            provided in the repository
                     https://gitlab.vtex.lt/texgr/tex4ht-v2.git
                 subfolder
                     2_spaces/styles
@@ -70,15 +78,19 @@ Add-ons to module tex4ht:
             correction of spaces recognition threshold;
             the percentage of the initial threshold value should be provided:
                 -r100   no change, the algorithm operates as usual;
-                -r50    threshold of spaces generation is increased twice -- resulting amount of spaces decreases;
-                -r200   threshold decreased by half, more spaces.
+                -r50    threshold of spaces generation is increased twice -- resulting
+                            amount of spaces decreases;
+                -r200   threshold decreased by half -- more spaces.
 
     OTF font character encoding.
 
-        Character mappings are provided during LaTex file compilation by additional LuaTeX script luafonts.lua .
-        Encoding files are placed in subdirectory of the working folder named .xdvips . They are used instead of *.htf encoding files.
+        Character mappings are provided during LaTex file compilation by additional
+            LuaTeX script luafonts.lua .
+        Encoding files are placed in subdirectory of the working folder named .xdvips
+            They are used instead of *.htf encoding files.
 
-        OTF font encoding exporter luafonts.lua with supplementing LaTeX styles could be found at
+        OTF font encoding exporter luafonts.lua with supplementing LaTeX styles could
+            be found at
                 https://gitlab.vtex.lt/vtex-soft/texlive.xdvipsk.git
             or
                 https://gitlab.vtex.lt/TeXProd.texroot/texlive-vtex-adds.git
@@ -87,17 +99,23 @@ Add-ons to module tex4ht:
                 and
                     Running xdvipsk
 
-    Attempt to solve the problem in MathML sup/subscript tag sending back algorithm.
+    Attempt to solve the problem in MathML sub/superscript tag sending back algorithm.
 
-        The problem arises in case of baseless sup/subscripts, for instance:
+        The problem arises in case of baseless sub/superscript, for instance:
                 $a_b{}^c$
-            tex4ht has a mechanizm of sup/subscript base searching through sending back initial MathML tags prior to the last printable character.
-            In case, when that character allready is inside of a previous tagged structure, such a back insertion ruins the validity of tags.
+            tex4ht has a mechanism of sub/superscript base searching through sending
+            back initial MathML tags prior to the last printable character. In case
+            when that character already is inside of a previous tagged structure,
+            such a back insertion ruins the validity of the file. Such back-sending
+            is organized through DVI file specials 't4ht~<*'.
 
-            Following modification implemented: when after the last printable character there are verbatim insertions 't4ht=',
-            containing tag characters '<' or '>', back sending of the initiating tags is suppressed,
-            resulting in the verbatim insertion of the special 't4ht~<*' contents right in the place, where it was encountered.
-            (The result is as the special 't4ht~<*' was entered as 't4ht='.)
+            Following modification implemented: when in between of the last printable
+            character and the sub/superscript there are verbatim insertions 't4ht=',
+            containing tag characters '<' or '>' (XML/HTML/MathML tags hopefully),
+            back sending of the initiating tags is suppressed, resulting in the verbatim
+            insertion of the special 't4ht~<*' contents right in the place, where it was
+            encountered. (The result is like as the special 't4ht~<*' was entered as
+            't4ht='.)
 
 TODO:
     Bug in command line parameters recognition:
@@ -110,6 +128,7 @@ TODO:
 
     reautoconf under MSYS
 
-    MathML sup/subscript tag sending back algorithm:
-        Stepping over is not allowed not just through tags, entered inside of verbatim specials 't4ht='.
-        All tag insertion specials, including 't4ht~<*' itself, should be examined as well.
+    MathML sub/superscript tag sending back algorithm:
+        Stepping over is not allowed not just through tags, entered inside of verbatim
+        specials 't4ht='. All tag insertion specials, including 't4ht~<*' itself,
+        should be examined as well.
