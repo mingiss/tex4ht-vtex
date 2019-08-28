@@ -40,7 +40,7 @@ Prerequisites:
                 http://gnuwin32.sourceforge.net/packages/m4.htm
                 http://gnuwin32.sourceforge.net/packages/regex.htm
 
-Building:
+Build:
 
     - mount current TL repository version to some local path:
         svn co svn://username:password@tug.org/texlive/trunk
@@ -68,7 +68,8 @@ Add-ons to module tex4ht:
             spaces then should be generated using some explicit means, for example by
             inserting commands
                 \special{t4ht=\&\#32;}
-            into the source .tex file. It could be done using script scripts_4hsp\4hspship.lua
+            into the source .tex file. It could be done using script 
+                Master/texmf-dist/scripts/4hsp/4hspship.lua
 
         command line switch -r
             correction of spaces recognition threshold;

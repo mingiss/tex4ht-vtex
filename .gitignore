@@ -115,3 +115,8 @@ Master/bin/x86_64-darwin/*
 Master/bin/x86_64-linux/*
 !Master/bin/x86_64-linux/tex4ht
 !Master/bin/x86_64-linux/t4ht
+!Master/texmf-dist
+Master/texmf-dist/*
+!Master/texmf-dist/scripts
+Master/texmf-dist/scripts/*
+!Master/texmf-dist/scripts/4hsp
