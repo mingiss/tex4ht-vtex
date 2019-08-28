@@ -63,14 +63,6 @@ Add-ons to module tex4ht:
         spaces in tex4ht doesn't work correctly enough -- there are situations, when spaces
         disappear or are duplicated.
 
-        command line switch -n
-            totally cuts off the heuristic algorithm for recognition of spaces in .dvi file;
-            spaces then should be generated using some explicit means, for example by
-            inserting commands
-                \special{t4ht=\&\#32;}
-            into the source .tex file. It could be done using script 
-                Master/texmf-dist/scripts/4hsp/4hspship.lua
-
         command line switch -r
             correction of spaces recognition threshold;
             the percentage of the initial threshold value should be provided:
@@ -78,6 +70,14 @@ Add-ons to module tex4ht:
                 -r50    threshold of spaces generation is increased twice -- resulting
                             amount of spaces decreases;
                 -r200   threshold decreased by half -- more spaces.
+
+        command line switch -n
+            totally cuts off the heuristic algorithm for recognition of spaces in .dvi file;
+            spaces then should be generated using some explicit means, for example by
+            inserting commands
+                \special{t4ht=\&\#32;}
+            into the source .tex file. It could be done using script 
+                Master/texmf-dist/scripts/4hsp/4hspship.lua
 
     OTF font character encoding.
 
