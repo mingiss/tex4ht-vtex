@@ -87,13 +87,13 @@ Add-ons to module tex4ht:
 
         OTF font encoding exporter luafonts.lua with supplementing LaTeX styles could
             be found at
-                https://gitlab.vtex.lt/vtex-soft/texlive.xdvipsk.git
-            or
-                https://gitlab.vtex.lt/TeXProd.texroot/texlive-vtex-adds.git
-            Folow instructions as provided in file README.overview, sections
-                    Opentype font support
-                and
-                    Running xdvipsk
+                https://github.com/vtex-soft/texlive.xdvipsk/tree/master/Master/texmf-dist/tex/luatex/luafonts
+            Folow instructions as provided in file 
+                https://github.com/vtex-soft/texlive.xdvipsk/blob/master/README.overview.md
+            sections
+                Opentype font support
+            and
+                Running xdvipsk
 
     Attempt to solve the problem in MathML sub/superscript tag sending back algorithm.
 
