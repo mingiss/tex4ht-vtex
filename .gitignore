@@ -102,8 +102,6 @@ Master/*
 Master/bin/*
 !Master/bin/win32
 Master/bin/win32/*
-!Master/bin/win32/kpathsea623.dll
-!Master/bin/win32/tex4ht*.exe
 !Master/bin/win32/t4ht.exe
 !Master/bin/win32/mingw-w64_i686-7.1.0-posix-dwarf-rt_v5-rev0
 !Master/bin/win32/mingw-w64_i686-7.1.0-posix-dwarf-rt_v5-rev0/*
