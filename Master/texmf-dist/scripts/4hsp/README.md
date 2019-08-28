@@ -15,7 +15,7 @@ Problema buvo bandyta spręsti, modifikuojant `tex4ht` konverterį &ndash; reali
 Detaliau žr. failą README saugykloje
 
 ```
-https://gitlab.vtex.vmt/texgr/tex4ht-vtex.git
+https://github.com/mingiss/tex4ht-vtex
 ```
 
 Surinkti vykdomieji moduliai yra šios saugyklos aplanke `Master`, `win32` versija yra ir `texroot` medyje šalia originalaus `tex4ht` konverterio failo:
@@ -37,21 +37,9 @@ ar neatsirado žalingų skirtumų.
 
 Saugyklos:
 
-- šios saugyklos failai turi būti nuklonuoti, pvz., į lokaliai kompiliuojamo failo aplanko pakatalogį `styles/4hsp`:
+- šio pakatalogio failai turi būti nukopijuoti, pvz., į lokaliai kompiliuojamo failo aplanko pakatalogį `styles/4hsp`:
 
-```
-mkdir styles
-cd styles
-git clone https://gitlab.vtex.vmt/mindaugas.piesina/4hsp.git
-```
-
-- į pakatalogį `styles/toktrc_common` papildomai klonuojami tokenų bibliotekos failai:
-
-```
-git clone https://gitlab.vtex.vmt/mindaugas.piesina/toktrc_common.git
-```
-
-- failas `styles/toktrc_common/toktrc.cfg` turi būti nukopijuotas į darbinį aplanką.
+- failas `styles/4hsp/common/toktrc.cfg` turi būti nukopijuotas į darbinį aplanką.
 
 Naudojimas:
 
