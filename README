@@ -133,3 +133,9 @@ TODO:
         Stepping over is not allowed not just through tags, entered inside of verbatim
         specials 't4ht='. All tag insertion specials, including 't4ht~<*' itself,
         should be examined as well.
+
+    Something unclear with file c-auto.h in QT 5.10.0 mingw64 kpathsea compilation:
+        c-auto.h is included in Build/source/texk/tex4htk/tex4ht.c, kpathsea/c-auto.h in Build/source/texk/kpathsea/config.h, neither of both existed nor actually needed.
+        kpathsea/c-auto.h has definition of HAVE_PWD_H which leads to problems in Build/source/texk/kpathsea/tilde.c
+        Problem solved by undefining of HAVE_PWD_H in Build/source/texk/tex4htk/kpathsea/config.h after inclusion of Build/source/texk/kpathsea/config.h
+        c-auto.h could be included in that place instead.
