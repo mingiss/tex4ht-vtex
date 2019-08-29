@@ -80,6 +80,7 @@ Build/source/texk/*
 Build/source/texk/tex4htk/*
 !Build/source/texk/tex4htk/Makefile*
 !Build/source/texk/tex4htk/configure*
+!Build/source/texk/tex4htk/c-auto.h
 !Build/source/texk/tex4htk/tex4ht*
 !Build/source/texk/tex4htk/t4ht*
 !Build/source/texk/tex4htk/envir*
