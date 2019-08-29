@@ -55,7 +55,7 @@ struct font_entry
     char *name, *gif_on, *ch_str, ch255;
     unsigned U_CHAR **str, *ch, *gif1;
     unsigned U_CHAR *accent, *accented;
-    unsigned int *accent_array, *accented_array, accent_N, accented_N;
+    uint *accent_array, *accented_array, accent_N, accented_N;
     char *math, *math_closing;
     INTEGER layout_dir;
     unsigned long rgba_color;
@@ -109,6 +109,6 @@ extern PLAIN_C void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job
 // converts TeX character code to unicode
 // tex_ch -- TeX character code
 // fnt_pars -- pointer to current font HFontPars object
-extern PLAIN_C void get_uni_ch(int /* UniChar */ *wch_buf, unsigned int wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var);
+extern PLAIN_C void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var);
 
 #endif // #ifndef TEX4HT_H_ADD_INCLUDED

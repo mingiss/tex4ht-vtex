@@ -166,7 +166,7 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
                                 pars.m_ChLast = tex_code;
 
                             UniStr utf16_str;
-                            for (int cpos = 0; cpos < codes[2].length(); cpos += 4)
+                            for (uint cpos = 0; cpos < codes[2].length(); cpos += 4)
                             {
                                 string cstr = "0000";
                                 cstr += codes[2].substr(cpos, 4);
@@ -220,7 +220,7 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
 cout << ":::: " << fnt_name << " first: " << ppars->m_ChFirst << " last: " << ppars->m_ChLast << endl;
 }
 
-void get_uni_ch(int /* UniChar */ *wch_buf, unsigned int wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var)
+void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var)
 {
     if ((!wch_buf) || (wch_buf_size == 0))
         return;
@@ -233,7 +233,7 @@ void get_uni_ch(int /* UniChar */ *wch_buf, unsigned int wch_buf_size, int tex_c
     if (it == ppars->m_mapTexUniTable.end())
         return;
 
-    int ix = 0;
+    uint ix = 0;
     for (UniStr::const_iterator is = it->second.begin(); is != it->second.end(); is++)
     {
         const char *ch_str = NULL;

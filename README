@@ -134,8 +134,9 @@ TODO:
         specials 't4ht='. All tag insertion specials, including 't4ht~<*' itself,
         should be examined as well.
 
-    Something unclear with file c-auto.h in QT 5.10.0 mingw64 kpathsea compilation:
+    Something unclear with file c-auto.h in QT 5.10.0 mingw64 kpathsea compilation (mingw-w64_i686-7.1.0-posix-dwarf-rt_v5-rev0):
         c-auto.h is included in Build/source/texk/tex4htk/tex4ht.c, kpathsea/c-auto.h in Build/source/texk/kpathsea/config.h, neither of both existed nor actually needed.
+        In Qt_5_10_0_MinGW_32bit compilation c-auto.h was claimed, therefore created Build/source/texk/tex4htk/c-auto.h as a stub, manually from Build/source/texk/tex4htk/c-auto.in
         kpathsea/c-auto.h has definition of HAVE_PWD_H which leads to problems in Build/source/texk/kpathsea/tilde.c
         Problem solved by undefining of HAVE_PWD_H in Build/source/texk/tex4htk/kpathsea/config.h after inclusion of Build/source/texk/kpathsea/config.h
         c-auto.h could be included in that place instead.

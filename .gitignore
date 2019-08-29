@@ -86,6 +86,8 @@ Build/source/texk/tex4htk/*
 !Build/source/texk/tex4htk/envir*
 !Build/source/texk/tex4htk/ProjData*
 
+!Build/source/texk/tex4htk/kpathsea
+
 !Build/source/texk/tex4htk/ac
 Build/source/texk/tex4htk/ac/*
 !Build/source/texk/tex4htk/ac/withenable.ac
