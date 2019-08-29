@@ -38,7 +38,7 @@ SOURCES += tex4ht.c \
     ../kpathsea/xmalloc.c \
     ../kpathsea/xstrdup.c \
     ../kpathsea/fn.c \
-#    ../kpathsea/knj.c \
+    ../kpathsea/knj.c \
     ../kpathsea/kdefault.c \
     ../kpathsea/path-elt.c \
     ../kpathsea/concat.c \
