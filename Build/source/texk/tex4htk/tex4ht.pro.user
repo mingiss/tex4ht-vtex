@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.5.0, 2019-08-29T16:13:03. -->
+<!-- Written by QtCreator 4.5.0, 2019-08-30T15:01:15. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -537,10 +537,10 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:F:/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk/tex4htk/tex4ht.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">steinmann05.htpicture.dvi -cunihtf</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">tex4ht.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory"></value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory">F:/vtex/D/kp/tex4ht/tasks/__tex4ht_20190822_1_129163_DGBook_nepagamina_htpicture/test/dgbook/steinmann/steinmann05</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">F:/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk/build-tex4ht-mingw64-Debug</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>

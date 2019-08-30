@@ -3315,7 +3315,7 @@ static void  put_alt_ch
     unsigned U_CHAR * p = NULL;
 if (font_tbl[cur_fnt].str && (chr > 0) &&
     (chr <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f /* + 1 ??? */)) // (chr <= design_n)) ???
-        p = font_tbl[cur_fnt].str[chr-1];
+        p = font_tbl[cur_fnt].str[chr - font_tbl[cur_fnt].char_f - 1];
 if (p)
 {
 if( gif_ch )  print_f( (char *) p );  
@@ -8533,6 +8533,8 @@ for( i = new_font.char_f; i <= new_font.char_l ; i++ ){
 
    new_font.str =  m_alloc(unsigned char*, n_gif);
    new_font.str[0] = &null_str;
+   for (int ii = 1; ii < n_gif; ii++)
+      new_font.str[ii] = NULL;
 
    } // if (!otf_pars)
 // ---------------------------------------------
