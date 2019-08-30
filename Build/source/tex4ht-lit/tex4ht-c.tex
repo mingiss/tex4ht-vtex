@@ -8935,7 +8935,7 @@ new_font.design_sz = (INTEGER) get_unt(4);
 
 
 \<vars\><<<
-static char*  new_font_name;
+static char*  new_font_name = NULL;
 >>>
 
 
@@ -10255,7 +10255,7 @@ Lynx introduces a space before and after each figure.
 
 \<get html characters\><<<
 {      U_CHAR str[256];
-       int i, design_n, n_gif;
+       int i, design_n, n_gif = 256, n_str;
        `<font looping variables`>
    n_gif = new_font.char_l - new_font.char_f + 1;
    new_font.ch255 = 0;  
@@ -10296,8 +10296,12 @@ Lynx introduces a space before and after each figure.
 
    design_n = 0;
       `<load file of characters`>
+   n_str = design_n?design_n:n_gif;
    new_font.str = (unsigned U_CHAR **) r_alloc((void *)   new_font.str,
-                     (size_t) ( (design_n?design_n:1) * sizeof(char *)) );
+                     (size_t) (n_str * sizeof(char *)) );
+   new_font.str[0] = &null_str;
+   for (int ii = 1; ii < n_str; ii++)
+      new_font.str[ii] = NULL;
    `<merge new html font with old ones`>
 }
 >>>
@@ -10528,7 +10532,9 @@ Don't we loose some vital info here? Were this comes from?
 
 \<merge new html font with old ones\><<<
 for( i = fonts_n; i--; )
-  if( eq_str(html_font[i].name, new_font_name) ){       int k;
+  if (new_font_name && html_font[i].name &&
+        new_font_name[0] && html_font[i].name[0] && // not merging nameless fonts
+        eq_str(html_font[i].name, new_font_name) ){       int k;
      k = html_font[i].i;
 
      if (new_font.gif1)
