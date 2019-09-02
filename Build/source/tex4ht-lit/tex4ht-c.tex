@@ -2770,7 +2770,8 @@ while( special_n-- > 0 ) {
 } 
 *p = '\0';
 p = post;  
-while( special_n-- > 0 ) { *(p++)=get_char(); }    *p='\0';
+while( special_n-- > 0 ) *(p++) = get_char();
+*p = '\0';
 >>>
 
 
@@ -3826,8 +3827,7 @@ static BOOL `<radical-line-off`> = FALSE;
 
 \<ruler ch\><<<
 if( !special_n ){ rule_ch = '\0'; }
-else            { while( special_n-- > 0 ){ rule_ch = get_char(); }
-                }
+else            { while( special_n-- > 0 ) rule_ch = get_char(); }
 >>>
 
 
@@ -3924,7 +3924,7 @@ case `<def 4 byte font`>:   (void) get_char();
 case `<def 3 byte font`>:   (void) get_char();
 case `<def 2 byte font`>:   (void) get_char();
 case `<def 1 byte font`>: {   
-  for( i=0; i<14; i++ ){ ch = get_char(); }
+  for( i=0; i<14; i++ ) ch = get_char();
   for( i=ch + get_char(); i>0; i--) (void) get_char();
   break;
 }
@@ -4674,7 +4674,7 @@ if( p != (struct files_rec*) 0 ){
 \<find file record\><<<
 i = 0;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ){  name[i++] = get_char(); }
+while(  special_n-- > 0 ) name[i++] = get_char();
 for( p = opened_files; p != (struct files_rec*) 0;  p = p->next ){ 
   if( eq_str(p->name, name) ){ break; }
 }
@@ -4771,7 +4771,7 @@ the return value is 0 iff the platform does not support system calls.
               struct sys_call_rec *p;
               BOOL flag;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ){  name[i++] = get_char(); }
+while(  special_n-- > 0 ) name[i++] = get_char();
 (IGNORED) printf("System call: %s\n", name);
 `<flag = permission for system calls`>
 if( flag ){
@@ -4851,7 +4851,7 @@ static struct sys_call_rec *system_calls = (struct sys_call_rec *) 0;
     int i=0;
     FILE* file;      
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ){  name[i++] = get_char(); }
+while(  special_n-- > 0 ) name[i++] = get_char();
 file  = f_open(name, READ_TEXT_FLAGS); 
 if( file ) {
   `<open output file`>
@@ -4887,7 +4887,7 @@ if( special_n-- ){
   code = get_char();    
   while( special_n > 254 ){ (void) get_char(); special_n--; }
   p = str;  n = special_n;
-  while( special_n-- ) { *(p++) = get_char(); }
+  while( special_n-- ) *(p++) = get_char();
   *p = '\0';
   `<search counter`>
   `<act on counter`>
@@ -5899,7 +5899,9 @@ else{
 
 \<out gif filename\><<<
 {    U_CHAR str[256], *ch;
-   ch = str;   while( --i )  *(ch++) =  get_char();  *ch = '\0';
+   ch = str;
+   while( --i )  *(ch++) =  get_char();
+   *ch = '\0';
    script(font_gif, job_name ,page_n+1, str);
 }
 >>>
@@ -6039,7 +6041,7 @@ case     `<font int`>: {    int i;
    cur_font[0] = ch - `<font 1-byte`> + 2;
    cur_font[1] = ch;
    for( i=2; i <= cur_font[0]; i++ ){ 
-      ch = get_char();    idv_char( ch );   
+      ch = get_char();    idv_char( ch );
       cur_font[i] = ch;   file_n++;         }
    break;  }
 >>>
@@ -7271,7 +7273,7 @@ case `<def 4 byte font`>: (void) get_char();
 case `<def 3 byte font`>: (void) get_char();   
 case `<def 2 byte font`>: (void) get_char();   
 case `<def 1 byte font`>: {    int i;
-  for( i=14; i; i-- ){  ch = get_char(); }
+  for( i=14; i; i-- ) ch = get_char();
   i = ch +  get_char();  
   (IGNORED) fseek(dvi_file, (long) i, `<relative file addr`>);
   break;  }
@@ -9669,12 +9671,12 @@ lig_kern_table_length          = (int) fget_int(font_file,2);
 kern_table_length              = (int) fget_int(font_file,2);
 extensible_char_table_length   = (int) fget_int(font_file,2);
 num_font_parameters            = (int) fget_int(font_file,2);
-if( file_length != ( 6                + header_length
+if (file_length != ( 6                + header_length
      - new_font.char_f              + new_font.char_l + 1
      + new_font.wtbl_n              + new_font.htbl_n
      + new_font.dtbl_n              + it_correction_table_length
      + lig_kern_table_length        + kern_table_length
-     + extensible_char_table_length + num_font_parameters  )  
+     + extensible_char_table_length + num_font_parameters  )
   ){ err_i_str(15,file_name); }
 >>>
 
@@ -11178,7 +11180,7 @@ What is the difference between the following two cases?
 
 
 \<insert standard char\><<<
-if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);  
+if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);
 } else{ `<put char(chr)`> }
 >>>
 
@@ -11872,7 +11874,7 @@ img_alt = m_alloc(char, (int) 7);
 p = gif_alt[gif_flag];
 if( p )
   if( *p ){
-     print_f(p);  put_alt_ch(chr,ch_str_flag);   
+     print_f(p);  put_alt_ch(chr,ch_str_flag);
 }
 >>>
 
@@ -12113,7 +12115,7 @@ if( span_on ){
    `<ord of chr`>
    `<close for chr`>
 }
-put_alt_ch(chr,ch_str_flag);  
+put_alt_ch(chr,ch_str_flag);
 if( span_on ){
    `<end for chr`>
 }
@@ -17346,6 +17348,7 @@ static long cond_int( n )
 "File not found: %s\n",               // ERR_FILE_NFOUND
 "File read error: %s\n",              // ERR_FILE_READ
 "Improper file format: %s\n",         // ERR_FILE_FORMAT
+// "OTF processing FT_Error: %s\n",   // ERR_FREETYPE_ERROR
 >>>
 
 \<vars\><<<

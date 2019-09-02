@@ -1816,7 +1816,7 @@ case
 case 
 243 
 : {
-  for( i=0; i<14; i++ ){ ch = get_char(); }
+  for( i=0; i<14; i++ ) ch = get_char();
   for( i=ch + get_char(); i>0; i--) (void) get_char();
   break;
 }
@@ -8245,7 +8245,7 @@ lig_kern_table_length          = (int) fget_int(font_file,2);
 kern_table_length              = (int) fget_int(font_file,2);
 extensible_char_table_length   = (int) fget_int(font_file,2);
 num_font_parameters            = (int) fget_int(font_file,2);
-if( file_length != ( 6                + header_length
+if (file_length != ( 6                + header_length
      - new_font.char_f              + new_font.char_l + 1
      + new_font.wtbl_n              + new_font.htbl_n
      + new_font.dtbl_n              + it_correction_table_length
@@ -9744,7 +9744,7 @@ case
 case 
 243 
 : {
-  for( i=0; i<14; i++ ){ ch = get_char(); }
+  for( i=0; i<14; i++ ) ch = get_char();
   for( i=ch + get_char(); i>0; i--) (void) get_char();
   break;
 }
@@ -9925,7 +9925,7 @@ if( special_n ){
     int i=0;
     FILE* file;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ){  name[i++] = get_char(); }
+while(  special_n-- > 0 ) name[i++] = get_char();
 file  = f_open(name, READ_TEXT_FLAGS);
 if( file ) {
   
@@ -9948,7 +9948,7 @@ if( special_n > 0 ){
 
 i = 0;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ){  name[i++] = get_char(); }
+while(  special_n-- > 0 ) name[i++] = get_char();
 for( p = opened_files; p != (struct files_rec*) 0;  p = p->next ){
   if( eq_str(p->name, name) ){ break; }
 }
@@ -10006,7 +10006,7 @@ if( q == (struct files_rec*) 0 ){
               struct sys_call_rec *p;
               BOOL flag;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ){  name[i++] = get_char(); }
+while(  special_n-- > 0 ) name[i++] = get_char();
 (IGNORED) printf("System call: %s\n", name);
 
 flag = FALSE;
@@ -10231,7 +10231,8 @@ while( special_n-- > 0 ) {
 }
 *p = '\0';
 p = post;
-while( special_n-- > 0 ) { *(p++)=get_char(); }    *p='\0';
+while( special_n-- > 0 ) *(p++) = get_char();
+*p='\0';
 
 
 p = m_alloc(char, 1 + (int) strlen((char *) pre));
@@ -10368,7 +10369,7 @@ case
 case 
 243 
 : {    int i;
-  for( i=14; i; i-- ){  ch = get_char(); }
+  for( i=14; i; i-- ) ch = get_char();
   i = ch +  get_char();
   (IGNORED) fseek(dvi_file, (long) i, 
 1
@@ -10722,8 +10723,7 @@ if( special_n ){
   break; }
   case '_': { 
 if( !special_n ){ rule_ch = '\0'; }
-else            { while( special_n-- > 0 ){ rule_ch = get_char(); }
-                }
+else            { while( special_n-- > 0 ) rule_ch = get_char(); }
 
   break; }
   case 'D': { 
@@ -10900,7 +10900,7 @@ if( special_n-- ){
   code = get_char();
   while( special_n > 254 ){ (void) get_char(); special_n--; }
   p = str;  n = special_n;
-  while( special_n-- ) { *(p++) = get_char(); }
+  while( special_n-- ) *(p++) = get_char();
   *p = '\0';
   
 q = counter;
@@ -11372,7 +11372,7 @@ case
 case 
 243 
 : {    int i;
-  for( i=14; i; i-- ){  ch = get_char(); }
+  for( i=14; i; i-- ) ch = get_char();
   i = ch +  get_char();
   (IGNORED) fseek(dvi_file, (long) i, 
 1
@@ -12755,7 +12755,9 @@ visible_cnt = TRUE;
   else switch( get_char() ){
      case '+': { 
 {    U_CHAR str[256], *ch;
-   ch = str;   while( --i )  *(ch++) =  get_char();  *ch = '\0';
+   ch = str;
+   while( --i ) *(ch++) = get_char();
+   *ch = '\0';
    script(font_gif, job_name ,page_n+1, str);
 }
 
