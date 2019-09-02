@@ -40,6 +40,11 @@ Prerequisites:
                 http://gnuwin32.sourceforge.net/packages/m4.htm
                 http://gnuwin32.sourceforge.net/packages/regex.htm
 
+    Additionally are provided QT v.5 (QT Creator v.4) build script, file
+            Build/source/texk/tex4htk/tex4ht.pro
+        QT tools for build in QT Creator IDE or qmake environments could be found here:
+            https://www.qt.io/ide/ 
+
 Build:
 
     - mount current TL repository version to some local path:
