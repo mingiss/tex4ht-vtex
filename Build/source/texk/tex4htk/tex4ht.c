@@ -8861,7 +8861,6 @@ switch( j ){
   case 2: { new_font.ch[i] = *str; break; }
   default: {                           unsigned U_CHAR  *p;
     p = m_alloc(unsigned U_CHAR, j);
-    p[0] = '\0';
     if (new_font.str && (design_n >= 0) && (design_n < n_gif))
             new_font.str[design_n] = p;
     if( design_n>255 ){ design_n--; warn_i(35);}
