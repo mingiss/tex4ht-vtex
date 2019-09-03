@@ -508,7 +508,7 @@ static BOOL sigint_handler(ARG_I(DWORD));
 static BOOL  sigint_handler(dwCtrlType)  DWORD dwCtrlType
 ;{  
   `<avoid warning of unused dwCtrlType`>
-  err_i(32);
+  err_i(ERR_CTRLC);
   return FALSE;      `% return value obligatory `%
 }
 #endif
@@ -1135,11 +1135,11 @@ sig_err(s)  int s
   (void) signal(s,SIG_IGN);  `%ignore the signal`%
   switch( s ){
 #ifdef SIGSEGV
-    case SIGSEGV: err_i(30); 
+    case SIGSEGV: err_i(ERR_STO_ADDR); 
 #endif
-    case SIGFPE : err_i(31);  
+    case SIGFPE : err_i(ERR_FLOAT);  
 #if defined(SIGINT) && !defined(WIN32)
-    case SIGINT : err_i(32);
+    case SIGINT : err_i(ERR_CTRLC);
 #endif
   } 
   `<DJGPP signals`>
@@ -1774,7 +1774,7 @@ in cases that the users insert for \`'$2' file names with extension.
        break; 
    } }
    if( (dvi_file = fopen(job_name, READ_BIN_FLAGS)) == NULL ){
-      warn_i_str(1, job_name); bad_in_file(job_name);
+      warn_i_str(ERR_IN_FILE, job_name); bad_in_file(job_name);
 }  }
 >>>
 
@@ -1884,7 +1884,7 @@ if( no_root_file ){
 } else { 
           U_CHAR str[256], *p;
    p = str;  while( special_n-- ){ *p++ = get_char(); }  *p = '\0';
-   warn_i_str(43,str); 
+   warn_i_str(ERR_SPC_IGNORE, str); 
 }
 >>>
 
@@ -2351,7 +2351,7 @@ static int  stack_len;
      `<scan font entry`> 
    } 
    `<end loading fonts`>
-   if( missing_fonts ) err_i(14);
+   if( missing_fonts ) err_i(ERR_NO_FONTS);
 #ifndef KPATHSEA
    `<close old cache file`>
    `<set new cache file`>
@@ -4442,10 +4442,10 @@ static U_CHAR  *next_str = (char *) 0;
 \<code := ...\><<<
 while( special_n-- > 0 ){
   digit = get_char() - '0';
-  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(41,digit+'0') ; }
+  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(ERR_SPC_BAD_CHR, digit + '0') ; }
   else { code = code * 10 + digit; }
 }
-if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(41,'?') ; }
+if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
 >>>
 
 \<send ch to next ch\><<<
@@ -4650,7 +4650,7 @@ for( q = opened_files; q != (struct files_rec*) 0;  q = q->next ){
   }
 }
 if( q == (struct files_rec*) 0 ){
-   warn_i_str(51,q->name);
+   warn_i_str(ERR_BACK_FILE, q->name);
    break;
 }
 >>>
@@ -4859,7 +4859,7 @@ if( file ) {
     (IGNORED)  put_4ht_ch(ch,cur_o_file);     
   }
   (IGNORED) fclose(file);
-} else { warn_i_str( 1, name ); }
+} else { warn_i_str(ERR_IN_FILE, name ); }
 >>>
 
 
@@ -5170,7 +5170,7 @@ static void insert_ch_map( ch, `<ch: 1, ruler: 0`> )
    `<get row and col for ch`>
    if(ch != 10){
       if( (ch_map[row].max > MAX_MAP_LINE) || (col > MAX_MAP_LINE) ){
-        if( ok_map ){ warn_i_int_2( 25, MAX_MAP_LINE, ch);  
+        if( ok_map ){ warn_i_int_2(ERR_MAP_LINE_OVFL, MAX_MAP_LINE, ch);  
                       ok_map = FALSE; }
       }else{  `<adjust boundary ch`>
          if( row < min_map_line ) min_map_line = row;
@@ -5206,7 +5206,7 @@ static U_CHAR ok_map = TRUE;
 {          double x;
    row = (int) ( (y_val>0? y_val : 0.0) / (double) yresolution + 0.5);
    if ((row >= HEIGHT) || (row < 0)){
-     if( ok_map ){ warn_i_int_2( 34, row, ch); ok_map = FALSE; }
+     if( ok_map ){ warn_i_int_2(ERR_MAP_ROWS_OVFL, row, ch); ok_map = FALSE; }
      return; }
    x = (x_val>0? x_val : 0.0 ) / (double) xresolution + 0.75;
    col = (int) x;
@@ -5441,7 +5441,7 @@ We need memory of order 2 times the number of characters.
 
 \<dump ch-map at end of page\><<<
 if( ch_map_flag ){ 
-   warn_i(27);  `% dump_ch_map();`%  init_ch_map(); }
+   warn_i(ERR_PBR);  `% dump_ch_map();`%  init_ch_map(); }
 >>>
 
 \`'dump_ch_map();' creates overflow problems here.
@@ -5634,7 +5634,7 @@ idv_char( ch );
      if( id_version != -1 ){
         if( (*q < '0') || (*q > '9') ){
            id_version = -1;
-           warn_i(53);
+           warn_i(ERR_PAR_V);
         }
         id_version =  id_version * 10 + *q - '0';
      }  
@@ -5900,7 +5900,7 @@ else{
 \<out gif filename\><<<
 {    U_CHAR str[256], *ch;
    ch = str;
-   while( --i )  *(ch++) =  get_char();
+   while( --i ) *(ch++) = get_char();
    *ch = '\0';
    script(font_gif, job_name ,page_n+1, str);
 }
@@ -5969,7 +5969,7 @@ case `<retrieve loc op`>: {      long long cur_x, cur_y;
    stack_depth--; 
    cur_x = x_val;  cur_y = y_val;  pop_stack();
    if( dvi_flag ){
-      if( stack_depth<0 ){ warn_i_int( 24,  page_n );
+      if( stack_depth<0 ){ warn_i_int(ERR_SPC_GRP,  page_n);
                            `<push curr state`>     }
       cond_idv_char( ch );                     
    }
@@ -6051,7 +6051,7 @@ default: {
   if( (ch < `<font 0`>) || (ch > `<font 63`>)   ){
      if( `<font defs for xdv's idv?`> ){
         `<xdv font def for idv`>
-     } else { err_i(23); }
+     } else { err_i(ERR_IMPL); }
   }
   else {  idv_char( ch );  file_n++; 
           cur_font[0] = 1;    cur_font[1] = ch;   }
@@ -6102,7 +6102,7 @@ BOOL visible_cnt=FALSE;
 
 \<insert the char code\><<<
 if( (ch = i + font_tbl[cur_fnt].char_f) > 127 )  {
-  if( ch < 256 ) cond_idv_char(133);  else  warn_i(23);   }
+  if( ch < 256 ) cond_idv_char(133);  else  warn_i(ERR_IMPL);   }
 cond_idv_char( ch );    
 mag = 10;
 if (font_tbl[cur_fnt].design_sz > 0)
@@ -6798,7 +6798,7 @@ if( (in_ch = get_char()) == '>' ) {
     special_n = 0;
 #endif
 } else {
-  if( !group_dvi ){ warn_i(42); }
+  if( !group_dvi ){ warn_i(ERR_SPC_NO_TILDE); }
   (IGNORED) fseek(dvi_file, (long) --special_n, 
                              `<relative file addr`>);  
   special_n = 0;  
@@ -7006,7 +7006,7 @@ static int ignore_end_group;
 \<check forward deliveries\><<<
 while( stack[stack_n-1].begin ){
                                struct group_info *p;      
-   warn_i_str(44, stack[stack_n-1].begin->info);
+   warn_i_str(ERR_SPC_PUSH, stack[stack_n-1].begin->info);
    p =  stack[stack_n-1].begin;
    stack[stack_n-1].begin = p->next;    
    free((void *)  p );  
@@ -7055,7 +7055,7 @@ case `<sv loc op`>: {
    `<stack-id into linked list`>
    stack[stack_n].stack_id = stack_id++;
    `<push-id + 1`>    stack_n++; 
-   if( stack_n > `<size of stack for nested boxes`> ){ warn_i(40); }
+   if( stack_n > `<size of stack for nested boxes`> ){ warn_i(ERR_SYS_40); }
    break; 
 }
 case `<retrieve loc op`>: { 
@@ -7293,8 +7293,8 @@ case     `<font int`>: {
   break; }
 default: {
   if( (ch < `<font 0`>) || (ch > `<font 63`>) ) {
-     if( ch == `<end page op`> ) { warn_i(46); }
-     else { warn_i_int(45,ch); }
+     if( ch == `<end page op`> ) { warn_i(ERR_SPC_PBR); }
+     else { warn_i_int(ERR_SPC_BAD_CHR_CODE, ch); }
   } else { cr_fnt = ch - `<font 0`>;  
          cr_fnt = search_font_tbl( cr_fnt );    
   }
@@ -7441,7 +7441,7 @@ static void push_stack(MYVOID)
    `<push inherit del`>
    stack_n++;              
 if( stack_n > `<size of stack for nested boxes`> ){
-  warn_i(40);
+  warn_i(ERR_SYS_40);
 }
    `<init end math accented`>
 }
@@ -8064,7 +8064,7 @@ if((
     ( str[n] != '/') && (str[n] != '-')
    ) || (n==0) ){
   str[n+1] = '\0';
-  err_i_str(38,str);  
+  err_i_str(ERR_SPC_TILDE_STR, str);  
 }
 p->action = str[n]; str[n] = '\0';
 p->path = m_alloc(char,n+1);
@@ -8357,7 +8357,7 @@ if( *(p->path) != '\0' ) {
 \<warn 38 for path\><<<
             char str[256];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
-(IGNORED) strct(str,p->info); warn_i_str(38,str);
+(IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 >>>
 
 
@@ -8696,7 +8696,7 @@ pos_text = pos_line = end_pos_body = end_pos_text = pos_body =
   i = 0;  `<scan templates for pos`>
   `<scan constants for pos`>
   if( (i != 10) || special_n ){ 
-    warn_i_str(39,pos_text); 
+    warn_i_str(ERR_SPC_BSL_STR, pos_text); 
     *(pos_text = end_pos_body = pos_line = 
       end_pos_text = pos_body) = '\0';
   }
@@ -8914,7 +8914,7 @@ if( (font_tbl_size + 1) < MAXFONTS )
    free((void *)  new_font_name);   font_tbl_size++;
 }
 #ifdef MAXFONTS
- else err_i_int(17, MAXFONTS);
+ else err_i_int(ERR_MAXFONTS, MAXFONTS);
 #endif
 >>>
 
@@ -8955,7 +8955,7 @@ switch( ch ){
                       get_unt(ch - `<def 1 byte font`> + 1); break; }
   case `<def 4 byte font`>: {  
      new_font.num = (INTEGER) get_int(4);  break; }
-  default: err_i(8); 
+  default: err_i(ERR_FONT_DEF); 
 }
 >>>
 
@@ -9333,7 +9333,7 @@ if (new_font.design_sz > 0)
    `<search dirs for xdv font`>
 /*
    if( font_file == NULL ){
-      dump_env();      err_i_str(1,file_name);  
+      dump_env();      err_i_str(ERR_IN_FILE, file_name);  
       missing_fonts = TRUE;
       new_font.char_f = DEF_CHAR_F;
       new_font.char_l = DEF_CHAR_L;
@@ -9536,7 +9536,7 @@ static void doGlyphArray(yLocs)
 \<first definition of font?\><<<
 {        int i;
    for( i=font_tbl_size-1; i >= 0;  i-- )
-     if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+     if( new_font.num == font_tbl[i].num )  warn_i(ERR_FONT_DEF_REP);   }
 >>>
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9561,7 +9561,7 @@ static int search_font_tbl( cur_fnt )
    for( i=0; i<font_tbl_size; i++){
      if( font_tbl[i].num == cur_fnt ){ return i; }
    }
-   err_i_int( 6,cur_fnt );
+   err_i_int(ERR_FONT_NUM, cur_fnt );
    return 0;
 }
 >>>
@@ -9593,7 +9593,7 @@ static int search_font_tbl( cur_fnt )
    if((font_file == NULL) && (otf_pars == NULL))
 #endif
    {
-      dump_env();      err_i_str(1,file_name);  
+      dump_env();      err_i_str(ERR_IN_FILE, file_name);  
       missing_fonts = TRUE;
       new_font.char_f = DEF_CHAR_F;
       new_font.char_l = DEF_CHAR_L;
@@ -9677,7 +9677,7 @@ if (file_length != ( 6                + header_length
      + new_font.dtbl_n              + it_correction_table_length
      + lig_kern_table_length        + kern_table_length
      + extensible_char_table_length + num_font_parameters  )
-  ){ err_i_str(15,file_name); }
+  ){ err_i_str(ERR_HEAD, file_name); }
 >>>
 
 
@@ -9745,7 +9745,7 @@ sum should be disregarded.
    checksum = ( INTEGER) fget_int(font_file,4);
    if( checksum && new_font_checksum
                 && (checksum  != new_font_checksum) )
-    {   warn_i(16);
+    {   warn_i(ERR_CHKSUM);
         (IGNORED) fprintf(stderr,"%s: %d\ndvi file: %d\n",file_name,
                      checksum, new_font_checksum);
 }   }
@@ -10381,7 +10381,7 @@ iteration searches for aliased font.
 #endif
             ){
      if( errCode == 0 ){ errCode= 21; }
-     warn_i_str(21,search_font_name); 
+     warn_i_str(ERR_HTF_FILE, search_font_name); 
      (IGNORED) fprintf(stderr,
                "%d--%d)\n", new_font.char_f, new_font.char_l);
      dump_env();
@@ -10400,7 +10400,7 @@ loopName[0] = '\0';
 if( eq_str( new_font_name, loopName) ){
      U_CHAR name[256];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
-    err_i_str(1, name);
+    err_i_str(ERR_IN_FILE, name);
 } else {
    (IGNORED) strcpy((char *) loopName, (char *) new_font_name);
 }
@@ -10408,7 +10408,7 @@ loopBound++;
 if( loopBound > 10 ){
    U_CHAR name[256];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
-   err_i_str(1, name);
+   err_i_str(ERR_IN_FILE, name);
 }
 >>>
 
@@ -10474,7 +10474,7 @@ but I think this should be fixed anyway).
     if( chr != ' ' ) search_font_name[font_name_n++] = chr;
   }
   search_font_name[font_name_n]  = '\0';
-  if( eq_str( search_font_name, new_font_name) ){ err_i_str(20, new_font_name); }
+  if( eq_str( search_font_name, new_font_name) ){ err_i_str(ERR_HTF_FILE_FMT, new_font_name); }
   (IGNORED) printf("Searching ``%s.htf' for ``%s.htf'\n", 
                                         search_font_name, new_font.name);
   htf_to_lg(html_font, new_font_name, fonts_n, file);
@@ -10675,7 +10675,7 @@ if( (digit=str[j-1]) == '\\' )
         } else { value -= '0';  base = 10; j--; }
   } } }
   else{ if( value>255 ){ 
-            warn_i_int(28,value); 
+            warn_i_int(ERR_CHR_CODE_OVFL, value); 
             value = 32;  dump_htf( file );
         }
         str[j-1] = value; 
@@ -10683,13 +10683,13 @@ if( (digit=str[j-1]) == '\\' )
 else if ( indirect_ch ){
   j--;   digit -=  (digit>'9')?  'A'-10 : '0';
   if( (digit<0) || (digit>=base) ){
-      warn_i_int(29, str[j]);
+      warn_i_int(ERR_CHR_HTF, str[j]);
       digit = 0; dump_htf( file );
   }
   value = value*base + digit;
 } else if ( str[j-1]==10 ){
    dump_htf( file );
-   err_i_int(48, i+1);
+   err_i_int(ERR_ENTRY_LINE, i + 1);
 }
 >>>
 
@@ -10716,7 +10716,7 @@ switch( j ){
     p = m_alloc(unsigned U_CHAR, j);
     if (new_font.str && (design_n >= 0) && (design_n < n_gif))
             new_font.str[design_n] = p;
-    if( design_n>255 ){ design_n--; warn_i(35);}
+    if( design_n>255 ){ design_n--; warn_i(ERR_FNT_OVFL);}
     if( i==255 ){
        if( design_n == 255 ){
                 new_font.ch[i] = 0;           new_font.ch255 = 1; 
@@ -10746,7 +10746,7 @@ static int get_html_ch( file )   FILE*  file
 ;{                        int ch;
   if( (ch = (int) getc(file)) == EOF ) {
      dump_htf( file );
-     err_i_str(20, new_font_name);
+     err_i_str(ERR_HTF_FILE_FMT, new_font_name);
   }
   return ch;
 }
@@ -11141,7 +11141,7 @@ For some reason, bordlan cc+ complains if the
    "configuration for htf class %d (char %d of %s.htf)",
    gif_flag, ch,font_tbl[cur_fnt].name
   );
-warn_i_str(50,str); 
+warn_i_str(ERR_MISSING, str); 
 >>>
 
 \<img char without template\><<<
@@ -11788,7 +11788,7 @@ switch ( code ){
   case '=': { `<insert css name of ch`>  break; }
   case '|': { `<record string for htf class`>  break; }
   case ',': { `<don't report next htf class to lg`>  break; }
-  default: { warn_i_int( 36, code); }
+  default: { warn_i_int(ERR_SPC_CHAR, code); }
 }
 span_on = span_name_on && !pause_style; 
 if( q ) free((void *)  q);
@@ -12002,7 +12002,7 @@ if( n>`<n spans+2`> ){
 #endif
    }
 }
-if( bad_str ){  warn_i_str(37,err_str); }
+if( bad_str ){  warn_i_str(ERR_SPC_BAR_STR, err_str); }
 }
 >>>
 
@@ -12484,7 +12484,7 @@ for( i=n_gif; i--; ) {
 \<scan htf accent\><<<
 ch1 = 0;
 while( ((ch = (int) get_html_ch(file)) != del) ){
-     if( (ch < '0') || (ch > '9') ){ warn_i_int(48,i);  break; }
+     if( (ch < '0') || (ch > '9') ){ warn_i_int(ERR_ENTRY_LINE, i);  break; }
      ch1 = ch1 * 10 + ch - '0'; }
 new_font.accent_array = new_font.accent_N++?
       (unsigned int *) r_alloc((void *) new_font.accent_array,
@@ -12498,7 +12498,7 @@ new_font.accent[i] = new_font.accent_N;
 \<scan htf accented\><<<
 ch1 = 0;
 while( ((ch = (int) get_html_ch(file)) != del) ){
-     if( (ch < '0') || (ch > '9') ){ warn_i_int(48,i);  break; }
+     if( (ch < '0') || (ch > '9') ){ warn_i_int(ERR_ENTRY_LINE, i);  break; }
      ch1 = ch1 * 10 + ch - '0'; }
 new_font.accented_array = new_font.accented_N++?
       (unsigned int *) r_alloc((void *) new_font.accented_array,
@@ -13462,8 +13462,8 @@ tex4ht_env_file = p+2;
 >>>
 
 
-% if( !_access(p+2,F_OK) ) tex4ht_env_file = p+2; 
-% else warn_i_str(12,p+2);
+% if (!_access(p + 2, F_OK)) tex4ht_env_file = p + 2; 
+% else warn_i_str(ERR_DIR_ACC, p + 2);
 
 
 \<main's vars\><<<
@@ -13758,7 +13758,7 @@ do{                                       int int_ch;
                         (int_ch = (int) getc(dot_file))
         )       != '\n'){
     if( int_ch == EOF ){ *(ch-1)='\n';  break; }    
-    if( str[254] ){ warn_i_int(33, x);  break; }
+    if( str[254] ){ warn_i_int(ERR_SCPT_OVFL, x);  break; }
   }
 }while( (int) getc(dot_file) == x );
 *ch = '\0';
@@ -14041,7 +14041,7 @@ static struct env_var_rec * get_env_var( env_var )
                `<add env var dir`>        
            } }
          } while (from > TEX4HTTFM );
-      } else {  warn_i_str2( 49, env_var, TEX4HTTFM); }
+      } else {  warn_i_str2(ERR_ENV_VAR, env_var, TEX4HTTFM); }
     }
     return tfm_dirs;
 }
@@ -14066,15 +14066,15 @@ tfm_dirs = p;
          str = m_alloc(char, strlen((char *) HOME_DIR)+strlen((char *) base));
          (IGNORED) sprintf(str,"%s%s", HOME_DIR, base+1);
          if( _access(str,F_OK) ) {
-            warn_i_str2(49, env_var, str); base = NULL; }
+            warn_i_str2(ERR_ENV_VAR, env_var, str); base = NULL; }
          free((void *)  str);
      } else { 
          if( _access(base,F_OK) ) {
-            warn_i_str2(49, env_var, base); base = NULL; }
+            warn_i_str2(ERR_ENV_VAR, env_var, base); base = NULL; }
      }
    } else {    
      if( _access(base,F_OK) )  { 
-        warn_i_str2(49, env_var, base); base = NULL; }
+        warn_i_str2(ERR_ENV_VAR, env_var, base); base = NULL; }
 }  }
 >>>
 
@@ -14333,8 +14333,8 @@ static void com_dir(p)
 }
 >>>
 
-%   if( !_access(str,F_OK) ) return TRUE;
-%  warn_i_str(12,p+2);     return FALSE;
+%  if( !_access(str, F_OK) ) return TRUE;
+%  warn_i_str(ERR_DIR_ACC, p + 2);     return FALSE;
 
 
 
@@ -14534,7 +14534,7 @@ cache_dir[n+1] = '\0';
 
 \<BROKEN\><<<
 if( (file = f_open(cache_dir,flags)) == NULL ) {
-   warn_i_str( 47, cache_dir);
+   warn_i_str(ERR_FLS_NO_FILE, cache_dir);
 } else {
    return file;
 }
@@ -14945,7 +14945,7 @@ TEX4HTINPUTS=.;$TEXMF/tex4ht/base//;$TEXMF/tex4ht/ht-fonts/{$TEX4HTFONTSET}//
         (IGNORED) printf("setting TEX4HTFONTSET={%s}\n", export_str);
      }
   } else if( dump_htf_search ) {
-     warn_i_str( 50, "TEX4HTFONTSET for kpathsea" );
+     warn_i_str(ERR_MISSING, "TEX4HTFONTSET for kpathsea");
   }
 }
 >>>
@@ -15264,7 +15264,7 @@ with the assumption/hope  that  it will take care of the problem.
 p = kpse_find_file ( "texmf.cnf", kpse_cnf_format, 0);
 if( p ){
    (IGNORED) printf( "texmf.cnf = %s\n", p);
-} else { warn_i_str(1, "texmf.cnf" ); }
+} else { warn_i_str(ERR_IN_FILE, "texmf.cnf"); }
 p = (U_CHAR *) kpse_var_value( "TEX4HTINPUTS" );
 if( p ){
    (IGNORED) printf("TEX4HTINPUTS = %s\n", p);
@@ -15345,7 +15345,7 @@ if( !dot_file ) {                    U_CHAR * envfile;
     p = (char *) kpse_var_value( "TEX4HTINPUTS" );
     if( p ){
        (IGNORED)  printf( "TEX4HTINPUTS = %s\n", p );
-    } else {  warn_i_str( 50, "kpathsea variable TEX4HTINPUTS"); }
+    } else {  warn_i_str(ERR_MISSING, "kpathsea variable TEX4HTINPUTS"); }
   }
 }
 #endif
@@ -15461,7 +15461,7 @@ if( system(KPSEWHICH_CMD ">tex4ht.tmp") == 0 ){
    `<fileaddr = read tex4ht.tmp`>
    envfile= kpse_find_file (fileaddr, kpse_program_text_format, 0);
    if( envfile ){
-      warn_i_str( 50, 
+      warn_i_str(ERR_MISSING, 
           "search support for kpse_find_file--using kpsewhich calls instead"); 
 }  }
 >>>
@@ -16335,7 +16335,7 @@ special_n--;
 switch ( code = get_char() ){
   case '+': { put_4ht_off++; `<flush incomplete unicode`> break; }
   case '-': { if( put_4ht_off>0 ){ put_4ht_off--; }
-              else { warn_i_str(52, "@u-"); }
+              else { warn_i_str(ERR_SPC_QUEST, "@u-"); }
               break; }
 }
 >>>
@@ -16464,7 +16464,7 @@ while( TRUE ) {
 
 \<error 4hf fields\><<<
 if( err ){
-   warn_i_int(48,line_no); 
+   warn_i_int(ERR_ENTRY_LINE, line_no); 
    (IGNORED) printf( "%c", delimiter );
    for( p=in; p != in_p; p++ ){
      if( *p=='\0' ){
@@ -17285,7 +17285,7 @@ static long cond_int( n )
 \SubSection{Messages}
 
 \<warn and err messages\><<<
-`<command line options`>,                            `%0`%    // ERR_HELP
+`<command line options`>,                             `%0`%   // ERR_HELP
 "Can't find/open file ``%s'\n",                       `%1`%   // ERR_IN_FILE
 "Can't open output file for ``%s'\n",                 `%2`%   // ERR_OUT_FILE
 "Can't close file ``%s' (file is not open)\n",        `%3`%   // ERR_CLOSE_FILE
@@ -17306,7 +17306,7 @@ static long cond_int( n )
 "Improper signature at end of file ``%s.htf'\n",      `%18`%  // ERR_EOF_SIG
 "Improper signature at start of file ``%s.htf'\n",    `%19`%  // ERR_STA_SIG
 "Improper file ``%s.htf'\n",                          `%20`%  // ERR_HTF_FILE_FMT
-"Couldn't find font ``%s.htf' (char codes: ",        `%21`%   // ERR_HTF_FILE
+"Couldn't find font ``%s.htf' (char codes: ",         `%21`%  // ERR_HTF_FILE
 "File ``%s.htf' starts/ends with character code %d (instead of %d)\n",`%22`%  // ERR_HTF_STA_EOF
 "Implementation problem\n",                           `%23`%  // ERR_IMPL
 "Improper groups in \\special{t4ht+}... idv[%d]\n",   `%24`%  // ERR_SPC_GRP
@@ -17319,7 +17319,7 @@ static long cond_int( n )
 #ifdef DOS_WIN32
 "%c-script too long in tex4ht.env \n",                `%33`%  // ERR_SCPT_OVFL
 #else
-"%c-script too long in tex4ht.env (.tex4ht)\n",       `%33`%
+"%c-script too long in tex4ht.env (.tex4ht)\n",
 #endif
 "Too many rows (> %d) for map: ``%c'\n",              `%34`%  // ERR_MAP_ROWS_OVFL
 "More than 256 strings in font\n",                    `%35`%  // ERR_FNT_OVFL
@@ -17328,7 +17328,8 @@ static long cond_int( n )
 "\\special{t4ht~!%s}?\n",                             `%38`%  // ERR_SPC_TILDE_STR
 "\\special{t4ht\"...%s}?\n",                          `%39`%  // ERR_SPC_BSL_STR
 "System error 40\n",                                  `%40`%  // ERR_SYS_40
-"``%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",   `%41`% // ERR_SPC_BAD_CHR
+"``%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",
+                                                      `%41`%  // ERR_SPC_BAD_CHR
 "\\special{t4ht~...} without \\special{t4ht~}\n",     `%42`%  // ERR_SPC_NO_TILDE
 "Ignoring \\special{t4ht.%s}\n",                      `%43`%  // ERR_SPC_IGNORE
 "PUSH for \\special{t4ht<...%s}?\n",                  `%44`%  // ERR_SPC_PUSH
@@ -17336,18 +17337,16 @@ static long cond_int( n )
 "Page break in \\special{t4h~}...\n",                 `%46`%  // ERR_SPC_PBR
 "tex4ht.fls: Couldn't find file ``%s'\n",             `%47`%  // ERR_FLS_NO_FILE
 "Improper entry (line %d)\n",                         `%48`%  // ERR_ENTRY_LINE
-"Improper environment variable %s: ``%s'\n",           `%49`% // ERR_ENV_VAR
+"Improper environment variable %s: ``%s'\n",          `%49`%  // ERR_ENV_VAR
 "Missing %s\n",                                       `%50`%  // ERR_MISSING
-"Can't back from file ``%s\n'",                        `%51`% // ERR_BACK_FILE
+"Can't back from file ``%s\n'",                       `%51`%  // ERR_BACK_FILE
 "\\special{t4ht%s}?\n",                               `%52`%  // ERR_SPC_QUEST
-"Improper -v option\n",               // ERR_PAR_V    `%53`%
-#ifdef VTEX_SPACING_ADDONS
-"Option -r value out of range: %d\n", // ERR_PAR_R
-#endif
-"Buffer overflow: %s\n",              // ERR_BUF_OVFL
-"File not found: %s\n",               // ERR_FILE_NFOUND
-"File read error: %s\n",              // ERR_FILE_READ
-"Improper file format: %s\n",         // ERR_FILE_FORMAT
+"Improper -v option\n",                               `%53`%  // ERR_PAR_V
+"Option -r value out of range: %d\n",                 `%54`%  // ERR_PAR_R
+"Buffer overflow: %s\n",                              `%55`%  // ERR_BUF_OVFL
+"File not found: %s\n",                               `%56`%  // ERR_FILE_NFOUND
+"File read error: %s\n",                              `%57`%  // ERR_FILE_READ
+"Improper file format: %s\n",                         `%58`%  // ERR_FILE_FORMAT
 >>>
 
 \<vars\><<<
@@ -17457,13 +17456,13 @@ static void warn_i_str2(n,str1,str2)
 
 
 \<defines\><<<
-#define bad_arg            err_i(0)
-#define bad_in_file(name)   err_i_str(1,name)
-#define bad_out_file(name)  err_i_str(2,name)
-#define bad_special(name)   warn_i_str(3,name)
-#define bad_mem             err_i(4)
-#define bad_char(chr)       warn_i_int(5,chr)
-#define bad_dvi             err_i(7)
+#define bad_arg             err_i(ERR_HELP)
+#define bad_in_file(name)   err_i_str(ERR_IN_FILE, name)
+#define bad_out_file(name)  err_i_str(ERR_OUT_FILE, name)
+#define bad_special(name)   warn_i_str(ERR_CLOSE_FILE, name)
+#define bad_mem             err_i(ERR_MEM)
+#define bad_char(chr)       warn_i_int(ERR_BAD_CHAR, chr)
+#define bad_dvi             err_i(ERR_DVI_FILE)
 >>>
 
 
@@ -17524,13 +17523,13 @@ static void err_i_int(n,i)     int  n`;  int i
 
 \<check for extra special chars\><<<
 if( special_n > 0 ){
-   warn_i_int( 26, sv);  
+   warn_i_int(ERR_SPC_OVFL, sv);  
    while( special_n-- )  (IGNORED) putc( get_char(), stderr);
 }
 >>>
 
 \<special resolution err\><<<
-warn_i_int( 26, '!');
+warn_i_int(ERR_SPC_OVFL, '!');
 (IGNORED) putc( ch, stderr);
 while( special_n-- )  (IGNORED) putc( get_char(), stderr);
 >>>

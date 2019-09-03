@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2017-11-27-12:55), generated from tex4ht-c.tex
+/* tex4ht.c (2019-09-03-10:18), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -455,13 +455,13 @@ struct env_c_rec{
 #define gt_str(x,y) (strcmp(x,y)>0)
 
 
-#define bad_arg            err_i(0)
-#define bad_in_file(name)   err_i_str(1,name)
-#define bad_out_file(name)  err_i_str(2,name)
-#define bad_special(name)   warn_i_str(3,name)
-#define bad_mem             err_i(4)
-#define bad_char(chr)       warn_i_int(5,chr)
-#define bad_dvi             err_i(7)
+#define bad_arg             err_i(ERR_HELP)
+#define bad_in_file(name)   err_i_str(ERR_IN_FILE, name)
+#define bad_out_file(name)  err_i_str(ERR_OUT_FILE, name)
+#define bad_special(name)   warn_i_str(ERR_CLOSE_FILE, name)
+#define bad_mem             err_i(ERR_MEM)
+#define bad_char(chr)       warn_i_int(ERR_BAD_CHAR, chr)
+#define bad_dvi             err_i(ERR_DVI_FILE)
 
 
 #if defined(DOS_WIN32) || defined(__MSDOS__)
@@ -1146,7 +1146,7 @@ static const U_CHAR *warn_err_mssg[]={
 #ifdef DOS_WIN32
 "%c-script too long in tex4ht.env \n",                  // ERR_SCPT_OVFL
 #else
-"%c-script too long in tex4ht.env (.tex4ht)\n",       
+"%c-script too long in tex4ht.env (.tex4ht)\n",
 #endif
 "Too many rows (> %d) for map: `%c'\n",                // ERR_MAP_ROWS_OVFL
 "More than 256 strings in font\n",                      // ERR_FNT_OVFL
@@ -1155,7 +1155,8 @@ static const U_CHAR *warn_err_mssg[]={
 "\\special{t4ht~!%s}?\n",                               // ERR_SPC_TILDE_STR
 "\\special{t4ht\"...%s}?\n",                            // ERR_SPC_BSL_STR
 "System error 40\n",                                    // ERR_SYS_40
-"`%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",    // ERR_SPC_BAD_CHR
+"`%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",
+                                                        // ERR_SPC_BAD_CHR
 "\\special{t4ht~...} without \\special{t4ht~}\n",       // ERR_SPC_NO_TILDE
 "Ignoring \\special{t4ht.%s}\n",                        // ERR_SPC_IGNORE
 "PUSH for \\special{t4ht<...%s}?\n",                    // ERR_SPC_PUSH
@@ -1167,14 +1168,12 @@ static const U_CHAR *warn_err_mssg[]={
 "Missing %s\n",                                         // ERR_MISSING
 "Can't back from file `%s\n'",                         // ERR_BACK_FILE
 "\\special{t4ht%s}?\n",                                 // ERR_SPC_QUEST
-"Improper -v option\n",               // ERR_PAR_V    
-#ifdef VTEX_SPACING_ADDONS
-"Option -r value out of range: %d\n", // ERR_PAR_R
-#endif
-"Buffer overflow: %s\n",              // ERR_BUF_OVFL
-"File not found: %s\n",               // ERR_FILE_NFOUND
-"File read error: %s\n",              // ERR_FILE_READ
-"Improper file format: %s\n",         // ERR_FILE_FORMAT
+"Improper -v option\n",                                 // ERR_PAR_V
+"Option -r value out of range: %d\n",                   // ERR_PAR_R
+"Buffer overflow: %s\n",                                // ERR_BUF_OVFL
+"File not found: %s\n",                                 // ERR_FILE_NFOUND
+"File read error: %s\n",                                // ERR_FILE_READ
+"Improper file format: %s\n",                           // ERR_FILE_FORMAT
 
  "" };
 
@@ -1477,7 +1476,7 @@ static BOOL  sigint_handler
 if( dwCtrlType ){ (IGNORED) printf(" "); }
 
 
-  err_i(32);
+  err_i(ERR_CTRLC);
   return FALSE;      
 }
 #endif
@@ -1507,11 +1506,11 @@ sig_err
   (void) signal(s,SIG_IGN);  
   switch( s ){
 #ifdef SIGSEGV
-    case SIGSEGV: err_i(30);
+    case SIGSEGV: err_i(ERR_STO_ADDR);
 #endif
-    case SIGFPE : err_i(31);
+    case SIGFPE : err_i(ERR_FLOAT);
 #if defined(SIGINT) && !defined(WIN32)
-    case SIGINT : err_i(32);
+    case SIGINT : err_i(ERR_CTRLC);
 #endif
   }
   
@@ -2254,7 +2253,7 @@ tag
 {          double x;
    row = (int) ( (y_val>0? y_val : 0.0) / (double) yresolution + 0.5);
    if ((row >= HEIGHT) || (row < 0)){
-     if( ok_map ){ warn_i_int_2( 34, row, ch); ok_map = FALSE; }
+     if( ok_map ){ warn_i_int_2(ERR_MAP_ROWS_OVFL, row, ch); ok_map = FALSE; }
      return; }
    x = (x_val>0? x_val : 0.0 ) / (double) xresolution + 0.75;
    col = (int) x;
@@ -2295,7 +2294,7 @@ design_size_to_pt(
 
    if(ch != 10){
       if( (ch_map[row].max > MAX_MAP_LINE) || (col > MAX_MAP_LINE) ){
-        if( ok_map ){ warn_i_int_2( 25, MAX_MAP_LINE, ch);
+        if( ok_map ){ warn_i_int_2(ERR_MAP_LINE_OVFL, MAX_MAP_LINE, ch);
                       ok_map = FALSE; }
       }else{  
          if( row < min_map_line ) min_map_line = row;
@@ -2676,7 +2675,7 @@ if( stack_n >
 ((int) stack_len + 2)
 
  ){
-  warn_i(40);
+  warn_i(ERR_SYS_40);
 }
    
 stack[stack_n].accented  = FALSE;
@@ -2903,7 +2902,7 @@ static int search_font_tbl
    for( i=0; i<font_tbl_size; i++){
      if( font_tbl[i].num == cur_fnt ){ return i; }
    }
-   err_i_int( 6,cur_fnt );
+   err_i_int(ERR_FONT_NUM, cur_fnt );
    return 0;
 }
 
@@ -2926,7 +2925,7 @@ static int get_html_ch
 {                        int ch;
   if( (ch = (int) getc(file)) == EOF ) {
      dump_htf( file );
-     err_i_str(20, new_font_name);
+     err_i_str(ERR_HTF_FILE_FMT, new_font_name);
   }
   return ch;
 }
@@ -3621,7 +3620,7 @@ do{                                       int int_ch;
                         (int_ch = (int) getc(dot_file))
         )       != '\n'){
     if( int_ch == EOF ){ *(ch-1)='\n';  break; }
-    if( str[254] ){ warn_i_int(33, x);  break; }
+    if( str[254] ){ warn_i_int(ERR_SCPT_OVFL, x);  break; }
   }
 }while( (int) getc(dot_file) == x );
 *ch = '\0';
@@ -3754,15 +3753,15 @@ static struct env_var_rec * get_env_var
          str = m_alloc(char, strlen((char *) HOME_DIR)+strlen((char *) base));
          (IGNORED) sprintf(str,"%s%s", HOME_DIR, base+1);
          if( _access(str,F_OK) ) {
-            warn_i_str2(49, env_var, str); base = NULL; }
+            warn_i_str2(ERR_ENV_VAR, env_var, str); base = NULL; }
          free((void *)  str);
      } else {
          if( _access(base,F_OK) ) {
-            warn_i_str2(49, env_var, base); base = NULL; }
+            warn_i_str2(ERR_ENV_VAR, env_var, base); base = NULL; }
      }
    } else {
      if( _access(base,F_OK) )  {
-        warn_i_str2(49, env_var, base); base = NULL; }
+        warn_i_str2(ERR_ENV_VAR, env_var, base); base = NULL; }
 }  }
 
 
@@ -3776,7 +3775,7 @@ tfm_dirs = p;
 
            } }
          } while (from > TEX4HTTFM );
-      } else {  warn_i_str2( 49, env_var, TEX4HTTFM); }
+      } else {  warn_i_str2(ERR_ENV_VAR, env_var, TEX4HTTFM); }
     }
     return tfm_dirs;
 }
@@ -5091,7 +5090,7 @@ if( no_root_file ){  open_o_file(); }
    "configuration for htf class %d (char %d of %s.htf)",
    gif_flag, ch,font_tbl[cur_fnt].name
   );
-warn_i_str(50,str);
+warn_i_str(ERR_MISSING, str);
 
 
 gif_open[gif_flag] = m_alloc(char,
@@ -5520,7 +5519,7 @@ if( no_root_file ){  open_o_file(); }
    "configuration for htf class %d (char %d of %s.htf)",
    gif_flag, ch,font_tbl[cur_fnt].name
   );
-warn_i_str(50,str);
+warn_i_str(ERR_MISSING, str);
 
 
 gif_open[gif_flag] = m_alloc(char,
@@ -6515,7 +6514,7 @@ CDECL
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2017-11-27-12:55%s%s%s%s%s%s)\n",PLATFORM_SIG, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2019-09-03-10:18%s%s%s%s%s%s)\n",PLATFORM_SIG, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -6794,7 +6793,7 @@ else{ bad_arg;}
      if( id_version != -1 ){
         if( (*q < '0') || (*q > '9') ){
            id_version = -1;
-           warn_i(53);
+           warn_i(ERR_PAR_V);
         }
         id_version =  id_version * 10 + *q - '0';
      }
@@ -6919,7 +6918,7 @@ if( (dvi_file = fopen(job_name, READ_BIN_FLAGS)) == NULL )
        break;
    } }
    if( (dvi_file = fopen(job_name, READ_BIN_FLAGS)) == NULL ){
-      warn_i_str(1, job_name); bad_in_file(job_name);
+      warn_i_str(ERR_IN_FILE, job_name); bad_in_file(job_name);
 }  }
 
  }
@@ -7119,7 +7118,7 @@ if( file ){
 
    envfile= kpse_find_file (fileaddr, kpse_program_text_format, 0);
    if( envfile ){
-      warn_i_str( 50,
+      warn_i_str(ERR_MISSING,
           "search support for kpse_find_file--using kpsewhich calls instead");
 }  }
 
@@ -7132,7 +7131,7 @@ if( file ){
     p = (char *) kpse_var_value( "TEX4HTINPUTS" );
     if( p ){
        (IGNORED)  printf( "TEX4HTINPUTS = %s\n", p );
-    } else {  warn_i_str( 50, "kpathsea variable TEX4HTINPUTS"); }
+    } else {  warn_i_str(ERR_MISSING, "kpathsea variable TEX4HTINPUTS"); }
   }
 }
 #endif
@@ -7313,7 +7312,7 @@ if( !p && !q ){
         (IGNORED) printf("setting TEX4HTFONTSET={%s}\n", export_str);
      }
   } else if( dump_htf_search ) {
-     warn_i_str( 50, "TEX4HTFONTSET for kpathsea" );
+     warn_i_str(ERR_MISSING, "TEX4HTFONTSET for kpathsea");
   }
 }
 
@@ -7337,7 +7336,7 @@ if( dump_htf_search || dump_env_search ) {
 p = kpse_find_file ( "texmf.cnf", kpse_cnf_format, 0);
 if( p ){
    (IGNORED) printf( "texmf.cnf = %s\n", p);
-} else { warn_i_str(1, "texmf.cnf" ); }
+} else { warn_i_str(ERR_IN_FILE, "texmf.cnf"); }
 p = (U_CHAR *) kpse_var_value( "TEX4HTINPUTS" );
 if( p ){
    (IGNORED) printf("TEX4HTINPUTS = %s\n", p);
@@ -7810,7 +7809,7 @@ htf_4hf[i].type2  =  value;
      else { err = TRUE; }
      
 if( err ){
-   warn_i_int(48,line_no);
+   warn_i_int(ERR_ENTRY_LINE, line_no);
    (IGNORED) printf( "%c", delimiter );
    for( p=in; p != in_p; p++ ){
      if( *p=='\0' ){
@@ -7927,7 +7926,7 @@ if( flags &
 
 {        int i;
    for( i=font_tbl_size-1; i >= 0;  i-- )
-     if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+     if( new_font.num == font_tbl[i].num )  warn_i(ERR_FONT_DEF_REP);   }
 
 
 
@@ -7935,7 +7934,7 @@ if( flags &
    
 /*
    if( font_file == NULL ){
-      dump_env();      err_i_str(1,file_name);
+      dump_env();      err_i_str(ERR_IN_FILE, file_name);
       missing_fonts = TRUE;
       new_font.char_f = DEF_CHAR_F;
       new_font.char_l = DEF_CHAR_L;
@@ -8094,7 +8093,7 @@ switch( ch ){
 246 
 : {
      new_font.num = (INTEGER) get_int(4);  break; }
-  default: err_i(8);
+  default: err_i(ERR_FONT_DEF);
 }
 
 
@@ -8118,7 +8117,7 @@ new_font.design_sz = (INTEGER) get_unt(4);
 
 {        int i;
    for( i=font_tbl_size-1; i >= 0;  i-- )
-     if( new_font.num == font_tbl[i].num )  warn_i(10);   }
+     if( new_font.num == font_tbl[i].num )  warn_i(ERR_FONT_DEF_REP);   }
 
 
 
@@ -8209,7 +8208,7 @@ for( cur_cache_font = cache_font;
    if((font_file == NULL) && (otf_pars == NULL))
 #endif
    {
-      dump_env();      err_i_str(1,file_name);
+      dump_env();      err_i_str(ERR_IN_FILE, file_name);
       missing_fonts = TRUE;
       new_font.char_f = DEF_CHAR_F;
       new_font.char_l = DEF_CHAR_L;
@@ -8251,7 +8250,7 @@ if (file_length != ( 6                + header_length
      + new_font.dtbl_n              + it_correction_table_length
      + lig_kern_table_length        + kern_table_length
      + extensible_char_table_length + num_font_parameters  )
-  ){ err_i_str(15,file_name); }
+  ){ err_i_str(ERR_HEAD, file_name); }
 
 
    
@@ -8260,7 +8259,7 @@ if (file_length != ( 6                + header_length
    checksum = ( INTEGER) fget_int(font_file,4);
    if( checksum && new_font_checksum
                 && (checksum  != new_font_checksum) )
-    {   warn_i(16);
+    {   warn_i(ERR_CHKSUM);
         (IGNORED) fprintf(stderr,"%s: %d\ndvi file: %d\n",file_name,
                      checksum, new_font_checksum);
 }   }
@@ -8530,6 +8529,8 @@ for( i = new_font.char_f; i <= new_font.char_l ; i++ ){
                  (char)  (((31<i) && (i<128))? i : ignore_ch);
 }
 
+
+
    } // if (!otf_pars)
 // ---------------------------------------------
 
@@ -8550,7 +8551,7 @@ for( i = new_font.char_f; i <= new_font.char_l ; i++ ){
 if( eq_str( new_font_name, loopName) ){
      U_CHAR name[256];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
-    err_i_str(1, name);
+    err_i_str(ERR_IN_FILE, name);
 } else {
    (IGNORED) strcpy((char *) loopName, (char *) new_font_name);
 }
@@ -8558,7 +8559,7 @@ loopBound++;
 if( loopBound > 10 ){
    U_CHAR name[256];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
-   err_i_str(1, name);
+   err_i_str(ERR_IN_FILE, name);
 }
 
 
@@ -8695,7 +8696,7 @@ if( x_char_l != HTF_ALIAS) {
     if( chr != ' ' ) search_font_name[font_name_n++] = chr;
   }
   search_font_name[font_name_n]  = '\0';
-  if( eq_str( search_font_name, new_font_name) ){ err_i_str(20, new_font_name); }
+  if( eq_str( search_font_name, new_font_name) ){ err_i_str(ERR_HTF_FILE_FMT, new_font_name); }
   (IGNORED) printf("Searching `%s.htf' for `%s.htf'\n",
                                         search_font_name, new_font.name);
   htf_to_lg(html_font, new_font_name, fonts_n, file);
@@ -8737,7 +8738,7 @@ if( (digit=str[j-1]) == '\\' )
         } else { value -= '0';  base = 10; j--; }
   } } }
   else{ if( value>255 ){
-            warn_i_int(28,value);
+            warn_i_int(ERR_CHR_CODE_OVFL, value);
             value = 32;  dump_htf( file );
         }
         str[j-1] = value;
@@ -8745,13 +8746,13 @@ if( (digit=str[j-1]) == '\\' )
 else if ( indirect_ch ){
   j--;   digit -=  (digit>'9')?  'A'-10 : '0';
   if( (digit<0) || (digit>=base) ){
-      warn_i_int(29, str[j]);
+      warn_i_int(ERR_CHR_HTF, str[j]);
       digit = 0; dump_htf( file );
   }
   value = value*base + digit;
 } else if ( str[j-1]==10 ){
    dump_htf( file );
-   err_i_int(48, i+1);
+   err_i_int(ERR_ENTRY_LINE, i + 1);
 }
 
  };
@@ -8817,7 +8818,7 @@ if( htf_4hf[mid].type1 == ch1  ){
       
 ch1 = 0;
 while( ((ch = (int) get_html_ch(file)) != del) ){
-     if( (ch < '0') || (ch > '9') ){ warn_i_int(48,i);  break; }
+     if( (ch < '0') || (ch > '9') ){ warn_i_int(ERR_ENTRY_LINE, i);  break; }
      ch1 = ch1 * 10 + ch - '0'; }
 new_font.accent_array = new_font.accent_N++?
       (unsigned int *) r_alloc((void *) new_font.accent_array,
@@ -8835,7 +8836,7 @@ new_font.accent[i] = new_font.accent_N;
         
 ch1 = 0;
 while( ((ch = (int) get_html_ch(file)) != del) ){
-     if( (ch < '0') || (ch > '9') ){ warn_i_int(48,i);  break; }
+     if( (ch < '0') || (ch > '9') ){ warn_i_int(ERR_ENTRY_LINE, i);  break; }
      ch1 = ch1 * 10 + ch - '0'; }
 new_font.accented_array = new_font.accented_N++?
       (unsigned int *) r_alloc((void *) new_font.accented_array,
@@ -8863,7 +8864,7 @@ switch( j ){
     p = m_alloc(unsigned U_CHAR, j);
     if (new_font.str && (design_n >= 0) && (design_n < n_gif))
             new_font.str[design_n] = p;
-    if( design_n>255 ){ design_n--; warn_i(35);}
+    if( design_n>255 ){ design_n--; warn_i(ERR_FNT_OVFL);}
     if( i==255 ){
        if( design_n == 255 ){
                 new_font.ch[i] = 0;           new_font.ch255 = 1;
@@ -8903,7 +8904,7 @@ if( dump_htf_files ){
 #endif
             ){
      if( errCode == 0 ){ errCode= 21; }
-     warn_i_str(21,search_font_name);
+     warn_i_str(ERR_HTF_FILE, search_font_name);
      (IGNORED) fprintf(stderr,
                "%d--%d)\n", new_font.char_f, new_font.char_l);
      dump_env();
@@ -9123,7 +9124,7 @@ visited_file = v;
    free((void *)  new_font_name);   font_tbl_size++;
 }
 #ifdef MAXFONTS
- else err_i_int(17, MAXFONTS);
+ else err_i_int(ERR_MAXFONTS, MAXFONTS);
 #endif
 
 
@@ -9152,7 +9153,7 @@ for( i = 0; i<htf_4hf_n; i++){
 free((void *) htf_4hf);
 
 
-   if( missing_fonts ) err_i(14);
+   if( missing_fonts ) err_i(ERR_NO_FONTS);
 #ifndef KPATHSEA
    
 if( cache_files != (FILE *) 0 ){  (IGNORED) fclose(cache_files); }
@@ -9936,7 +9937,7 @@ if( no_root_file ){  open_o_file(); }
     (IGNORED)  put_4ht_ch(ch,cur_o_file);
   }
   (IGNORED) fclose(file);
-} else { warn_i_str( 1, name ); }
+} else { warn_i_str(ERR_IN_FILE, name ); }
 
     break; }
     case '>': { 
@@ -9983,7 +9984,7 @@ for( q = opened_files; q != (struct files_rec*) 0;  q = q->next ){
   }
 }
 if( q == (struct files_rec*) 0 ){
-   warn_i_str(51,q->name);
+   warn_i_str(ERR_BACK_FILE, q->name);
    break;
 }
 
@@ -10232,7 +10233,7 @@ while( special_n-- > 0 ) {
 *p = '\0';
 p = post;
 while( special_n-- > 0 ) *(p++) = get_char();
-*p='\0';
+*p = '\0';
 
 
 p = m_alloc(char, 1 + (int) strlen((char *) pre));
@@ -10588,8 +10589,8 @@ default: {
 ) ) {
      if( ch == 
 140 
- ) { warn_i(46); }
-     else { warn_i_int(45,ch); }
+ ) { warn_i(ERR_SPC_PBR); }
+     else { warn_i_int(ERR_SPC_BAD_CHR_CODE, ch); }
   } else { cr_fnt = ch - 
 171  
 ;
@@ -10652,10 +10653,10 @@ while( special_n-- > 0 ){  (void) get_char(); }
      if( special_n ) { code = 0; 
 while( special_n-- > 0 ){
   digit = get_char() - '0';
-  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(41,digit+'0') ; }
+  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(ERR_SPC_BAD_CHR, digit + '0') ; }
   else { code = code * 10 + digit; }
 }
-if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(41,'?') ; }
+if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
 
 
        put_char( code );
@@ -10745,7 +10746,7 @@ flush_uni();
 
  break; }
   case '-': { if( put_4ht_off>0 ){ put_4ht_off--; }
-              else { warn_i_str(52, "@u-"); }
+              else { warn_i_str(ERR_SPC_QUEST, "@u-"); }
               break; }
 }
 
@@ -10754,10 +10755,10 @@ flush_uni();
 code -= '0';  
 while( special_n-- > 0 ){
   digit = get_char() - '0';
-  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(41,digit+'0') ; }
+  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(ERR_SPC_BAD_CHR, digit + '0') ; }
   else { code = code * 10 + digit; }
 }
-if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(41,'?') ; }
+if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
 
  next_char = code;
 if( 
@@ -10870,7 +10871,7 @@ while( special_n-- > 0 ){
   else { 
 xresolution = yresolution = 0;
 
-warn_i_int( 26, '!');
+warn_i_int(ERR_SPC_OVFL, '!');
 (IGNORED) putc( ch, stderr);
 while( special_n-- )  (IGNORED) putc( get_char(), stderr);
 
@@ -11041,7 +11042,7 @@ if( n>
 #endif
    }
 }
-if( bad_str ){  warn_i_str(37,err_str); }
+if( bad_str ){  warn_i_str(ERR_SPC_BAR_STR, err_str); }
 }
 
   break; }
@@ -11049,7 +11050,7 @@ if( bad_str ){  warn_i_str(37,err_str); }
 not_notify = TRUE;
 
   break; }
-  default: { warn_i_int( 36, code); }
+  default: { warn_i_int(ERR_SPC_CHAR, code); }
 }
 span_on = span_name_on && !pause_style;
 if( q ) free((void *)  q);
@@ -11117,7 +11118,7 @@ if( rect_pos ){  special_n -= 2;  rect_pos = get_char() - '0';}
 
 
   if( (i != 10) || special_n ){
-    warn_i_str(39,pos_text);
+    warn_i_str(ERR_SPC_BSL_STR, pos_text);
     *(pos_text = end_pos_body = pos_line =
       end_pos_text = pos_body) = '\0';
   }
@@ -11214,7 +11215,7 @@ if((
     ( str[n] != '/') && (str[n] != '-')
    ) || (n==0) ){
   str[n+1] = '\0';
-  err_i_str(38,str);
+  err_i_str(ERR_SPC_TILDE_STR, str);
 }
 p->action = str[n]; str[n] = '\0';
 p->path = m_alloc(char,n+1);
@@ -11280,7 +11281,7 @@ while( special_n-- > 0 ){
     special_n = 0;
 #endif
 } else {
-  if( !group_dvi ){ warn_i(42); }
+  if( !group_dvi ){ warn_i(ERR_SPC_NO_TILDE); }
   (IGNORED) fseek(dvi_file, (long) --special_n,
                              
 1
@@ -11554,7 +11555,7 @@ if( !back_id_off )
    if( stack_n > 
 ((int) stack_len + 2)
 
- ){ warn_i(40); }
+ ){ warn_i(ERR_SYS_40); }
    break;
 }
 case 
@@ -11754,8 +11755,8 @@ default: {
 ) ) {
      if( ch == 
 140 
- ) { warn_i(46); }
-     else { warn_i_int(45,ch); }
+ ) { warn_i(ERR_SPC_PBR); }
+     else { warn_i_int(ERR_SPC_BAD_CHR_CODE, ch); }
   } else { cr_fnt = ch - 
 171  
 ;
@@ -11858,7 +11859,7 @@ while( p ){
     
 while( stack[stack_n-1].begin ){
                                struct group_info *p;
-   warn_i_str(44, stack[stack_n-1].begin->info);
+   warn_i_str(ERR_SPC_PUSH, stack[stack_n-1].begin->info);
    p =  stack[stack_n-1].begin;
    stack[stack_n-1].begin = p->next;
    free((void *)  p );
@@ -11887,7 +11888,7 @@ if( no_root_file ){
 } else {
           U_CHAR str[256], *p;
    p = str;  while( special_n-- ){ *p++ = get_char(); }  *p = '\0';
-   warn_i_str(43,str);
+   warn_i_str(ERR_SPC_IGNORE, str);
 }
 
  break; }
@@ -11995,7 +11996,7 @@ stack[stack_n+1].active_class_del = TRUE;
   special_on = FALSE;
      
 if( special_n > 0 ){
-   warn_i_int( 26, sv);
+   warn_i_int(ERR_SPC_OVFL, sv);
    while( special_n-- )  (IGNORED) putc( get_char(), stderr);
 }
 
@@ -12334,7 +12335,7 @@ if( *(p->path) != '\0' ) {
    
             char str[256];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
-(IGNORED) strct(str,p->info); warn_i_str(38,str);
+(IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
 
 } else  {
@@ -12344,7 +12345,7 @@ if( *(p->path) != '\0' ) {
           
             char str[256];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
-(IGNORED) strct(str,p->info); warn_i_str(38,str);
+(IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
 
           break;
@@ -12372,7 +12373,7 @@ if( *(p->path) != '\0' ) {
    
             char str[256];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
-(IGNORED) strct(str,p->info); warn_i_str(38,str);
+(IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
 
 } else  {
@@ -12382,7 +12383,7 @@ if( *(p->path) != '\0' ) {
           
             char str[256];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
-(IGNORED) strct(str,p->info); warn_i_str(38,str);
+(IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
 
           break;
@@ -12493,7 +12494,7 @@ text_on = stack[stack_n].text_on;
     }
     
 if( ch_map_flag ){
-   warn_i(27);    init_ch_map(); }
+   warn_i(ERR_PBR);    init_ch_map(); }
 
 
     (IGNORED) printf("]%c",unread_pages % 10 == 0? '\n' : ' ');
@@ -12852,7 +12853,7 @@ case
    stack_depth--;
    cur_x = x_val;  cur_y = y_val;  pop_stack();
    if( dvi_flag ){
-      if( stack_depth<0 ){ warn_i_int( 24,  page_n );
+      if( stack_depth<0 ){ warn_i_int(ERR_SPC_GRP,  page_n);
                            
 cond_idv_char( 
 146 
@@ -13051,7 +13052,7 @@ if( flags &
 }
 
 
-     } else { err_i(23); }
+     } else { err_i(ERR_IMPL); }
   }
   else {  idv_char( ch );  file_n++;
           cur_font[0] = 1;    cur_font[1] = ch;   }
@@ -13119,7 +13120,7 @@ if( errCode > 0 ){
 
             
 if( (ch = i + font_tbl[cur_fnt].char_f) > 127 )  {
-  if( ch < 256 ) cond_idv_char(133);  else  warn_i(23);   }
+  if( ch < 256 ) cond_idv_char(133);  else  warn_i(ERR_IMPL);   }
 cond_idv_char( ch );
 mag = 10;
 if (font_tbl[cur_fnt].design_sz > 0)
