@@ -1107,66 +1107,66 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-p]            switch off sending back of base tags for sub- / superscripts estimated as being baseless\n"
 #endif
 
-,                            
-"Can't find/open file `%s'\n",                       
-"Can't open output file for `%s'\n",                 
-"Can't close file `%s' (file is not open)\n",        
-"Insufficient memory\n",                              
-"Bad character code: %d\n",                           
-"Can't find font number %d\n",                        
-"Improper dvi file\n",                                
-"Improper op while scanning font defs in postamble\n",
-"Problem with command line\n",                        
-"Font definition repeated in postamble\n",            
-"Empty entry in font environment variable\n",         
-"Can't access directory `%s\n'",                     
-"Too many directories in font environment variable\n",
-"Missing fonts, can't proceed\n",                     
-"Invalid header in file `%s'\n",                     
-"Checksum inconsistent\n",                            
-"MAXFONTS too small: %d\n",                           
-"Improper signature at end of file `%s.htf'\n",      
-"Improper signature at start of file `%s.htf'\n",    
-"Improper file `%s.htf'\n",                          
-"Couldn't find font `%s.htf' (char codes: ",        
-"File `%s.htf' starts/ends with character code %d (instead of %d)\n",
-"Implementation problem\n",                           
-"Improper groups in \\special{t4ht+}... idv[%d]\n",   
-"Too many characters (> %d) for map line: `%c'\n",   
-"Extra characters in \\special{t4ht%c...",            
-"Page break within a ch map/picture\n",               
-"Char code >255 in htf file: %d\n",                   
-"Improper char for code in htf file: %c\n",           
+,                                // ERR_HELP
+"Can't find/open file `%s'\n",                          // ERR_IN_FILE
+"Can't open output file for `%s'\n",                    // ERR_OUT_FILE
+"Can't close file `%s' (file is not open)\n",           // ERR_CLOSE_FILE
+"Insufficient memory\n",                                 // ERR_MEM
+"Bad character code: %d\n",                              // ERR_BAD_CHAR
+"Can't find font number %d\n",                           // ERR_FONT_NUM
+"Improper dvi file\n",                                   // ERR_DVI_FILE
+"Improper op while scanning font defs in postamble\n",   // ERR_FONT_DEF
+"Problem with command line\n",                           // ERR_CMD_LINE
+"Font definition repeated in postamble\n",              // ERR_FONT_DEF_REP
+"Empty entry in font environment variable\n",           // ERR_FONT_EMPTY_ENV
+"Can't access directory `%s\n'",                       // ERR_DIR_ACC
+"Too many directories in font environment variable\n",  // ERR_FONT_DIR_ENV
+"Missing fonts, can't proceed\n",                       // ERR_NO_FONTS
+"Invalid header in file `%s'\n",                       // ERR_HEAD
+"Checksum inconsistent\n",                              // ERR_CHKSUM
+"MAXFONTS too small: %d\n",                             // ERR_MAXFONTS
+"Improper signature at end of file `%s.htf'\n",        // ERR_EOF_SIG
+"Improper signature at start of file `%s.htf'\n",      // ERR_STA_SIG
+"Improper file `%s.htf'\n",                            // ERR_HTF_FILE_FMT
+"Couldn't find font `%s.htf' (char codes: ",           // ERR_HTF_FILE
+"File `%s.htf' starts/ends with character code %d (instead of %d)\n",  // ERR_HTF_STA_EOF
+"Implementation problem\n",                             // ERR_IMPL
+"Improper groups in \\special{t4ht+}... idv[%d]\n",     // ERR_SPC_GRP
+"Too many characters (> %d) for map line: `%c'\n",     // ERR_MAP_LINE_OVFL
+"Extra characters in \\special{t4ht%c...",              // ERR_SPC_OVFL
+"Page break within a ch map/picture\n",                 // ERR_PBR
+"Char code >255 in htf file: %d\n",                     // ERR_CHR_CODE_OVFL
+"Improper char for code in htf file: %c\n",             // ERR_CHR_HTF
 
 "Illegal storage address\n", 
 "Floating-point\n",          
 "Interrupt with Cntr-C\n",   
 
-                           
+                            // ERR_STO_ADDR, ERR_FLOAT, ERR_CTRLC
 #ifdef DOS_WIN32
-"%c-script too long in tex4ht.env \n",                
+"%c-script too long in tex4ht.env \n",                  // ERR_SCPT_OVFL
 #else
 "%c-script too long in tex4ht.env (.tex4ht)\n",       
 #endif
-"Too many rows (> %d) for map: `%c'\n",              
-"More than 256 strings in font\n",                    
-"\\special{t4ht;%c...}?\n",                           
-"\\special{t4ht;|%s}?\n",                             
-"\\special{t4ht~!%s}?\n",                             
-"\\special{t4ht\"...%s}?\n",                          
-"System error 40\n",                                  
-"`%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",   
-"\\special{t4ht~...} without \\special{t4ht~}\n",     
-"Ignoring \\special{t4ht.%s}\n",                      
-"PUSH for \\special{t4ht<...%s}?\n",                  
-"Bad character code (%d) in \\special{t4h~}...\n",    
-"Page break in \\special{t4h~}...\n",                 
-"tex4ht.fls: Couldn't find file `%s'\n",             
-"Improper entry (line %d)\n",                         
-"Improper environment variable %s: `%s'\n",           
-"Missing %s\n",                                       
-"Can't back from file `%s\n'",                        
-"\\special{t4ht%s}?\n",                               
+"Too many rows (> %d) for map: `%c'\n",                // ERR_MAP_ROWS_OVFL
+"More than 256 strings in font\n",                      // ERR_FNT_OVFL
+"\\special{t4ht;%c...}?\n",                             // ERR_SPC_CHAR
+"\\special{t4ht;|%s}?\n",                               // ERR_SPC_BAR_STR
+"\\special{t4ht~!%s}?\n",                               // ERR_SPC_TILDE_STR
+"\\special{t4ht\"...%s}?\n",                            // ERR_SPC_BSL_STR
+"System error 40\n",                                    // ERR_SYS_40
+"`%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",    // ERR_SPC_BAD_CHR
+"\\special{t4ht~...} without \\special{t4ht~}\n",       // ERR_SPC_NO_TILDE
+"Ignoring \\special{t4ht.%s}\n",                        // ERR_SPC_IGNORE
+"PUSH for \\special{t4ht<...%s}?\n",                    // ERR_SPC_PUSH
+"Bad character code (%d) in \\special{t4h~}...\n",      // ERR_SPC_BAD_CHR_CODE
+"Page break in \\special{t4h~}...\n",                   // ERR_SPC_PBR
+"tex4ht.fls: Couldn't find file `%s'\n",               // ERR_FLS_NO_FILE
+"Improper entry (line %d)\n",                           // ERR_ENTRY_LINE
+"Improper environment variable %s: `%s'\n",            // ERR_ENV_VAR
+"Missing %s\n",                                         // ERR_MISSING
+"Can't back from file `%s\n'",                         // ERR_BACK_FILE
+"\\special{t4ht%s}?\n",                                 // ERR_SPC_QUEST
 "Improper -v option\n",               // ERR_PAR_V    
 #ifdef VTEX_SPACING_ADDONS
 "Option -r value out of range: %d\n", // ERR_PAR_R
