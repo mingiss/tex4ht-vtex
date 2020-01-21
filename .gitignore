@@ -1,5 +1,6 @@
 .hgignore
 .hg
+hg_*
 */autom4te.cache
 */.deps
 *.o

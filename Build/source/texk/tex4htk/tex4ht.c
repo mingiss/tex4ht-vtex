@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2019-09-03-10:58), generated from tex4ht-c.tex
+/* tex4ht.c (2020-01-21-16:41), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -700,7 +700,7 @@ static BOOL dos_file_names =
 #ifdef VTEX_SPACING_ADDONS
 // flag for no spaces recognition
 // set by command line parameter -n
-static BOOL no_spaces;
+static BOOL no_spaces = FALSE;
 
 // factor for threshold of spaces recognition max_x_val, in percents
 // set by command line parameter -r
@@ -710,13 +710,13 @@ static long x_fact = 100;
 #ifdef VTEX_OTF_ADDONS
 // flag for math variant conversion
 // set by command line parameter -m
-static BOOL cvt_to_math_var;
+static BOOL cvt_to_math_var = FALSE;
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
 // flag for sending back base tags of sub- / superscripts
 // set by command line parameter -p
-static BOOL dont_send_base_back;
+static BOOL dont_send_base_back = FALSE;
 #endif
 
 static FILE*  dot_file;
@@ -881,9 +881,9 @@ static struct del_stack_entry  *del_stack;
 
 static int ch_id, sv_id, id_latex, back_id_off;
 #ifdef VTEX_SSCRIPT_ADDONS
-BOOL ch_fl; // flag for no xml tags after the last printable character
-            // used for cutting off any further back sendings after verbatims with xml tags
-            // in contrast with ch_token it should be equally functional during both runs of group_dvi
+static BOOL ch_fl = FALSE;  // flag for no xml tags after the last printable character
+                            // used for cutting off any further back sendings after verbatims with xml tags
+                            // in contrast with ch_token it should be equally functional during both runs of group_dvi
 #endif
 
 
@@ -1815,7 +1815,7 @@ case
 case 
 243 
 : {
-  for( i=0; i<14; i++ ) ch = get_char();
+  for( i=0; i<14; i++ ){ ch = get_char(); }
   for( i=ch + get_char(); i>0; i--) (void) get_char();
   break;
 }
@@ -3496,9 +3496,9 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
    if ((font_tbl[cur_fnt].wtbl == NULL) || (wt_ix < 0) || (wt_ix >= font_tbl[cur_fnt].wtbl_n))
       return DEF_GLYPH_WDT_PT;
 
-   
+
 return (INTEGER)(
-    
+
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
@@ -4289,16 +4289,16 @@ static FILE* search_file_ext
   str[n-1] = '\0';
 #ifndef NOSUBDIR
 #ifdef WIN32
-  
+
 {
     WIN32_FIND_DATA find_file_data;
     HANDLE hnd;
     int proceed;
     (IGNORED) strcpy((char *) dirname, (char *) str);
-    strct(dirname, "/*.*");       
+    strct(dirname, "/*.*");
     hnd = FindFirstFile(dirname, &find_file_data);
     if (hnd != INVALID_HANDLE_VALUE) {
-      
+
 proceed = 1;
 while (proceed) {
   if( !eq_str(find_file_data.cFileName, ".")  &&
@@ -4940,7 +4940,7 @@ if( no_root_file ){  open_o_file(); }
 next_char
 
 , cur_o_file );
-   
+
 next_char
 
  = -1;
@@ -4948,7 +4948,7 @@ next_char
 next_str
 
  ) {
-   
+
 if( keepChar ){
   keepChar=FALSE;
   { 
@@ -4968,7 +4968,7 @@ if (font_tbl[cur_fnt].pars)
         if (*pwch < 256)
         {
             chr = *pwch;
-            
+
 if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);
 } else{ 
 
@@ -4989,14 +4989,14 @@ if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
 
 
 if( span_on ){
-   
+
 if( span_open[gif_flag] )
   if( *span_open[gif_flag] ){
      print_f( span_open[gif_flag] );
 }
 
 
-   
+
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
@@ -5004,7 +5004,7 @@ if( span_name[gif_flag] )
 }
 
 
-   
+
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
@@ -5012,7 +5012,7 @@ if( span_size[gif_flag] )
 }
 
 
-   
+
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
@@ -5020,14 +5020,14 @@ if( span_mag[gif_flag] )
 }
 
 
-   
+
 if( span_ord[gif_flag] )
   if( *span_ord[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_ord[gif_flag], chr);
 }
 
 
-   
+
 if( span_ch[gif_flag] )
   if( *span_ch[gif_flag] ){
     print_f( span_ch[gif_flag] );
@@ -5037,7 +5037,7 @@ if( span_ch[gif_flag] )
 }
 put_char(chr);
 if( span_on ){
-   
+
 if( end_span[gif_flag] )
   if( *end_span[gif_flag] ){
      print_f( end_span[gif_flag] );
@@ -5046,7 +5046,7 @@ if( end_span[gif_flag] )
 
 }
 
- }
+}
 
 
         }
@@ -5099,7 +5099,7 @@ gif_open[gif_flag] = m_alloc(char,
 
 );
 (IGNORED) strcpy((char *) gif_open[gif_flag],
-           
+
 "<img src=\"+\" alt=\"+++++\" />+"
 
 );
@@ -5221,14 +5221,14 @@ if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
 
 
 if( span_on ){
-   
+
 if( span_open[gif_flag] )
   if( *span_open[gif_flag] ){
      print_f( span_open[gif_flag] );
 }
 
 
-   
+
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
@@ -5236,7 +5236,7 @@ if( span_name[gif_flag] )
 }
 
 
-   
+
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
@@ -5244,7 +5244,7 @@ if( span_size[gif_flag] )
 }
 
 
-   
+
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
@@ -5252,14 +5252,14 @@ if( span_mag[gif_flag] )
 }
 
 
-   
+
 if( span_ord[gif_flag] )
   if( *span_ord[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_ord[gif_flag], chr);
 }
 
 
-   
+
 if( span_ch[gif_flag] )
   if( *span_ch[gif_flag] ){
     print_f( span_ch[gif_flag] );
@@ -5269,7 +5269,7 @@ if( span_ch[gif_flag] )
 }
 put_alt_ch(chr,ch_str_flag);
 if( span_on ){
-   
+
 if( end_span[gif_flag] )
   if( *end_span[gif_flag] ){
      print_f( end_span[gif_flag] );
@@ -5528,7 +5528,7 @@ gif_open[gif_flag] = m_alloc(char,
 
 );
 (IGNORED) strcpy((char *) gif_open[gif_flag],
-           
+
 "<img src=\"+\" alt=\"+++++\" />+"
 
 );
@@ -6435,7 +6435,7 @@ struct htf_com_rec* htf_font_dir = (struct htf_com_rec *) 0;
 #endif
 
 
-   
+
 
 #ifdef SIGSEGV
 (void) signal(SIGSEGV, (void (
@@ -6514,7 +6514,7 @@ CDECL
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2019-09-03-10:58%s%s%s%s%s%s)\n",PLATFORM_SIG, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-01-21-16:41%s%s%s%s%s%s)\n",PLATFORM_SIG, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -9926,7 +9926,7 @@ if( special_n ){
     int i=0;
     FILE* file;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ) name[i++] = get_char();
+while(  special_n-- > 0 ){  name[i++] = get_char(); }
 file  = f_open(name, READ_TEXT_FLAGS);
 if( file ) {
   
@@ -9949,7 +9949,7 @@ if( special_n > 0 ){
 
 i = 0;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ) name[i++] = get_char();
+while(  special_n-- > 0 ){  name[i++] = get_char(); }
 for( p = opened_files; p != (struct files_rec*) 0;  p = p->next ){
   if( eq_str(p->name, name) ){ break; }
 }
@@ -10007,7 +10007,7 @@ if( q == (struct files_rec*) 0 ){
               struct sys_call_rec *p;
               BOOL flag;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ) name[i++] = get_char();
+while(  special_n-- > 0 ){  name[i++] = get_char(); }
 (IGNORED) printf("System call: %s\n", name);
 
 flag = FALSE;
@@ -10232,7 +10232,7 @@ while( special_n-- > 0 ) {
 }
 *p = '\0';
 p = post;
-while( special_n-- > 0 ) *(p++) = get_char();
+while( special_n-- > 0 ){ *(p++) = get_char(); }
 *p = '\0';
 
 
@@ -10370,7 +10370,7 @@ case
 case 
 243 
 : {    int i;
-  for( i=14; i; i-- ) ch = get_char();
+  for( i=14; i; i-- ){  ch = get_char(); }
   i = ch +  get_char();
   (IGNORED) fseek(dvi_file, (long) i, 
 1
@@ -10901,7 +10901,7 @@ if( special_n-- ){
   code = get_char();
   while( special_n > 254 ){ (void) get_char(); special_n--; }
   p = str;  n = special_n;
-  while( special_n-- ) *(p++) = get_char();
+  while( special_n-- ) { *(p++) = get_char(); }
   *p = '\0';
   
 q = counter;
@@ -11244,7 +11244,7 @@ if( p->action == '>' ){
 
 
 #ifdef VTEX_SSCRIPT_ADDONS
-} else if( in_ch == '<' ) {
+} else if ((in_ch == '<') && dont_send_base_back) {
     in_ch = get_char();
     special_n -= 2;
     if ((in_ch == '*') && (!ch_fl) && dont_send_base_back) // supressed back sending special -- placing it right here
@@ -11373,7 +11373,7 @@ case
 case 
 243 
 : {    int i;
-  for( i=14; i; i-- ) ch = get_char();
+  for( i=14; i; i-- ){  ch = get_char(); }
   i = ch +  get_char();
   (IGNORED) fseek(dvi_file, (long) i, 
 1
@@ -11701,7 +11701,7 @@ while( --i ) *q++ = get_char();
 
 
 #ifdef VTEX_SSCRIPT_ADDONS
-     } else if (ch == '='){
+     } else if ((ch == '=') && dont_send_base_back){
         while (i--)
         {
             int ch = get_char();
