@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-01-21-16:41), generated from tex4ht-c.tex
+/* tex4ht.c (2020-01-22-18:14), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -115,6 +115,17 @@
 #define PLATFORM "ms-dos"
 #ifndef PATH_MAX
 #define PATH_MAX 256
+#endif
+#endif
+
+
+
+#ifdef WIN32
+#define DOS_WIN32
+#ifdef _WIN64
+#define PLATFORM "ms-win64"
+#else
+#define PLATFORM "ms-win32"
 #endif
 #endif
 
@@ -881,9 +892,9 @@ static struct del_stack_entry  *del_stack;
 
 static int ch_id, sv_id, id_latex, back_id_off;
 #ifdef VTEX_SSCRIPT_ADDONS
-static BOOL ch_fl = FALSE;  // flag for no xml tags after the last printable character
-                            // used for cutting off any further back sendings after verbatims with xml tags
-                            // in contrast with ch_token it should be equally functional during both runs of group_dvi
+static BOOL ch_fl = FALSE; // flag for no xml tags after the last printable character
+                           // used for cutting off any further back sendings after verbatims with xml tags
+                           // in contrast with ch_token it should be equally functional during both runs of group_dvi
 #endif
 
 
@@ -3496,9 +3507,9 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
    if ((font_tbl[cur_fnt].wtbl == NULL) || (wt_ix < 0) || (wt_ix >= font_tbl[cur_fnt].wtbl_n))
       return DEF_GLYPH_WDT_PT;
 
-
+   
 return (INTEGER)(
-
+    
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
@@ -4289,16 +4300,16 @@ static FILE* search_file_ext
   str[n-1] = '\0';
 #ifndef NOSUBDIR
 #ifdef WIN32
-
+  
 {
     WIN32_FIND_DATA find_file_data;
     HANDLE hnd;
     int proceed;
     (IGNORED) strcpy((char *) dirname, (char *) str);
-    strct(dirname, "/*.*");
+    strct(dirname, "/*.*");       
     hnd = FindFirstFile(dirname, &find_file_data);
     if (hnd != INVALID_HANDLE_VALUE) {
-
+      
 proceed = 1;
 while (proceed) {
   if( !eq_str(find_file_data.cFileName, ".")  &&
@@ -4940,7 +4951,7 @@ if( no_root_file ){  open_o_file(); }
 next_char
 
 , cur_o_file );
-
+   
 next_char
 
  = -1;
@@ -4948,7 +4959,7 @@ next_char
 next_str
 
  ) {
-
+   
 if( keepChar ){
   keepChar=FALSE;
   { 
@@ -4968,7 +4979,7 @@ if (font_tbl[cur_fnt].pars)
         if (*pwch < 256)
         {
             chr = *pwch;
-
+            
 if( !gif_flag || (gif_flag % 2) || ch_map_flag ) {  put_char(chr);
 } else{ 
 
@@ -4982,21 +4993,21 @@ if( no_root_file ){  open_o_file(); }
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
-}
 
 
 if( span_on ){
-
+   
 if( span_open[gif_flag] )
   if( *span_open[gif_flag] ){
      print_f( span_open[gif_flag] );
 }
 
 
-
+   
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
@@ -5004,7 +5015,7 @@ if( span_name[gif_flag] )
 }
 
 
-
+   
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
@@ -5012,7 +5023,7 @@ if( span_size[gif_flag] )
 }
 
 
-
+   
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
@@ -5020,14 +5031,14 @@ if( span_mag[gif_flag] )
 }
 
 
-
+   
 if( span_ord[gif_flag] )
   if( *span_ord[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_ord[gif_flag], chr);
 }
 
 
-
+   
 if( span_ch[gif_flag] )
   if( *span_ch[gif_flag] ){
     print_f( span_ch[gif_flag] );
@@ -5037,7 +5048,7 @@ if( span_ch[gif_flag] )
 }
 put_char(chr);
 if( span_on ){
-
+   
 if( end_span[gif_flag] )
   if( *end_span[gif_flag] ){
      print_f( end_span[gif_flag] );
@@ -5046,7 +5057,7 @@ if( end_span[gif_flag] )
 
 }
 
-}
+ }
 
 
         }
@@ -5099,7 +5110,7 @@ gif_open[gif_flag] = m_alloc(char,
 
 );
 (IGNORED) strcpy((char *) gif_open[gif_flag],
-
+           
 "<img src=\"+\" alt=\"+++++\" />+"
 
 );
@@ -5214,21 +5225,21 @@ else{
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
-}
 
 
 if( span_on ){
-
+   
 if( span_open[gif_flag] )
   if( *span_open[gif_flag] ){
      print_f( span_open[gif_flag] );
 }
 
 
-
+   
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
@@ -5236,7 +5247,7 @@ if( span_name[gif_flag] )
 }
 
 
-
+   
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
@@ -5244,7 +5255,7 @@ if( span_size[gif_flag] )
 }
 
 
-
+   
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
@@ -5252,14 +5263,14 @@ if( span_mag[gif_flag] )
 }
 
 
-
+   
 if( span_ord[gif_flag] )
   if( *span_ord[gif_flag] ){
     (IGNORED) fprintf(cur_o_file, span_ord[gif_flag], chr);
 }
 
 
-
+   
 if( span_ch[gif_flag] )
   if( *span_ch[gif_flag] ){
     print_f( span_ch[gif_flag] );
@@ -5269,7 +5280,7 @@ if( span_ch[gif_flag] )
 }
 put_alt_ch(chr,ch_str_flag);
 if( span_on ){
-
+   
 if( end_span[gif_flag] )
   if( *end_span[gif_flag] ){
      print_f( end_span[gif_flag] );
@@ -5298,10 +5309,10 @@ if( no_root_file ){  open_o_file(); }
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
-}
 
 
 if( span_on ){
@@ -5411,10 +5422,10 @@ if( no_root_file ){  open_o_file(); }
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
-}
 
 
 if( span_on ){
@@ -5528,7 +5539,7 @@ gif_open[gif_flag] = m_alloc(char,
 
 );
 (IGNORED) strcpy((char *) gif_open[gif_flag],
-
+           
 "<img src=\"+\" alt=\"+++++\" />+"
 
 );
@@ -5643,10 +5654,10 @@ else{
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
-}
 
 
 if( span_on ){
@@ -5727,10 +5738,10 @@ if( no_root_file ){  open_o_file(); }
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
-}
 
 
 if( span_on ){
@@ -6435,7 +6446,7 @@ struct htf_com_rec* htf_font_dir = (struct htf_com_rec *) 0;
 #endif
 
 
-
+   
 
 #ifdef SIGSEGV
 (void) signal(SIGSEGV, (void (
@@ -6514,7 +6525,7 @@ CDECL
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-01-21-16:41%s%s%s%s%s%s)\n",PLATFORM_SIG, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-01-22-18:14%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -9745,7 +9756,7 @@ case
 case 
 243 
 : {
-  for( i=0; i<14; i++ ) ch = get_char();
+  for( i=0; i<14; i++ ){ ch = get_char(); }
   for( i=ch + get_char(); i>0; i--) (void) get_char();
   break;
 }
@@ -10806,7 +10817,7 @@ while( special_n-- > 0 ){
    U_CHAR *name;
 name =  m_alloc(char, (int) special_n+1);
 *(name + (int) special_n) = '\0';
-while(  special_n-- > 0 )  *(name + i++) = get_char();
+while(  special_n-- > 0 ){ *(name + i++) = get_char(); }
 
 
 
@@ -11887,7 +11898,9 @@ if( no_root_file ){
    *name = '\0';
 } else {
           U_CHAR str[256], *p;
-   p = str;  while( special_n-- ){ *p++ = get_char(); }  *p = '\0';
+   p = str;
+   while( special_n-- ){ *p++ = get_char(); }
+   *p = '\0';
    warn_i_str(ERR_SPC_IGNORE, str);
 }
 

@@ -284,6 +284,7 @@ the HTML/XML and \`'.css', also \`'.lg', \`'.idv', and
 `<define MSVC-1-52`>
 `<bordland: bcc32 -DBCC32 tex4ht`>
 `<bordland: bcc -DBCC -mh tex4ht`>
+`<mingw64`>
 `<DJGPP`>
 #ifdef DOS_C
 #define DOS
@@ -328,6 +329,18 @@ The \`'-mh' below calls for `Huge Memory Model'.
 #endif
 #endif
 >>>
+
+\<mingw64\><<<
+#ifdef WIN32
+#define DOS_WIN32
+#ifdef _WIN64
+#define PLATFORM "ms-win64"
+#else
+#define PLATFORM "ms-win32"
+#endif
+#endif
+>>>
+
 
 
 
@@ -1380,7 +1393,7 @@ come back through return. why?  Was this corrected?
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (`version%s%s%s%s%s%s)\n",PLATFORM_SIG, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (`version%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){ 
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -1416,7 +1429,7 @@ put_char('\n');put_char('\n');
 #ifdef VTEX_SPACING_ADDONS
 // flag for no spaces recognition
 // set by command line parameter -n
-static BOOL no_spaces;
+static BOOL no_spaces = FALSE;
 
 // factor for threshold of spaces recognition max_x_val, in percents
 // set by command line parameter -r
@@ -1426,13 +1439,13 @@ static long x_fact = 100;
 #ifdef VTEX_OTF_ADDONS
 // flag for math variant conversion
 // set by command line parameter -m
-static BOOL cvt_to_math_var;
+static BOOL cvt_to_math_var = FALSE;
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
 // flag for sending back base tags of sub- / superscripts
 // set by command line parameter -p
-static BOOL dont_send_base_back;
+static BOOL dont_send_base_back = FALSE;
 #endif
 
 static FILE*  dot_file;
@@ -1883,7 +1896,9 @@ if( no_root_file ){
    *name = '\0'; 
 } else { 
           U_CHAR str[256], *p;
-   p = str;  while( special_n-- ){ *p++ = get_char(); }  *p = '\0';
+   p = str;
+   while( special_n-- ){ *p++ = get_char(); }
+   *p = '\0';
    warn_i_str(ERR_SPC_IGNORE, str); 
 }
 >>>
@@ -2770,7 +2785,7 @@ while( special_n-- > 0 ) {
 } 
 *p = '\0';
 p = post;  
-while( special_n-- > 0 ) *(p++) = get_char();
+while( special_n-- > 0 ){ *(p++) = get_char(); }
 *p = '\0';
 >>>
 
@@ -3924,7 +3939,7 @@ case `<def 4 byte font`>:   (void) get_char();
 case `<def 3 byte font`>:   (void) get_char();
 case `<def 2 byte font`>:   (void) get_char();
 case `<def 1 byte font`>: {   
-  for( i=0; i<14; i++ ) ch = get_char();
+  for( i=0; i<14; i++ ){ ch = get_char(); }
   for( i=ch + get_char(); i>0; i--) (void) get_char();
   break;
 }
@@ -4674,7 +4689,7 @@ if( p != (struct files_rec*) 0 ){
 \<find file record\><<<
 i = 0;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ) name[i++] = get_char();
+while(  special_n-- > 0 ){  name[i++] = get_char(); }
 for( p = opened_files; p != (struct files_rec*) 0;  p = p->next ){ 
   if( eq_str(p->name, name) ){ break; }
 }
@@ -4703,7 +4718,7 @@ if( q != p ){
    U_CHAR *name;
 name =  m_alloc(char, (int) special_n+1);
 *(name + (int) special_n) = '\0';
-while(  special_n-- > 0 )  *(name + i++) = get_char();
+while(  special_n-- > 0 ){ *(name + i++) = get_char(); }
 >>>
 
 
@@ -4771,7 +4786,7 @@ the return value is 0 iff the platform does not support system calls.
               struct sys_call_rec *p;
               BOOL flag;
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ) name[i++] = get_char();
+while(  special_n-- > 0 ){  name[i++] = get_char(); }
 (IGNORED) printf("System call: %s\n", name);
 `<flag = permission for system calls`>
 if( flag ){
@@ -4851,7 +4866,7 @@ static struct sys_call_rec *system_calls = (struct sys_call_rec *) 0;
     int i=0;
     FILE* file;      
 name[(int) special_n] = '\0';
-while(  special_n-- > 0 ) name[i++] = get_char();
+while(  special_n-- > 0 ){  name[i++] = get_char(); }
 file  = f_open(name, READ_TEXT_FLAGS); 
 if( file ) {
   `<open output file`>
@@ -4887,7 +4902,7 @@ if( special_n-- ){
   code = get_char();    
   while( special_n > 254 ){ (void) get_char(); special_n--; }
   p = str;  n = special_n;
-  while( special_n-- ) *(p++) = get_char();
+  while( special_n-- ) { *(p++) = get_char(); }
   *p = '\0';
   `<search counter`>
   `<act on counter`>
@@ -6786,7 +6801,7 @@ if( (in_ch = get_char()) == '>' ) {
 } else if( in_ch == '!' ) {
   `<store path-based forward submissions`>
 #ifdef VTEX_SSCRIPT_ADDONS
-} else if( in_ch == '<' ) {
+} else if ((in_ch == '<') && dont_send_base_back) {
     in_ch = get_char();
     special_n -= 2;
     if ((in_ch == '*') && (!ch_fl) && dont_send_base_back) // supressed back sending special -- placing it right here
@@ -7188,7 +7203,7 @@ case `<special 3`>:  case `<special 4`>: {  long int i;
      if( ch == '~' ){                  
         `<handle requests for backward submissions`> 
 #ifdef VTEX_SSCRIPT_ADDONS
-     } else if (ch == '='){
+     } else if ((ch == '=') && dont_send_base_back){
         while (i--)
         {
             int ch = get_char();
@@ -7273,7 +7288,7 @@ case `<def 4 byte font`>: (void) get_char();
 case `<def 3 byte font`>: (void) get_char();   
 case `<def 2 byte font`>: (void) get_char();   
 case `<def 1 byte font`>: {    int i;
-  for( i=14; i; i-- ) ch = get_char();
+  for( i=14; i; i-- ){  ch = get_char(); }
   i = ch +  get_char();  
   (IGNORED) fseek(dvi_file, (long) i, `<relative file addr`>);
   break;  }
@@ -7668,9 +7683,9 @@ struct del_stack_entry{
 \<vars\><<<
 static int ch_id, sv_id, id_latex, back_id_off; 
 #ifdef VTEX_SSCRIPT_ADDONS
-BOOL ch_fl; // flag for no xml tags after the last printable character
-            // used for cutting off any further back sendings after verbatims with xml tags
-            // in contrast with ch_token it should be equally functional during both runs of group_dvi
+static BOOL ch_fl = FALSE; // flag for no xml tags after the last printable character
+                           // used for cutting off any further back sendings after verbatims with xml tags
+                           // in contrast with ch_token it should be equally functional during both runs of group_dvi
 #endif
 >>>
 
@@ -12128,10 +12143,10 @@ if( span_on ){
 if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
   store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+} 
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
-} 
 >>>
 
 
