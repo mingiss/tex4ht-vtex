@@ -48,10 +48,20 @@ extern PLAIN_C void warn_i_int(/* enum err_codes */ int nErrCode, int nSupplErrC
 #define DEF_WORD_SP 999999.0
 #define WORD_SP_XDV 350000
 
-#define DEF_CHAR_F 2
-#define DEF_CHAR_L 1
+#define DEF_CHAR_F 0
+#define MAX_T1_CHAR_L 255
+#define DEF_CHAR_L MAX_T1_CHAR_L
+#define T1_NCHARS 256
+
+#define NO_CHAR_F 2
+#define NO_CHAR_L 1
 
 #define CLASS_ON_SIZE 32
+
+#define MAX_PUSH_DEPTH 256
+#define MAX_SPEC_LEN 254 // max num of bytes in \special body to be parsed
+#define FONT_NAME_BUF_LEN PATH_MAX // (256 - 1)
+#define STR_BUF_LEN 1024 // (256 - 1)
 
 enum err_codes
 {

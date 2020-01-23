@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-01-23-11:36), generated from tex4ht-c.tex
+/* tex4ht.c (2020-01-23-12:13), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -695,7 +695,7 @@ struct htf_4hf_rec { int   ch, type1, type2;
 
 
 #ifdef WIN32
-static U_CHAR dirname[PATH_MAX];
+static U_CHAR dirname[PATH_MAX + 1];
 #endif
 
 
@@ -773,7 +773,7 @@ static U_CHAR *trace_dvi_del_P,  *end_trace_dvi_del_P,
      *trace_dvi_del_r,  *end_trace_dvi_del_r,
      *trace_dvi_del_V,  *end_trace_dvi_del_V,
      *trace_dvi_del_v,  *end_trace_dvi_del_v;
-static int push_depth=0, push_id=0, push_st[256];
+static int push_depth=0, push_id=0, push_st[MAX_PUSH_DEPTH + 1];
 
 
 static long long x_val = 0, max_x_val = DEF_MAX_X_VAL,
@@ -2280,17 +2280,17 @@ tag
              + (
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
-( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % 256] : 0 )
+( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  >= 0) && (
-( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % 256] : 0 )
+( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
-( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % 256] : 0 )
+( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l))?
+    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
 ] : 0 )
             * (double) font_tbl[cur_fnt].scale
@@ -3127,7 +3127,7 @@ static void notify_class_info
 ;
 #undef SEP
 #endif
-{                        U_CHAR str[256], *p;
+{                        U_CHAR str[STR_BUF_LEN + 1], *p;
    str[0] = '\0';
    p = gif_open[gif_flag];
    if( p )
@@ -3186,7 +3186,7 @@ static void script
 #undef SEP
 #endif
 {    U_CHAR *ch, *p;
-      U_CHAR fmt[256];
+      U_CHAR fmt[STR_BUF_LEN + 1];
    job[ (int) strlen((char *) job) - 1 ] ='\0';
    p = ch = templt;
    while( TRUE ){
@@ -3504,7 +3504,7 @@ if (font_tbl[cur_fnt].math && (!bad_ch))
 
    if ((font_tbl[cur_fnt].char_wi == NULL) || bad_ch)
       return DEF_GLYPH_WDT_PT;
-   wt_ix = font_tbl[cur_fnt].char_wi[(ch - font_tbl[cur_fnt].char_f) % 256];
+   wt_ix = font_tbl[cur_fnt].char_wi[(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS];
    if ((font_tbl[cur_fnt].wtbl == NULL) || (wt_ix < 0) || (wt_ix >= font_tbl[cur_fnt].wtbl_n))
       return DEF_GLYPH_WDT_PT;
 
@@ -3514,16 +3514,16 @@ return (INTEGER)(
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  >= 0) && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
 ] : 0 )
             * (double) font_tbl[cur_fnt].scale
@@ -3620,19 +3620,19 @@ static char* get_script
 #endif
 {
    if( !name )
-   {                U_CHAR  str[256], *ch;
+   {                U_CHAR  str[MAX_SPEC_LEN + 2], *ch;
       (IGNORED) fseek(dot_file, 0L, 
 0
 );
       if( search_dot_file( x ) ){
            
-ch = str;  str[254] = '\0';
+ch = str;  str[MAX_SPEC_LEN] = '\0';
 do{                                       int int_ch;
   while((*(ch++) = (char)
                         (int_ch = (int) getc(dot_file))
         )       != '\n'){
     if( int_ch == EOF ){ *(ch-1)='\n';  break; }
-    if( str[254] ){ warn_i_int(ERR_SCPT_OVFL, x);  break; }
+    if( str[MAX_SPEC_LEN] ){ warn_i_int(ERR_SCPT_OVFL, x);  break; }
   }
 }while( (int) getc(dot_file) == x );
 *ch = '\0';
@@ -3668,7 +3668,7 @@ static BOOL search_dot_file
     if( chr == ch ){ return TRUE; }
     if( chr == '<' ) {
       
-                         U_CHAR match[256];
+                         U_CHAR match[STR_BUF_LEN + 1];
                          int i;
 for( i = 0; (chr != '\n') && (chr != EOF ) ; i++){
   chr = (int) getc(dot_file);
@@ -3808,7 +3808,7 @@ static void com_dir
 ;
 #undef SEP
 #endif
-{   int i;   U_CHAR   str[256];
+{   int i;   U_CHAR   str[STR_BUF_LEN + 1];
   (IGNORED) strcpy((char *)  str, (char *) p+2 );
   i = (int) strlen((char *) str) - 1;
   if( str[i] == '!' )  str[i] = '\0';
@@ -3891,12 +3891,12 @@ static FILE*  search_in_dot_file
 ;
 #undef SEP
 #endif
-{                                         U_CHAR  *ch, dir[256];
+{                                         U_CHAR  *ch, dir[PATH_MAX + 1];
                                           FILE* file;
 #ifndef KPATHSEA
    if( cache_files != (FILE *) 0 ){
       
-                 U_CHAR cache_dir[256], dot_dir[256], *q;
+                 U_CHAR cache_dir[PATH_MAX + 1], dot_dir[PATH_MAX + 1], *q;
 // gcc 5.4.0 does not distinguish between a pointer to const and const pointer
 // #if (__GNUC__ != 5) || (__GNUC_MINOR__ != 4) || (__GNUC_PATCHLEVEL__ != 0)
                  const
@@ -4114,7 +4114,7 @@ static FILE* search_file
 #undef SEP
 #endif
 {   FILE*  file;
-     U_CHAR     str[256];
+     U_CHAR     str[PATH_MAX + 1];
      int i;
      BOOL subs;
   
@@ -4269,7 +4269,7 @@ static FILE* search_file_ext
 ;
 #undef SEP
 #endif
-{  U_CHAR   str[256];
+{  U_CHAR   str[PATH_MAX + 1];
     FILE*  file;
     int    n;
   n = (int) strlen(dir);
@@ -4834,16 +4834,16 @@ if( no_root_file ){  open_o_file(); }
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  >= 0) && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
 ] : 0 )
             * (double) font_tbl[cur_fnt].scale
@@ -4856,7 +4856,7 @@ design_size_to_pt(
 design_size_to_pt( (font_tbl[cur_fnt].htbl && (
 (
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
         >>  4
 ) & 0x0F
 )
@@ -4864,7 +4864,7 @@ design_size_to_pt( (font_tbl[cur_fnt].htbl && (
  >= 0) && (
 (
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
         >>  4
 ) & 0x0F
 )
@@ -4873,7 +4873,7 @@ design_size_to_pt( (font_tbl[cur_fnt].htbl && (
     font_tbl[cur_fnt].htbl[
 (
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
         >>  4
 ) & 0x0F
 )
@@ -4889,14 +4889,14 @@ design_size_to_pt( (font_tbl[cur_fnt].htbl && (
 design_size_to_pt( (font_tbl[cur_fnt].dtbl && (
 (
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 ) & 0x0F
 )
 
  >= 0) && (
 (
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 ) & 0x0F
 )
 
@@ -4904,7 +4904,7 @@ design_size_to_pt( (font_tbl[cur_fnt].dtbl && (
     font_tbl[cur_fnt].dtbl[
 (
 ( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 ) & 0x0F
 )
 
@@ -4977,7 +4977,7 @@ if (font_tbl[cur_fnt].pars)
     get_uni_ch(wch_buf, WCH_BUF_SIZE, ch, font_tbl[cur_fnt].pars, cvt_to_math_var);
     for (int *pwch = wch_buf; *pwch; pwch++)
     {
-        if (*pwch < 256)
+        if (*pwch < T1_NCHARS)
         {
             chr = *pwch;
             
@@ -5079,12 +5079,12 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
     gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
-chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
+chr = ((r_ch == MAX_T1_CHAR_L) && font_tbl[cur_fnt].ch255 )? T1_NCHARS :
     ( (font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
         font_tbl[cur_fnt].ch[r_ch] : 0 );
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { 
-      U_CHAR  str[256], *p;
+      U_CHAR  str[STR_BUF_LEN + 1], *p;
       BOOL sv;
       int mag;
 sv = special_on;   special_on = TRUE;
@@ -5406,7 +5406,7 @@ if (font_tbl[cur_fnt].pars)
     get_uni_ch(wch_buf, WCH_BUF_SIZE, ch, font_tbl[cur_fnt].pars, cvt_to_math_var);
     for (int *pwch = wch_buf; *pwch; pwch++)
     {
-        if (*pwch < 256)
+        if (*pwch < T1_NCHARS)
         {
             chr = *pwch;
             
@@ -5508,12 +5508,12 @@ if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tb
     gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
 ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
-chr = ((r_ch == 255) && font_tbl[cur_fnt].ch255 )? 256 :
+chr = ((r_ch == MAX_T1_CHAR_L) && font_tbl[cur_fnt].ch255 )? T1_NCHARS :
     ( (font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
         font_tbl[cur_fnt].ch[r_ch] : 0 );
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { 
-      U_CHAR  str[256], *p;
+      U_CHAR  str[STR_BUF_LEN + 1], *p;
       BOOL sv;
       int mag;
 sv = special_on;   special_on = TRUE;
@@ -5896,16 +5896,16 @@ return (INTEGER)(
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  >= 0) && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
 ] : 0 )
             * (double) font_tbl[cur_fnt].scale
@@ -6526,7 +6526,7 @@ CDECL
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-01-23-11:36%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-01-23-12:13%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -6675,7 +6675,7 @@ while( *digit != '\0' ){
     ignore_ch = 0; break;
   }
   ignore_ch = 10 * ignore_ch + (*digit - '0');
-  if( ignore_ch > 255 ){ ignore_ch = 0; break; }
+  if( ignore_ch > MAX_T1_CHAR_L ){ ignore_ch = 0; break; }
   digit++;
 }
 
@@ -6988,7 +6988,7 @@ no_root_file = name;
 
 
   
-{                              U_CHAR  str[PATH_MAX],  *TEX4HTENV;
+{                              U_CHAR  str[PATH_MAX + 1],  *TEX4HTENV;
    
 if( dump_env_search && tex4ht_env_file ){
    (IGNORED) printf("-e: %s?\n", tex4ht_env_file);
@@ -7080,7 +7080,7 @@ if( !dot_file && dos_env_file){
 
 #ifdef KPATHSEA
 if( !dot_file ) {                    U_CHAR * envfile;
-                             char *arch, *p, str[256];
+                             char *arch, *p, str[PATH_MAX + 1];
   
 p = arch = (char *) kpse_var_value( "SELFAUTOLOC" );
 while( *p != '\0' ){
@@ -7116,7 +7116,7 @@ if( dump_env_search ){
 }
 if( system(KPSEWHICH_CMD ">tex4ht.tmp") == 0 ){
    
-char fileaddr [256];
+char fileaddr[PATH_MAX + 1];
 int loc = 0;
 FILE* file =  f_open("tex4ht.tmp", READ_TEXT_FLAGS);
 if( file ){
@@ -7158,7 +7158,7 @@ if( file ){
 0
 );
 while ( search_dot_file( 'P' ) ){     struct sys_call_rec *q;
-                                      U_CHAR *p, str[256];
+                                      U_CHAR *p, str[PATH_MAX + 1];
   q = m_alloc(struct sys_call_rec, 1);
   q->next = system_calls;
   system_calls = q;
@@ -7213,7 +7213,8 @@ gif = (char *) get_script(gif,LGTYP,'g');
 
 
   
-{      U_CHAR str[256];
+{      U_CHAR str[PATH_MAX + 1];
+   if (job_name_n > PATH_MAX) warn_i_str(ERR_BUF_OVFL, "");
    (IGNORED) strcpy((char *) str, (char *) job_name);
    str[job_name_n-1] = '\0';
    str[job_name_n-2] = 'g';
@@ -7225,7 +7226,7 @@ gif = (char *) get_script(gif,LGTYP,'g');
 
   
 #ifdef KPATHSEA
-{           char str [256], *export_str, *postfix;
+{           char str[FONT_NAME_BUF_LEN + 1], *export_str, *postfix;
    export_str = m_alloc(char, 1);
    *export_str = '\0';
    
@@ -7488,7 +7489,7 @@ char ** fontset=0;
 #endif
 #ifndef KPATHSEA
        
-U_CHAR files_cache[PATH_MAX];
+U_CHAR files_cache[PATH_MAX + 1];
 
 
    
@@ -7565,7 +7566,7 @@ if( export_str_chars ){
 
 
    
-{                              U_CHAR name[256];
+{                              U_CHAR name[PATH_MAX + 1];
                                FILE* file;
    (IGNORED) sprintf(name, "%s.4hf", "unicode");
    
@@ -7667,12 +7668,12 @@ int value;
 
 
       
-max_charset_n = 256;
-charset =   m_alloc(struct charset_rec, 256);
+max_charset_n = T1_NCHARS;
+charset =   m_alloc(struct charset_rec, T1_NCHARS);
 
 
-max_htf_4hf_n = 256;
-htf_4hf = m_alloc(struct htf_4hf_rec, 256);
+max_htf_4hf_n = T1_NCHARS;
+htf_4hf = m_alloc(struct htf_4hf_rec, T1_NCHARS);
 
 
       
@@ -7948,15 +7949,15 @@ if( flags &
    if( font_file == NULL ){
       dump_env();      err_i_str(ERR_IN_FILE, file_name);
       missing_fonts = TRUE;
-      new_font.char_f = DEF_CHAR_F;
-      new_font.char_l = DEF_CHAR_L;
+      new_font.char_f = NO_CHAR_F;
+      new_font.char_l = NO_CHAR_L;
    } else {
 */
       
 {       
    
-new_font.char_f = 0;
-new_font.char_l = 255;
+new_font.char_f = DEF_CHAR_F;
+new_font.char_l = DEF_CHAR_L;
 new_font.wtbl_n = 0;
 new_font.htbl_n = 0;
 new_font.dtbl_n = 0;
@@ -8011,7 +8012,7 @@ if( new_font.word_sp == 0 ) {
         int i;
   for( i = new_font.char_f; i <= new_font.char_l; i++ ){
     INTEGER wdt = 0;
-    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l - new_font.char_f))
+    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l))
         wdt = new_font.char_wi[i - new_font.char_f];
     new_font.word_sp =
       ( new_font.word_sp
@@ -8134,7 +8135,7 @@ new_font.design_sz = (INTEGER) get_unt(4);
 
 
 {       FILE *font_file;
-        U_CHAR  file_name[256];
+        U_CHAR  file_name[PATH_MAX + 1];
    
 {                        
    font_file = NULL;
@@ -8145,13 +8146,13 @@ new_font.design_sz = (INTEGER) get_unt(4);
      U_CHAR * tfmfile;
   tfmfile = kpse_find_file (file_name, kpse_tfm_format, 0);
   if( !tfmfile ){ 
-char s [256];
+char s[PATH_MAX + 50];
 (IGNORED) strcpy(s, "kpsewhich ");
 (IGNORED) strcat(s, file_name);
 (IGNORED) strcat(s, " > tex4ht.tmp ");
 if( system(s) == 0 ){
    
-char fileaddr [256];
+char fileaddr[PATH_MAX + 1];
 int loc = 0;
 FILE* file =  f_open("tex4ht.tmp", READ_TEXT_FLAGS);
 if( file ){
@@ -8222,8 +8223,8 @@ for( cur_cache_font = cache_font;
    {
       dump_env();      err_i_str(ERR_IN_FILE, file_name);
       missing_fonts = TRUE;
-      new_font.char_f = DEF_CHAR_F;
-      new_font.char_l = DEF_CHAR_L;
+      new_font.char_f = NO_CHAR_F;
+      new_font.char_l = NO_CHAR_L;
    }
 
 #ifdef VTEX_OTF_ADDONS
@@ -8371,7 +8372,7 @@ if( new_font.word_sp == 0 ) {
         int i;
   for( i = new_font.char_f; i <= new_font.char_l; i++ ){
     INTEGER wdt = 0;
-    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l - new_font.char_f))
+    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l))
         wdt = new_font.char_wi[i - new_font.char_f];
     new_font.word_sp =
       ( new_font.word_sp
@@ -8465,11 +8466,11 @@ if (new_font.design_sz > 0)
 
    }
    
-{      U_CHAR str[256];
+{      U_CHAR str[STR_BUF_LEN + 1];
        int i, design_n, n_gif;
        
 int loopBound = 0;
-U_CHAR loopName[256];
+U_CHAR loopName[FONT_NAME_BUF_LEN + 1];
 loopName[0] = '\0';
 
 
@@ -8556,12 +8557,12 @@ for( i = new_font.char_f; i <= new_font.char_l ; i++ ){
 
    design_n = 0;
       
-{  char search_font_name [256];
+{  char search_font_name[FONT_NAME_BUF_LEN + 1];
   (IGNORED) strcpy((char *) search_font_name, (char *) new_font.name);
   while( 1 ){                         BOOL flag;
      
 if( eq_str( new_font_name, loopName) ){
-     U_CHAR name[256];
+     U_CHAR name[PATH_MAX + 1];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
     err_i_str(ERR_IN_FILE, name);
 } else {
@@ -8569,7 +8570,7 @@ if( eq_str( new_font_name, loopName) ){
 }
 loopBound++;
 if( loopBound > 10 ){
-   U_CHAR name[256];
+   U_CHAR name[PATH_MAX + 1];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
    err_i_str(ERR_IN_FILE, name);
 }
@@ -8583,7 +8584,7 @@ if( loopBound > 10 ){
             break;
 
        
-{                              U_CHAR name[256];
+{                              U_CHAR name[PATH_MAX + 1];
    (IGNORED) sprintf(name, "%s.htf", new_font_name);
    
    file = NULL;
@@ -8749,7 +8750,7 @@ if( (digit=str[j-1]) == '\\' )
           indirect_ch = !indirect_ch;   str[j-1] = value;
         } else { value -= '0';  base = 10; j--; }
   } } }
-  else{ if( value>255 ){
+  else{ if( value > MAX_T1_CHAR_L ){
             warn_i_int(ERR_CHR_CODE_OVFL, value);
             value = 32;  dump_htf( file );
         }
@@ -8824,7 +8825,7 @@ if( htf_4hf[mid].type1 == ch1  ){
 }   }
 
 
-  new_font.gif1[i] = ch1 % 256;
+  new_font.gif1[i] = ch1 % T1_NCHARS;
   do{
     if( (ch = get_html_ch(file)) == del ){
       
@@ -8876,9 +8877,9 @@ switch( j ){
     p = m_alloc(unsigned U_CHAR, j);
     if (new_font.str && (design_n >= 0) && (design_n < n_gif))
             new_font.str[design_n] = p;
-    if( design_n>255 ){ design_n--; warn_i(ERR_FNT_OVFL);}
-    if( i==255 ){
-       if( design_n == 255 ){
+    if( design_n > MAX_T1_CHAR_L ){ design_n--; warn_i(ERR_FNT_OVFL);}
+    if( i == MAX_T1_CHAR_L ){
+       if( design_n == MAX_T1_CHAR_L ){
                 new_font.ch[i] = 0;           new_font.ch255 = 1;
        } else { new_font.ch[i] = ++design_n;  }
     } else {    new_font.ch[i] = ++design_n; }
@@ -8993,7 +8994,7 @@ fonts_n++;
             break;
 
        
-{                              U_CHAR name[256];
+{                              U_CHAR name[PATH_MAX + 1];
    (IGNORED) sprintf(name, "%s.%s", css_file_name,
                                     search_css_ext->name);
    
@@ -9174,8 +9175,9 @@ if( cache_files != (FILE *) 0 ){  (IGNORED) fclose(cache_files); }
    
 if( tex4ht_fls ){
                FILE *in_file, *out_file;
-               U_CHAR temp_file[256];
+               U_CHAR temp_file[PATH_MAX + 1];
    
+if (job_name_n > PATH_MAX) warn_i_str(ERR_BUF_OVFL, "");
 (IGNORED) strcpy((char *) temp_file, (char *) job_name);
 temp_file[job_name_n] = '\0';
 temp_file[job_name_n-1] = 'p';
@@ -9203,7 +9205,7 @@ if( (out_file = fopen(temp_file, WRITE_TEXT_FLAGS)) == NULL )
    } else {
       if( (in_file = fopen(temp_file, READ_TEXT_FLAGS)) != NULL ){
         
-              U_CHAR dir[255], prev_dir[255], file[255], *p;
+              U_CHAR dir[PATH_MAX + 1], prev_dir[PATH_MAX + 1], file[PATH_MAX + 1], *p;
               int ch;
               BOOL is_dir;
               struct cache_file_rec *file_rec, *prev_file_rec;
@@ -9525,16 +9527,16 @@ width = (INTEGER)(
 design_size_to_pt(
     (font_tbl[cur_fnt].wtbl && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  >= 0) && (
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
  < font_tbl[cur_fnt].wtbl_n))?
         font_tbl[cur_fnt].wtbl[
 ( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % 256] : 0 )
+    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
 
 ] : 0 )
             * (double) font_tbl[cur_fnt].scale
@@ -9934,9 +9936,11 @@ if( special_n ){
   special_n--;
   switch ( get_char() ){
     case '<': { 
-    U_CHAR name[256];
+    U_CHAR name[PATH_MAX + 1];
     int i=0;
     FILE* file;
+if (special_n > PATH_MAX) warn_i_str(ERR_BUF_OVFL, "");
+while (special_n > PATH_MAX){ get_char(); special_n--; }
 name[(int) special_n] = '\0';
 while(  special_n-- > 0 ){  name[i++] = get_char(); }
 file  = f_open(name, READ_TEXT_FLAGS);
@@ -9956,9 +9960,11 @@ if( no_root_file ){  open_o_file(); }
 if( special_n > 0 ){
   
         static struct files_rec *p, *q;
-        U_CHAR name[256];
+        U_CHAR name[PATH_MAX + 1];
         int i;
 
+if (special_n > PATH_MAX) warn_i_str(ERR_BUF_OVFL, "");
+while (special_n > PATH_MAX){ get_char(); special_n--; }
 i = 0;
 name[(int) special_n] = '\0';
 while(  special_n-- > 0 ){  name[i++] = get_char(); }
@@ -10014,10 +10020,12 @@ if( q == (struct files_rec*) 0 ){
 
     break; }
     case '!': { 
-              U_CHAR name[256], ch;
+              U_CHAR name[PATH_MAX + 1], ch;
               int i=0, n;
               struct sys_call_rec *p;
               BOOL flag;
+if (special_n > PATH_MAX) warn_i_str(ERR_BUF_OVFL, "");
+while (special_n > PATH_MAX){ get_char(); special_n--; }
 name[(int) special_n] = '\0';
 while(  special_n-- > 0 ){  name[i++] = get_char(); }
 (IGNORED) printf("System call: %s\n", name);
@@ -10236,13 +10244,16 @@ if( special_n>1 ) {
    special_n--;
    if (  get_char() == '%' ) {
       if( special_n>2 ) { 
-     U_CHAR  type, ch, *p, *q, *pp=0, *qq=0, pre[256], post[256];
+     U_CHAR  type, ch, *p, *q, *pp=0, *qq=0, pre[STR_BUF_LEN + 1], post[STR_BUF_LEN + 1];
 special_n -= 2;   type = get_char();  ch = get_char();
+if (special_n > STR_BUF_LEN) warn_i_str(ERR_BUF_OVFL, "");
+// while (special_n > STR_BUF_LEN) { get_char(); special_n--; }
 p = pre;
 while( special_n-- > 0 ) {
-  if ( (*(p++)=get_char() ) == ch ) { p--; break; }
+  if ( ((*(p++)=get_char() ) == ch) || ((p - pre) >= STR_BUF_LEN) ) { p--; break; }
 }
 *p = '\0';
+while (special_n > STR_BUF_LEN) { get_char(); special_n--; }
 p = post;
 while( special_n-- > 0 ){ *(p++) = get_char(); }
 *p = '\0';
@@ -10668,7 +10679,7 @@ while( special_n-- > 0 ){
   if ( (digit < 0) || (digit > 9) ) {  warn_i_int(ERR_SPC_BAD_CHR, digit + '0') ; }
   else { code = code * 10 + digit; }
 }
-if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
+if ( (code < 0) || (code > MAX_T1_CHAR_L) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
 
 
        put_char( code );
@@ -10770,7 +10781,7 @@ while( special_n-- > 0 ){
   if ( (digit < 0) || (digit > 9) ) {  warn_i_int(ERR_SPC_BAD_CHR, digit + '0') ; }
   else { code = code * 10 + digit; }
 }
-if ( (code < 0) || (code > 255) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
+if ( (code < 0) || (code > MAX_T1_CHAR_L) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
 
  next_char = code;
 if( 
@@ -10908,10 +10919,11 @@ dump_ch_map();
   case ':': { 
 if( special_n-- ){
         int code, n;
-        U_CHAR str [255], *p;
+        U_CHAR str[MAX_SPEC_LEN + 1], *p;
         struct count_rec *q;
   code = get_char();
-  while( special_n > 254 ){ (void) get_char(); special_n--; }
+  if (special_n > MAX_SPEC_LEN) warn_i_str(ERR_BUF_OVFL, "");
+  while( special_n > MAX_SPEC_LEN ){ (void) get_char(); special_n--; }
   p = str;  n = special_n;
   while( special_n-- ) { *(p++) = get_char(); }
   *p = '\0';
@@ -10976,9 +10988,10 @@ if( no_root_file ){  open_o_file(); }
         int n, code;
         U_CHAR *p, *q;
 code = get_char();
-n = 1 + ((--special_n>254)? 254 : special_n);
+n = 1 + ((--special_n > MAX_SPEC_LEN)? MAX_SPEC_LEN : special_n);
 q = p = m_alloc(char, (int) n);
-while( special_n > 254 ){ (void) get_char(); special_n--; }
+if (special_n > MAX_SPEC_LEN) warn_i_str(ERR_BUF_OVFL, "");
+while( special_n > MAX_SPEC_LEN ){ (void) get_char(); special_n--; }
 while( special_n-- ) { *(q++) = get_char(); }
 *q = '\0';  q = p;
 switch ( code ){
@@ -11015,7 +11028,7 @@ if( font_tbl[cur_fnt].mag != 100 ){
 {                 int bad_str, m;
                   U_CHAR ch, *t[
 8
-], err_str[256];
+], err_str[STR_BUF_LEN + 1];
 bad_str=
 7
 ;   (IGNORED) strcpy((char *) err_str, (char *) p);
@@ -11212,10 +11225,12 @@ if( special_n == 1 ){
 } else if( in_ch == '!' ) {
   
                  struct group_path *p, *t;
-                 U_CHAR            *q, str[256];
+                 U_CHAR            *q, str[STR_BUF_LEN + 1];
                  int               n;
 p = m_alloc(struct group_path,1);
 
+if (special_n > STR_BUF_LEN) warn_i_str(ERR_BUF_OVFL, "");
+while (special_n > STR_BUF_LEN) { get_char(); special_n--; }
 n = 0;
 while( --special_n ) {
    str[n] = get_char();
@@ -11887,7 +11902,7 @@ stack[stack_n-1].stack_id = -1;
   case '.': { 
 if( no_root_file ){
    U_CHAR *name;
-   name = m_alloc(char, 256);
+   name = m_alloc(char, PATH_MAX + 1);
    (IGNORED) strcpy((char *)  name, (char *) no_root_file );
    free((void *)  no_root_file);
    no_root_file = name;
@@ -11898,7 +11913,9 @@ if( no_root_file ){
   }
    *name = '\0';
 } else {
-          U_CHAR str[256], *p;
+          U_CHAR str[STR_BUF_LEN + 1], *p;
+   if (special_n > STR_BUF_LEN) warn_i_str(ERR_BUF_OVFL, "");
+   while (special_n > STR_BUF_LEN) { get_char(); special_n--; }
    p = str;
    while( special_n-- ){ *p++ = get_char(); }
    *p = '\0';
@@ -11954,9 +11971,11 @@ stack[stack_n+1].class_close = close_class[math_class];
 
             break; }
  default:{ 
-{                                    U_CHAR str[256], *p, ch, **q;
+{                                    U_CHAR str[STR_BUF_LEN + 1], *p, ch, **q;
    math_class = scan_class(2);  ch = get_char();
    special_n -= 2;   p = str;
+   if (special_n > STR_BUF_LEN) warn_i_str(ERR_BUF_OVFL, "");
+   while (special_n > STR_BUF_LEN) { get_char(); special_n--; }
    while( special_n-- > 0 ){
       if(  (*(p++) = get_char()) == ch ){ p--; break; }
    }
@@ -12283,7 +12302,7 @@ free((void *)  q );
 
 
 
-if( push_depth<256 ) { push_st[push_depth] = push_id++; }
+if( push_depth < MAX_PUSH_DEPTH ) { push_st[push_depth] = push_id++; }
 if( trace_dvi_P && !ch_map_flag ){
    
 if( no_root_file ){  open_o_file(); }
@@ -12292,7 +12311,7 @@ if( no_root_file ){  open_o_file(); }
    if( *trace_dvi_del_P != '\0' ){
       (IGNORED) fprintf(cur_o_file, "%s%d %d",
          trace_dvi_del_P, push_depth,
-         push_st[(push_depth<256)? push_depth:256]);
+         push_st[(push_depth < MAX_PUSH_DEPTH)? push_depth:MAX_PUSH_DEPTH]);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_P);
 }
@@ -12347,7 +12366,7 @@ while( p !=  (struct group_path *) 0 ){
    
 if( *(p->path) != '\0' ) {
    
-            char str[256];
+            char str[STR_BUF_LEN + 1];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
 (IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
@@ -12357,7 +12376,7 @@ if( *(p->path) != '\0' ) {
      case '/':  ignore_chs--;  break;
       default:  {
           
-            char str[256];
+            char str[STR_BUF_LEN + 1];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
 (IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
@@ -12385,7 +12404,7 @@ while( p !=  (struct group_path *) 0 ){
    
 if( *(p->path) != '\0' ) {
    
-            char str[256];
+            char str[STR_BUF_LEN + 1];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
 (IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
@@ -12395,7 +12414,7 @@ if( *(p->path) != '\0' ) {
      case '>':  print_f( p->info );  break;
       default:  {
           
-            char str[256];
+            char str[STR_BUF_LEN + 1];
 (IGNORED) strcpy(str, "...."); *(str+3) = p->action;
 (IGNORED) strct(str,p->info); warn_i_str(ERR_SPC_TILDE_STR, str);
 
@@ -12447,7 +12466,7 @@ if( no_root_file ){  open_o_file(); }
    if( *trace_dvi_del_p != '\0' ){
       (IGNORED) fprintf(cur_o_file, "%s%d %d",
          trace_dvi_del_p,  push_depth,
-         push_st[(push_depth<256)? push_depth:256]);
+         push_st[(push_depth < MAX_PUSH_DEPTH)? push_depth:MAX_PUSH_DEPTH]);
    }
    (IGNORED) fprintf(cur_o_file, "%s", end_trace_dvi_del_p);
 }
@@ -12747,7 +12766,7 @@ case
      if( ch == '+' ){
         
 if( i==0 ){ if( dvi_flag ){ dvi_flag = 0;  
-if( !visible_cnt ) {                            U_CHAR  str[256];
+if( !visible_cnt ) {                            U_CHAR  str[STR_BUF_LEN + 1];
    (IGNORED) sprintf(str, "--- empty picture --- %sidv[%d] ---\n",
                           job_name,page_n);
    (IGNORED) printf("%s", str);  (IGNORED) fprintf(log_file, "%s",str); }
@@ -12769,7 +12788,9 @@ visible_cnt = TRUE;
  }
   else switch( get_char() ){
      case '+': { 
-{    U_CHAR str[256], *ch;
+{    U_CHAR str[STR_BUF_LEN + 1], *ch;
+   if (i > STR_BUF_LEN) warn_i_str(ERR_BUF_OVFL, "");
+   while (i > STR_BUF_LEN) { get_char(); i--; }
    ch = str;
    while( --i ) *(ch++) = get_char();
    *ch = '\0';
@@ -13084,7 +13105,7 @@ if( errCode > 0 ){
 
 
 {                                               int   ch, i, mag;
-                                                U_CHAR  str[256];
+                                                U_CHAR  str[STR_BUF_LEN + 1];
    (IGNORED) fprintf(log_file, "%s", begin_char_gif);
    dvi_flag = TRUE;
    for( cur_fnt = font_tbl_size; cur_fnt--; ){

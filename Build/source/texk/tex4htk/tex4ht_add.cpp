@@ -199,17 +199,17 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
     if (pfont_pars)
         *pfont_pars = (HANDLE)ppars;
 
-    new_font.char_f = DEF_CHAR_F;
-    new_font.char_l = DEF_CHAR_L;
+    new_font.char_f = NO_CHAR_F;
+    new_font.char_l = NO_CHAR_L;
     if (ppars)
     {
         new_font.char_f = ppars->m_ChFirst;
         new_font.char_l = ppars->m_ChLast;
     }
-    if (new_font.char_l < new_font.char_f - 1)
+    if (new_font.char_l < new_font.char_f)
     {
-        new_font.char_f = DEF_CHAR_F;
-        new_font.char_l = DEF_CHAR_L;
+        new_font.char_f = NO_CHAR_F;
+        new_font.char_l = NO_CHAR_L;
     }
 
     new_font.word_sp = DEF_WORD_SP;

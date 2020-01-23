@@ -24,8 +24,6 @@ using namespace std;
 
 #include "tex4ht.h"
 
-#define STR_BUF_LEN 1024
-
 // scale and design_sz values of /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 #define DEF_FONT_SCALE  655360
 #define DEF_DESIGN_SZ   655360
