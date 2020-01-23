@@ -7634,7 +7634,8 @@ static  struct del_stack_entry* pop_del(ch, id_hide, cr_fnt)
 ;{                   
    if( del_stack != (struct del_stack_entry*) 0 ){
       if( (cr_fnt ==  del_stack->fnt) && 
-          font_tbl[cr_fnt].math && (ch >= font_tbl[cr_fnt].char_f) && (ch < font_tbl[cr_fnt].char_f) &&
+          font_tbl[cr_fnt].math &&
+          (ch >= font_tbl[cr_fnt].char_f) && (ch <= font_tbl[cr_fnt].char_l) &&
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
                                              struct del_stack_entry  * p;

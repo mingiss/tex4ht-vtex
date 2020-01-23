@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-01-22-18:14), generated from tex4ht-c.tex
+/* tex4ht.c (2020-01-23-11:36), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -2768,7 +2768,8 @@ static  struct del_stack_entry* pop_del
 {
    if( del_stack != (struct del_stack_entry*) 0 ){
       if( (cr_fnt ==  del_stack->fnt) &&
-          font_tbl[cr_fnt].math && (ch >= font_tbl[cr_fnt].char_f) && (ch < font_tbl[cr_fnt].char_f) &&
+          font_tbl[cr_fnt].math &&
+          (ch >= font_tbl[cr_fnt].char_f) && (ch <= font_tbl[cr_fnt].char_l) &&
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
                                              struct del_stack_entry  * p;
@@ -6525,7 +6526,7 @@ CDECL
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-01-22-18:14%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-01-23-11:36%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
