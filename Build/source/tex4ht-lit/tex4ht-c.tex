@@ -4462,10 +4462,10 @@ static U_CHAR  *next_str = (char *) 0;
 \<code := ...\><<<
 while( special_n-- > 0 ){
   digit = get_char() - '0';
-  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(ERR_SPC_BAD_CHR, digit + '0') ; }
+  if ( (digit < 0) || (digit > 9) ) {  warn_i_int(ERR_SPC_BAD_CHAR, digit + '0') ; }
   else { code = code * 10 + digit; }
 }
-if ( (code < 0) || (code > MAX_T1_CHAR_L) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHR, '?') ; }
+if ( (code < 0) || (code > MAX_T1_CHAR_L) ) {  code = '?'; warn_i_int(ERR_SPC_BAD_CHAR, '?') ; }
 >>>
 
 \<send ch to next ch\><<<
@@ -6108,9 +6108,9 @@ BOOL visible_cnt=FALSE;
    dvi_flag = TRUE;    
    for( cur_fnt = font_tbl_size; cur_fnt--; ){
       `<output to lg file`>
-      for( i = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
-           i--; )
-         if( get_bit( font_tbl[cur_fnt].gif_on, i, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1)) ){
+      int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
+      for( i = n_gif; i--; )
+         if( get_bit(font_tbl[cur_fnt].gif_on, i, n_gif) ){
             bop_addr = advance_idv_page( bop_addr, cur_font );
             set_loc( `<mv hor 1-byte`>, (long int) mid_page_x );
             set_loc( `<mv ver 1-byte`>, (long int) mid_page_y );
@@ -7324,7 +7324,7 @@ case     `<font int`>: {
 default: {
   if( (ch < `<font 0`>) || (ch > `<font 63`>) ) {
      if( ch == `<end page op`> ) { warn_i(ERR_SPC_PBR); }
-     else { warn_i_int(ERR_SPC_BAD_CHR_CODE, ch); }
+     else { warn_i_int(ERR_SPC_BAD_CHAR_CODE, ch); }
   } else { cr_fnt = ch - `<font 0`>;  
          cr_fnt = search_font_tbl( cr_fnt );    
   }
@@ -9456,10 +9456,9 @@ num_font_parameters          = 0;
 \<scan xdv char info words\><<<
 {      U_CHAR *ch, *hidp;
        int i;
-   ch = new_font.char_wi = m_alloc(char, new_font.char_l
-                                       - new_font.char_f + 1);
-   hidp = new_font.char_hidp = m_alloc(char, new_font.char_l
-                                       - new_font.char_f + 1);
+   int n_gif = new_font.char_l - new_font.char_f + 1;
+   ch = new_font.char_wi = m_alloc(char, n_gif);
+   hidp = new_font.char_hidp = m_alloc(char, n_gif);
    for( i = new_font.char_f; i <= new_font.char_l; i++ ){
       *(ch++) = 10;
       *(hidp++) = 26;
@@ -9808,10 +9807,9 @@ identification of font family (20 bytes), etc.
 \<scan char info words\><<<
 {      U_CHAR *ch, *hidp;
        int i;
-   ch = new_font.char_wi = m_alloc(char, new_font.char_l
-                                       - new_font.char_f + 1);
-   hidp = new_font.char_hidp = m_alloc(char, new_font.char_l
-                                       - new_font.char_f + 1);
+       int n_gif = new_font.char_l - new_font.char_f + 1;
+   ch = new_font.char_wi = m_alloc(char, n_gif);
+   hidp = new_font.char_hidp = m_alloc(char, n_gif);
    for( i = new_font.char_f; i <= new_font.char_l; i++ ){
       *(ch++) = (int) fget_unt(font_file,1);
       *(hidp++) = (int) fget_unt(font_file,1);
@@ -10041,7 +10039,7 @@ if( new_font.word_sp == 0 ) {
         int i;
   for( i = new_font.char_f; i <= new_font.char_l; i++ ){
     INTEGER wdt = 0;
-    if (new_font.char_wi && (i >= new_font.char_f) && (i <= new_font.char_l))
+    if (new_font.char_wi)
         wdt = new_font.char_wi[i - new_font.char_f];
     new_font.word_sp = 
       ( new_font.word_sp
@@ -10089,121 +10087,113 @@ new_font.ex = (INTEGER) fget_int(font_file,4);
 \SubSection{Characters' Width}
 
 \<return char width\><<<
-return (INTEGER)(
-    `<(double) char_width( ch )`>  
-  );  
+return (INTEGER)(`<(double) char_width( ch )`>);  
 >>>
-
-
-\<(double) char_width( chr )\><<<
-design_size_to_pt(
-    (font_tbl[cur_fnt].wtbl && (`<chr width of`> >= 0) && (`<chr width of`> < font_tbl[cur_fnt].wtbl_n))?
-        font_tbl[cur_fnt].wtbl[`<chr width of`>] : 0 )
-            * (double) font_tbl[cur_fnt].scale
->>>
-
-
-\<chr width of\><<<
-( (font_tbl[cur_fnt].char_wi && (chr >= font_tbl[cur_fnt].char_f) && (chr <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-    font_tbl[cur_fnt].char_wi[(chr - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
->>>
-
-
 
 \<(double) char_width( design_ch? design_ch : ch )\><<<
-design_size_to_pt(
-    (font_tbl[cur_fnt].wtbl && (`<design-ch / ch width of`> >= 0) && (`<design-ch / ch width of`> < font_tbl[cur_fnt].wtbl_n))?
-        font_tbl[cur_fnt].wtbl[`<design-ch / ch width of`>] : 0 )
-            * (double) font_tbl[cur_fnt].scale
+char_width(design_ch? design_ch : ch)
 >>>
-
-
-\<design-ch / ch width of\><<<
-( (font_tbl[cur_fnt].char_wi && ((design_ch? design_ch : ch) >= font_tbl[cur_fnt].char_f) && ((design_ch? design_ch : ch) <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)((design_ch? design_ch : ch) - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
->>>
-
-
-
-
 
 \<(double) char_width( ch )\><<<
-design_size_to_pt(
-    (font_tbl[cur_fnt].wtbl && (`<ch of width`> >= 0) && (`<ch of width`> < font_tbl[cur_fnt].wtbl_n))?
-        font_tbl[cur_fnt].wtbl[`<ch of width`>] : 0 )
-            * (double) font_tbl[cur_fnt].scale
+char_width(ch)
 >>>
-
-
-\<ch of width\><<<
-( (font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_wi[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
->>>
-
 
 \<ch width\><<<
 (int)(`<(double) char_width( ch )`>)
 >>>
 
+\<header functions\><<<
+static double char_width(int ch);
+>>>
+
+\<functions\><<<
+`[
+static double  char_width(ch)  int ch
+;{
+   INTEGER size = 0;
+   // size = *(font_tbl[cur_fnt].wtbl + (int)(*(font_tbl[cur_fnt].char_wi + (int)(ch - font_tbl[cur_fnt].char_f)% 256)));
+   if (font_tbl[cur_fnt].wtbl && font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
+   {
+      int r_ch = (ch - font_tbl[cur_fnt].char_f) % T1_NCHARS;
+      int /* U_CHAR */ wi = font_tbl[cur_fnt].char_wi[r_ch];
+      if ((wi >= 0) && (wi < font_tbl[cur_fnt].wtbl_n))
+         size = font_tbl[cur_fnt].wtbl[wi];
+   }
+   return design_size_to_pt(size) * font_tbl[cur_fnt].scale;
+}
+>>>
+
+
 \SubSection{Characters' Height}
 
-
-
-
 \<(double) char_height( ch )\><<<
-design_size_to_pt( (font_tbl[cur_fnt].htbl && (`<ch of height`> >= 0) && (`<ch of height`> < font_tbl[cur_fnt].htbl_n))?
-    font_tbl[cur_fnt].htbl[`<ch of height`>] : 0 )
-        * (double) font_tbl[cur_fnt].scale
+char_height(ch)
 >>>
-
-
-\<ch of height\><<<
-(
-( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
-        >>  4
-) & 0x0F
-)
->>>
-
 
 \<ch height\><<<
 (int)(`<(double) char_height( ch )`>)
 >>>
 
+\<header functions\><<<
+static double char_height(int ch);
+>>>
+
+\<functions\><<<
+`[
+static double  char_height(ch)  int ch
+;{
+   INTEGER size = 0;
+   // size = *(font_tbl[cur_fnt].htbl + (int)((*(font_tbl[cur_fnt].char_hidp + (int)(ch - font_tbl[cur_fnt].char_f)% 256) >>  4) & 0x0F))
+   if (font_tbl[cur_fnt].htbl && font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
+   {
+      int r_ch = (ch - font_tbl[cur_fnt].char_f) % T1_NCHARS;
+      int /* U_CHAR */ ht = (font_tbl[cur_fnt].char_hidp[r_ch] >> 4) & 0x0F;
+      if ((ht >= 0) && (ht < font_tbl[cur_fnt].htbl_n))
+          size = font_tbl[cur_fnt].htbl[ht];
+   }
+   return design_size_to_pt(size) * font_tbl[cur_fnt].scale;
+}
+>>>
+
+
 \SubSection{Characters' Depth}
 
-
-
-
 \<(double) char_depth( ch )\><<<
-design_size_to_pt( (font_tbl[cur_fnt].dtbl && (`<ch of depth`> >= 0) && (`<ch of depth`> < font_tbl[cur_fnt].dtbl_n))?
-    font_tbl[cur_fnt].dtbl[`<ch of depth`>] : 0 )
-        * (double) font_tbl[cur_fnt].scale
+char_depth(ch)
 >>>
-
-
-\<ch of depth\><<<
-(
-( ( (font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))?
-    font_tbl[cur_fnt].char_hidp[(int)(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS] : 0 )
-) & 0x0F
-)
->>>
-
 
 \<ch depth\><<<
 (int)(`<(double) char_depth( ch )`>)
 >>>
 
-\SubSection{Other Sizes}
+\<header functions\><<<
+static double char_depth(int ch);
+>>>
 
+\<functions\><<<
+`[
+static double  char_depth(ch)  int ch
+;{
+   INTEGER size = 0;
+   // size = *(font_tbl[cur_fnt].dtbl + (int)((*(font_tbl[cur_fnt].char_hidp + (int)(ch - font_tbl[cur_fnt].char_f)% 256)) & 0x0F))
+   if (font_tbl[cur_fnt].dtbl && font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
+   {
+      int r_ch = (ch - font_tbl[cur_fnt].char_f) % T1_NCHARS;
+      int /* U_CHAR */ dp = font_tbl[cur_fnt].char_hidp[r_ch] & 0x0F;
+      if ((dp >= 0) && (dp < font_tbl[cur_fnt].dtbl_n))
+          size = font_tbl[cur_fnt].dtbl[dp];
+   }
+   return design_size_to_pt(size) * font_tbl[cur_fnt].scale;
+}
+>>>
+
+
+\SubSection{Other Sizes}
 
 \<size of ex\><<<
 design_size_to_pt( 1.7 * (double) font_tbl[cur_fnt].ex )
 * (double) font_tbl[cur_fnt].scale
 >>>
-
 
 \<size of space\><<<
 design_size_to_pt( font_tbl[cur_fnt].word_sp )
@@ -10740,7 +10730,8 @@ one.
 
 
 \<store html character\><<<
-add_bit( new_font.ch_str, i, j!=2, (new_font.char_l - new_font.char_f + 1));
+int n_gif = new_font.char_l - new_font.char_f + 1;
+add_bit(new_font.ch_str, i, j!=2, n_gif);
 if (new_font.ch && (i >= 0) && (i <= new_font.char_l - new_font.char_f))
 switch( j ){
   case 1: { new_font.ch[i] = 0;    break; }
@@ -11033,7 +11024,8 @@ Does \`'verb_ch' correspond to \''\Char'?
 
 \<insert font char\><<<
    int gif_flag = FALSE;
-   int chr, r_ch;
+   int chr = 0;
+   int r_ch = 0;
    BOOL ch_str_flag = FALSE;
 
 #ifdef VTEX_OTF_ADDONS
@@ -11061,15 +11053,17 @@ if (font_tbl[cur_fnt].pars)
 else
 #endif
 {
-r_ch = ch - font_tbl[cur_fnt].char_f;
+BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
+if (ch_proper)
+   r_ch = ch - font_tbl[cur_fnt].char_f;
 
-if (font_tbl[cur_fnt].gif1 && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
-    gif_flag = font_tbl[cur_fnt].gif1[r_ch];
+if (font_tbl[cur_fnt].gif1 && ch_proper)
+   gif_flag = font_tbl[cur_fnt].gif1[r_ch];
 
-ch_str_flag = get_bit( font_tbl[cur_fnt].ch_str, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
-chr = ((r_ch == MAX_T1_CHAR_L) && font_tbl[cur_fnt].ch255 )? T1_NCHARS :
-    ( (font_tbl[cur_fnt].ch && (r_ch >= 0) && (r_ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f))?
-        font_tbl[cur_fnt].ch[r_ch] : 0 );
+int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
+ch_str_flag = get_bit(font_tbl[cur_fnt].ch_str, r_ch, n_gif);
+if (font_tbl[cur_fnt].ch && ch_proper)
+   chr = ((r_ch == MAX_T1_CHAR_L) && font_tbl[cur_fnt].ch255 )? T1_NCHARS : font_tbl[cur_fnt].ch[r_ch];
 if( (gif_flag % 2) || ch_str_flag ){      design_ch = ch;
              { `<insert design chr`> } design_ch = 0;    }
 else { `<insert standard char`> }
@@ -11098,9 +11092,9 @@ if( gif_ch && (gif_flag % 2) ){
 #endif
    if( !gif_open[gif_flag] ){
      `<img char without template`>    
-   } else if( !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
+   } else if( !get_bit(class_on, gif_flag, CLASS_ON_SIZE) ) {
       notify_class_info(gif_flag);
-      store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);  
+      store_bit_I(class_on, gif_flag, CLASS_ON_SIZE);  
    } 
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
@@ -11763,8 +11757,9 @@ comamnds \`'<...>' and the delimiter characters \`'"'.
 
 \<put htf char string\><<<
     unsigned U_CHAR * p = NULL;
+int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
 if (font_tbl[cur_fnt].str && (chr > 0) &&
-    (chr <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1))
+    (chr <= n_gif))
         p = font_tbl[cur_fnt].str[chr-1];
 if (p)
 {
@@ -11880,7 +11875,8 @@ if( *p ){
                 font_tbl[cur_fnt].design_sz  * 10 );
    `<insert gif symbol to html file`>
    print_f(str);
-   add_bit( font_tbl[cur_fnt].gif_on, r_ch, 1, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1)); 
+   int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
+   add_bit(font_tbl[cur_fnt].gif_on, r_ch, 1, n_gif); 
 }
 >>>
 
@@ -12028,9 +12024,9 @@ if( n>`<n spans+2`> ){
 #pragma GCC diagnostic ignored "-Waddress"
 #endif
       if( not_notify ) { 
-        store_bit_I( class_on, m, CLASS_ON_SIZE);
+        store_bit_I(class_on, m, CLASS_ON_SIZE);
         not_notify = FALSE; 
-      } else   store_bit_Z( class_on, m, CLASS_ON_SIZE);
+      } else store_bit_Z(class_on, m, CLASS_ON_SIZE);
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
@@ -12080,8 +12076,8 @@ static U_CHAR class_on[CLASS_ON_SIZE];
 #ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Waddress"
 #endif
-       if( (i>0) && !(i%2) ) {  store_bit_Z( class_on, i, CLASS_ON_SIZE); }
-       else {   store_bit_I( class_on, i, CLASS_ON_SIZE); }
+       if ( (i>0) && !(i%2) ) { store_bit_Z(class_on, i, CLASS_ON_SIZE); }
+       else { store_bit_I(class_on, i, CLASS_ON_SIZE); }
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
 #endif
@@ -12159,9 +12155,9 @@ if( span_on ){
 #ifdef __GNUC__
 #pragma GCC diagnostic ignored "-Waddress"
 #endif
-if( gif_flag && !get_bit( class_on, gif_flag, CLASS_ON_SIZE) ) {
+if( gif_flag && !get_bit(class_on, gif_flag, CLASS_ON_SIZE) ) {
   notify_class_info(gif_flag);
-  store_bit_I( class_on, gif_flag, CLASS_ON_SIZE);
+  store_bit_I(class_on, gif_flag, CLASS_ON_SIZE);
 } 
 #ifdef __GNUC__
 #pragma GCC diagnostic warning "-Waddress"
@@ -13084,26 +13080,27 @@ static INTEGER set_ch_class( ARG_I(int) );
 `[ 
 static  INTEGER set_ch_class(ch)    int ch
 ;{
-BOOL bad_ch = ((ch < font_tbl[cur_fnt].char_f) || (ch > font_tbl[cur_fnt].char_l));
+BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 int wt_ix;
 
-if (font_tbl[cur_fnt].math && (!bad_ch))
+int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
+if (font_tbl[cur_fnt].math && ch_proper)
 {                              int r_ch;
    r_ch = ch - font_tbl[cur_fnt].char_f;
    if( math_class == `<math close`> ){
-      store_bit_I( font_tbl[cur_fnt].math_closing, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
+      store_bit_I(font_tbl[cur_fnt].math_closing, r_ch, n_gif);
       *(font_tbl[cur_fnt].math + r_ch) =
               (char) ((open_del == 256)?  ch : open_del);
    } else {
-      store_bit_Z( font_tbl[cur_fnt].math_closing, r_ch, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1));
+      store_bit_Z(font_tbl[cur_fnt].math_closing, r_ch, n_gif);
       *(font_tbl[cur_fnt].math + r_ch) = math_class;
    }
 
-} // if (font_tbl[cur_fnt].math && (!bad_ch))
+} // if (font_tbl[cur_fnt].math && ch_proper)
 
    open_del = ( math_class == `<math open`> )? ch : 256;      
 
-   if ((font_tbl[cur_fnt].char_wi == NULL) || bad_ch)
+   if ((font_tbl[cur_fnt].char_wi == NULL) || (!ch_proper))
       return DEF_GLYPH_WDT_PT;
    wt_ix = font_tbl[cur_fnt].char_wi[(ch - font_tbl[cur_fnt].char_f) % T1_NCHARS];
    if ((font_tbl[cur_fnt].wtbl == NULL) || (wt_ix < 0) || (wt_ix >= font_tbl[cur_fnt].wtbl_n))
@@ -13156,10 +13153,14 @@ static int math_class_of( ARG_II(int,int) );
 `[ 
 static  int math_class_of(ch,cur_fnt)    int ch`; int cur_fnt
 ;{                           int math_class;
-   math_class = ch - font_tbl[cur_fnt].char_f;
-   return ((get_bit( font_tbl[cur_fnt].math_closing, math_class, (font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1))
-              || (font_tbl[cur_fnt].math == NULL) || (ch < font_tbl[cur_fnt].char_f) || (ch > font_tbl[cur_fnt].char_l))?
-                `<math close`> : *( math_class + font_tbl[cur_fnt].math));
+   BOOL math_class_ready = (font_tbl[cur_fnt].math != NULL);
+   BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
+   math_class = 0;
+   if (ch_proper)
+      math_class = ch - font_tbl[cur_fnt].char_f;
+   int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
+   return (((!math_class_ready) || get_bit(font_tbl[cur_fnt].math_closing, math_class, n_gif))?
+                `<math close`> : font_tbl[cur_fnt].math[math_class]);
 
 }
 >>>
@@ -17366,11 +17367,11 @@ static long cond_int( n )
 "\\special{t4ht\"...%s}?\n",                          `%39`%  // ERR_SPC_BSL_STR
 "System error 40\n",                                  `%40`%  // ERR_SYS_40
 "``%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",
-                                                      `%41`%  // ERR_SPC_BAD_CHR
+                                                      `%41`%  // ERR_SPC_BAD_CHAR
 "\\special{t4ht~...} without \\special{t4ht~}\n",     `%42`%  // ERR_SPC_NO_TILDE
 "Ignoring \\special{t4ht.%s}\n",                      `%43`%  // ERR_SPC_IGNORE
 "PUSH for \\special{t4ht<...%s}?\n",                  `%44`%  // ERR_SPC_PUSH
-"Bad character code (%d) in \\special{t4h~}...\n",    `%45`%  // ERR_SPC_BAD_CHR_CODE
+"Bad character code (%d) in \\special{t4h~}...\n",    `%45`%  // ERR_SPC_BAD_CHAR_CODE
 "Page break in \\special{t4h~}...\n",                 `%46`%  // ERR_SPC_PBR
 "tex4ht.fls: Couldn't find file ``%s'\n",             `%47`%  // ERR_FLS_NO_FILE
 "Improper entry (line %d)\n",                         `%48`%  // ERR_ENTRY_LINE
