@@ -284,7 +284,9 @@ the HTML/XML and \`'.css', also \`'.lg', \`'.idv', and
 `<define MSVC-1-52`>
 `<bordland: bcc32 -DBCC32 tex4ht`>
 `<bordland: bcc -DBCC -mh tex4ht`>
-`<mingw64`>
+`<msc`>
+`<mingw`>
+`<gcc`>
 `<DJGPP`>
 #ifdef DOS_C
 #define DOS
@@ -312,7 +314,9 @@ the HTML/XML and \`'.css', also \`'.lg', \`'.idv', and
 #define DOS_WIN32 
 #define ANSI
 #define HAVE_DIRENT_H 
-#define PLATFORM "ms-win32"
+// #define PLATFORM "ms-win32"
+#define PLATFORM "ms-win"
+#define COMPILER "bcc"
 #endif
 >>>
 
@@ -324,23 +328,60 @@ The \`'-mh' below calls for `Huge Memory Model'.
 #define ANSI       
 #define HAVE_DIRENT_H 
 #define PLATFORM "ms-dos"
+#define COMPILER "bcc"
 #ifndef PATH_MAX
 #define PATH_MAX 256
 #endif
 #endif
 >>>
 
-\<mingw64\><<<
-#ifdef WIN32
+\<msc\><<<
+#ifdef _MSC_VER
 #define DOS_WIN32
-#ifdef _WIN64
-#define PLATFORM "ms-win64"
-#else
-#define PLATFORM "ms-win32"
-#endif
+// #ifdef _WIN64
+// #define PLATFORM "ms-win64"
+// #else
+// #define PLATFORM "ms-win32"
+// #endif
+#define PLATFORM "ms-win"
+#define COMPILER "msc"
+#define COMPILER_MAJOR (_MSC_VER / 100)
+#define COMPILER_MINOR (_MSC_VER % 100)
+#define COMPILER_REL (_MSC_FULL_VER % 100000)
+#define COMPILER_BUILD _MSC_BUILD
 #endif
 >>>
 
+\<mingw\><<<
+#ifdef __MINGW32__
+#define DOS_WIN32
+// #ifdef _WIN64
+// #define PLATFORM "ms-win64"
+// #else
+// #define PLATFORM "ms-win32"
+// #endif
+#define PLATFORM "ms-win"
+#define COMPILER "mingw"
+#define COMPILER_MAJOR __GNUC__
+#define COMPILER_MINOR __GNUC_MINOR__
+#define COMPILER_REL __GNUC_PATCHLEVEL__
+#endif
+>>>
+
+\<gcc\><<<
+#ifdef linux
+// #ifdef __x86_64
+// #define PLATFORM "linux64"
+// #else
+// #define PLATFORM "linux32"
+// #endif
+#define PLATFORM "linux"
+#define COMPILER "gcc"
+#define COMPILER_MAJOR __GNUC__
+#define COMPILER_MINOR __GNUC_MINOR__
+#define COMPILER_REL __GNUC_PATCHLEVEL__
+#endif
+>>>
 
 
 
@@ -1367,6 +1408,21 @@ come back through return. why?  Was this corrected?
 #define PLATFORM_SIG ""
 #endif
 
+#ifdef COMPILER
+#define COMPILER_SIG " "COMPILER
+#else
+#define COMPILER_SIG ""
+#endif
+
+static char vers[STR_BUF_LEN + 1];
+vers[0] = '\0';
+#ifdef COMPILER_MAJOR
+sprintf(vers, " %d.%d.%d", COMPILER_MAJOR, COMPILER_MINOR, COMPILER_REL);
+#endif
+#ifdef COMPILER_BUILD
+sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
+#endif
+
 #define VTEX_ADDONS_SIG ""
 
 #ifdef VTEX_SPACING_ADDONS
@@ -1393,7 +1449,7 @@ come back through return. why?  Was this corrected?
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (`version%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (`version%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){ 
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }

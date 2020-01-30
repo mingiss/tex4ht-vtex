@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-01-27-10:58), generated from tex4ht-c.tex
+/* tex4ht.c (2020-01-27-13:23), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -103,7 +103,9 @@
 #define DOS_WIN32
 #define ANSI
 #define HAVE_DIRENT_H
-#define PLATFORM "ms-win32"
+// #define PLATFORM "ms-win32"
+#define PLATFORM "ms-win"
+#define COMPILER "bcc"
 #endif
 
 
@@ -113,6 +115,7 @@
 #define ANSI
 #define HAVE_DIRENT_H
 #define PLATFORM "ms-dos"
+#define COMPILER "bcc"
 #ifndef PATH_MAX
 #define PATH_MAX 256
 #endif
@@ -120,13 +123,50 @@
 
 
 
-#ifdef WIN32
+#ifdef _MSC_VER
 #define DOS_WIN32
-#ifdef _WIN64
-#define PLATFORM "ms-win64"
-#else
-#define PLATFORM "ms-win32"
+// #ifdef _WIN64
+// #define PLATFORM "ms-win64"
+// #else
+// #define PLATFORM "ms-win32"
+// #endif
+#define PLATFORM "ms-win"
+#define COMPILER "msc"
+#define COMPILER_MAJOR (_MSC_VER / 100)
+#define COMPILER_MINOR (_MSC_VER % 100)
+#define COMPILER_REL (_MSC_FULL_VER % 100000)
+#define COMPILER_BUILD _MSC_BUILD
 #endif
+
+
+
+#ifdef __MINGW32__
+#define DOS_WIN32
+// #ifdef _WIN64
+// #define PLATFORM "ms-win64"
+// #else
+// #define PLATFORM "ms-win32"
+// #endif
+#define PLATFORM "ms-win"
+#define COMPILER "mingw"
+#define COMPILER_MAJOR __GNUC__
+#define COMPILER_MINOR __GNUC_MINOR__
+#define COMPILER_REL __GNUC_PATCHLEVEL__
+#endif
+
+
+
+#ifdef linux
+// #ifdef __x86_64
+// #define PLATFORM "linux64"
+// #else
+// #define PLATFORM "linux32"
+// #endif
+#define PLATFORM "linux"
+#define COMPILER "gcc"
+#define COMPILER_MAJOR __GNUC__
+#define COMPILER_MINOR __GNUC_MINOR__
+#define COMPILER_REL __GNUC_PATCHLEVEL__
 #endif
 
 
@@ -6491,6 +6531,21 @@ CDECL
 #define PLATFORM_SIG ""
 #endif
 
+#ifdef COMPILER
+#define COMPILER_SIG " "COMPILER
+#else
+#define COMPILER_SIG ""
+#endif
+
+static char vers[STR_BUF_LEN + 1];
+vers[0] = '\0';
+#ifdef COMPILER_MAJOR
+sprintf(vers, " %d.%d.%d", COMPILER_MAJOR, COMPILER_MINOR, COMPILER_REL);
+#endif
+#ifdef COMPILER_BUILD
+sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
+#endif
+
 #define VTEX_ADDONS_SIG ""
 
 #ifdef VTEX_SPACING_ADDONS
@@ -6517,7 +6572,7 @@ CDECL
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-01-27-10:58%s %dbit%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-01-27-13:23%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
