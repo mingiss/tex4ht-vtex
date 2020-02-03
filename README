@@ -119,7 +119,7 @@ Add-ons to module tex4ht:
             encountered. (The result is like as the special 't4ht~<*' was entered as
             't4ht='.)
 
-        Comand line switch -p switches the superscript base recognition algorithm totally off.
+        Command line switch -p switches the superscript base recognition algorithm totally off.
         
     Command line switch -m converts math unicode bold or italic letters to their latin equivalents, enveloped into corresponding math variant MathML tags.        
 
