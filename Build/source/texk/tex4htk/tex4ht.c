@@ -1140,7 +1140,7 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-F<ch-code>]        replacement for missing font characters; 0--255; default 0\n"
 "   [-g<bitmap-file-ext>]\n"
 "   [-h[efFgsvVA]]       trace: e-errors/warnings, f-htf, F-htf search\n"
-"                             g-groups, s-specials, v-env, V-env search, A-all\n"
+"                           g-groups, s-specials, v-env, V-env search, A-all\n"
 "   [-i<htf-font-dir>]\n"
 "   [-l<bookkeeping-file>]\n"
 "   [-P(*|<filter>)]     permission for system calls: *-always, filter\n"
@@ -10897,6 +10897,7 @@ p->prev_file = cur_o_file;
  }
 else           { 
 if( p == (struct files_rec *)  0 ) bad_special( name );
+else { /* if p is null, do nothing more */
 
 if( p->prev != (struct files_rec*) 0 ) (p->prev)->next = p->next;
 else                                   opened_files = p->next;
@@ -10908,6 +10909,7 @@ if( opened_files !=  (struct files_rec*) 0 )
 else out_file = (FILE *) 0;
 (IGNORED) fclose( p->file );   free((void *)  p->name );
 free((void *) p );
+}
 
  }
 cur_o_file = ( out_file == (FILE *) 0 )? root_file
