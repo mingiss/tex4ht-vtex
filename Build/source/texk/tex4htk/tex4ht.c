@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-01-27-13:23), generated from tex4ht-c.tex
+/* tex4ht.c (2020-01-31-15:59), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -142,6 +142,8 @@
 
 #ifdef __MINGW32__
 #define DOS_WIN32
+#define ANSI
+#define HAVE_DIRENT_H
 // #ifdef _WIN64
 // #define PLATFORM "ms-win64"
 // #else
@@ -157,6 +159,8 @@
 
 
 #ifdef linux
+#define ANSI
+#define HAVE_DIRENT_H
 // #ifdef __x86_64
 // #define PLATFORM "linux64"
 // #else
@@ -6572,7 +6576,7 @@ sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-01-27-13:23%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-01-31-15:59%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -7431,8 +7435,8 @@ if( (i<4)
     ||
     ((ch != 
 2 
-) && (ch != 
-5
+) && (ch > 
+10
 
 ))
   )  bad_dvi;
@@ -7920,7 +7924,7 @@ if( (font_tbl_size + 1) < MAXFONTS )
    memset(&new_font, 0, sizeof(struct font_entry));
 
    if(       (version_id == 
-5
+10
 
 )
          &&  (ch == 
@@ -9802,7 +9806,7 @@ case
 
 :
    if(  version_id == 
-5
+10
 
  ){
      
@@ -9845,7 +9849,7 @@ case
 
 :
    if(  version_id == 
-5
+10
 
  ){
      
@@ -9859,7 +9863,7 @@ case
 
 :
    if(  version_id == 
-5
+10
 
  ){
      
@@ -13003,7 +13007,7 @@ default: {
 )   ){
      if( 
 (version_id == 
-5
+10
 
 )
 &&

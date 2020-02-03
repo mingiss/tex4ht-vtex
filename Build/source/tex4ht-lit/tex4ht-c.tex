@@ -355,6 +355,8 @@ The \`'-mh' below calls for `Huge Memory Model'.
 \<mingw\><<<
 #ifdef __MINGW32__
 #define DOS_WIN32
+#define ANSI
+#define HAVE_DIRENT_H
 // #ifdef _WIN64
 // #define PLATFORM "ms-win64"
 // #else
@@ -370,6 +372,8 @@ The \`'-mh' below calls for `Huge Memory Model'.
 
 \<gcc\><<<
 #ifdef linux
+#define ANSI
+#define HAVE_DIRENT_H
 // #ifdef __x86_64
 // #define PLATFORM "linux64"
 // #else
@@ -2341,7 +2345,7 @@ do{
 eof_op_n = file_len;
 if( (i<4) 
     || 
-    ((ch != `<version dvi`>) && (ch != `<version xdv`>))
+    ((ch != `<version dvi`>) && (ch > `<version xdv`>))
   )  bad_dvi; 
 version_id = ch;
 >>>
@@ -2475,7 +2479,7 @@ for( i= get_char(); i>0; i-- ) ch = get_char();
 The following is from xetex.
 
 \<version xdv\><<<
-5
+10
 >>>
 
 
