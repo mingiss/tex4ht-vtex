@@ -8,11 +8,6 @@
 // ------------------------------
 // definitions to manipulate tex4ht VTEX add-ons compilation
 #define VTEX_SPACING_ADDONS     // add-ons for space generator
-#ifdef VTEX_SPACING_ADDONS
-// #define VTEX_SPACING_ADDONS_MAX_X_VAL
-// #define VTEX_SPACING_ADDONS_X_VAL_INC
-#define VTEX_SPACING_ADDONS_WORD_SP
-#endif
 #define VTEX_OTF_ADDONS         // OpenType font processing
 #define VTEX_SSCRIPT_ADDONS     // add-ons for baseless sub / superscripts
 

@@ -1799,7 +1799,7 @@ long fact = atol(p + 2);
 if (fact >= 1)
 {
     x_fact = fact;
-    max_x_val = DEF_MAX_X_VAL * 100 / x_fact;
+    max_x_val = DEF_MAX_X_VAL;
 }
 else
     err_i_int(ERR_PAR_R, fact);
@@ -2530,11 +2530,7 @@ verbatim environment that are expressed by \`'<pre>' elements
 
 
 \<initial values for new page\><<<
-x_val = dx_1 = dx_2 = 0;  max_x_val = DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-    * 100 / x_fact
-#endif
-        ; `%temp`%
+x_val = dx_1 = dx_2 = 0;  max_x_val = DEF_MAX_X_VAL; `%temp`%
 y_val = max_y_val = prev_y_val = dy_1 = dy_2 = 0;
 >>>
 
@@ -3198,11 +3194,7 @@ static void try_new_line(MYVOID)
    v = y_val - prev_y_val;      
    if( !text_on && (y_val > max_y_val) ){
      if( v > dy/2.5 ){
-        `<cond insert new line`>  max_x_val = DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-            * 100 / x_fact
-#endif
-                ;
+        `<cond insert new line`>  max_x_val = DEF_MAX_X_VAL;
         prev_y_val = max_y_val  = stack_n? y_val : 0;
      }
    }else{
@@ -3292,11 +3284,7 @@ static INTEGER move_x( d )
       double sp;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
-     if (max_x_val == DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-        * 100 / x_fact
-#endif
-            ) max_x_val = x_val - d;
+     if (max_x_val == DEF_MAX_X_VAL) max_x_val = x_val - d;
      `<insert space`>
    } else    if( d && text_on  && (x_val != max_x_val) ){
       `<space for llap`>
@@ -3341,12 +3329,7 @@ if( !ignore_spaces ){
    if (word_sp > 0.0001)
       i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
-   if( !i ) i =
-#ifdef VTEX_SPACING_ADDONS
-        (dx >= 100000L * 100 / x_fact);
-#else
-        dx>99999L;
-#endif
+   if( !i ) i = dx>99999L;
    if( i ){ put_char(' '); }
 }
 >>>
@@ -3710,7 +3693,11 @@ while( !done ){
 cr_fnt = ch - `<font 0`>;
 cr_fnt = search_font_tbl( cr_fnt );
 word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
-             * (double) font_tbl[cr_fnt].scale;
+             * (double) font_tbl[cr_fnt].scale
+#ifdef VTEX_SPACING_ADDONS
+             * 100 / x_fact
+#endif
+             ;
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
@@ -3936,11 +3923,7 @@ if( (x_val + right)  &&
         )
 ){ 
    double sp;
-   if ( (max_x_val == DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-        * 100 / x_fact
-#endif
-            ) || ((x_val + right) <= max_x_val) )
+   if ( (max_x_val == DEF_MAX_X_VAL) || ((x_val + right) <= max_x_val) )
    {  max_x_val = x_val;  }        
    i = 0;
    sp = (text_on? word_sp : margin_sp);
@@ -10093,7 +10076,11 @@ static double word_sp   = DEF_WORD_SP, margin_sp;
 Turbo C didn't let me to do casting within initialization.
 
 \<main's init\><<<
-margin_sp = (double) MARGINSP;     `%/ (double)(1L<<20) * (double) 655360;`%
+margin_sp = (double) MARGINSP
+#ifdef VTEX_SPACING_ADDONS
+                        * 100 / x_fact
+#endif
+                        ;     `%/ (double)(1L<<20) * (double) 655360;`%
 >>>
 
 \<adjust inter-word space\><<<
@@ -10260,6 +10247,9 @@ design_size_to_pt( 1.7 * (double) font_tbl[cur_fnt].ex )
 \<size of space\><<<
 design_size_to_pt( font_tbl[cur_fnt].word_sp )
                    * (double) font_tbl[cur_fnt].scale 
+#ifdef VTEX_SPACING_ADDONS
+                   * 100 / x_fact
+#endif
 >>>
 
 
