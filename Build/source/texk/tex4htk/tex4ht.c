@@ -1770,8 +1770,8 @@ rule_ch_off
 }
 
   max_x_val = DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-            * 100 / x_fact
+#ifdef VTEX_SPACING_ADDONS_MAX_X_VAL
+                * 100 / x_fact
 #endif
                 ;
         prev_y_val = max_y_val  = stack_n? y_val : 0;
@@ -1831,19 +1831,30 @@ static INTEGER move_x
 {    register long     i;
       long long dx;
       double sp;
-   x_val += d;
+   x_val += d
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+      * x_fact / 100 
+#endif
+      ;
    if( (x_val > max_x_val) && x_val ){
      if (max_x_val == DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-        * 100 / x_fact
+#ifdef VTEX_SPACING_ADDONS_MAX_X_VAL
+            * 100 / x_fact
 #endif
-            ) max_x_val = x_val - d;
+            ) max_x_val = x_val - d
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+              * x_fact / 100 
+#endif
+              ;
      
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
-    i =  (INTEGER) (  (double) (dx = x_val - max_x_val)
-            /         sp
+    i =  (INTEGER) (  (double) (dx = (x_val - max_x_val)
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+            * 100 / x_fact 
+#endif
+            )/        sp
             +         0.5 );
 
 if( i==0 ){
@@ -1907,7 +1918,11 @@ cr_fnt = ch -
 ;
 cr_fnt = search_font_tbl( cr_fnt );
 word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
-             * (double) font_tbl[cr_fnt].scale;
+             * (double) font_tbl[cr_fnt].scale
+#ifdef VTEX_SPACING_ADDONS_WORD_SP
+              * 100 / x_fact
+#endif
+             ;
 i = 0;
 sp = (text_on? word_sp : margin_sp);
 if (sp > 0.0001)
@@ -1981,7 +1996,7 @@ if( !ignore_spaces ){
       i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
    if( i<0 ) i=0;
    if( !i ) i =
-#ifdef VTEX_SPACING_ADDONS
+#ifdef VTEX_SPACING_ADDONS_MAX_X_VAL
         (dx >= 100000L * 100 / x_fact);
 #else
         dx>99999L;
@@ -2048,7 +2063,11 @@ sv_x_val = x_val;
 sv_y_val = y_val;
 sv_right = right;
 y_val-=up;
-if( right < 0 ){ x_val += right;  right = -right; }
+if( right < 0 ){ x_val += right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+      * x_fact / 100 
+#endif
+      ;  right = -right; }
 if( up < 0 ){ y_val += up;  up = -up; }
 ch = ( (right > xresolution) &&  (up > yresolution) ) ?
        
@@ -2058,17 +2077,41 @@ ch = ( (right > xresolution) &&  (up > yresolution) ) ?
  : 
 2
  );
-right += x_val;
+right += x_val
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+      * 100 / x_fact 
+#endif
+      ;
 up    += sv = y_val;
-for( ; x_val < right; x_val += xresolution )
+for( ; x_val < right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                * x_fact / 100 
+#endif
+                ; x_val += xresolution 
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                    * x_fact / 100 
+#endif
+                    )
   for( y_val = sv ; y_val < up;  y_val += yresolution )
      insert_ch_map((char) ch, FALSE);
 x_val = sv_x_val;
 y_val = sv_y_val;
-if( sv_x_val + sv_right > max_x_val ) max_x_val = sv_x_val + sv_right;
+if( sv_x_val + sv_right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                * x_fact / 100 
+#endif
+                > max_x_val ) max_x_val = sv_x_val + sv_right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                    * x_fact / 100 
+#endif
+                    ;
 if( 
 tag
- ) x_val += sv_right;
+ ) x_val += sv_right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                * x_fact / 100 
+#endif
+                ;
 
  }
    else if( pos_dvi ){
@@ -2106,37 +2149,65 @@ if( no_root_file ){  open_o_file(); }
       }
    }
    if( x_val < min_pos_x )           min_pos_x = x_val;
-   if( (d = x_val + right) > max_pos_x ) max_pos_x = d;
+   if( (d = x_val + right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                      * x_fact / 100 
+#endif
+                      ) > max_pos_x ) max_pos_x = d;
    if( (d = y_val - up) < min_pos_y ) min_pos_y = d;
    if( y_val > max_pos_y )           max_pos_y = y_val;
 }
 
 
-      if( tag ) x_val += right;
+      if( tag ) x_val += right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                            * x_fact / 100 
+#endif
+                            ;
    } else if( (up>0) && (right>0) ) {
       
-if( (x_val + right)  &&
-        (    ((x_val + right) > max_x_val)
+if( (x_val + right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                * x_fact / 100 
+#endif
+                )  &&
+        (    ((x_val + right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                          * x_fact / 100 
+#endif
+                          ) > max_x_val)
           || ( !text_on && !ignore_chs )
         )
 ){
    double sp;
    if ( (max_x_val == DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-        * 100 / x_fact
+#ifdef VTEX_SPACING_ADDONS_MAX_X_VAL
+            * 100 / x_fact
 #endif
-            ) || ((x_val + right) <= max_x_val) )
+            ) || ((x_val + right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                              * x_fact / 100 
+#endif
+                              ) <= max_x_val) )
    {  max_x_val = x_val;  }
    i = 0;
    sp = (text_on? word_sp : margin_sp);
    if (sp > 0.0001)
-      i =  (INTEGER) (  (double) (x_val + right - max_x_val)
+      i =  (INTEGER) (  (double) (x_val + right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                            * x_fact / 100 
+#endif
+                                            - max_x_val)
                    /         sp
                    +         0.5 );
    
 if( i==0 ){
    if (word_sp > 0.0001)
-      i =  (INTEGER) (  (double) (x_val + right - max_x_val)
+      i =  (INTEGER) (  (double) (x_val + right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                            * x_fact / 100 
+#endif
+                                            - max_x_val)
                    /         word_sp
                    +         0.5 );
 }
@@ -2169,11 +2240,19 @@ if( trace_dvi_R && !ch_map_flag ){
 }
 
 
-   max_x_val = x_val + right;
+   max_x_val = x_val + right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                          * x_fact / 100 
+#endif
+                          ;
 }
 
 
-      if( tag ) x_val += right;
+      if( tag ) x_val += right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                            * x_fact / 100 
+#endif
+                            ;
    } else {
       
 
@@ -2198,7 +2277,11 @@ if( trace_dvi_R && !ch_map_flag ){
 
 
 
-      if( tag ) x_val += right;
+      if( tag ) x_val += right
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                            * x_fact / 100 
+#endif
+                            ;
 }  }
 
 
@@ -4940,7 +5023,9 @@ if( no_root_file ){  open_o_file(); }
   if( (d = x_val + 
 (int)(
 char_width(ch)
-
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+            * x_fact / 100 
+#endif
 )
 
 )  > max_pos_x ) max_pos_x = d;
@@ -6633,7 +6718,11 @@ pos_text = pos_line = end_pos_body = end_pos_text = pos_body =
 (IGNORED) strcpy((char *) pos_text, "" );
 
 
-margin_sp = (double) MARGINSP;     
+margin_sp = (double) MARGINSP
+#ifdef VTEX_SPACING_ADDONS_WORD_SP
+                        * 100 / x_fact
+#endif
+                        ;     
 
 
 {   int i;  i=256; while( i-- ) {
@@ -6887,7 +6976,11 @@ long fact = atol(p + 2);
 if (fact >= 1)
 {
     x_fact = fact;
-    max_x_val = DEF_MAX_X_VAL * 100 / x_fact;
+    max_x_val = DEF_MAX_X_VAL
+#ifdef VTEX_SPACING_ADDONS_MAX_X_VAL
+                        * 100 / x_fact
+#endif                        
+                        ;
 }
 else
     err_i_int(ERR_PAR_R, fact);
@@ -9394,8 +9487,8 @@ for( i= get_char(); i>0; i-- ) ch = get_char();
     (IGNORED) printf("[%d", dis_pages - unread_pages);
     
 x_val = dx_1 = dx_2 = 0;  max_x_val = DEF_MAX_X_VAL
-#ifdef VTEX_SPACING_ADDONS
-    * 100 / x_fact
+#ifdef VTEX_SPACING_ADDONS_MAX_X_VAL
+        * 100 / x_fact
 #endif
         ; 
 y_val = max_y_val = prev_y_val = dy_1 = dy_2 = 0;
@@ -9576,7 +9669,11 @@ width = (INTEGER)(
 char_width(ch)
 
  );
-if( needs_end_accent ){  needs_end_accent = (x_val + 9 * width / 10 != 0); }
+if( needs_end_accent ){  needs_end_accent = (x_val + 9 * width / 10 
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                                                  * x_fact / 100 
+#endif
+                                                                  != 0); }
 in_accenting = FALSE;
 
 
@@ -9625,9 +9722,16 @@ needs_accent_sym && (ch < 128)
    if( ch < 132 )  {
       x_val += math_class_on? 
 set_ch_class(ch_1)
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                * x_fact / 100 
+#endif
 
 
-                            : insert_ch(ch_1);       
+                            : insert_ch(ch_1)
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                        * x_fact / 100 
+#endif
+                                        ;       
       if(  max_x_val < x_val ) max_x_val = x_val;
 #ifdef VTEX_SSCRIPT_ADDONS
       ch_fl = TRUE; // printable character -- ready for sending back specials
@@ -9639,7 +9743,15 @@ set_ch_class(ch_1)
 set_ch_class(ch_1)
 
  : insert_ch(ch_1);
-         max_x_val = ( x_val + w > max_x_val )?  x_val + w : max_x_val;
+         max_x_val = ( x_val + w
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                * x_fact / 100 
+#endif
+                                > max_x_val )?  x_val + w
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                                    * x_fact / 100 
+#endif
+                                                    : max_x_val;
          break;
       }
       
@@ -9889,7 +10001,9 @@ cur_fnt = search_font_tbl( cur_fnt );
 word_sp = 
 design_size_to_pt( font_tbl[cur_fnt].word_sp )
                    * (double) font_tbl[cur_fnt].scale
-
+#ifdef VTEX_SPACING_ADDONS_WORD_SP
+                   * 100 / x_fact
+#endif
 ;
 
  }
@@ -9919,7 +10033,9 @@ cur_fnt = search_font_tbl( cur_fnt );
 word_sp = 
 design_size_to_pt( font_tbl[cur_fnt].word_sp )
                    * (double) font_tbl[cur_fnt].scale
-
+#ifdef VTEX_SPACING_ADDONS_WORD_SP
+                   * 100 / x_fact
+#endif
 ;
 
 
@@ -12550,7 +12666,11 @@ if (
 #ifdef VTEX_SPACING_ADDONS
     (!no_spaces) &&
 #endif
-        ((x_val+0.6*word_sp) <  stack[stack_n].x_val) )  put_char(' ');
+        ((x_val+0.6*word_sp
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                      * x_fact / 100 
+#endif
+                      ) <  stack[stack_n].x_val) )  put_char(' ');
 text_on = stack[stack_n].text_on;
 
   break; }
@@ -12656,11 +12776,19 @@ case
 case 
 147 
 : {
-  cond_idv_char( ch );  x_val += dx_1;  break; }
+  cond_idv_char( ch );  x_val += dx_1
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                    * x_fact / 100 
+#endif
+                                    ;  break; }
 case 
 152 
 : {
-  cond_idv_char( ch );  x_val += dx_2;  break; }
+  cond_idv_char( ch );  x_val += dx_2
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                    * x_fact / 100 
+#endif
+                                    ;  break; }
 case 
 161 
 : {
@@ -12684,7 +12812,11 @@ case
     cond_idv_char( ch );
     x_val += cond_int( ch - 
 143 
- + 1 );  break; }
+ + 1 )
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+      * x_fact / 100 
+#endif
+      ;  break; }
 case 
 148 
 :
@@ -12701,7 +12833,11 @@ case
     dx_1 = (INTEGER) cond_int( ch - 
 148 
  + 1);
-    x_val += dx_1;   break;  }
+    x_val += dx_1
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                * x_fact / 100 
+#endif
+                ;   break;  }
 case 
 153  
 :
@@ -12718,7 +12854,11 @@ case
     dx_2 = (INTEGER) cond_int( ch - 
 153  
  + 1);
-    x_val += dx_2;   break;  }
+    x_val += dx_2
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                * x_fact / 100 
+#endif
+                ;   break;  }
 
 
 case 
@@ -12775,7 +12915,11 @@ case
 case   
 132 
 :{
-  visible_cnt = TRUE; cond_string( ch,4 ); x_val += cond_int(4);
+  visible_cnt = TRUE; cond_string( ch,4 ); x_val += cond_int(4)
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                                              * x_fact / 100 
+#endif
+                                                              ;
   break;
 }
 case 
@@ -12929,7 +13073,15 @@ case
 cond_idv_char( 
 146 
  );
-idv_int( x_val - cur_x - dx_1 - dx_2 );
+idv_int( x_val - cur_x - dx_1
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                            * x_fact / 100 
+#endif
+                            - dx_2 
+#ifdef VTEX_SPACING_ADDONS_X_VAL_INC
+                                  * x_fact / 100 
+#endif
+                                  );
 cond_idv_char( 
 151 
  );
