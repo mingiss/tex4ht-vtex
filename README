@@ -74,7 +74,11 @@ Add-ons to module tex4ht:
                 -r100   no change, the algorithm operates as usual;
                 -r50    threshold of spaces generation is increased twice -- resulting
                             amount of spaces decreases;
-                -r200   threshold decreased by half -- more spaces.
+                -r200   threshold decreased by half -- more spaces;
+            feature at the moment activated outside of math equations solely --
+                spaces inside of formulae meet more sophisticated postprocessing
+                (are converted to <mml:mspace width="2.5pt" />, for example),
+                therefore, more investigations should be carried out here.
 
         command line switch -n
             totally cuts off the heuristic algorithm for recognition of spaces in .dvi file;
@@ -130,7 +134,7 @@ TODO:
         is not recognized until order of parameters is changed to 
             tex4ht foo -n -cunihtf
 
-    Command line switch -r currently does work in math mode solely.
+    Additional option for switching on action of the feature -r for inside of equations as well.
 
     reautoconf under MSYS
 
