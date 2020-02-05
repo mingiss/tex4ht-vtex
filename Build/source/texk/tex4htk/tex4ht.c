@@ -1045,7 +1045,9 @@ static char  * i_accent_template = (char *) 0,
 
 
 static BOOL math_class_on = FALSE, show_class = FALSE;
+#ifdef VTEX_SPACING_ADDONS
 static BOOL inside_math = FALSE;
+#endif
 int trace_cnt = 0;
 static int open_del = 256, math_class, pause_class, ignore_subclass_del;
 
@@ -1845,15 +1847,15 @@ if (sp > 0.0001)
             /         sp
             +         0.5 );
 
-// if( i==0 ){
-//    if (word_sp > 0.0001)
-//       i =  (INTEGER) (  (double) dx
-//             /        ( word_sp
-// #ifdef VTEX_SPACING_ADDONS
-//              * (inside_math? x_fact : 100) / 100 
-// #endif
-//             ) +         0.5 );
-// }
+if( i==0 ){
+   if (word_sp > 0.0001)
+      i =  (INTEGER) (  (double) dx
+            /        ( word_sp
+#ifdef VTEX_SPACING_ADDONS
+             * (inside_math? x_fact : 100) / 100 
+#endif
+            ) +         0.5 );
+}
 
 
 if( i<0 ) i=0;
@@ -1926,15 +1928,15 @@ if (sp > 0.0001)
             /         sp
             +         0.5 );
 
-// if( i==0 ){
-//    if (word_sp > 0.0001)
-//       i =  (INTEGER) (  (double) dx
-//             /        ( word_sp
-// #ifdef VTEX_SPACING_ADDONS
-//             * (inside_math? x_fact : 100) / 100 
-// #endif
-//             ) +       0.5 );
-// }
+if( i==0 ){
+   if (word_sp > 0.0001)
+      i =  (INTEGER) (  (double) dx
+            /        ( word_sp
+#ifdef VTEX_SPACING_ADDONS
+            * (inside_math? x_fact : 100) / 100 
+#endif
+            ) +       0.5 );
+}
 
 
 if( i>0 ){ i =1; }
@@ -2149,15 +2151,15 @@ printf(":::::::::::::::::: 4 %d inside_math: %d\n", trace_cnt++, inside_math);
                    /         sp
                    +         0.5 );
    
-// if( i==0 ){
-//    if (word_sp > 0.0001)
-//       i =  (INTEGER) (  (double) (x_val + right - max_x_val)
-//                    /             ( word_sp
-// #ifdef VTEX_SPACING_ADDONS
-//                    * (inside_math? x_fact : 100) / 100 
-// #endif
-//                    ) +       0.5 );
-// }
+if( i==0 ){
+   if (word_sp > 0.0001)
+      i =  (INTEGER) (  (double) (x_val + right - max_x_val)
+                   /             ( word_sp
+#ifdef VTEX_SPACING_ADDONS
+                   * (inside_math? x_fact : 100) / 100 
+#endif
+                   ) +       0.5 );
+}
 
 
    if( i && !text_on )  try_new_line();
@@ -10853,9 +10855,11 @@ while( special_n-- > 0 )  (void) get_char();
 
   break; }
   case '=': {
-int tag_buf_len = special_n;
-char tag_buf[tag_buf_len + 1]; 
-while( special_n-- > 0 ){
+#ifdef VTEX_SPACING_ADDONS
+    int tag_buf_len = special_n;
+    char tag_buf[tag_buf_len + 1]; 
+#endif
+    while( special_n-- > 0 ){
         int ch;
         BOOL flag;
         struct hcode_repl_typ *q;
@@ -10877,13 +10881,13 @@ tag_buf[tag_buf_len - special_n - 1] = ch;
       while( *chr != 0 ){ put_char( *chr ); chr++; }
    } else { put_char( ch ); }
 }
-tag_buf[tag_buf_len] = '\0';
-const char *test_tag = "<math ";
-if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
-test_tag = "</math>";
-if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
-printf("%s\n", tag_buf);   
-
+#ifdef VTEX_SPACING_ADDONS
+    tag_buf[tag_buf_len] = '\0';
+    const char *test_tag = "<math ";
+    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
+    test_tag = "</math>";
+    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+#endif
  break; }
   case '<':
   case '>': { 
@@ -11437,16 +11441,12 @@ if(!back_id_off ){
      case 
 4
 
-: { del_stack = push_del( (char) ch, cr_fnt);
-//  inside_math = TRUE;
-                           break; }
+: { del_stack = push_del( (char) ch, cr_fnt); break; }
      case 
 5
 
 : {
-        del_stack = pop_del( (char) ch, id_hide, cr_fnt);
-//      inside_math = FALSE;
-           break; }
+        del_stack = pop_del( (char) ch, id_hide, cr_fnt); break; }
      default:{ ; }
 }  }
 
@@ -11874,16 +11874,12 @@ if(!back_id_off ){
      case 
 4
 
-: { del_stack = push_del( (char) ch, cr_fnt);
-//  inside_math = TRUE;
-                           break; }
+: { del_stack = push_del( (char) ch, cr_fnt); break; }
      case 
 5
 
 : {
-        del_stack = pop_del( (char) ch, id_hide, cr_fnt);   
-//      inside_math = FALSE;
-        break; }
+        del_stack = pop_del( (char) ch, id_hide, cr_fnt); break; }
      default:{ ; }
 }  }
 
