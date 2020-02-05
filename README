@@ -130,7 +130,7 @@ TODO:
         is not recognized until order of parameters is changed to 
             tex4ht foo -n -cunihtf
 
-    Command line switch -r currently does work in math mode solely.
+    Command line switch -r affects currently space widths in math mode as well.
 
     reautoconf under MSYS
 
