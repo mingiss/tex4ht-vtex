@@ -1045,6 +1045,8 @@ static char  * i_accent_template = (char *) 0,
 
 
 static BOOL math_class_on = FALSE, show_class = FALSE;
+static BOOL inside_math = FALSE;
+int trace_cnt = 0;
 static int open_del = 256, math_class, pause_class, ignore_subclass_del;
 
 
@@ -1832,18 +1834,26 @@ static INTEGER move_x
      if (max_x_val == DEF_MAX_X_VAL) max_x_val = x_val - d;
      
 i = 0;
-sp = (text_on? word_sp : margin_sp);
+printf(":::::::::::::::::: 1 %d inside_math: %d\n", trace_cnt++, inside_math);
+sp = (text_on? word_sp
+#ifdef VTEX_SPACING_ADDONS
+             * (inside_math? x_fact : 100) / 100 
+#endif
+             : margin_sp);
 if (sp > 0.0001)
     i =  (INTEGER) (  (double) (dx = x_val - max_x_val)
             /         sp
             +         0.5 );
 
-if( i==0 ){
-   if (word_sp > 0.0001)
-      i =  (INTEGER) (  (double) dx
-            /         word_sp
-            +         0.5 );
-}
+// if( i==0 ){
+//    if (word_sp > 0.0001)
+//       i =  (INTEGER) (  (double) dx
+//             /        ( word_sp
+// #ifdef VTEX_SPACING_ADDONS
+//              * (inside_math? x_fact : 100) / 100 
+// #endif
+//             ) +         0.5 );
+// }
 
 
 if( i<0 ) i=0;
@@ -1905,18 +1915,26 @@ word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
 #endif
              ;
 i = 0;
-sp = (text_on? word_sp : margin_sp);
+printf(":::::::::::::::::: 2 %d inside_math: %d\n", trace_cnt++, inside_math);
+sp = (text_on? word_sp
+#ifdef VTEX_SPACING_ADDONS
+             * (inside_math? x_fact : 100) / 100 
+#endif
+             : margin_sp);
 if (sp > 0.0001)
     i =  (INTEGER) (  (double) dx
             /         sp
             +         0.5 );
 
-if( i==0 ){
-   if (word_sp > 0.0001)
-      i =  (INTEGER) (  (double) dx
-            /         word_sp
-            +         0.5 );
-}
+// if( i==0 ){
+//    if (word_sp > 0.0001)
+//       i =  (INTEGER) (  (double) dx
+//             /        ( word_sp
+// #ifdef VTEX_SPACING_ADDONS
+//             * (inside_math? x_fact : 100) / 100 
+// #endif
+//             ) +       0.5 );
+// }
 
 
 if( i>0 ){ i =1; }
@@ -1973,8 +1991,13 @@ max_x_val = x_val;
       
 if( !ignore_spaces ){
    i = 0;
+printf(":::::::::::::::::: 3 %d inside_math: %d\n", trace_cnt++, inside_math);
    if (word_sp > 0.0001)
-      i =  (INTEGER) ( (double) (dx = d) / word_sp + 0.5 );
+      i =  (INTEGER) ( (double) (dx = d) / word_sp
+#ifdef VTEX_SPACING_ADDONS
+                                              * (inside_math? x_fact : 100) / 100 
+#endif
+                                              + 0.5 );
    if( i<0 ) i=0;
    if( !i ) i = dx>99999L;
    if( i ){ put_char(' '); }
@@ -2115,18 +2138,26 @@ if( (x_val + right)  &&
    if ( (max_x_val == DEF_MAX_X_VAL) || ((x_val + right) <= max_x_val) )
    {  max_x_val = x_val;  }
    i = 0;
-   sp = (text_on? word_sp : margin_sp);
+printf(":::::::::::::::::: 4 %d inside_math: %d\n", trace_cnt++, inside_math);
+   sp = (text_on? word_sp
+#ifdef VTEX_SPACING_ADDONS
+             * (inside_math? x_fact : 100) / 100 
+#endif
+             : margin_sp);
    if (sp > 0.0001)
       i =  (INTEGER) (  (double) (x_val + right - max_x_val)
                    /         sp
                    +         0.5 );
    
-if( i==0 ){
-   if (word_sp > 0.0001)
-      i =  (INTEGER) (  (double) (x_val + right - max_x_val)
-                   /         word_sp
-                   +         0.5 );
-}
+// if( i==0 ){
+//    if (word_sp > 0.0001)
+//       i =  (INTEGER) (  (double) (x_val + right - max_x_val)
+//                    /             ( word_sp
+// #ifdef VTEX_SPACING_ADDONS
+//                    * (inside_math? x_fact : 100) / 100 
+// #endif
+//                    ) +       0.5 );
+// }
 
 
    if( i && !text_on )  try_new_line();
@@ -6621,9 +6652,9 @@ pos_text = pos_line = end_pos_body = end_pos_text = pos_body =
 
 
 margin_sp = (double) MARGINSP
-#ifdef VTEX_SPACING_ADDONS
-                        * 100 / x_fact
-#endif
+// #ifdef VTEX_SPACING_ADDONS
+//                         * 100 / x_fact
+// #endif
                         ;     
 
 
@@ -6875,11 +6906,7 @@ ignore_spaces = no_spaces = TRUE;
   case 'r':{ 
 #ifdef VTEX_SPACING_ADDONS
 long fact = atol(p + 2);
-if (fact >= 1)
-{
-    x_fact = fact;
-    max_x_val = DEF_MAX_X_VAL;
-}
+if (fact >= 1) x_fact = fact;
 else
     err_i_int(ERR_PAR_R, fact);
 #endif
@@ -10825,7 +10852,9 @@ next_str
 while( special_n-- > 0 )  (void) get_char();
 
   break; }
-  case '=': { 
+  case '=': {
+int tag_buf_len = special_n;
+char tag_buf[tag_buf_len + 1]; 
 while( special_n-- > 0 ){
         int ch;
         BOOL flag;
@@ -10835,6 +10864,7 @@ while( special_n-- > 0 ){
    if ((ch == '<') || (ch == '>'))
         ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
 #endif
+tag_buf[tag_buf_len - special_n - 1] = ch;   
    q = hcode_repl;
    flag = FALSE;
    while( q != (struct hcode_repl_typ*) 0 ){
@@ -10847,6 +10877,12 @@ while( special_n-- > 0 ){
       while( *chr != 0 ){ put_char( *chr ); chr++; }
    } else { put_char( ch ); }
 }
+tag_buf[tag_buf_len] = '\0';
+const char *test_tag = "<math ";
+if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
+test_tag = "</math>";
+if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+printf("%s\n", tag_buf);   
 
  break; }
   case '<':
@@ -11402,12 +11438,15 @@ if(!back_id_off ){
 4
 
 : { del_stack = push_del( (char) ch, cr_fnt);
+//  inside_math = TRUE;
                            break; }
      case 
 5
 
 : {
-        del_stack = pop_del( (char) ch, id_hide, cr_fnt);   break; }
+        del_stack = pop_del( (char) ch, id_hide, cr_fnt);
+//      inside_math = FALSE;
+           break; }
      default:{ ; }
 }  }
 
@@ -11836,12 +11875,15 @@ if(!back_id_off ){
 4
 
 : { del_stack = push_del( (char) ch, cr_fnt);
+//  inside_math = TRUE;
                            break; }
      case 
 5
 
 : {
-        del_stack = pop_del( (char) ch, id_hide, cr_fnt);   break; }
+        del_stack = pop_del( (char) ch, id_hide, cr_fnt);   
+//      inside_math = FALSE;
+        break; }
      default:{ ; }
 }  }
 
@@ -12539,11 +12581,16 @@ if( stack[stack_n].halign_info )
 
 
 pop_stack();
+printf(":::::::::::::::::: 5 %d inside_math: %d\n", trace_cnt++, inside_math);
 if (
 #ifdef VTEX_SPACING_ADDONS
     (!no_spaces) &&
 #endif
-        ((x_val+0.6*word_sp) <  stack[stack_n].x_val) )  put_char(' ');
+        ((x_val+0.6*word_sp
+#ifdef VTEX_SPACING_ADDONS
+                        * (inside_math? x_fact : 100) / 100 
+#endif
+                        ) <  stack[stack_n].x_val) )  put_char(' ');
 text_on = stack[stack_n].text_on;
 
   break; }
