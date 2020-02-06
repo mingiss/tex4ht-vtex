@@ -65,8 +65,8 @@ Build:
 Add-ons to module tex4ht:
 
     Following are attempts to deal with the problem, that original heuristic recognition of
-        spaces in tex4ht doesn't work correctly enough -- there are situations, when spaces
-        disappear or are duplicated.
+        spaces in tex4ht doesn't work correctly enough -- there are situations with
+        disappearing or redundant spaces.
 
         command line switch -r
             correction of spaces recognition threshold;
@@ -125,7 +125,8 @@ Add-ons to module tex4ht:
 
         Command line option -p switches on the enhanced superscript base recognition algorithm.
         
-    Command line switch -m converts math unicode bold or italic letters to their latin equivalents, enveloped into corresponding math variant MathML tags.        
+    Command line switch -m converts math unicode bold or italic letters to their latin equivalents,
+        enveloped into corresponding math variant MathML tags.
 
 TODO:
     Bug in command line parameters recognition:
@@ -135,6 +136,10 @@ TODO:
             tex4ht foo -n -cunihtf
 
     Additional option for switching on action of the feature -r for inside of equations as well.
+
+    Additional functionality to the script 4hspship.lua -- output of mathematical
+        spaces in the form <mml:mspace width="2.5pt" /> instead of calculating
+        them as product of count of space characters generated and font space width.
 
     reautoconf under MSYS
 
