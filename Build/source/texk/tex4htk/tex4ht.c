@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-02-04-17:42), generated from tex4ht-c.tex
+/* tex4ht.c (2020-02-07-15:17), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -1048,7 +1048,6 @@ static BOOL math_class_on = FALSE, show_class = FALSE;
 #ifdef VTEX_SPACING_ADDONS
 static BOOL inside_math = FALSE;
 #endif
-int trace_cnt = 0;
 static int open_del = 256, math_class, pause_class, ignore_subclass_del;
 
 
@@ -1836,12 +1835,11 @@ static INTEGER move_x
      if (max_x_val == DEF_MAX_X_VAL) max_x_val = x_val - d;
      
 i = 0;
-printf(":::::::::::::::::: 1 %d inside_math: %d\n", trace_cnt++, inside_math);
 sp = (text_on? word_sp
 #ifdef VTEX_SPACING_ADDONS
-             * (inside_math? x_fact : 100) / 100 
+            * (inside_math? x_fact : 100) / 100
 #endif
-             : margin_sp);
+            : margin_sp);
 if (sp > 0.0001)
     i =  (INTEGER) (  (double) (dx = x_val - max_x_val)
             /         sp
@@ -1852,9 +1850,9 @@ if( i==0 ){
       i =  (INTEGER) (  (double) dx
             /        ( word_sp
 #ifdef VTEX_SPACING_ADDONS
-             * (inside_math? x_fact : 100) / 100 
+            * (inside_math? x_fact : 100) / 100
 #endif
-            ) +         0.5 );
+            ) +      0.5 );
 }
 
 
@@ -1917,12 +1915,11 @@ word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
 #endif
              ;
 i = 0;
-printf(":::::::::::::::::: 2 %d inside_math: %d\n", trace_cnt++, inside_math);
 sp = (text_on? word_sp
 #ifdef VTEX_SPACING_ADDONS
-             * (inside_math? x_fact : 100) / 100 
+            * (inside_math? x_fact : 100) / 100
 #endif
-             : margin_sp);
+            : margin_sp);
 if (sp > 0.0001)
     i =  (INTEGER) (  (double) dx
             /         sp
@@ -1933,9 +1930,9 @@ if( i==0 ){
       i =  (INTEGER) (  (double) dx
             /        ( word_sp
 #ifdef VTEX_SPACING_ADDONS
-            * (inside_math? x_fact : 100) / 100 
+            * (inside_math? x_fact : 100) / 100
 #endif
-            ) +       0.5 );
+            ) +      0.5 );
 }
 
 
@@ -1993,13 +1990,12 @@ max_x_val = x_val;
       
 if( !ignore_spaces ){
    i = 0;
-printf(":::::::::::::::::: 3 %d inside_math: %d\n", trace_cnt++, inside_math);
    if (word_sp > 0.0001)
-      i =  (INTEGER) ( (double) (dx = d) / word_sp
+      i =  (INTEGER) ( (double) (dx = d) / ( word_sp
 #ifdef VTEX_SPACING_ADDONS
-                                              * (inside_math? x_fact : 100) / 100 
+            * (inside_math? x_fact : 100) / 100
 #endif
-                                              + 0.5 );
+            ) + 0.5 );
    if( i<0 ) i=0;
    if( !i ) i = dx>99999L;
    if( i ){ put_char(' '); }
@@ -2140,12 +2136,11 @@ if( (x_val + right)  &&
    if ( (max_x_val == DEF_MAX_X_VAL) || ((x_val + right) <= max_x_val) )
    {  max_x_val = x_val;  }
    i = 0;
-printf(":::::::::::::::::: 4 %d inside_math: %d\n", trace_cnt++, inside_math);
    sp = (text_on? word_sp
 #ifdef VTEX_SPACING_ADDONS
-             * (inside_math? x_fact : 100) / 100 
+                   * (inside_math? x_fact : 100) / 100
 #endif
-             : margin_sp);
+                   : margin_sp);
    if (sp > 0.0001)
       i =  (INTEGER) (  (double) (x_val + right - max_x_val)
                    /         sp
@@ -2154,11 +2149,11 @@ printf(":::::::::::::::::: 4 %d inside_math: %d\n", trace_cnt++, inside_math);
 if( i==0 ){
    if (word_sp > 0.0001)
       i =  (INTEGER) (  (double) (x_val + right - max_x_val)
-                   /             ( word_sp
+                   /        ( word_sp
 #ifdef VTEX_SPACING_ADDONS
-                   * (inside_math? x_fact : 100) / 100 
+                   * (inside_math? x_fact : 100) / 100
 #endif
-                   ) +       0.5 );
+                   ) +      0.5 );
 }
 
 
@@ -6596,7 +6591,7 @@ sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-02-04-17:42%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-02-07-15:17%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -10854,12 +10849,12 @@ next_str
 while( special_n-- > 0 )  (void) get_char();
 
   break; }
-  case '=': {
+  case '=': { 
 #ifdef VTEX_SPACING_ADDONS
-    int tag_buf_len = special_n;
-    char tag_buf[tag_buf_len + 1]; 
+   int tag_buf_len = special_n;
+   char tag_buf[tag_buf_len + 1];
 #endif
-    while( special_n-- > 0 ){
+while( special_n-- > 0 ){
         int ch;
         BOOL flag;
         struct hcode_repl_typ *q;
@@ -10868,7 +10863,9 @@ while( special_n-- > 0 )  (void) get_char();
    if ((ch == '<') || (ch == '>'))
         ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
 #endif
-tag_buf[tag_buf_len - special_n - 1] = ch;   
+#ifdef VTEX_SPACING_ADDONS
+   tag_buf[tag_buf_len - special_n - 1] = ch;
+#endif
    q = hcode_repl;
    flag = FALSE;
    while( q != (struct hcode_repl_typ*) 0 ){
@@ -10882,12 +10879,13 @@ tag_buf[tag_buf_len - special_n - 1] = ch;
    } else { put_char( ch ); }
 }
 #ifdef VTEX_SPACING_ADDONS
-    tag_buf[tag_buf_len] = '\0';
-    const char *test_tag = "<math ";
-    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
-    test_tag = "</math>";
-    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+   tag_buf[tag_buf_len] = '\0';
+   const char *test_tag = "<math ";
+   if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
+   test_tag = "</math>";
+   if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
 #endif
+
  break; }
   case '<':
   case '>': { 
@@ -11346,6 +11344,10 @@ if( p->action == '>' ){
     if ((in_ch == '*') && (!ch_fl) && dont_send_base_back) // supressed back sending special -- placing it right here
     {
         
+#ifdef VTEX_SPACING_ADDONS
+   int tag_buf_len = special_n;
+   char tag_buf[tag_buf_len + 1];
+#endif
 while( special_n-- > 0 ){
         int ch;
         BOOL flag;
@@ -11354,6 +11356,9 @@ while( special_n-- > 0 ){
 #ifdef VTEX_SSCRIPT_ADDONS
    if ((ch == '<') || (ch == '>'))
         ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+#endif
+#ifdef VTEX_SPACING_ADDONS
+   tag_buf[tag_buf_len - special_n - 1] = ch;
 #endif
    q = hcode_repl;
    flag = FALSE;
@@ -11367,6 +11372,13 @@ while( special_n-- > 0 ){
       while( *chr != 0 ){ put_char( *chr ); chr++; }
    } else { put_char( ch ); }
 }
+#ifdef VTEX_SPACING_ADDONS
+   tag_buf[tag_buf_len] = '\0';
+   const char *test_tag = "<math ";
+   if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
+   test_tag = "</math>";
+   if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+#endif
 
 
     }
@@ -11441,12 +11453,13 @@ if(!back_id_off ){
      case 
 4
 
-: { del_stack = push_del( (char) ch, cr_fnt); break; }
+: { del_stack = push_del( (char) ch, cr_fnt);
+                           break; }
      case 
 5
 
 : {
-        del_stack = pop_del( (char) ch, id_hide, cr_fnt); break; }
+        del_stack = pop_del( (char) ch, id_hide, cr_fnt);   break; }
      default:{ ; }
 }  }
 
@@ -11874,12 +11887,13 @@ if(!back_id_off ){
      case 
 4
 
-: { del_stack = push_del( (char) ch, cr_fnt); break; }
+: { del_stack = push_del( (char) ch, cr_fnt);
+                           break; }
      case 
 5
 
 : {
-        del_stack = pop_del( (char) ch, id_hide, cr_fnt); break; }
+        del_stack = pop_del( (char) ch, id_hide, cr_fnt);   break; }
      default:{ ; }
 }  }
 
@@ -12577,16 +12591,15 @@ if( stack[stack_n].halign_info )
 
 
 pop_stack();
-printf(":::::::::::::::::: 5 %d inside_math: %d\n", trace_cnt++, inside_math);
 if (
 #ifdef VTEX_SPACING_ADDONS
     (!no_spaces) &&
 #endif
         ((x_val+0.6*word_sp
 #ifdef VTEX_SPACING_ADDONS
-                        * (inside_math? x_fact : 100) / 100 
+            * (inside_math? x_fact : 100) / 100
 #endif
-                        ) <  stack[stack_n].x_val) )  put_char(' ');
+            ) <  stack[stack_n].x_val) )  put_char(' ');
 text_on = stack[stack_n].text_on;
 
   break; }
