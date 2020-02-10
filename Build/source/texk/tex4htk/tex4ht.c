@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-02-07-15:17), generated from tex4ht-c.tex
+/* tex4ht.c (2020-02-10-17:45), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -1232,6 +1232,7 @@ static const U_CHAR *warn_err_mssg[]={
 "File not found: %s\n",                                 // ERR_FILE_NFOUND
 "File read error: %s\n",                                // ERR_FILE_READ
 "Improper file format: %s\n",                           // ERR_FILE_FORMAT
+"Fatal error, file: %s, line: %d\n",                    // ERR_FATAL
 
  "" };
 
@@ -1509,7 +1510,7 @@ static void warn_i_int_2( ARG_III(int,int,int) );
 static void warn_i_str2( ARG_III(int,const char *,const char *) );
 
 
-static void err_i( ARG_I(int) );
+/* static */ void err_i( ARG_II(int, ...) );
 
 
 static void err_i_int( ARG_II(int,int) );
@@ -1582,8 +1583,10 @@ sig_err
   }
   
 #ifdef __DJGPP__
-  if (s != SIGINT && s != SIGQUIT)
+  if (s != SIGINT && s != SIGQUIT){
+    fflush(stderr);
     exit(EXIT_FAILURE);
+    }
 #endif
 
 
@@ -1727,6 +1730,7 @@ static  void set_del
 static void try_new_line(MYVOID)
 {        long long  v;
          double    dy;
+assert((cur_fnt >= -1) && (cur_fnt < font_tbl_size));
    dy =  (cur_fnt == -1)? 0.0 : (
 (
 design_size_to_pt( 1.7 * (double) font_tbl[cur_fnt].ex )
@@ -1908,6 +1912,7 @@ cr_fnt = ch -
 171  
 ;
 cr_fnt = search_font_tbl( cr_fnt );
+assert((cr_fnt >= 0) && (cr_fnt < font_tbl_size));
 word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
              * (double) font_tbl[cr_fnt].scale
 #ifdef VTEX_SPACING_ADDONS
@@ -2820,8 +2825,9 @@ static  struct del_stack_entry* pop_del
 #endif
 {
    if( del_stack != (struct del_stack_entry*) 0 ){
-      if( (cr_fnt ==  del_stack->fnt) &&
-          font_tbl[cr_fnt].math &&
+      if (cr_fnt ==  del_stack->fnt){
+         assert((cr_fnt >= 0) && (cr_fnt < font_tbl_size));
+         if ( font_tbl[cr_fnt].math &&
           (ch >= font_tbl[cr_fnt].char_f) && (ch <= font_tbl[cr_fnt].char_l) &&
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
@@ -2832,7 +2838,7 @@ static  struct del_stack_entry* pop_del
 #endif
          }
          del_stack = (p = del_stack)->next;  free((void *)  p );
-   }  }
+   }  }  }
    return del_stack;
 }
 
@@ -2987,6 +2993,7 @@ static double  char_width
 #endif
 {
    INTEGER size = 0;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    // size = *(font_tbl[cur_fnt].wtbl + (int)(*(font_tbl[cur_fnt].char_wi + (int)(ch - font_tbl[cur_fnt].char_f)% 256)));
    if (font_tbl[cur_fnt].wtbl && font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
    {
@@ -3014,6 +3021,7 @@ static double  char_height
 #endif
 {
    INTEGER size = 0;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    // size = *(font_tbl[cur_fnt].htbl + (int)((*(font_tbl[cur_fnt].char_hidp + (int)(ch - font_tbl[cur_fnt].char_f)% 256) >>  4) & 0x0F))
    if (font_tbl[cur_fnt].htbl && font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
    {
@@ -3041,6 +3049,7 @@ static double  char_depth
 #endif
 {
    INTEGER size = 0;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    // size = *(font_tbl[cur_fnt].dtbl + (int)((*(font_tbl[cur_fnt].char_hidp + (int)(ch - font_tbl[cur_fnt].char_f)% 256)) & 0x0F))
    if (font_tbl[cur_fnt].dtbl && font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
    {
@@ -3458,6 +3467,7 @@ static void  put_alt_ch
    if( !ch_str_flag ) put_char( chr );
    else if( chr > 0 ){ 
     unsigned U_CHAR * p = NULL;
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
 if (font_tbl[cur_fnt].str && (chr > 0) &&
     (chr <= n_gif))
@@ -3612,6 +3622,7 @@ static  INTEGER set_ch_class
 #undef SEP
 #endif
 {
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 int wt_ix;
 
@@ -3668,6 +3679,7 @@ static  int math_class_of
 #undef SEP
 #endif
 {                           int math_class;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    BOOL math_class_ready = (font_tbl[cur_fnt].math != NULL);
    BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
    math_class = 0;
@@ -4872,6 +4884,7 @@ needs_accented_sym--;
 
 
 
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 if( span_on && (default_font != font_tbl[cur_fnt].num) ){
   if( !ch_map_flag && start_span ){
     if( span_name_on ){
@@ -4881,16 +4894,22 @@ if( no_root_file ){  open_o_file(); }
 
        if( span_open[0] )  if( *span_open[0] )
            (IGNORED) fprintf(cur_o_file, "%s", span_open[0]);
-       if( span_name[0] )  if( *span_name[0] )
+       if( span_name[0] )  if( *span_name[0] ){
+           assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
            (IGNORED) fprintf(cur_o_file,
                span_name[0], font_tbl[cur_fnt].family_name);
-       if( span_size[0] )  if( *span_size[0] )
+           }
+       if( span_size[0] )  if( *span_size[0] ){
+           assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
            (IGNORED) fprintf(cur_o_file,
                span_size[0], font_tbl[cur_fnt].font_size);
+           }
        if( span_mag[0] )
-         if( *span_mag[0]  && (font_tbl[cur_fnt].mag != 100))
+         if( *span_mag[0]  && (font_tbl[cur_fnt].mag != 100)){
+           assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
            (IGNORED) fprintf(cur_o_file,
                        span_mag[0], font_tbl[cur_fnt].mag);
+           }
        if( span_ch[0] )  if( *span_ch[0] )
            (IGNORED) fprintf(cur_o_file, "%s", span_ch[0]);
     }
@@ -4906,6 +4925,7 @@ if( no_root_file ){  open_o_file(); }
 
 
      if( *trace_dvi_del_C != '\0' ){
+        assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
         (IGNORED) fprintf(cur_o_file,
             block_start? "%s%s %d B" : "%s%s %d",
             trace_dvi_del_C, font_tbl[cur_fnt].name, ch);
@@ -4980,6 +5000,7 @@ char_depth(ch)
 if( a_accent_template && needs_accented_sym ){
                                         BOOL acc_avail;
                                         unsigned int acc_ix = 1;
+  assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
   acc_avail = (font_tbl[cur_fnt].accented
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
       && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
@@ -5028,6 +5049,7 @@ if( keepChar ){
    int r_ch = 0;
    BOOL ch_str_flag = FALSE;
 
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 #ifdef VTEX_OTF_ADDONS
 if (font_tbl[cur_fnt].pars)
 {
@@ -5071,6 +5093,7 @@ if( span_open[gif_flag] )
    
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
                         font_tbl[cur_fnt].family_name);
 }
@@ -5079,6 +5102,7 @@ if( span_name[gif_flag] )
    
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
                         font_tbl[cur_fnt].font_size);
 }
@@ -5087,6 +5111,7 @@ if( span_size[gif_flag] )
    
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
                         font_tbl[cur_fnt].mag);
 }
@@ -5133,6 +5158,7 @@ if( end_span[gif_flag] )
 else
 #endif
 {
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 if (ch_proper)
    r_ch = ch - font_tbl[cur_fnt].char_f;
@@ -5160,6 +5186,7 @@ if( no_root_file ){  open_o_file(); }
 #endif
    if( !gif_open[gif_flag] ){
      
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) sprintf(str,
    "configuration for htf class %d (char %d of %s.htf)",
    gif_flag, ch,font_tbl[cur_fnt].name
@@ -5204,8 +5231,10 @@ gif_id[gif_flag] = gif_open[gif_flag]+28;
 p= gif_open[gif_flag];
 if( p )
 if( *p ){
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    print_f(p); (IGNORED) strcpy((char *) str, (char *) font_tbl[cur_fnt].name);
    mag = 10;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    if (font_tbl[cur_fnt].design_sz > 0)
       mag = (int) ((double) font_tbl[cur_fnt].scale /
                 font_tbl[cur_fnt].design_sz  * 10 );
@@ -5244,6 +5273,7 @@ if( p )
 p = gif_class[gif_flag];
 if( p )
   if( *p ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, p,
                    font_tbl[cur_fnt].family_name);  }
 
@@ -5252,6 +5282,7 @@ if( p )
 p = gif_size[gif_flag];
 if( p )
   if( *p ){
+     assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
      (IGNORED) fprintf(cur_o_file, p,
                    font_tbl[cur_fnt].font_size);  }
 
@@ -5259,8 +5290,11 @@ if( p )
    
 p = gif_mag[gif_flag];
 if( p )
-  if( *p && (font_tbl[cur_fnt].mag != 100) ){
-     (IGNORED) fprintf(cur_o_file, p, font_tbl[cur_fnt].mag);
+  if( *p ){
+     assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
+     if ( font_tbl[cur_fnt].mag != 100 ){
+        (IGNORED) fprintf(cur_o_file, p, font_tbl[cur_fnt].mag);
+        }
 }
 
 
@@ -5306,6 +5340,7 @@ if( span_open[gif_flag] )
    
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
                         font_tbl[cur_fnt].family_name);
 }
@@ -5314,6 +5349,7 @@ if( span_name[gif_flag] )
    
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
                         font_tbl[cur_fnt].font_size);
 }
@@ -5322,6 +5358,7 @@ if( span_size[gif_flag] )
    
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
                         font_tbl[cur_fnt].mag);
 }
@@ -5390,6 +5427,7 @@ if( span_open[gif_flag] )
    
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
                         font_tbl[cur_fnt].family_name);
 }
@@ -5398,6 +5436,7 @@ if( span_name[gif_flag] )
    
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
                         font_tbl[cur_fnt].font_size);
 }
@@ -5406,6 +5445,7 @@ if( span_size[gif_flag] )
    
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
                         font_tbl[cur_fnt].mag);
 }
@@ -5461,6 +5501,7 @@ if( no_root_file ){  open_o_file(); }
    int r_ch = 0;
    BOOL ch_str_flag = FALSE;
 
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 #ifdef VTEX_OTF_ADDONS
 if (font_tbl[cur_fnt].pars)
 {
@@ -5504,6 +5545,7 @@ if( span_open[gif_flag] )
    
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
                         font_tbl[cur_fnt].family_name);
 }
@@ -5512,6 +5554,7 @@ if( span_name[gif_flag] )
    
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
                         font_tbl[cur_fnt].font_size);
 }
@@ -5520,6 +5563,7 @@ if( span_size[gif_flag] )
    
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
                         font_tbl[cur_fnt].mag);
 }
@@ -5566,6 +5610,7 @@ if( end_span[gif_flag] )
 else
 #endif
 {
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 if (ch_proper)
    r_ch = ch - font_tbl[cur_fnt].char_f;
@@ -5593,6 +5638,7 @@ if( no_root_file ){  open_o_file(); }
 #endif
    if( !gif_open[gif_flag] ){
      
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) sprintf(str,
    "configuration for htf class %d (char %d of %s.htf)",
    gif_flag, ch,font_tbl[cur_fnt].name
@@ -5637,8 +5683,10 @@ gif_id[gif_flag] = gif_open[gif_flag]+28;
 p= gif_open[gif_flag];
 if( p )
 if( *p ){
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    print_f(p); (IGNORED) strcpy((char *) str, (char *) font_tbl[cur_fnt].name);
    mag = 10;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    if (font_tbl[cur_fnt].design_sz > 0)
       mag = (int) ((double) font_tbl[cur_fnt].scale /
                 font_tbl[cur_fnt].design_sz  * 10 );
@@ -5677,6 +5725,7 @@ if( p )
 p = gif_class[gif_flag];
 if( p )
   if( *p ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, p,
                    font_tbl[cur_fnt].family_name);  }
 
@@ -5685,6 +5734,7 @@ if( p )
 p = gif_size[gif_flag];
 if( p )
   if( *p ){
+     assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
      (IGNORED) fprintf(cur_o_file, p,
                    font_tbl[cur_fnt].font_size);  }
 
@@ -5692,8 +5742,11 @@ if( p )
    
 p = gif_mag[gif_flag];
 if( p )
-  if( *p && (font_tbl[cur_fnt].mag != 100) ){
-     (IGNORED) fprintf(cur_o_file, p, font_tbl[cur_fnt].mag);
+  if( *p ){
+     assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
+     if ( font_tbl[cur_fnt].mag != 100 ){
+        (IGNORED) fprintf(cur_o_file, p, font_tbl[cur_fnt].mag);
+        }
 }
 
 
@@ -5739,6 +5792,7 @@ if( span_open[gif_flag] )
    
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
                         font_tbl[cur_fnt].family_name);
 }
@@ -5747,6 +5801,7 @@ if( span_name[gif_flag] )
    
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
                         font_tbl[cur_fnt].font_size);
 }
@@ -5755,6 +5810,7 @@ if( span_size[gif_flag] )
    
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
                         font_tbl[cur_fnt].mag);
 }
@@ -5823,6 +5879,7 @@ if( span_open[gif_flag] )
    
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
                         font_tbl[cur_fnt].family_name);
 }
@@ -5831,6 +5888,7 @@ if( span_name[gif_flag] )
    
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
                         font_tbl[cur_fnt].font_size);
 }
@@ -5839,6 +5897,7 @@ if( span_size[gif_flag] )
    
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
                         font_tbl[cur_fnt].mag);
 }
@@ -6292,24 +6351,16 @@ static void warn_i_str2
 }
 
 
-
-static void err_i
-#ifdef ANSI
-#define SEP ,
-(      int  n
-
-)
-#undef SEP
-#else
-#define SEP ;
-(n)      int  n
-
-;
-#undef SEP
-#endif
-{  (IGNORED) fprintf(stderr,"--- error --- ");
-   (IGNORED) fprintf(stderr, "%s", warn_err_mssg[n]);
+/* static */ void err_i(int n, ...)
+{
+va_list argptr;
+char str_buf[STR_BUF_LEN + 1];
+   va_start(argptr, n);
+   (IGNORED) fprintf(stderr,"--- error --- ");
+   vsnprintf(str_buf, STR_BUF_LEN, warn_err_mssg[n], argptr);
+   (IGNORED) fprintf(stderr, str_buf);
    show_err_context();
+   fflush(stderr);
    exit(EXIT_FAILURE);
 }
 
@@ -6332,6 +6383,7 @@ static void err_i_int
 {  (IGNORED) fprintf(stderr,"--- error --- ");
    (IGNORED) fprintf(stderr, warn_err_mssg[n], i);
    show_err_context();
+   fflush(stderr);
    exit(EXIT_FAILURE);
 }
 
@@ -6358,6 +6410,7 @@ static void err_i_int
 {  (IGNORED) fprintf(stderr,"--- error --- ");
    (IGNORED) fprintf(stderr, warn_err_mssg[n], str);
    show_err_context();
+   fflush(stderr);
    exit(EXIT_FAILURE);
 }
 
@@ -6591,7 +6644,7 @@ sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-02-07-15:17%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-02-10-17:45%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -9535,7 +9588,9 @@ else if ( in_trace_char ){
 
 
    
+assert((cur_fnt >= -1) && (cur_fnt < font_tbl_size));
 if( span_on && !in_span_ch  && !ignore_chs && !in_accenting
+            && (cur_fnt != -1)
             && (default_font != font_tbl[cur_fnt].num) ){
   if(  (ch < 137) && (ch != 
 132 
@@ -9600,6 +9655,7 @@ needs_accent_sym && (ch < 128)
                                         BOOL acc_avail;
                                         unsigned int acc_ix = 1;
     needs_end_accent = (needs_accent_sym == 2 * TRUE);
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     acc_avail = (font_tbl[cur_fnt].accent
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
       && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
@@ -9897,6 +9953,7 @@ default: {
 ;
          
 cur_fnt = search_font_tbl( cur_fnt );
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 word_sp = 
 design_size_to_pt( font_tbl[cur_fnt].word_sp )
                    * (double) font_tbl[cur_fnt].scale
@@ -9930,6 +9987,7 @@ case
    cur_fnt = (int)  ((n==4)? get_int(4) : get_unt((int) n));
    
 cur_fnt = search_font_tbl( cur_fnt );
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 word_sp = 
 design_size_to_pt( font_tbl[cur_fnt].word_sp )
                    * (double) font_tbl[cur_fnt].scale
@@ -11064,7 +11122,8 @@ while( special_n-- ) { *(q++) = get_char(); }
 switch ( code ){
   case '8': {  pause_style--; break; }
   case '9': {  pause_style++;  break; }
-  case '-': {  default_font = font_tbl[cur_fnt].num;
+  case '-': {  assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
+               default_font = font_tbl[cur_fnt].num;
                base_font_size = font_tbl[cur_fnt].scale / 100;
                break; }
   case '+': {  default_font = -1;                    break; }
@@ -11075,6 +11134,7 @@ f = 0; while( *p ){ f = 10*f + *(p++) - '0'; }
 if( no_root_file ){  open_o_file(); }
 
 
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) fprintf(cur_o_file, "%d",
   (font_tbl[cur_fnt].scale / base_font_size - 100) * f / 100 +100
    );
@@ -11085,6 +11145,7 @@ if( no_root_file ){  open_o_file(); }
 if( no_root_file ){  open_o_file(); }
 
 
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) fprintf(cur_o_file, "%s", font_tbl[cur_fnt].name);
 if( font_tbl[cur_fnt].mag != 100 ){
    (IGNORED) fprintf(cur_o_file,"_%d", font_tbl[cur_fnt].mag);
@@ -13195,6 +13256,7 @@ if( errCode > 0 ){
    dvi_flag = TRUE;
    for( cur_fnt = font_tbl_size; cur_fnt--; ){
       
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) fprintf(log_file, lg_font_fmt,
   font_tbl[cur_fnt].family_name,
   font_tbl[cur_fnt].font_size,
@@ -13202,6 +13264,7 @@ if( errCode > 0 ){
   font_tbl[cur_fnt].mag);
 
 
+      assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
       int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
       for( i = n_gif; i--; )
          if( get_bit(font_tbl[cur_fnt].gif_on, i, n_gif) ){
@@ -13239,6 +13302,7 @@ if( errCode > 0 ){
 
 
             
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 if( (ch = i + font_tbl[cur_fnt].char_f) > 127 )  {
   if( ch < 256 ) cond_idv_char(133);  else  warn_i(ERR_IMPL);   }
 cond_idv_char( ch );

@@ -11,6 +11,10 @@
 #define VTEX_OTF_ADDONS         // OpenType font processing
 #define VTEX_SSCRIPT_ADDONS     // add-ons for baseless sub / superscripts
 
+// #include <assert.h>
+#undef assert
+#define assert(expr) { if (!(expr)) err_i(ERR_FATAL, __FILE__, __LINE__); }
+
 #include <stdio.h>
 #include "kpstdlib.h"
 #include "kpstring.h"
@@ -35,6 +39,7 @@ extern PLAIN_C int font_tbl_size;
 
 #define new_font font_tbl[font_tbl_size]
 
+extern PLAIN_C void err_i(/* enum err_codes */ int nErrCode, ...);
 extern PLAIN_C void err_i_str(/* enum err_codes */ int nErrCode, char *pszErrMsg);
 extern PLAIN_C void warn_i(/* enum err_codes */ int nErrCode);
 extern PLAIN_C void warn_i_str(/* enum err_codes */ int nErrCode, const char *pszErrMsg);
@@ -123,7 +128,8 @@ ERR_PAR_R,
 ERR_BUF_OVFL,
 ERR_FILE_NFOUND,
 ERR_FILE_READ,
-ERR_FILE_FORMAT
+ERR_FILE_FORMAT,
+ERR_FATAL
 };
 
 #endif // #ifndef TEX4HT_ADD_H_INCLUDED

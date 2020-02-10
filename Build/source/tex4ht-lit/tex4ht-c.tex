@@ -822,8 +822,10 @@ for the gif files.
 
 \<DJGPP signals\><<<
 #ifdef __DJGPP__
-  if (s != SIGINT && s != SIGQUIT)
+  if (s != SIGINT && s != SIGQUIT){
+    fflush(stderr);
     exit(EXIT_FAILURE);
+    }
 #endif
 >>>
 
@@ -2726,27 +2728,34 @@ Options 'h' and 'v' are not in use.
 
 
 \<css for chars\><<<
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 if( span_on && (default_font != font_tbl[cur_fnt].num) ){
   if( !ch_map_flag && start_span ){
     if( span_name_on ){
        `<open output file`>
        if( span_open[0] )  if( *span_open[0] )
            (IGNORED) fprintf(cur_o_file, "%s", span_open[0]);
-       if( span_name[0] )  if( *span_name[0] )
+       if( span_name[0] )  if( *span_name[0] ){
+           assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
            (IGNORED) fprintf(cur_o_file,
-               span_name[0], font_tbl[cur_fnt].family_name);      
-       if( span_size[0] )  if( *span_size[0] ) 
+               span_name[0], font_tbl[cur_fnt].family_name);
+           }
+       if( span_size[0] )  if( *span_size[0] ){
+           assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
            (IGNORED) fprintf(cur_o_file,
-               span_size[0], font_tbl[cur_fnt].font_size);      
+               span_size[0], font_tbl[cur_fnt].font_size);
+           }
        if( span_mag[0] )
-         if( *span_mag[0]  && (font_tbl[cur_fnt].mag != 100))
+         if( *span_mag[0]  && (font_tbl[cur_fnt].mag != 100)){
+           assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
            (IGNORED) fprintf(cur_o_file,
-                       span_mag[0], font_tbl[cur_fnt].mag);      
+                       span_mag[0], font_tbl[cur_fnt].mag);
+           }
        if( span_ch[0] )  if( *span_ch[0] )
            (IGNORED) fprintf(cur_o_file, "%s", span_ch[0]);
     }
     start_span = FALSE;
-  } 
+  }
 }
 >>>
 
@@ -2770,7 +2779,9 @@ static BOOL start_span = FALSE, in_span_ch = FALSE;
 
 
 \<span char block\><<<
+assert((cur_fnt >= -1) && (cur_fnt < font_tbl_size));
 if( span_on && !in_span_ch  && !ignore_chs && !in_accenting
+            && (cur_fnt != -1)
             && (default_font != font_tbl[cur_fnt].num) ){
   if(  (ch < 137) && (ch != `<insert rule + move op`>) ){
     in_span_ch = TRUE; start_span = TRUE;    
@@ -3088,6 +3099,7 @@ if( trace_dvi_C ){
    if( !ch_map_flag ){
      `<open output file`>
      if( *trace_dvi_del_C != '\0' ){   
+        assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
         (IGNORED) fprintf(cur_o_file,
             block_start? "%s%s %d B" : "%s%s %d",
             trace_dvi_del_C, font_tbl[cur_fnt].name, ch);      
@@ -3186,6 +3198,7 @@ static void try_new_line( ARG_I(void) );
 static void try_new_line(MYVOID)
 {        long long  v;
          double    dy;
+assert((cur_fnt >= -1) && (cur_fnt < font_tbl_size));
    dy =  (cur_fnt == -1)? 0.0 : (`<sign of ex`> * `<size of ex`>) ;
    v = y_val - prev_y_val;      
    if( !text_on && (y_val > max_y_val) ){
@@ -3699,6 +3712,7 @@ while( !done ){
          double sp;
 cr_fnt = ch - `<font 0`>;
 cr_fnt = search_font_tbl( cr_fnt );
+assert((cr_fnt >= 0) && (cr_fnt < font_tbl_size));
 word_sp = design_size_to_pt( font_tbl[cr_fnt].word_sp )
              * (double) font_tbl[cr_fnt].scale
 #ifdef VTEX_SPACING_ADDONS
@@ -6185,6 +6199,7 @@ BOOL visible_cnt=FALSE;
    dvi_flag = TRUE;    
    for( cur_fnt = font_tbl_size; cur_fnt--; ){
       `<output to lg file`>
+      assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
       int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
       for( i = n_gif; i--; )
          if( get_bit(font_tbl[cur_fnt].gif_on, i, n_gif) ){
@@ -6207,6 +6222,7 @@ BOOL visible_cnt=FALSE;
 
 
 \<insert the char code\><<<
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 if( (ch = i + font_tbl[cur_fnt].char_f) > 127 )  {
   if( ch < 256 ) cond_idv_char(133);  else  warn_i(ERR_IMPL);   }
 cond_idv_char( ch );    
@@ -7729,8 +7745,9 @@ static  struct del_stack_entry* pop_del(ch, id_hide, cr_fnt)
                                                   int cr_fnt
 ;{                   
    if( del_stack != (struct del_stack_entry*) 0 ){
-      if( (cr_fnt ==  del_stack->fnt) && 
-          font_tbl[cr_fnt].math &&
+      if (cr_fnt ==  del_stack->fnt){ 
+         assert((cr_fnt >= 0) && (cr_fnt < font_tbl_size));
+         if ( font_tbl[cr_fnt].math &&
           (ch >= font_tbl[cr_fnt].char_f) && (ch <= font_tbl[cr_fnt].char_l) &&
           (  *(font_tbl[cr_fnt].math + (ch - font_tbl[cr_fnt].char_f))
              == del_stack->ch) ){
@@ -7741,7 +7758,7 @@ static  struct del_stack_entry* pop_del(ch, id_hide, cr_fnt)
 #endif
          }
          del_stack = (p = del_stack)->next;  free((void *)  p );
-   }  }
+   }  }  }
    return del_stack;
 }
 >>>
@@ -9156,6 +9173,7 @@ char *family_name, *font_size;
 When the size is not zero, n+2 can be reduced to n+1.
 
 \<output to lg file\><<<
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) fprintf(log_file, lg_font_fmt,  
   font_tbl[cur_fnt].family_name, 
   font_tbl[cur_fnt].font_size, 
@@ -9659,6 +9677,7 @@ static void doGlyphArray(yLocs)
 
 \<search font in font-tbl\><<<
 cur_fnt = search_font_tbl( cur_fnt );
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 word_sp = `<size of space`>;
 >>>
 
@@ -10196,6 +10215,7 @@ static double char_width(int ch);
 static double  char_width(ch)  int ch
 ;{
    INTEGER size = 0;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    // size = *(font_tbl[cur_fnt].wtbl + (int)(*(font_tbl[cur_fnt].char_wi + (int)(ch - font_tbl[cur_fnt].char_f)% 256)));
    if (font_tbl[cur_fnt].wtbl && font_tbl[cur_fnt].char_wi && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
    {
@@ -10228,6 +10248,7 @@ static double char_height(int ch);
 static double  char_height(ch)  int ch
 ;{
    INTEGER size = 0;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    // size = *(font_tbl[cur_fnt].htbl + (int)((*(font_tbl[cur_fnt].char_hidp + (int)(ch - font_tbl[cur_fnt].char_f)% 256) >>  4) & 0x0F))
    if (font_tbl[cur_fnt].htbl && font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
    {
@@ -10260,6 +10281,7 @@ static double char_depth(int ch);
 static double  char_depth(ch)  int ch
 ;{
    INTEGER size = 0;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    // size = *(font_tbl[cur_fnt].dtbl + (int)((*(font_tbl[cur_fnt].char_hidp + (int)(ch - font_tbl[cur_fnt].char_f)% 256)) & 0x0F))
    if (font_tbl[cur_fnt].dtbl && font_tbl[cur_fnt].char_hidp && (ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l))
    {
@@ -11116,6 +11138,7 @@ Does \`'verb_ch' correspond to \''\Char'?
    int r_ch = 0;
    BOOL ch_str_flag = FALSE;
 
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 #ifdef VTEX_OTF_ADDONS
 if (font_tbl[cur_fnt].pars)
 {
@@ -11141,6 +11164,7 @@ if (font_tbl[cur_fnt].pars)
 else
 #endif
 {
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 if (ch_proper)
    r_ch = ch - font_tbl[cur_fnt].char_f;
@@ -11252,6 +11276,7 @@ For some reason, bordlan cc+ complains if the
 
 
 \<img char without template\><<<
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) sprintf(str, 
    "configuration for htf class %d (char %d of %s.htf)",
    gif_flag, ch,font_tbl[cur_fnt].name
@@ -11845,6 +11870,7 @@ comamnds \`'<...>' and the delimiter characters \`'"'.
 
 \<put htf char string\><<<
     unsigned U_CHAR * p = NULL;
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
 if (font_tbl[cur_fnt].str && (chr > 0) &&
     (chr <= n_gif))
@@ -11890,15 +11916,16 @@ static int design_ch = 0;
 code = get_char();
 n = 1 + ((--special_n > MAX_SPEC_LEN)? MAX_SPEC_LEN : special_n);
 q = p = m_alloc(char, (int) n);
-if (special_n > MAX_SPEC_LEN) warn_i_str(ERR_BUF_OVFL, "");   
+if (special_n > MAX_SPEC_LEN) warn_i_str(ERR_BUF_OVFL, "");
 while( special_n > MAX_SPEC_LEN ){ (void) get_char(); special_n--; }
 while( special_n-- ) { *(q++) = get_char(); }
 *q = '\0';  q = p;
 switch ( code ){
   case '8': {  pause_style--; break; }
   case '9': {  pause_style++;  break; }
-  case '-': {  default_font = font_tbl[cur_fnt].num; 
-               base_font_size = font_tbl[cur_fnt].scale / 100; 
+  case '-': {  assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
+               default_font = font_tbl[cur_fnt].num;
+               base_font_size = font_tbl[cur_fnt].scale / 100;
                break; }
   case '+': {  default_font = -1;                    break; }
   case '%': { `<insert font size`>  break; }
@@ -11907,7 +11934,7 @@ switch ( code ){
   case ',': { `<don't report next htf class to lg`>  break; }
   default: { warn_i_int(ERR_SPC_CHAR, code); }
 }
-span_on = span_name_on && !pause_style; 
+span_on = span_name_on && !pause_style;
 if( q ) free((void *)  q);
 >>>
 
@@ -11923,7 +11950,7 @@ By taking integer for \`'pause_style' we allow for nested pausing of fonts.
 
 \<vars\><<<
 static int    pause_style = 0, default_font = -1, base_font_size=6533;
-static BOOL  
+static BOOL
   span_name_on = FALSE,
   span_on = FALSE;
 >>>
@@ -11956,8 +11983,10 @@ img_src = m_alloc(char, (int) 12);
 p= gif_open[gif_flag];
 if( p ) 
 if( *p ){      
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    print_f(p); (IGNORED) strcpy((char *) str, (char *) font_tbl[cur_fnt].name);
    mag = 10;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    if (font_tbl[cur_fnt].design_sz > 0)
       mag = (int) ((double) font_tbl[cur_fnt].scale /
                 font_tbl[cur_fnt].design_sz  * 10 );
@@ -12006,6 +12035,7 @@ if( p )
 p = gif_class[gif_flag];
 if( p )
   if( *p ){ 
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, p,
                    font_tbl[cur_fnt].family_name);  }
 >>>
@@ -12029,7 +12059,8 @@ if( p )
 \<...gif font size...\><<<
 p = gif_size[gif_flag];
 if( p )
-  if( *p ){ 
+  if( *p ){
+     assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
      (IGNORED) fprintf(cur_o_file, p,
                    font_tbl[cur_fnt].font_size);  }
 >>>
@@ -12045,9 +12076,12 @@ if( p )
 
 \<...gif font mag...\><<<
 p = gif_mag[gif_flag];
-if( p ) 
-  if( *p && (font_tbl[cur_fnt].mag != 100) ){
-     (IGNORED) fprintf(cur_o_file, p, font_tbl[cur_fnt].mag); 
+if( p )
+  if( *p ){
+     assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
+     if ( font_tbl[cur_fnt].mag != 100 ){
+        (IGNORED) fprintf(cur_o_file, p, font_tbl[cur_fnt].mag);
+        }
 }
 >>>
 
@@ -12062,7 +12096,7 @@ if( p )
 p = gif_ord[gif_flag];
 if( p )
   if( *p ){
-    (IGNORED) fprintf(cur_o_file, p, ch); 
+    (IGNORED) fprintf(cur_o_file, p, ch);
 }
 >>>
 
@@ -12282,6 +12316,7 @@ if( span_ch[gif_flag] )
 \<font-family of chr\><<<
 if( span_name[gif_flag] )
   if( *span_name[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_name[gif_flag],
                         font_tbl[cur_fnt].family_name);      
 }
@@ -12292,6 +12327,7 @@ if( span_name[gif_flag] )
 \<font-size of chr\><<<
 if( span_size[gif_flag] )
   if( *span_size[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_size[gif_flag],
                         font_tbl[cur_fnt].font_size);      
 }
@@ -12301,6 +12337,7 @@ if( span_size[gif_flag] )
 \<font-mag of chr\><<<
 if( span_mag[gif_flag] )
   if( *span_mag[gif_flag] ){
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     (IGNORED) fprintf(cur_o_file, span_mag[gif_flag],
                         font_tbl[cur_fnt].mag);      
 }
@@ -12324,6 +12361,7 @@ if( span_ord[gif_flag] )
    int f;
 f = 0; while( *p ){ f = 10*f + *(p++) - '0'; }
 `<open output file`>
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) fprintf(cur_o_file, "%d", 
   (font_tbl[cur_fnt].scale / base_font_size - 100) * f / 100 +100
    );      
@@ -12331,6 +12369,7 @@ f = 0; while( *p ){ f = 10*f + *(p++) - '0'; }
 
 \<insert css name of ch\><<<
 `<open output file`>
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 (IGNORED) fprintf(cur_o_file, "%s", font_tbl[cur_fnt].name);      
 if( font_tbl[cur_fnt].mag != 100 ){
    (IGNORED) fprintf(cur_o_file,"_%d", font_tbl[cur_fnt].mag);
@@ -12730,6 +12769,7 @@ if( in_accenting ){
                                         BOOL acc_avail;
                                         unsigned int acc_ix = 1;
     needs_end_accent = (needs_accent_sym == 2 * TRUE);
+    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     acc_avail = (font_tbl[cur_fnt].accent
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
       && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
@@ -12916,6 +12956,7 @@ static void get_open_accent(all,first,second,third,fourth,fifth,n)
 if( a_accent_template && needs_accented_sym ){
                                         BOOL acc_avail;
                                         unsigned int acc_ix = 1;
+  assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
   acc_avail = (font_tbl[cur_fnt].accented
       && (ch >= 0) // (ch >= font_tbl[cur_fnt].char_f) ???
       && (ch <= font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f) // (ch <= font_tbl[cur_fnt].char_l) ???
@@ -13171,6 +13212,7 @@ static INTEGER set_ch_class( ARG_I(int) );
 `[ 
 static  INTEGER set_ch_class(ch)    int ch
 ;{
+assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 int wt_ix;
 
@@ -13244,6 +13286,7 @@ static int math_class_of( ARG_II(int,int) );
 `[ 
 static  int math_class_of(ch,cur_fnt)    int ch`; int cur_fnt
 ;{                           int math_class;
+   assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    BOOL math_class_ready = (font_tbl[cur_fnt].math != NULL);
    BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
    math_class = 0;
@@ -17476,6 +17519,7 @@ static long cond_int( n )
 "File not found: %s\n",                               `%56`%  // ERR_FILE_NFOUND
 "File read error: %s\n",                              `%57`%  // ERR_FILE_READ
 "Improper file format: %s\n",                         `%58`%  // ERR_FILE_FORMAT
+"Fatal error, file: %s, line: %d\n",                  `%59`%  // ERR_FATAL
 >>>
 
 \<vars\><<<
@@ -17596,16 +17640,20 @@ static void warn_i_str2(n,str1,str2)
 
 
 \<header functions\><<<
-static void err_i( ARG_I(int) );
+/* static */ void err_i( ARG_II(int, ...) );
 >>>
 
 \<functions\><<<
-`[
-static void err_i(n)      int  n
-
-;{  (IGNORED) fprintf(stderr,"--- error --- ");
-   (IGNORED) fprintf(stderr, "%s", warn_err_mssg[n]);
+/* static */ void err_i(int n, ...)
+{
+va_list argptr;
+char str_buf[STR_BUF_LEN + 1];
+   va_start(argptr, n);
+   (IGNORED) fprintf(stderr,"--- error --- ");
+   vsnprintf(str_buf, STR_BUF_LEN, warn_err_mssg[n], argptr);
+   (IGNORED) fprintf(stderr, str_buf);
    show_err_context();
+   fflush(stderr);
    exit(EXIT_FAILURE);  
 }
 >>>
@@ -17623,6 +17671,7 @@ static void err_i_int(n,i)     int  n`;  int i
 ;{  (IGNORED) fprintf(stderr,"--- error --- ");
    (IGNORED) fprintf(stderr, warn_err_mssg[n], i);
    show_err_context();
+   fflush(stderr);
    exit(EXIT_FAILURE);  
 }
 >>>
@@ -17641,6 +17690,7 @@ static void err_i_int(n,i)     int  n`;  int i
 ;{  (IGNORED) fprintf(stderr,"--- error --- ");
    (IGNORED) fprintf(stderr, warn_err_mssg[n], str);
    show_err_context();
+   fflush(stderr);
    exit(EXIT_FAILURE);  
 }
 >>>
