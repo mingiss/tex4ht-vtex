@@ -5511,7 +5511,7 @@ if (font_tbl[cur_fnt].pars)
     get_uni_ch(wch_buf, WCH_BUF_SIZE, ch, font_tbl[cur_fnt].pars, cvt_to_math_var);
     for (int *pwch = wch_buf; *pwch; pwch++)
     {
-        if (*pwch < T1_NCHARS)
+        if (*pwch <= MAXCHAR)
         {
             chr = *pwch;
             
