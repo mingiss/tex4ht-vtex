@@ -1,6 +1,6 @@
 # `tex4ht`
 
-Environment for local corrections of `tex4ht` tools
+Environment for local corrections of `tex4ht` tools.
 
 
 ## Add-ons to the module `tex4ht`
@@ -26,40 +26,44 @@ disappearing or redundant spaces.
       -r200   threshold decreased by half &ndash; more spaces;
 
   Feature at the moment activated outside of math equations solely &ndash;
-spaces inside of formulae meet more sophisticated postprocessing
-(are converted to `<mml:mspace width="2.5pt" />`, for example),
-therefore, more investigations should be carried out here.
+  spaces inside of formulae meet more sophisticated postprocessing
+  (are converted to `<mml:mspace width="2.5pt" />`, for example),
+  therefore, more investigations should be carried out here.
 
 - command line switch -n
 
-  Totally cuts off the heuristic algorithm for recognition of spaces in .dvi file;
+  Totally cuts off the heuristic algorithm for recognition of spaces in `.dvi` file;
   spaces then should be generated using some explicit means, for example by
   inserting commands
 
       \special{t4ht=\&\#32;}
 
-  into the source .tex file. It could be done using script 
+  into the source `.tex` file. It could be done using script 
 
       Master/texmf-dist/scripts/4hsp/4hspship.lua
 
 
-### OTF font character encoding
+### `OTF` font character encoding
 
-Character mappings are provided during LaTex file compilation by additional
+Character mappings are provided during `LaTex` file compilation by additional
 `LuaTeX` script `luafonts.lua`.
-Encoding files are placed in subdirectory of the working folder named `.xdvips`.
+Encoding files are placed in a subdirectory of the working folder named `.xdvips`.
 They are used instead of *.htf encoding files.
 
-OTF font encoding exporter `luafonts.lua` with supplementing LaTeX styles could
+`OTF` font encoding exporter `luafonts.lua` with supplementing `LaTeX` styles could
 be found at
 
 > https://github.com/vtex-soft/texlive.xdvipsk/tree/master/Master/texmf-dist/tex/luatex/luafonts
 
-Folow instructions as provided in file
+Follow instructions as provided in the file
 
 > https://github.com/vtex-soft/texlive.xdvipsk/blob/master/README.overview.md
 
 sections `Opentype font support` and `Running xdvipsk`.
+
+Alternatively encoding extractor script `extractdvipsk.lua` could be used:
+
+> https://github.com/michal-h21/extractxdvipsk.git
 
 
 ### Math sub/superscripts base
@@ -73,7 +77,7 @@ The problem arises in case of baseless sub/superscript, for instance:
 back initial `MathML` tags prior to the last printable character. In case
 when that character already is inside of a previous tagged structure,
 such a back insertion ruins the validity of the file. Such back-sending
-is organized through DVI file specials `t4ht~<*`.
+is organized through `DVI` file specials `t4ht~<*`.
 
 Following modification implemented: when in between of the last printable
 character and the sub/superscript there are verbatim insertions `t4ht=`,
@@ -85,18 +89,18 @@ encountered. (The result is like as the special `t4ht~<*` was entered as
 
 - Command line option `-p` switches on the enhanced superscript base recognition algorithm.
 
-- Command line switch `-m` converts math unicode bold or italic letters to their latin equivalents,
+- Command line switch `-m` converts math unicode bold or italic letters to their Latin equivalents,
   enveloped into corresponding math variant `MathML` tags.
 
 
-## Repository structure:
+## Repository structure
 
 Designed as a mirror copy of `TeX Live` (`TL`) build tree structure.
 
 There are problems in running standard `TL` script `Build/source/reautoconf` under `MS Windows`
-in `MSYS` environment, hence additional set of prepared configure scripts are provided.
+in `MSYS` environment, hence an additional set of prepared configure scripts are provided.
 
-Modified executables and libraries should be copied from repository folder `Master/bin` to
+Modified executables and libraries should be copied from the repository folder `Master/bin` to
 the relevant local `TL` deployment path, for example, either
 
     D:\texroot\texlive2010\bin
@@ -147,7 +151,7 @@ additionally installed:
 
       Build/source/texk/tex4htk/tex4ht.pro
 
-  `QT` tools for build in `QT Creator` `IDE` or `qmake` environments could be found here:
+  `QT` tools for building in `QT Creator` `IDE` or `qmake` environments could be found here:
 
   > https://www.qt.io/ide/ 
 
@@ -158,7 +162,7 @@ additionally installed:
 
       svn co svn://username:password@tug.org/texlive/trunk
 
-- Overwrite original `TL` source files with these provided here.
+- Overwrite original `TL` source files with those provided here.
 
 - Execute scripts:
 
@@ -166,37 +170,49 @@ additionally installed:
       ./reautoconf            (not for `MS Windows` `MSYS` environment)
       ./Build_tex4ht.sh
 
-Resulting binary executables are created here:
+- Resulting binary executables are created here:
 
-    Build/source/Work/texk/tex4htk/tex4ht     (tex4ht.exe)
+      Build/source/Work/texk/tex4htk/tex4ht     (tex4ht.exe)
 
-and manually copied to the relevant deployment path inside of
+- and manually copied to the relevant deployment path inside of
 
-    Master/bin
+      Master/bin
 
-`reautoconf` does not work yet under `MSYS`. Necessary slightly corrected `linux` build
+`reautoconf` does not work yet under `MSYS`. Necessary slightly corrected `Linux` build
 environment configure scripts are provided here.
 
+
 ## TODO
-- Bug in command line parameters recognition:
 
-  command line
+1. Bug in command line parameters recognition:
 
-      tex4ht foo -cunihtf -n
+   command line
 
-  is not recognized until order of parameters is changed to
+        tex4ht foo -cunihtf -n
 
-      tex4ht foo -n -cunihtf
+   is not recognized until the order of parameters is changed to
 
-- Additional option for switching on action of the feature -r for inside of equations as well.
+        tex4ht foo -n -cunihtf
 
-- Additional functionality to the script `4hspship.lua` &ndash; output of mathematical
-  spaces in the form `<mml:mspace width="2.5pt" />` instead of calculating
-  them as product of count of space characters generated and font space width.
+1. Additional option for switching on the action of the feature `-r` for inside of equations as well.
 
-- `reautoconf` under `MSYS`
+1. Additional functionality to the script `4hspship.lua` &ndash; output of mathematical
+   spaces in the form `<mml:mspace width="2.5pt" />` instead of calculating
+   them as product of count of space characters generated and font space width.
 
-- MathML sub/superscript tag sending back algorithm:
-  Stepping over is not allowed not just through tags, entered inside of verbatim
-  specials `t4ht=`. All tag insertion specials, including `t4ht~<*` itself,
-  should be examined as well.
+1. `reautoconf` under `MSYS`
+
+1. MathML sub/superscript tag sending back algorithm:
+   Stepping over is not allowed not just through tags, entered inside of verbatim
+   specials `t4ht=`. All tag insertion specials, including `t4ht~<*` itself,
+   should be examined as well.
+
+1. Space recognition for `OTF` fonts.
+
+1. Integrate `OTF` encoding extractor functionality `extractdvipsk.lua` into the `tex4ht` binary &ndash;
+   instant extraction of encodings, generated by `luaotfload` scripts.
+
+1. Implement generation of `OTF` encodings as sets of `.htf` files, corresponding to
+   the virtual internal subsets of the `OTF` fonts, generated by `luaotfload`.
+   Could be either instant dynamic or permanently prepared during installation of the `TeX` environment.
+   No need for additional `OTF` features in the `tex4ht` converter then.
