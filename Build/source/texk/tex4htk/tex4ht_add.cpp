@@ -40,7 +40,8 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
     char enc_fname[PATH_MAX + 40];
     FILE *enc_file = NULL;
     char *pnts = NULL;
-
+    long ch_cnt = 0L;
+    double ch_wdt = 0.;
 
     HFontParMap::const_iterator it = theOtfAdds.m_mapHFontParMap.find(fnt_name);
     const HFontPars *ppars = NULL;
@@ -179,7 +180,16 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
                             Utf16ToUniStr(utf16_str, uni_str);
 
                             pars.m_mapTexUniTable[tex_code] = uni_str;
+
+                            if (codes.size() < 4)
+                                warn_i_str(ERR_FILE_FORMAT, errstr.c_str());
+                            else
+                            {
+                                ch_wdt += atof(codes[3]);
+                                ch_cnt++;
+                            }
                         }
+
                     }
 
                 } while (TRUE);
@@ -212,7 +222,11 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
         new_font.char_l = NO_CHAR_L;
     }
 
-    new_font.word_sp = WORD_SP_XDV;
+    if ((ch_cnt > 0L) && (ch_wdt > 0.001))
+        new_font.word_sp = ch_wdt / ch_cnt;
+    else
+        new_font.word_sp = WORD_SP_XDV;
+
     new_font.scale = DEF_FONT_SCALE;
     new_font.design_sz = DEF_DESIGN_SZ;
     new_font.mag = DEF_MAG_VAL;
