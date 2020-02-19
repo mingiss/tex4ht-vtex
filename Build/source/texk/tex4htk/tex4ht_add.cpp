@@ -212,7 +212,7 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
         new_font.char_l = NO_CHAR_L;
     }
 
-    new_font.word_sp = DEF_WORD_SP;
+    new_font.word_sp = WORD_SP_XDV;
     new_font.scale = DEF_FONT_SCALE;
     new_font.design_sz = DEF_DESIGN_SZ;
     new_font.mag = DEF_MAG_VAL;
