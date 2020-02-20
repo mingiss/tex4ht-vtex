@@ -89,8 +89,15 @@ encountered. (The result is like as the special `t4ht~<*` was entered as
 
 - Command line option `-p` switches on the enhanced superscript base recognition algorithm.
 
-- Command line switch `-m` converts math unicode bold or italic letters to their Latin equivalents,
-  enveloped into corresponding math variant `MathML` tags.
+
+### Math letters conversion to their Latin equivalents
+
+Letters with `bold`, `italic`, `fraktur`, `sans-serif`, etc. attributes in math equations
+could be represented as `Unicode` characters in corresponding code ranges.
+There is implemented possibility to convert such letters to their Latin counterparts.  
+
+- Command line switch `-m` switches on the conversion of math `Unicode` letters to their Latin equivalents,
+  enveloped into corresponding math variant `MathML` tags with corresponding attributes.
 
 
 ## Repository structure
