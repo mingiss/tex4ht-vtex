@@ -4897,12 +4897,19 @@ if( no_root_file ){  open_o_file(); }
        if( span_name[0] )  if( *span_name[0] ){
            assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
            (IGNORED) fprintf(cur_o_file,
-               span_name[0], font_tbl[cur_fnt].family_name);
+               span_name[0],
+#ifdef VTEX_OTF_ADDONS
+               font_tbl[cur_fnt].span_class? font_tbl[cur_fnt].span_class :
+#endif
+                   font_tbl[cur_fnt].family_name);
            }
        if( span_size[0] )  if( *span_size[0] ){
            assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
-           (IGNORED) fprintf(cur_o_file,
-               span_size[0], font_tbl[cur_fnt].font_size);
+#ifdef VTEX_OTF_ADDONS
+           if (font_tbl[cur_fnt].font_size && font_tbl[cur_fnt].font_size[0])
+#endif
+               (IGNORED) fprintf(cur_o_file,
+                   span_size[0], font_tbl[cur_fnt].font_size);
            }
        if( span_mag[0] )
          if( *span_mag[0]  && (font_tbl[cur_fnt].mag != 100)){
