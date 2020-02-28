@@ -240,3 +240,7 @@ environment configure scripts are provided here.
     - in case of no success &ndash; directly from the `.otf` files using the `FreeType` library.
 
 1. Escape characters `<`, `>` and `&` to their `HTML` entity equivalents when used in `OpenType` fonts.
+
+1. Move `Build\source\libs\kplib` features to `tex4ht_add.h` and `tex4ht_add.cpp`, remove `Build\source\libs\kplib`.
+
+1. Rename `tex4ht_vtex` / `tex4ht-vtex` to `xtex4ht`.
