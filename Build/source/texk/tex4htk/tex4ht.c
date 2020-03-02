@@ -1,5 +1,5 @@
 
-/* tex4ht.c (2020-02-19-14:29), generated from tex4ht-c.tex
+/* tex4ht.c (2020-03-02-10:01), generated from tex4ht-c.tex
    Copyright (C) 2009-2012 TeX Users Group
    Copyright (C) 1996-2009 Eitan M. Gurari
 
@@ -6651,7 +6651,7 @@ sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-02-19-14:29%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-03-02-10:01%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
