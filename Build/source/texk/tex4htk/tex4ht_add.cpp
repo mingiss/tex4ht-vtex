@@ -30,26 +30,42 @@ HFontPars::HFontPars()
 }
 
 // ------------------------------
-void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *pfont_pars)
+void extract_css_token(char *font_style, const char *token, const char *css_kwd)
+{
+    char *pnts1 = NULL;
+    char *pnts = strstr(font_style, token);
+    if (pnts)
+    {
+        fprintf(log_file, css_kwd);
+        pnts1 = pnts + strlen(token);
+        while (*pnts1)
+            *pnts++ = *pnts1++;
+        *pnts = '\0';            
+    }
+}
+
+void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE *pfont_pars)
 {
     char fmap_fname[PATH_MAX + 40];
     FILE *fmap_file = NULL;
     char tfm_name[PATH_MAX + 1];
     char str_buf[STR_BUF_LEN + 1];
     /* const */ char *ps_name = NULL;
+    const char *font_name = NULL;
+    char *font_style = NULL;
     char enc_fname[PATH_MAX + 40];
     FILE *enc_file = NULL;
-    char *pnts = NULL;
+    char *pnts, *pnts1 = NULL;
     long ch_cnt = 0L;
     double ch_wdt = 0.;
 
-    HFontParMap::const_iterator it = theOtfAdds.m_mapHFontParMap.find(fnt_name);
+    HFontParMap::const_iterator it = theOtfAdds.m_mapHFontParMap.find(vfnt_name);
     const HFontPars *ppars = NULL;
     if (it != theOtfAdds.m_mapHFontParMap.end())
         ppars = &it->second;
     else
     {
-        cout << ":::: searching for .otf font " << fnt_name << endl;
+        cout << ":::: searching for .otf font " << vfnt_name << endl;
 
         if (strlen(job_name) > PATH_MAX)
             err_i_str(ERR_BUF_OVFL, job_name);
@@ -68,9 +84,9 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
         fmap_file = fopen(fmap_fname, "r");
         if (fmap_file)
         {
-            if (strlen(fnt_name) > PATH_MAX)
-                err_i_str(ERR_BUF_OVFL, fnt_name);
-            strcpy(tfm_name, fnt_name);
+            if (strlen(vfnt_name) > PATH_MAX)
+                err_i_str(ERR_BUF_OVFL, vfnt_name);
+            strcpy(tfm_name, vfnt_name);
             pnts = strstr(tfm_name, ".tfm");
             if (pnts) *pnts = 0;
 
@@ -78,6 +94,8 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
             {
                 /* const */ char *psname = NULL;
 
+                font_name = NULL;
+                font_style = NULL;
                 fgets(str_buf, STR_BUF_LEN, fmap_file);
                 if (ferror(fmap_file))
                     err_i_str(ERR_FILE_READ, fmap_fname);
@@ -89,18 +107,26 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
                 errstr += str_buf;
 
                 pnts = str_buf;
-                for (int ii = 0; ii < 4; ii++)
+                for (int ii = 0; ii < 6; ii++)
                 {
-                    pnts = strchr(pnts, '\t');
-                    if (pnts == NULL)
+                    pnts1 = strchr(pnts, '\t');
+                    if (pnts1 == NULL) pnts1 = strchr(pnts, '\r');
+                    if (pnts1 == NULL) pnts1 = strchr(pnts, '\n');
+                    if (pnts1 == NULL)
                     {
-                        warn_i_str(ERR_FILE_FORMAT, errstr.c_str());
+                        if (ii < 4)
+                            warn_i_str(ERR_FILE_FORMAT, errstr.c_str());
                         break;
                     }
+                    pnts = pnts1;
                     *pnts++ = 0;
 
-                    if (ii == 2)
-                        psname = pnts;
+                    switch (ii)
+                    {
+                    case 1: font_name = pnts; break;
+                    case 2: psname = pnts; break;
+                    case 4: font_style = pnts; break;
+                    }
                 }
 
                 if (psname == NULL)
@@ -123,6 +149,47 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
 
         if (ps_name)
         {
+            while (*ps_name == ' ')
+                ps_name++;
+printf(":::::::::::::::: [%s] [%s] [%s] [%s] [%s]\n", tfm_name, new_font.name, new_font.span_class, ps_name, font_style?font_style:"");
+            if (font_name)
+            {
+                while (*font_name == ' ')
+                    font_name++;
+                if (*font_name)
+                {
+                    if (new_font.span_class) free(new_font.span_class);
+                    new_font.span_class = (char *)malloc(strlen(font_name) + 1);
+                    if (new_font.span_class)
+                        strcpy(new_font.span_class, font_name);
+                    else
+                        err_i(ERR_MEM);
+
+                    if (font_style)
+                    {
+                        if (!log_file)
+                            err_i_str(ERR_OUT_FILE, "*.lg");
+
+                        fprintf(log_file, "htfcss: %s ", font_name);
+                        extract_css_token(font_style, "Regular", " font-style:normal;");
+                        extract_css_token(font_style, "Italic", " font-style:italic;");
+                        extract_css_token(font_style, "Bold", " font-weight: bold;");
+                        // extract_css_token(font_style, "???", " font-style:oblique;");
+                        // extract_css_token(font_style, "???", " font-family:cursive;");
+                        // extract_css_token(font_style, "???", " font-family:monospace;");
+                        // extract_css_token(font_style, "???", " font-family:sans-serif;");
+                        // extract_css_token(font_style, "???", " font-variant:small-caps;");
+                        fprintf(log_file, "\n");
+                        
+                        while (*font_style == ' ')
+                            font_style++;
+                        if (*font_style)
+                            warn_i_str(ERR_FILE_FORMAT, font_style);
+                    }
+                }
+            }
+printf(":::::::::::::::: [%s] [%s] [%s] [%s] [%s]\n", tfm_name, new_font.name, new_font.span_class, ps_name, font_style?font_style:"");
+
             if (strlen(ps_name) > PATH_MAX)
                 err_i_str(ERR_BUF_OVFL, ps_name);
             strcpy(enc_fname, ".xdvipsk/");
@@ -200,7 +267,7 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
                 warn_i_str(ERR_FILE_NFOUND, enc_fname);
         }
 
-        ppars = &(theOtfAdds.m_mapHFontParMap[fnt_name] = pars);
+        ppars = &(theOtfAdds.m_mapHFontParMap[vfnt_name] = pars);
     }
 
     if (ppars == NULL)
@@ -231,7 +298,7 @@ void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *
     new_font.design_sz = DEF_DESIGN_SZ;
     new_font.mag = DEF_MAG_VAL;
 
-cout << ":::: " << fnt_name << " first: " << ppars->m_ChFirst << " last: " << ppars->m_ChLast << endl;
+cout << ":::: " << vfnt_name << " first: " << ppars->m_ChFirst << " last: " << ppars->m_ChLast << endl;
 }
 
 void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var)

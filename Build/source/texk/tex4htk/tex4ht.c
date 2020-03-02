@@ -906,7 +906,7 @@ static int errCode = 0;
 static int id_version = -1;
 
 
-static FILE*  log_file;
+/* static */ FILE*  log_file;
 
 
 static INTEGER mid_page_y, mid_page_x;
@@ -1516,7 +1516,7 @@ static void warn_i_str2( ARG_III(int,const char *,const char *) );
 static void err_i_int( ARG_II(int,int) );
 
 
-/* static */ void err_i_str( ARG_II(int,char *) );
+/* static */ void err_i_str( ARG_II(int, const char *) );
 
 
 static void show_err_context( ARG_I(void) );
@@ -6401,7 +6401,7 @@ static void err_i_int
 #define SEP ,
 (
      int  n SEP 
-     U_CHAR *str
+     const U_CHAR *str
 
 )
 #undef SEP
@@ -6409,7 +6409,7 @@ static void err_i_int
 #define SEP ;
 (n,str)
      int  n SEP 
-     U_CHAR *str
+     const U_CHAR *str
 
 ;
 #undef SEP

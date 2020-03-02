@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.5.0, 2020-02-19T14:15:32. -->
+<!-- Written by QtCreator 4.5.0, 2020-02-27T18:17:57. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -532,15 +532,17 @@
      <value type="int">14</value>
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
+     <value type="QString">TEXMFCNF=D:\texroot\2019\texmf-vtex\web2c</value>
+    </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">tex4ht</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:F:/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk/tex4htk/tex4ht.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">steinmann05.htpicture.dvi -cunihtf</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments">-utf8 -cmozhtf sample</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">tex4ht.pro</value>
     <value type="bool" key="Qt4ProjectManager.Qt4RunConfiguration.UseDyldImageSuffix">false</value>
-    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory">F:/vtex/D/kp/tex4ht/tasks/__tex4ht_20190822_1_129163_DGBook_nepagamina_htpicture/test/dgbook/steinmann/steinmann05</value>
+    <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory">F:/kp/src/vtex/xml/tex4ht_vtex/src_sty/extractxdvipsk/src_kp/sample</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.UserWorkingDirectory.default">F:/kp/src/vtex/tex/texlive/2017/src_kp_tex4ht/trunk/Build/source/texk/build-tex4ht-mingw64-Debug</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>

@@ -58,6 +58,7 @@ struct font_entry
     INTEGER layout_dir;
     unsigned long rgba_color;
 
+    char *span_class; // font span class attribute and .css entry name, extracted from the third column of the mapping file .xdvipsk/%jobname%.opentype.map
     HANDLE pars; // pointer to OTF font HFontPars object actually
 };
 
@@ -99,9 +100,9 @@ extern COtfAdds theOtfAdds;
 
 // ------------------------------
 // tries to obtain otf font parameters from font mappings in subdirectory .xdvips provided by luafonts.lua
-// fnt_name -- internal TeX decorated font name
+// vfnt_name -- internal TeX decorated font name, probably, supplemented with an extension ".tfm"
 // returns *pfnt_pars -- pointer to found or newly created font parameter structure HFontPars object
-extern PLAIN_C void get_otf_fm(/* const */ char *fnt_name, /* const */ char *job_name, HANDLE *pfnt_pars);
+extern PLAIN_C void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE *pfnt_pars);
 
 // ------------------------------
 // converts TeX character code to unicode
