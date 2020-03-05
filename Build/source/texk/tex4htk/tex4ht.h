@@ -59,6 +59,7 @@ extern PLAIN_C void warn_i_int(/* enum err_codes */ int nErrCode, int nSupplErrC
 #define MAX_T1_CHAR_L 255
 #define DEF_CHAR_L MAX_T1_CHAR_L
 #define T1_NCHARS 256
+#define MAXCHAR 127
 
 #define NO_CHAR_F 2
 #define NO_CHAR_L 1
