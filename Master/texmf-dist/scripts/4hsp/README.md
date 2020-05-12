@@ -1,4 +1,4 @@
-﻿## `tex4ht` tarpų įterpinėjimo `script`ai
+## `tex4ht` tarpų įterpinėjimo `script`ai
 
 Skirti `tex4ht` konverterio tarpų atpažinimo problemų apeidinėjimui.
 `tex4ht` konverteris tarpus dokumento maketo faile `.idv` atpažįsta, skaičiuodamas atstumus tarp teksto elementų.
@@ -35,13 +35,15 @@ Dabartinė būsena: kaip ir veikia, bet reikia daug rankinio testavimo &ndash;
 `.uni` failus lyginti su pagamintais nekoreguotu `tex4ht` konverteriu ir tikrinti,
 ar neatsirado žalingų skirtumų.
 
-Saugyklos:
-
-- šio pakatalogio failai turi būti nukopijuoti, pvz., į lokaliai kompiliuojamo failo aplanko pakatalogį `styles/4hsp`:
-
-- failas `styles/4hsp/common/toktrc.cfg` turi būti nukopijuotas į darbinį aplanką.
-
 Naudojimas:
+
+- šios saugyklos failai nuklonuojami, pvz., į lokaliai kompiliuojamo failo aplanko pakatalogį `styles/4hsp`:
+
+```
+mkdir styles
+cd styles
+git clone https://gitlab.vtex.vmt/mindaugas.piesina/4hsp.git
+```
 
 - `.tex` failas kompiliuojamas komanda:
 
@@ -59,10 +61,10 @@ vtex 2016 4ht iosmlatex foo.tex draft "-n" "" --lua=styles/4hsp/4hspship.lua
    }
 ```
 
-- keliai iki pakatalogių `styles/4hsp` ir `styles/toktrc_common` turi būti nurodyti aplinkos kintamajame `LUA_PATH`:
+- kelias iki pakatalogio `styles/4hsp` turi būti nurodytas aplinkos kintamajame `LUA_PATH`:
 
 ```
-set LUA_PATH=styles\4hsp\?.lua;styles\toktrc_common\?.lua;%LUA_PATH%
+set LUA_PATH=styles\4hsp\?.lua;%LUA_PATH%
 ```
  
 - pateiktas ir pakoreguotas kompiliavimo skriptas `iosmlatex.bat`, kurį galima naudoti, įsikopijavus lokaliai į kompiliuojamo failo aplanką;
@@ -70,19 +72,43 @@ anksčiau nurodytų komandų tada nebereikia.
 
 ### `4hsp.lua`
 
- Naudojamas `callback`as `token_filter`.
-
-Po kiekvieno `spacer` klasės `token`o bandom įterpinėt `\special{t4ht= }`, `\special{t4ht=\&\#32;}` ar kokią nors simbolinę makrokomandą ("@", "@sp@" ar "†"),
+Naudojamas `callback`as `token_filter`.
+Po kiekvieno `spacer` klasės `token`o bandoma įterpinėti `\special{t4ht= }`, `\special{t4ht=\&\#32;}` ar kokią nors simbolinę makrokomandą ("@", "@sp@" ar "†"),
 kuri po to .uni faile postprocesinimo metu keičiama į tarpus.
 
-Dabartinė būsena &ndash; yra problemų:
+Naudojamas tokenų `tracer`iu papildytas `luatex` kompiliatorius iš tokenų bibliotekos `toktrc`: 
+ 
+- į pakatalogį `styles/toktrc_common` papildomai klonuojami `toktrc` failai:
 
-- reikia naudoti tokenų `tracer`iu papildytą `luatex` kompiliatorių `toktrc`
+```
+git clone https://gitlab.vtex.vmt/mindaugas.piesina/toktrc_common.git
+```
+
+- vietoj `4hsp` saugyklos apkarpyto failo `tokinit.lua` naudojamas originalus `toktrc` variantas &ndash;
+pvz., failas `styles/4hsp/tokinit.lua` lokaliai išmetamas,
+kad vietoj jo būtų paimamas `styles/toktrc_common/tokinit.lua`;
+
+- failas `styles/toktrc_common/toktrc.cfg` turi būti nukopijuotas į darbinį aplanką;
+
+- kelias iki `.lua` skriptų `LUA_PATH` turi būti atitinkamai papildytas:
+
+```
+set LUA_PATH=styles\4hsp\?.lua;styles\toktrc_common\?.lua;%LUA_PATH%
+```
+
+- perdaryti `luatex` kompiliatoriaus vykdomieji failai iš
+`styles/toktrc_common/win32` ar `styles/toktrc_common/linux` kopijuojami ar peradresuojami (`ln -s`)
+į atitinkamus `texroot` pakatalogius `D:\texroot\2017\bin\win32` ar `/usr/local/texlive/2017/bin/x86_64-linux`
+(žr. `README.md` bibliotekos `toktrc` suagykloje).  
+
+Dabartinėje versijoje yra problemų:
+
+- reikia naudoti perdarytą `luatex` kompiliatorių iš `toktrc`;
 
 - `\special` kimba teoremų apibrėžimuose (teoremos pavadinimo parametre), `\section` pavadinimo parametre --
-`luatex` kompiliatorius tiesiog sustoja ir nieko nedaro, klaidos neišveda
+`luatex` kompiliatorius tiesiog sustoja ir nieko nedaro, klaidos neišveda;
 
 - su tekstinėm makrokomandom geriau, kimba tik figūrose ir ties pirmu teoremų ar bibliografijos aplinkų tarpu;
-su `toktrc` palaikančiu `luatex` kompiliatorium šitas situacijas pavyko išgaudyti
+su `toktrc` palaikančiu `luatex` kompiliatorium šitas situacijas pavyko išgaudyti; 
 
-- kelių simbolių makrokomandos .uni faile suskyla į kelis gretimus identiškus (fontų) tagus, reikia postprocesinimo utilitos jų apjungimui atgal
+- kelių simbolių makrokomandos .uni faile suskyla į kelis gretimus identiškus (fontų) tagus, reikia postprocesinimo utilitos jų apjungimui atgal.

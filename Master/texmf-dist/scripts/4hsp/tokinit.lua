@@ -5,10 +5,6 @@
 --
 
 -----------------------------
--- konfigūracinio failo parsinimo modulis
-ConfigParser = require "configparser"
-
------------------------------
 -- globalios konstantos
 
 -- TeX'ą laužiančių simbolių kodai; reikia, jei naudojam \directlua{}
@@ -50,40 +46,6 @@ shorthand_def_cmd = 108     -- shorthand_def \chardef \countdef
 mac_param_cmd = 6           -- mac_param "#"
 
 
-----------------------------------
--- konfigūracinio failo vardas
-toktrc_cfg_fname = "toktrc.cfg"
-
-----------------------------------
--- toktrc.cfg parametrų lentelė
---      konfigūracijos parametras mypar pasiekiamas per
---          cfgt["default"]["mypar"] arba cfgt.default.mypar
-cfgt = {}
-
--------------
--- toktrc.cfg parametrų leistinos reikšmės
-
-cfgv = {}
-cfgv["mainfilename"]    = {true, false}
-cfgv["tracelevel"]      = {"filter", "tracer", "internal"}
-cfgv["tracefilename"]   = {true, false}
-cfgv["alltokens"]       = {true, "calls", false}
-cfgv["tracetokcnt"]     = {"all", "listed", "none"}
-cfgv["tracelpos"]       = {true, false}
-cfgv["tracetcmd"]       = {true, false}
-cfgv["tracecmdname"]    = {true, false}
-cfgv["tracetchcode"]    = {true, false}
-cfgv["tracetext"]       = {true, false}
-cfgv["tracetid"]        = {true, false}
-cfgv["tracegrplev"]     = {true, false}
-cfgv["tracemathmode"]   = {true, false}
-cfgv["traceixlev"]      = {true, false}
-cfgv["tracefont"]       = {"full", true, false}
-cfgv["tracepage"]       = {true, false}
-cfgv["traceenv"]        = {true, false}
-cfgv["expandmacros"]    = {true, false}
-
-
 ------------------------------------------------------------------------
 -- checks, whether table contains an element
 -- @param table, elem
@@ -116,42 +78,6 @@ end
 --        end
 --        return max
 --    end
-
-------------------------------------------------------------------------
--- konfigūracinio failo toktrc.cfg parsinimas į konfigūracijos
---      lentelę cfgt[][]
-------------------------------------------------------------------------
-function parse_cfg()
-
-    --------------------
-    cfgt = ConfigParser.load(toktrc_cfg_fname)
-
-    -- cfgt.default.mainfilename = "./\currfilename"
-    cfgt.default.mainfilename = cfgt.default.mainfilename:lower()
-
-    for par, val in pairs(cfgt.default) do
-        if (not cfgv[par]) then
-            texio.write_nl("! toktrc.lua: Unknown keyword in file " ..
-                toktrc_cfg_fname .. ": " .. par .. " = " ..
-                tostring(val))
-        else
-            if ((par ~= "mainfilename") and
-                (not table.contains(cfgv[par], val))) then
-                texio.write_nl(
-                    "! toktrc.lua: Unknown keyword value in file " ..
-                    toktrc_cfg_fname .. ": " .. par .. " = " ..
-                    tostring(val))
-            end
-        end
-    end
-
-    if (cfgt.default.tracetokcnt == "none") then
-        cfgt.default.tracetokcnt = nil end
-
-    if (not cfgt.default.tracelevel) then
-        cfgt.default.tracelevel = "tracer" end
-end
-
 
 ------------------------------------------------------------------------
 -- atidaro log failą, grąžina atidaryto failo objektą;
@@ -258,7 +184,7 @@ function format_font_str(font_obj)
             fstr = append_str_elem(fstr, "") -- TODO: font_obj["characters"])
             fstr = append_str_elem(fstr, font_obj["checksum"])
         end
-        
+
         local design_size = font_obj["designsize"]
         if (design_size == nil)
         then 
@@ -313,15 +239,15 @@ function format_font_str(font_obj)
 
             -- visiems ""
             fstr = append_str_elem(fstr, font_obj["filename"])
-                                
+
             fstr = append_str_elem(fstr, font_obj["tounicode"])
 
             -- visiems ""
             fstr = append_str_elem(fstr, font_obj["stretch"])
-            
+
             -- visiems ""
             fstr = append_str_elem(fstr, font_obj["shrink"])
-        
+
             fstr = append_str_elem(fstr, font_obj["step"])
             fstr = append_str_elem(fstr, font_obj["auto_expand"])
 
@@ -336,7 +262,7 @@ function format_font_str(font_obj)
 
             -- visiems "0"
             fstr = append_str_elem(fstr, font_obj["slant"])
-            
+
             fstr = append_str_elem(fstr, font_obj["extent"])
 
         end -- if (cfgt.default.tracefont == "full")
@@ -393,39 +319,3 @@ function tabs_allign(value, max_tabs)
     if (value ~= nil) then val_len = value:len() end
     return(tabs:sub(math.floor(val_len / tab_wdt + tabs_len - max_tabs)))
 end
-
-
-----------------------------------------------------
--- pradžia, inicializacija
-
-parse_cfg() -- skaitom toktrc.cfg
-
--------------------------------------
--- išorinių funkcijų prijungimas
-
--- čia kad kpadd.so ieškotų ne per kpathsea, o per sistemą iš /usr/lib
---      package.searchers[2] = package.searchers[3]
--- nepadeda, o ir nebereikia -- paleidimo faile nustatom
---      # CLUAINPUTS=/usr/lib
---      LUA_CPATH="/usr/local/texlive/2010/bin/x86_64-linux/kpadd.so"
--- prijungiam kpadd.so/kpadd.dll; iškviečia TeXtrcClass::LuaOpen()
-require("kpadd")
-
--- galima ir pavienėm funkcijom, tada kpadd.so ieško ne per kpathsea
---  get_cur_lnum = package.loadlib("kpadd.so", "get_cur_lnum")
---  if not(get_cur_lnum) then
---      texio.write_nl("! toktrc.lua: Error on kpadd.so:get_cur_lnum")
---  else texio.write_nl("toktrc.lua: kpadd.so:get_cur_lnum prijungtas")
---  end
-
---  get_cur_lpos = package.loadlib("kpadd.so", "get_cur_lpos")
---  if not(get_cur_lpos) then
---      texio.write_nl("! toktrc.lua: Error on kpadd.so:get_cur_lpos")
---  else texio.write_nl("toktrc.lua: kpadd.so:get_cur_lpos prijungtas")
---  end
-
---  get_cur_fname = package.loadlib("kpadd.so", "get_cur_fname")
---  if not(get_cur_fname) then
---      texio.write_nl("! toktrc.lua: Error on kpadd.so:get_cur_fname")
---  else texio.write_nl("toktrc.lua: kpadd.so:get_cur_fname prijungtas")
---  end
