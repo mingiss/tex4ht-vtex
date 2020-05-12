@@ -43,15 +43,22 @@ function ins_sp(head)
 
         if (node_type == 'glue')
         then
-            sp_node = node.new(node.id('whatsit'), 3)
---          sp_node.data = 't4ht=&#32;'
-            sp_node.data = 't4ht= '
-
-            sp_node.prev = cur_node
-            sp_node.next = cur_node.next
-            cur_node.next = sp_node
-
-            cur_node = sp_node.next
+        
+            width, stretch, shrink, stretch_order, shrink_order = node.getglue(cur_node)
+            if (width > 0)
+            then
+                sp_node = node.new(node.id('whatsit'), 3)
+                -- sp_node.data = 't4ht=&#32;'
+                sp_node.data = 't4ht= '
+    
+                sp_node.prev = cur_node
+                sp_node.next = cur_node.next
+                cur_node.next = sp_node
+    
+                cur_node = sp_node.next
+            else
+                cur_node = cur_node.next
+            end
         else
             cur_node = cur_node.next
         end
