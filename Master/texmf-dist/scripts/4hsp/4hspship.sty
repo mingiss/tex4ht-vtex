@@ -1,0 +1,14 @@
+%% This is file `4hspship.sty'
+%% 4hspship.lua loader
+%% Author: Mindaugas Piešina
+%% Start-date: 2020-05-15
+
+%\ifnum\jobstart@date@info>20200512\relax
+  \RequirePackage{luatexbase}
+  \RequireLuaModule{4hspship}
+  \directlua{
+     luatexbase.add_to_callback('pre_output_filter', spship_insert_spaces, 'Insert tex4ht spaces')
+     }
+%\fi
+
+\endinput

@@ -1,62 +1,38 @@
-## `tex4ht` tarpų įterpinėjimo `script`ai
+## `tex4ht` scripts for inserting of explicit spaces
 
-Skirti `tex4ht` konverterio tarpų atpažinimo problemų apeidinėjimui.
-`tex4ht` konverteris tarpus dokumento maketo faile `.idv` atpažįsta, skaičiuodamas atstumus tarp teksto elementų.
-Jei tas atstumas viršija tam tikrą slenkstį, generuojamas tarpas.
-Algoritmas neveikia idealiai, būna situacijų, kai tarpų prigeneruojama kur nereikia, ar jie iš viso neatpažįstami &ndash;
-atsiranda tarpų žodžių viduryje, ar žodžiai sulimpa.
+Used for eliminating problems of heuristic space recognition of `tex4ht`.
+`tex4ht` converter recognizes spaces by means of measuring geometric intervals between text elements in `.dvi` file of the document layout. 
+When that interval exceeds some certain threshold, the `xml` space is generated.
+The algorithm doesn't function ideally, there are situations with excess or missing spaces &ndash;
+for example, spaces in the middle of the words or stuck words. 
 
-Problema buvo bandyta spręsti, modifikuojant `tex4ht` konverterį &ndash; realizuoti du papildomi vykdomojo modulio raktai:
+The problem was intended to solve by modifications of `tex4ht` converter &ndash; two additional command line switches have been implemented:
 
-- `-r` &ndash; tarpų atpažinimo slenksčio reikšmės korekcijai &ndash; po rakto nurodoma korekcijos koeficiento procentinė išraiška;
+- `-r` &ndash; correction of the space recognition threshold &ndash; the switch should be followed by the percentage value of the correction factor;
 
-- `-n` &ndash; visiškam tarpų atpažinimo mechanizmo atjungimui. Pastaruoju atveju failas turi būti kompiliuojamas, naudojant vieną iš šioje saugykloje pateikiamų skriptų.
+- `-n` &ndash; switch off the space recognition. In this case the `.tex` file should be compiled using one of the scripts provided in this repo.
 
-Detaliau žr. failą README saugykloje
-
-```
-https://github.com/mingiss/tex4ht-vtex
-```
-
-Surinkti vykdomieji moduliai yra šios saugyklos aplanke `Master`, `win32` versija yra ir `texroot` medyje šalia originalaus `tex4ht` konverterio failo:
+Look the main `README` file in this repository:
 
 ```
-X:\texroot\2016\bin\win32\tex4ht_vtex.exe
+https://github.com/mingiss/tex4ht-vtex/blob/master/README.md
 ```
+
+Built executables of the updated converter are stored in the folder `Master` of this repository.
  
 
 ### `4hspship.lua`
 
-Naudojamas `callback`as `pre_output_filter`.
+The script uses the `LuaTeX` callback `pre_output_filter`.
+It inserts the `whatsit` (`\special`) node with the value `"t4ht= "`
+after each `glue` or `kern` node (corresponding to real spaces in the source file).
 
-Po kiekvieno `glue` tipo `node`o įterpiamas `whatsit` `node`as (`\special`) su reikšme `"t4ht= "`.
+Using:
 
-Dabartinė būsena: kaip ir veikia, bet reikia daug rankinio testavimo &ndash;
-`.uni` failus lyginti su pagamintais nekoreguotu `tex4ht` konverteriu ir tikrinti,
-ar neatsirado žalingų skirtumų.
+- files of this folder could be copied to the local folder of the `.tex` file being compiled;
 
-Naudojimas:
-
-- šio pakatalogio failai nukopijuojami, pvz., į lokaliai kompiliuojamo failo aplanko pakatalogį `styles/4hsp`:
-
-- `.tex` failas kompiliuojamas komanda:
+- the header of the `.tex` file should be supplemented with the command 
 
 ```
-vtex 2016 4ht iosmlatex foo.tex draft "-n" "" --lua=styles/4hsp/4hspship.lua
-```
-
-- `callback`ai inicijuojami komandomis:
-
-```
-\RequirePackage{luatexbase}
-\directlua{
-   luatexbase.add_to_callback('pre_output_filter', spship_insert_spaces, 'Insert tex4ht spaces')
-   luatexbase.add_to_callback('stop_run', close_spship_log, 'Close 4hspship.log')
-   }
-```
-
-- kelias iki pakatalogio `styles/4hsp` turi būti nurodytas aplinkos kintamajame `LUA_PATH`:
-
-```
-set LUA_PATH=styles\4hsp\?.lua;%LUA_PATH%
+  \RequirePackage{4hspship}
 ```

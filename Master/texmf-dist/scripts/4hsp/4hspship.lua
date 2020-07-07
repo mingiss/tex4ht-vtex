@@ -1,34 +1,31 @@
 ------------------------------------------------------------------------------
 --  4hspship.lua
---      tex4hp tarpų \special generatorius prieš node'ų sąrašo shipout'ą
---      naudoja pre_output_filter callbacką
---      po kiekvieno glue node'o prilipdo po whatsit tipo node (komandą \special{}) su tarpu ar entity &#32;
---      kad tex4hp nereikėtų užsiiminėti tarpų atpažinimu pagal layout'o intervalus
+--      generator of tex4hp \special's for output of explicit spaces
+--      the version of processing the node list right before the ship out -- uses the pre_output_filter callback
+--      inserts the whatsit nodes (verbatim \special{} commands with space content) right after each glue and kern node
+--      for possibility tex4ht heuristic spaces recognition algorithm to be switched off
 --
---      Scenarijus aktyvuojamas LuaTex kompiliatoriaus iškvietimo komandoje
---          pridėjus parinktį --lua=4hspship.lua
---      Pvz.:
---          luatex.exe --fmt=lualatex --progname=latex --lua=4hspship.lua foo.tex
+--      The script is activated including the wrapper style 4hspship.sty to the source .tex document:
+--            \RequirePackage{4hspship}
 --
 --  2017  Mindaugas Piešina, mindaugas.piesina@vtex.lt
 --
 --  Changelog:
 --      2017-07-26  mp  initial implementation
+--      2020-06-10  mp  tested and deployed
 --
 --  TODO:
---      - yra dubliuotų glue node'ų, dabar įsiterps keli tarpai iš eilės
---      - ar visi glue reiškia tarpus?
---      - kern'ams gal irgi reikia?
---      - node medis apdorojamas rekursiškai, jei jis bus gilus, gali persipildyti stekas
---          išbandyt post_linebreak_filter callback'ą -- jame node'ai panašu kad vienmačiai
---          žr. https://gitlab.vtex.lt/texgr/tex4ht-v2/blob/withspaces/1_fontspec/styles/addspaces.lua
+--      - there are multiple glue nodes, generating several spaces instead of one
+--      - processing of node tree uses recursion, the big one could cause stack overflow
+--          implementation could be moved to the another callback post_linebreak_filter -- 
+--            at that stage nodes are placed to linear lists
+--       - glues with the width = 1 appear on the very begin of the table row, producing double spaces
+--          it seems there is no problem with that -- spaces are cleared using xslt transformations anyway  
 --
 ------------------------------------------------------------------------------
 
--------------------------------
--- įterpia whatsit tipo node (\special) su reikšme 't4ht= ' ar 't4ht=&#32;' po kiekvieno glue tipo node
---      &#32; negerai, nes jie įsiterpia ir tagų viduje tarp tago vardo ir atributų: <math&#32;xmlns="http://www.w3.org/1998/Math/MathML">
--------------------------------
+require('tokinit')
+
 function ins_sp(head)
     local cur_node = head
     while (cur_node)
@@ -41,24 +38,41 @@ function ins_sp(head)
             ins_sp(cur_node.head)
         end
 
+        sp_str = nil
         if (node_type == 'glue')
         then
-        
             width, stretch, shrink, stretch_order, shrink_order = node.getglue(cur_node)
             if (width > 0)
             then
-                sp_node = node.new(node.id('whatsit'), 3)
-                -- sp_node.data = 't4ht=&#32;'
-                sp_node.data = 't4ht= '
-    
-                sp_node.prev = cur_node
-                sp_node.next = cur_node.next
-                cur_node.next = sp_node
-    
-                cur_node = sp_node.next
-            else
-                cur_node = cur_node.next
+                -- sp_str = '&#32;' -- not good -- entities are inserted into the tag itself:
+                                    -- <math&#32;xmlns="http://www.w3.org/1998/Math/MathML">
+                sp_str = ' '
             end
+        else
+            if ((node_type == 'kern') and (cur_node.kern > 0) and
+                (cur_node.subtype == 1)) -- userkern
+            then
+                -- if (cur_node.kern >= 1000000) -- approximate threshold for \; -- \thickmuskip
+                if (cur_node.kern > 0)
+                then
+                    -- sp_str = '&#32;'
+                    sp_str = ' '
+                -- else
+                --    sp_str = '&#x2009;' -- thin space; kern threshold should be much less than 1000000
+                end                       -- no need at the moment -- thin spaces are converted directly to &#x2009;
+            end
+        end
+
+        if (sp_str)
+        then
+            sp_node = node.new(node.id('whatsit'), 3)
+            sp_node.data = 't4ht=' .. sp_str
+
+            sp_node.prev = cur_node
+            sp_node.next = cur_node.next
+            cur_node.next = sp_node
+
+            cur_node = sp_node.next
         else
             cur_node = cur_node.next
         end
@@ -66,124 +80,9 @@ function ins_sp(head)
 end
 
 
----------------------------------------------------------------
--- 'pre_output_filter' calback'o funkcija
--- ties glue įterpinėja \special{t4ht= }
----------------------------------------------------------------
 function spship_insert_spaces(head, groupcode, size, packtype, maxdepth, direction)
 
-    -- įterpiam
     ins_sp(head)
-
-    -- loginam
-    local cur_node = head
-    while (cur_node)
-    do
-        local node_id = cur_node.id
-        local node_type = node.type(node_id)
-
-        logfile:write(
-            node_type, tab_chr,
---          node_id, tab_chr,
-            cur_node.subtype, tab_chr -- ,
---          node.type(cur_node.subtype), tab_chr
-            )
-
-        if (node_type ~= 'whatsit')
-        then
-            for _, fld in pairs(node.fields(node_id))
-            do
-                logfile:write(fld, tab_chr)
-            end
-        end
-        logfile:write('||', tab_chr)
-
-        for _, fld in pairs(node.fields(node_id, cur_node.subtype))
-        do
-            logfile:write(fld, tab_chr)
-        end
-        logfile:write('||', tab_chr)
-
---      if cur_node.attr
---      then
---          logfile:write('attr:', cur_node.attr, tab_chr)
---      end
-
-        if (node_type == 'whatsit')
-        then
-            local dta = cur_node.data
-            if (type(dta) == 'string')
-            then
-                logfile:write(dta, tab_chr)
-            elseif (type(dta) == 'table')
-            then
-                logfile:write('[')
-                for _, fld in pairs(dta)
-                do
-                    if (type(fld) == 'string')
-                    then
-                        logfile:write(fld, tab_chr)
-                    elseif (type(fld) == 'table')
-                    then
-                        logfile:write('[')
-                        for _, fld1 in pairs(fld)
-                        do
-                            logfile:write(fld1, tab_chr)
-                        end
-                        logfile:write(']')
-                    end
-                end
-                logfile:write(']')
-            end
-        end
-
-        if (node_type == 'hlist') or (node_type == 'vlist')
-        then
-            local cur_subnode = cur_node.head
-            while cur_subnode
-            do
-                local subnode_id = cur_subnode.id
-                local subnode_type = node.type(subnode_id)
-
-                logfile:write(subnode_type, tab_chr)
-
-                cur_subnode = cur_subnode.next
-            end
-        end
-
-
-        logfile:write(eol_chr)
-
-        cur_node = cur_node.next
-    end
-
-    logfile:write(eol_chr)
 
     return true
 end
-
--------------------------------
--- Darbo pabaigos callback'as
--------------------------------
-function close_spship_log()
-    logfile:close()
-end
-
--------------------------------
--- Initiation
--------------------------------
--- package.path = './styles' .. package.path
-require('tokinit')
-
-logfile = io.open('4hspship.log', 'w')
-
--- conflicts with luatexbase.add_to_callback('pre_output_filter',...) in dgbook.cls 
--- callback.register('pre_output_filter', spship_insert_spaces)
--- callback.register('stop_run', close_spship_log)
-
--- should be registered using                                                            
--- \RequirePackage{luatexbase}
--- \directlua{
---    luatexbase.add_to_callback('pre_output_filter', spship_insert_spaces, 'Insert tex4ht spaces')
---    luatexbase.add_to_callback('stop_run', close_spship_log, 'Close 4hspship.log')
---    }
