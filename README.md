@@ -38,9 +38,13 @@ disappearing or redundant spaces.
 
       \special{t4ht=\&\#32;}
 
-  into the source `.tex` file. It could be done using script 
+  into the source `.tex` file. It could be done using the script 
 
       Master/texmf-dist/scripts/4hsp/4hspship.lua
+
+  Look corresponding `readme` for details:
+
+      https://github.com/mingiss/tex4ht-vtex/blob/master/Master/texmf-dist/scripts/4hsp/README.md
 
 
 ### `OpenType` font character encoding
