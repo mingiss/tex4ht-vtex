@@ -42,7 +42,7 @@ disappearing or redundant spaces.
 
       Master/texmf-dist/scripts/4hsp/4hspship.lua
 
-  Look corresponding `readme` for details:
+  Look corresponding `README` for details:
 
     > https://github.com/mingiss/tex4ht-vtex/blob/master/Master/texmf-dist/scripts/4hsp/README.md
 
