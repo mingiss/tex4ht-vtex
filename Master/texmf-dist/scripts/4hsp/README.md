@@ -14,9 +14,7 @@ The problem was intended to solve by modifications of `tex4ht` converter &ndash;
 
 Look the main `README` file in this repository:
 
-```
 https://github.com/mingiss/tex4ht-vtex/blob/master/README.md
-```
 
 Built executables of the updated converter are stored in the folder `Master` of this repository.
  
@@ -34,5 +32,11 @@ Using:
 - the header of the `.tex` file should be supplemented with the command 
 
 ```
-  \RequirePackage{4hspship}
+    \RequirePackage{4hspship}
+```
+
+- resulting `XML` file should be extracted using modified converter `tex4ht_vtex` with space recognition switched off:
+
+```
+    tex4ht_vtex foo -n
 ```
