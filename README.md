@@ -44,7 +44,7 @@ disappearing or redundant spaces.
 
   Look corresponding `readme` for details:
 
-      https://github.com/mingiss/tex4ht-vtex/blob/master/Master/texmf-dist/scripts/4hsp/README.md
+    > https://github.com/mingiss/tex4ht-vtex/blob/master/Master/texmf-dist/scripts/4hsp/README.md
 
 
 ### `OpenType` font character encoding
