@@ -174,6 +174,10 @@ additionally installed:
       svn co svn://username:password@tug.org/texlive/trunk
 
 - Overwrite original `TL` source files with those provided here.
+  The whole tree has to be overwritten, supposing the root of this repo with the subfolders `Build/source` and `Master` 
+  contain all additional or changed files for the `TL` tree subfolders `trunk/Build/source and trunk/Master`.
+  This repo could be simply mapped to the same folder, where the `TL` `trunk` is mapped &ndash; 
+  the rest of `TL` files will be separated from `git` scope using `.gitignore`. 
 
 - Execute scripts:
 
