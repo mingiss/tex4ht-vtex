@@ -77,6 +77,7 @@ Attempt to solve the problem in `MathML` sub/superscript tag sending back algori
 The problem arises in case of baseless sub/superscript, for instance:
 
     $a_b{}^c$
+
 `tex4ht` has a mechanism of sub/superscript base searching through sending
 back initial `MathML` tags prior to the last printable character. In case
 when that character already is inside of a previous tagged structure,
