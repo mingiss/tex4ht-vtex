@@ -39,7 +39,11 @@ extern PLAIN_C int font_tbl_size;
 
 #define new_font font_tbl[font_tbl_size]
 
-extern FILE *log_file;
+extern
+#ifdef __cplusplus
+    "C"
+#endif
+        FILE *log_file;
 
 extern PLAIN_C void err_i(/* enum err_codes */ int nErrCode, ...);
 extern PLAIN_C void err_i_str(/* enum err_codes */ int nErrCode, const char *pszErrMsg);

@@ -93,6 +93,12 @@ Build/source/texk/tex4htk/*
 Build/source/texk/tex4htk/ac/*
 !Build/source/texk/tex4htk/ac/withenable.ac
 
+Build/source/texk/tex4htk/tex4htx_vs17
+!Build/source/texk/tex4htk/tex4htx_vs17/tex4htx_vs17.sln
+!Build/source/texk/tex4htk/tex4htx_vs17/tex4htx_vs17.vcxproj
+!Build/source/texk/tex4htk/tex4htx_vs17/tex4htx_vs17.vcxproj.filters
+!Build/source/texk/tex4htk/tex4htx_vs17/tex4htx_vs17.vcxproj.user
+
 !Build/source/utils
 Build/source/utils/*
 !Build/source/utils/configure

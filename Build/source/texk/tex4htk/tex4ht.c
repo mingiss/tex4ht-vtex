@@ -6453,7 +6453,7 @@ CDECL
 #ifdef ANSI
 #define SEP ,
 (
-       int  argc SEP 
+       int  argc SEP
        U_CHAR **argv
 )
 #undef SEP
@@ -6504,7 +6504,6 @@ get_env_dir(argv[0])
 struct htf_com_rec* htf_font_dir = (struct htf_com_rec *) 0;
 
 
-   
 #ifdef WIN32
   /* The idea here is to split options apart at spaces: a single argument
      "-foo -bar" becomes the two options "-foo" and "-bar".  We need to
@@ -6651,7 +6650,7 @@ sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-03-02-10:01%s%d%s%s%s%s%s%s%s)\n",PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+(IGNORED) printf("tex4ht.c (2020-03-02-10:01%s%d%s%s%s%s%s%s%s)\n", PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -10917,7 +10916,8 @@ while( special_n-- > 0 )  (void) get_char();
   case '=': { 
 #ifdef VTEX_SPACING_ADDONS
    int tag_buf_len = special_n;
-   char tag_buf[tag_buf_len + 1];
+   char *tag_buf = malloc(tag_buf_len + 1);
+   assert(tag_buf);
 #endif
 while( special_n-- > 0 ){
         int ch;
@@ -10949,6 +10949,8 @@ while( special_n-- > 0 ){
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
    test_tag = "</math>";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+   free(tag_buf);
+   tag_buf = NULL;
 #endif
 
  break; }
@@ -11414,7 +11416,8 @@ if( p->action == '>' ){
         
 #ifdef VTEX_SPACING_ADDONS
    int tag_buf_len = special_n;
-   char tag_buf[tag_buf_len + 1];
+   char *tag_buf = malloc(tag_buf_len + 1);
+   assert(tag_buf);
 #endif
 while( special_n-- > 0 ){
         int ch;
@@ -11446,6 +11449,8 @@ while( special_n-- > 0 ){
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
    test_tag = "</math>";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+   free(tag_buf);
+   tag_buf = NULL;
 #endif
 
 

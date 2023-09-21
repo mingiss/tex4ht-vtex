@@ -13,7 +13,6 @@ CONFIG -= qt
 SOURCES += tex4ht.c \
     tex4ht_add.cpp \
     ../../libs/kplib/src/kpcapp.cpp \
-    ../../libs/kplib/src/KpCharWgt.cpp \
     ../../libs/kplib/src/kpctype.cpp \
     ../../libs/kplib/src/chr/kptt.cpp \
     ../../libs/kplib/src/kperr.cpp \
