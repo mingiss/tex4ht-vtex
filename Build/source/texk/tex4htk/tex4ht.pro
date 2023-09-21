@@ -3,6 +3,8 @@ TEMPLATE = app
 DEFINES -= UNICODE
 DEFINES += DEBUG Debug
 DEFINES += KPATHSEA
+DEFINES += KPSE_DEBUG
+DEFINES += QT_DEBUG
 
 CONFIG += console
 CONFIG -= app_bundle
@@ -140,8 +142,10 @@ INCLUDEPATH += . ../../Work/texk/tex4htk .. ../../Work/texk \
 # QMAKE_CFLAGS += -Waddress
 # QMAKE_CFLAGS -= -Wmisleading-indentation -Wimplicit-fallthrough
 # QMAKE_CFLAGS -= -Wimplicit-function-declaration
+QMAKE_CFLAGS += -std=c99
 
 # QMAKE_CXXFLAGS -= -DUNICODE
 # QMAKE_CFLAGS -= -DUNICODE
 
 # LIBS += ../../Work/texk/kpathsea/.libs/libkpathsea.a
+# LIBS += D:/kp/bin/Qt/Qt5.3.2/Tools/mingw482_32/i686-w64-mingw32/lib/libmingwex.a
