@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>D:\texroot\2019\bin\win32</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -187,8 +190,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\libs\kplib\include\kperr.h" />
+    <ClInclude Include="..\..\..\libs\kplib\include\kpstdlib.h" />
     <ClInclude Include="..\..\kpathsea\c-memstr.h" />
     <ClInclude Include="..\tex4ht.h" />
+    <ClInclude Include="..\tex4ht_add.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
