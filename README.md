@@ -200,7 +200,7 @@ environment configure scripts are provided here.
 
 ## TODO
 
-- [ ] Bug in command line parameters recognition:
+- [x] Bug in command line parameters recognition:
 
    command line
 
@@ -209,6 +209,11 @@ environment configure scripts are provided here.
    is not recognized until the order of parameters is changed to
 
         tex4ht foo -n -cunihtf
+
+    - The limitation to enter all single letter keys prior to the keys with values is intentional:
+
+          if( (int) strlen((char *)  argv[i] ) == 2 ){
+             if( ++i == argc ) bad_arg;
 
 - [ ] Additional option for switching on the action of the feature `-r` for inside of equations as well.
 
