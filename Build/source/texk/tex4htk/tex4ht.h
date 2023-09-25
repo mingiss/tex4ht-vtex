@@ -10,6 +10,7 @@
 #define VTEX_SPACING_ADDONS     // add-ons for space generator
 #define VTEX_OTF_ADDONS         // OpenType font processing
 #define VTEX_SSCRIPT_ADDONS     // add-ons for baseless sub / superscripts
+#define VTEX_MATH_CLASS_ADDONS  // add-ons for character math classes
 
 // #include <assert.h>
 #undef assert
@@ -73,7 +74,7 @@ extern PLAIN_C void warn_i_int(/* enum err_codes */ int nErrCode, int nSupplErrC
 #define MAX_PUSH_DEPTH 256
 #define MAX_SPEC_LEN 254 // max num of bytes in \special body to be parsed
 #define FONT_NAME_BUF_LEN PATH_MAX // (256 - 1)
-#define STR_BUF_LEN 1024 // (256 - 1)
+#define STR_BUF_LEN 2048 // (256 - 1)
 
 enum err_codes
 {

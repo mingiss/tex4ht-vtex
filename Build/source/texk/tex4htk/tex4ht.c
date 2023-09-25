@@ -769,9 +769,15 @@ static BOOL cvt_to_math_var = FALSE;
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
-// flag for sending back base tags of sub- / superscripts
+// flag for sending back base tags of sub-/superscripts
 // set by command line parameter -p
 static BOOL dont_send_base_back = FALSE;
+#endif
+
+#ifdef VTEX_MATH_CLASS_ADDONS
+// flag for grouping math class definitions to family of the font (according to the actual top level .htf file of the particular font)
+// set by command line parameter -a
+static BOOL group_math_classes = TRUE;
 #endif
 
 static FILE*  dot_file;
@@ -1162,9 +1168,11 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-m]            convert math unicode characters to their latin equivalents, enveloped into math variant MathML tags\n"
 #endif
 #ifdef VTEX_SSCRIPT_ADDONS
-"   [-p]            switch off sending back of base tags for sub- / superscripts estimated as being baseless\n"
+"   [-p]            switch off sending back of base tags for sub-/superscripts estimated as being baseless\n"
 #endif
-
+#ifdef VTEX_MATH_CLASS_ADDONS
+"   [-a]            switch off grouping of math class definitions to the font family level\n"
+#endif
 ,                                // ERR_HELP
 "Can't find/open file `%s'\n",                          // ERR_IN_FILE
 "Can't open output file for `%s'\n",                    // ERR_OUT_FILE
@@ -6650,7 +6658,15 @@ sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-03-02-10:01%s%d%s%s%s%s%s%s%s)\n", PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG);
+#ifdef VTEX_MATH_CLASS_ADDONS
+#undef VTEX_ADDONS_SIG
+#define VTEX_ADDONS_SIG " vtex:"
+#define VTEX_MATH_CLASS_ADDONS_SIG " mclass"
+#else
+#define VTEX_MATH_CLASS_ADDONS_SIG ""
+#endif
+
+(IGNORED) printf("tex4ht.c (2020-03-02-10:01%s%d%s%s%s%s%s%s%s%s)\n", PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG, VTEX_MATH_CLASS_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -6953,39 +6969,37 @@ ext = p+1;
 
   break; }
 #ifdef VTEX_SPACING_ADDONS
-  case 'n':{ 
-#ifdef VTEX_SPACING_ADDONS
-ignore_spaces = no_spaces = TRUE;
-#endif
-
-  break; }
-  case 'r':{ 
-#ifdef VTEX_SPACING_ADDONS
-long fact = atol(p + 2);
-if (fact >= 1) x_fact = fact;
-else
-    err_i_int(ERR_PAR_R, fact);
-#endif
-
-  break; }
+    case 'n':
+        ignore_spaces = no_spaces = TRUE;
+        break;
+    case 'r':
+        {
+            long fact = atol(p + 2);
+            if (fact >= 1) x_fact = fact;
+            else err_i_int(ERR_PAR_R, fact);
+        }
+        break;
 #endif
 #ifdef VTEX_OTF_ADDONS
-  case 'm':{ 
-#ifdef VTEX_OTF_ADDONS
-cvt_to_math_var = TRUE;
-#endif
-
-  break; }
+    case 'm':
+        cvt_to_math_var = TRUE;
+        break;
 #endif
 #ifdef VTEX_SSCRIPT_ADDONS
-  case 'p':{ 
-#ifdef VTEX_SSCRIPT_ADDONS
-dont_send_base_back = TRUE;
+    case 'p':
+        dont_send_base_back = TRUE;
+        break;
 #endif
-
-  break; }
+#ifdef VTEX_MATH_CLASS_ADDONS
+    case 'a':
+        group_math_classes = FALSE;
+        break;
 #endif
-   default:{ bad_arg; }
+    default:
+        {
+            bad_arg;
+        }
+        break;
 }
 
  }
@@ -9076,15 +9090,18 @@ for( i = fonts_n; i--; )
         free((void *)  new_font.ch_str );
      new_font.ch_str = font_tbl[ k ].ch_str;
 
-     
-if (new_font.math_closing)
-    free((void *)  new_font.math_closing );
-new_font.math_closing = font_tbl[ k ].math_closing;
+#ifdef VTEX_MATH_CLASS_ADDONS
+     if (group_math_classes)
+#endif
+     {
+         if (new_font.math_closing)
+             free((void*)new_font.math_closing);
+         new_font.math_closing = font_tbl[k].math_closing;
 
-if (new_font.math)
-    free((void *)  new_font.math );
-new_font.math = font_tbl[ k ].math;
-
+         if (new_font.math)
+             free((void*)new_font.math);
+         new_font.math = font_tbl[k].math;
+     }
 
      break;     }
 if( i < 0 ){ 
