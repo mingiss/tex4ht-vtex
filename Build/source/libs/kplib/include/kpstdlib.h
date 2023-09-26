@@ -497,7 +497,7 @@ void I2BinStr(uchar *p_lpszBinStrBuf, int p_iVal);
 
 double NormAngle(double p_dAngle); // sukiša kampą į intervalą [-pi, pi)
 
-#define max(val1, val2) ((val1 > val2)?val1:val2)
+// #define max(val1, val2) ((val1 > val2)?val1:val2)
 
 // ================================================== date/time
 #define WND_DATE_TEXT_LENGTH 40 // 30 // Windows: "Thu Aug  3 15:55:45 2006", HTTP: "Thu, 15 Jul 2004 16:29:04 GMT"
