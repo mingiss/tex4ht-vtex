@@ -1,9 +1,11 @@
 .hgignore
 .hg
 hg_*
-*/autom4te.cache
-*/.deps
+autom4te.cache
+.deps
 *.o
+*.d
+*.map
 
 *.log
 *.map
@@ -86,6 +88,10 @@ Build/source/texk/tex4htk/*
 !Build/source/texk/tex4htk/t4ht*
 !Build/source/texk/tex4htk/envir*
 !Build/source/texk/tex4htk/ProjData*
+Build/source/texk/tex4htk/*.o
+Build/source/texk/tex4htk/*.d
+Build/source/texk/tex4htk/*.map
+Build/source/texk/tex4htk/*.exe
 
 !Build/source/texk/tex4htk/kpathsea
 

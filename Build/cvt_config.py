@@ -97,8 +97,8 @@ while 1:
         concat_line += line
         if not continues:
             # kaupimas baigėsi -- išvedam sukauptą eilutę
-            print concat_line
+            print(concat_line)
             concat_line = ""
             mode = mode_scan
     else:
-        print line
+        print(line)

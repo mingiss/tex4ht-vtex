@@ -1,0 +1,118 @@
+# Makefile_msys makefile to build tex4ht.exe for Win32 using mingw compiler under Msys2 environment
+
+SHELL = /bin/sh
+
+CC = gcc
+CXX = g++
+# LIBTOOL = $(SHELL) ./libtool
+LIBTOOL = $(CXX)
+
+OBJEXT = o
+EXEEXT = exe
+
+WARNING_CFLAGS =
+# WARNING_CFLAGS += -Wall -Wextra
+WARNING_CCFLAGS = -Wimplicit -Wreturn-type
+WARNING_CXXFLAGS = -Wreturn-type -Wno-write-strings
+COMMON_CFLAGS = -g -O2
+# COMMON_CFLAGS += -c -pipe -fno-keep-inline-dllexport
+COMMON_CCFLAGS = -std=c99
+COMMON_CXXFLAGS = 
+# COMMON_CXXFLAGS += -c -pipe -fno-keep-inline-dllexport -frtti
+CFLAGS = $(COMMON_CFLAGS) $(COMMON_CCFLAGS) $(WARNING_CFLAGS) $(WARNING_CCFLAGS)
+CXXFLAGS = $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(WARNING_CFLAGS) $(WARNING_CXXFLAGS)
+
+DEFS = -DHAVE_CONFIG_H -DKPATHSEA -DDEBUG -DDebug -DKPSE_DEBUG
+
+INCLUDES = -I. \
+	-I/e/vtex/tex4htx/src/tex4htx/src/tex4ht-vtex/Build/source/texk \
+	-I../../libs/kplib/include -I../../libs/kplib/src -I../../libs/kplib/src/net
+# -I../../libs/kplib/src/win -I/d/kp/bin/Qt/Qt5.3.2/5.3/mingw482_32/mkspecs/win32-g++
+
+# gcc -c -pipe -fno-keep-inline-dllexport -std=c99 -g -Wall -Wextra -DDEBUG -DDebug -DKPATHSEA -DKPSE_DEBUG -DQT_DEBUG -I../tex4htk -I'../tex4htk' -I'../../Work/texk/tex4htk' -I'../../texk' -I'../../Work/texk' -I'../../libs/kplib/include' -I'../../libs/kplib/src' -I'../../libs/kplib/src/net' -I'../../libs/kplib/src/win' -I'.' -I'D:/kp/bin/Qt/Qt5.3.2/5.3/mingw482_32/mkspecs/win32-g++' -o debug/tex-hush.o ../kpathsea/tex-hush.c
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CFLAGS)
+
+# g++ -c -pipe -fno-keep-inline-dllexport -g -frtti -Wall -Wextra -fexceptions -mthreads -DDEBUG -DDebug -DKPATHSEA -DKPSE_DEBUG -DQT_DEBUG -I../tex4htk -I'../tex4htk' -I'../../Work/texk/tex4htk' -I'../../texk' -I'../../Work/texk' -I'../../libs/kplib/include' -I'../../libs/kplib/src' -I'../../libs/kplib/src/net' -I'../../libs/kplib/src/win' -I'.' -I'D:/kp/bin/Qt/Qt5.3.2/5.3/mingw482_32/mkspecs/win32-g++' -o debug/tex4ht_add.o ../tex4htk/tex4ht_add.cpp
+CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(CXXFLAGS)
+
+# LDFLAGS = -Wl,-Map,tex4ht.$(EXEEXT).map -ggdb
+LDFLAGS = -Wl,-Map,tex4ht.$(EXEEXT).map,-subsystem,console -ggdb -mthreads
+
+# g++ -Wl,-subsystem,console -mthreads -o debug/tex4ht.exe object_script.tex4ht.Debug
+# g++ -g -O2 -Wl,-Map -Wl,tex4ht.exe.map -ggdb -o .libs/tex4ht.exe tex4ht.o tex4ht_add.o ../../libs/kplib/src/kpstring.o ../../libs/kplib/src/kpstdlib.o ../../libs/kplib/src/kpstdio.o ../../libs/kplib/src/kpctype.o ../../libs/kplib/src/kperr.o ../../libs/kplib/src/kpsort.o ../../libs/kplib/src/kpcapp.o ../../libs/kplib/src/chr/kptt.o ../../libs/kplib/src/win/kpwindow.o ../kpathsea/progname.o ../kpathsea/debug.o ../kpathsea/variable.o ../kpathsea/tex-file.o ../kpathsea/xputenv.o ../kpathsea/mingw32.o ../kpathsea/xdirname.o ../kpathsea/xbasename.o ../kpathsea/find-suffix.o ../kpathsea/rm-suffix.o ../kpathsea/kpathsea.o ../kpathsea/concat3.o ../kpathsea/cnf.o ../kpathsea/expand.o ../kpathsea/xrealloc.o ../kpathsea/xmalloc.o ../kpathsea/xstrdup.o ../kpathsea/fn.o ../kpathsea/knj.o ../kpathsea/kdefault.o ../kpathsea/path-elt.o ../kpathsea/concat.o ../kpathsea/uppercasify.o ../kpathsea/concatn.o ../kpathsea/fontmap.o ../kpathsea/pathsearch.o ../kpathsea/tex-make.o ../kpathsea/absolute.o ../kpathsea/xcalloc.o ../kpathsea/hash.o ../kpathsea/xfopen.o ../kpathsea/line.o ../kpathsea/db.o ../kpathsea/tilde.o ../kpathsea/str-list.o ../kpathsea/elt-dirs.o ../kpathsea/extend-fname.o ../kpathsea/readable.o ../kpathsea/str-llist.o ../kpathsea/magstep.o ../kpathsea/file-p.o ../kpathsea/dir.o ../kpathsea/tex-hush.o 
+# LINK = $(LIBTOOL) --tag=CXX $ --mode=link $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@
+# LINK = $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@ INPUT($(OBJECTS))
+# LINK = $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@ $(OBJECTS)
+LINK = $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@
+
+SOURCES = tex4ht.c tex4ht_add.cpp \
+	../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp \
+	../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp \
+	../../libs/kplib/src/chr/kptt.cpp ../../libs/kplib/src/win/kpwindow.cpp
+
+OBJECTS = tex4ht.$(OBJEXT) tex4ht_add.$(OBJEXT) \
+	../../libs/kplib/src/kpstring.$(OBJEXT) \
+	../../libs/kplib/src/kpstdlib.$(OBJEXT) \
+	../../libs/kplib/src/kpstdio.$(OBJEXT) \
+	../../libs/kplib/src/kpctype.$(OBJEXT) \
+	../../libs/kplib/src/kperr.$(OBJEXT) \
+	../../libs/kplib/src/kpsort.$(OBJEXT) \
+	../../libs/kplib/src/kpcapp.$(OBJEXT) \
+	../../libs/kplib/src/chr/kptt.$(OBJEXT) \
+	../../libs/kplib/src/win/kpwindow.$(OBJEXT) \
+	../kpathsea/progname.$(OBJEXT) \
+	../kpathsea/debug.$(OBJEXT) \
+	../kpathsea/variable.$(OBJEXT) \
+	../kpathsea/tex-file.$(OBJEXT) \
+	../kpathsea/xputenv.$(OBJEXT) \
+	../kpathsea/mingw32.$(OBJEXT) \
+	../kpathsea/xdirname.$(OBJEXT) \
+	../kpathsea/xbasename.$(OBJEXT) \
+	../kpathsea/find-suffix.$(OBJEXT) \
+	../kpathsea/rm-suffix.$(OBJEXT) \
+	../kpathsea/kpathsea.$(OBJEXT) \
+	../kpathsea/concat3.$(OBJEXT) \
+	../kpathsea/cnf.$(OBJEXT) \
+	../kpathsea/expand.$(OBJEXT) \
+	../kpathsea/xrealloc.$(OBJEXT) \
+	../kpathsea/xmalloc.$(OBJEXT) \
+	../kpathsea/xstrdup.$(OBJEXT) \
+	../kpathsea/fn.$(OBJEXT) \
+	../kpathsea/knj.$(OBJEXT) \
+	../kpathsea/kdefault.$(OBJEXT) \
+	../kpathsea/path-elt.$(OBJEXT) \
+	../kpathsea/concat.$(OBJEXT) \
+	../kpathsea/uppercasify.$(OBJEXT) \
+	../kpathsea/concatn.$(OBJEXT) \
+	../kpathsea/fontmap.$(OBJEXT) \
+	../kpathsea/pathsearch.$(OBJEXT) \
+	../kpathsea/tex-make.$(OBJEXT) \
+	../kpathsea/absolute.$(OBJEXT) \
+	../kpathsea/xcalloc.$(OBJEXT) \
+	../kpathsea/hash.$(OBJEXT) \
+	../kpathsea/xfopen.$(OBJEXT) \
+	../kpathsea/line.$(OBJEXT) \
+	../kpathsea/db.$(OBJEXT) \
+	../kpathsea/tilde.$(OBJEXT) \
+	../kpathsea/str-list.$(OBJEXT) \
+	../kpathsea/elt-dirs.$(OBJEXT) \
+	../kpathsea/extend-fname.$(OBJEXT) \
+	../kpathsea/readable.$(OBJEXT) \
+	../kpathsea/str-llist.$(OBJEXT) \
+	../kpathsea/magstep.$(OBJEXT) \
+	../kpathsea/file-p.$(OBJEXT) \
+	../kpathsea/dir.$(OBJEXT) \
+	../kpathsea/tex-hush.$(OBJEXT)
+
+.c.o:
+	$(COMPILE) -MT $@ -MD -MP -c -o $@ $<
+
+.cpp.o:
+	$(CXXCOMPILE) -MT $@ -MD -MP -c -o $@ $<
+
+tex4ht.$(EXEEXT): $(OBJECTS) $(DEPENDENCIES)
+	@rm -f t4ht$(EXEEXT)
+	$(LINK) $(OBJECTS)
+
+clean:
+	-rm -f $(OBJECTS) tex4ht.$(EXEEXT)
