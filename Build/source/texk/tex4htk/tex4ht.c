@@ -982,6 +982,7 @@ static unsigned  U_CHAR  null_str = '\0';
 static short dump_htf_files = 0;
 static BOOL dump_env_files = FALSE;
 
+static BOOL dump_math_class_flag = FALSE;
 
 static BOOL dumped_env = FALSE;
 
@@ -1148,8 +1149,8 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-f<path-separator-ch>]        remove path from the file name\n"
 "   [-F<ch-code>]        replacement for missing font characters; 0--255; default 0\n"
 "   [-g<bitmap-file-ext>]\n"
-"   [-h[efFgsvVA]]       trace: e-errors/warnings, f-htf, F-htf search\n"
-"                           g-groups, s-specials, v-env, V-env search, A-all\n"
+"   [-h[efFgsvVmA]]      trace: e-errors/warnings, f-htf, F-htf search\n"
+"                           g-groups, s-specials, v-env, V-env search, m-math classes, A-all\n"
 "   [-i<htf-font-dir>]\n"
 "   [-l<bookkeeping-file>]\n"
 "   [-P(*|<filter>)]     permission for system calls: *-always, filter\n"
@@ -1252,6 +1253,37 @@ static U_CHAR *err_mark = (char *) 0;
 
 
 static BOOL trace_special = FALSE;
+
+
+
+void dump_math_class(int cur_fnt, int ch, int math_class)
+{
+    bool proper_font = ((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
+    printf(">>>>>>>>>>>> fnt: %s fn%d family: %s ch: %d %c math_class: %d\n", proper_font ? font_tbl[cur_fnt].name : "", cur_fnt, proper_font ? font_tbl[cur_fnt].family_name : "", ch, ch, math_class);
+
+    if (proper_font)
+    {
+        int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
+
+        if (font_tbl[cur_fnt].math)
+        {
+            printf("math: ");
+            // printf("%08x: ", font_tbl[cur_fnt].math);
+            for (int ii = 0; ii < n_gif; ii++)
+                printf("%d ", font_tbl[cur_fnt].math[ii]);
+            printf("\n");
+        }
+        if (font_tbl[cur_fnt].math_closing)
+        {
+            printf("math_closing: ");
+            // printf("%08x: ", font_tbl[cur_fnt].math_closing);
+            for (int ii = 0; ii < (n_gif + 7) / 8; ii++)
+                printf("%02x ", font_tbl[cur_fnt].math_closing[ii]);
+            printf("\n");
+        }
+    }
+}
+
 
 
 
@@ -3631,6 +3663,13 @@ static  INTEGER set_ch_class
 #endif
 {
 assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
+
+    if (dump_math_class_flag)
+    {
+        printf("------- set_ch_class():\n");
+        dump_math_class(cur_fnt, ch, math_class);
+    }
+
 BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 int wt_ix;
 
@@ -3664,6 +3703,8 @@ if (font_tbl[cur_fnt].math && ch_proper)
       return DEF_GLYPH_WDT_PT;
 
    
+    if (dump_math_class_flag) dump_math_class(cur_fnt, ch, math_class);
+
 return (INTEGER)(
 char_width(ch)
 
@@ -3686,20 +3727,25 @@ static  int math_class_of
 ;
 #undef SEP
 #endif
-{                           int math_class;
+{                           int r_ch;
    assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
    BOOL math_class_ready = (font_tbl[cur_fnt].math != NULL);
    BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
-   math_class = 0;
+   r_ch = 0;
    if (ch_proper)
-      math_class = ch - font_tbl[cur_fnt].char_f;
+       r_ch = ch - font_tbl[cur_fnt].char_f;
    int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
-   return (((!math_class_ready) || get_bit(font_tbl[cur_fnt].math_closing, math_class, n_gif))?
-                
-5
+   int math_class = ((!math_class_ready) || get_bit(font_tbl[cur_fnt].math_closing, r_ch, n_gif)) ?
+                       5
+                       : font_tbl[cur_fnt].math[r_ch];
 
- : font_tbl[cur_fnt].math[math_class]);
+    if (dump_math_class_flag)
+    {
+        printf("====== math_class_of():\n");
+        dump_math_class(cur_fnt, ch, math_class);
+    }
 
+   return (math_class);
 }
 
 
@@ -6881,6 +6927,13 @@ dump_env_files = TRUE;
 dump_env_search = TRUE;
 
  unkn_opt = FALSE; }
+
+    if (trace == 'A' || trace == 'm')
+    {
+        dump_math_class_flag = TRUE;
+        unkn_opt = FALSE;
+    }
+
   if (unkn_opt) { bad_arg; }
 }
 

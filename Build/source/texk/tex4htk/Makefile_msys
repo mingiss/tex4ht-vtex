@@ -3,7 +3,10 @@
 SHELL = /bin/sh
 
 CC = gcc
+# CC = /d/kp/bin/Qt/Qt5.3.2/Tools/mingw482_32/bin/gcc
 CXX = g++
+# CXX = /d/kp/bin/Qt/Qt5.3.2/Tools/mingw482_32/bin/g++
+
 # LIBTOOL = $(SHELL) ./libtool
 LIBTOOL = $(CXX)
 
@@ -15,12 +18,14 @@ WARNING_CFLAGS =
 WARNING_CCFLAGS = -Wimplicit -Wreturn-type
 WARNING_CXXFLAGS = -Wreturn-type -Wno-write-strings
 COMMON_CFLAGS = -g -O2
+PLATFORM = -m64
+# PLATFORM = -m32
 # COMMON_CFLAGS += -c -pipe -fno-keep-inline-dllexport
 COMMON_CCFLAGS = -std=c99
 COMMON_CXXFLAGS = 
 # COMMON_CXXFLAGS += -c -pipe -fno-keep-inline-dllexport -frtti
-CFLAGS = $(COMMON_CFLAGS) $(COMMON_CCFLAGS) $(WARNING_CFLAGS) $(WARNING_CCFLAGS)
-CXXFLAGS = $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(WARNING_CFLAGS) $(WARNING_CXXFLAGS)
+CFLAGS = $(COMMON_CFLAGS) $(PLATFORM) $(COMMON_CCFLAGS) $(WARNING_CFLAGS) $(WARNING_CCFLAGS)
+CXXFLAGS = $(COMMON_CFLAGS) $(PLATFORM) $(COMMON_CXXFLAGS) $(WARNING_CFLAGS) $(WARNING_CXXFLAGS)
 
 DEFS = -DHAVE_CONFIG_H -DKPATHSEA -DDEBUG -DDebug -DKPSE_DEBUG
 
@@ -37,13 +42,16 @@ CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(CXXFLAGS)
 
 # LDFLAGS = -Wl,-Map,tex4ht.$(EXEEXT).map -ggdb
 LDFLAGS = -Wl,-Map,tex4ht.$(EXEEXT).map,-subsystem,console -ggdb -mthreads
+# LIBPATH = \
+#	-L/d/kp/bin/Qt/Qt5.3.2/Tools/mingw482_32/lib/gcc/i686-w64-mingw32/4.8.2 \
+#	-L/d/kp/bin/Qt/Qt5.3.2/Tools/mingw482_32/i686-w64-mingw32/lib
 
 # g++ -Wl,-subsystem,console -mthreads -o debug/tex4ht.exe object_script.tex4ht.Debug
 # g++ -g -O2 -Wl,-Map -Wl,tex4ht.exe.map -ggdb -o .libs/tex4ht.exe tex4ht.o tex4ht_add.o ../../libs/kplib/src/kpstring.o ../../libs/kplib/src/kpstdlib.o ../../libs/kplib/src/kpstdio.o ../../libs/kplib/src/kpctype.o ../../libs/kplib/src/kperr.o ../../libs/kplib/src/kpsort.o ../../libs/kplib/src/kpcapp.o ../../libs/kplib/src/chr/kptt.o ../../libs/kplib/src/win/kpwindow.o ../kpathsea/progname.o ../kpathsea/debug.o ../kpathsea/variable.o ../kpathsea/tex-file.o ../kpathsea/xputenv.o ../kpathsea/mingw32.o ../kpathsea/xdirname.o ../kpathsea/xbasename.o ../kpathsea/find-suffix.o ../kpathsea/rm-suffix.o ../kpathsea/kpathsea.o ../kpathsea/concat3.o ../kpathsea/cnf.o ../kpathsea/expand.o ../kpathsea/xrealloc.o ../kpathsea/xmalloc.o ../kpathsea/xstrdup.o ../kpathsea/fn.o ../kpathsea/knj.o ../kpathsea/kdefault.o ../kpathsea/path-elt.o ../kpathsea/concat.o ../kpathsea/uppercasify.o ../kpathsea/concatn.o ../kpathsea/fontmap.o ../kpathsea/pathsearch.o ../kpathsea/tex-make.o ../kpathsea/absolute.o ../kpathsea/xcalloc.o ../kpathsea/hash.o ../kpathsea/xfopen.o ../kpathsea/line.o ../kpathsea/db.o ../kpathsea/tilde.o ../kpathsea/str-list.o ../kpathsea/elt-dirs.o ../kpathsea/extend-fname.o ../kpathsea/readable.o ../kpathsea/str-llist.o ../kpathsea/magstep.o ../kpathsea/file-p.o ../kpathsea/dir.o ../kpathsea/tex-hush.o 
-# LINK = $(LIBTOOL) --tag=CXX $ --mode=link $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@
-# LINK = $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@ INPUT($(OBJECTS))
-# LINK = $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@ $(OBJECTS)
-LINK = $(CXX) $(COMMON_CFLAGS) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@
+# LINK = $(LIBTOOL) --tag=CXX $ --mode=link $(CXX) $(COMMON_CFLAGS) $(PLATFORM) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@
+# LINK = $(CXX) $(COMMON_CFLAGS) $(PLATFORM) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@ INPUT($(OBJECTS))
+# LINK = $(CXX) $(COMMON_CFLAGS) $(PLATFORM) $(COMMON_CXXFLAGS) $(LDFLAGS) -o $@ $(OBJECTS)
+LINK = $(CXX) $(COMMON_CFLAGS) $(PLATFORM) $(COMMON_CXXFLAGS) $(LDFLAGS) $(LIBPATH) -o $@
 
 SOURCES = tex4ht.c tex4ht_add.cpp \
 	../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp \
