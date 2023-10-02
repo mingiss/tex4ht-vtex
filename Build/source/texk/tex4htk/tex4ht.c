@@ -1258,8 +1258,9 @@ static BOOL trace_special = FALSE;
 
 void dump_math_class(int cur_fnt, int ch, int math_class)
 {
+#ifdef VTEX_MATH_CLASS_ADDONS
     bool proper_font = ((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
-    printf(">>>>>>>>>>>> fnt: %s fn%d family: %s ch: %d %c math_class: %d\n", proper_font ? font_tbl[cur_fnt].name : "", cur_fnt, proper_font ? font_tbl[cur_fnt].family_name : "", ch, ch, math_class);
+    printf(">>>>>>>>>>>> fnt: %s fn%d family: %s htf_family: %s ch: %d %c math_class: %d\n", proper_font ? font_tbl[cur_fnt].name : "", cur_fnt, proper_font ? font_tbl[cur_fnt].family_name : "", proper_font ? font_tbl[cur_fnt].htf_family_name : "", ch, ch, math_class);
 
     if (proper_font)
     {
@@ -1282,6 +1283,7 @@ void dump_math_class(int cur_fnt, int ch, int math_class)
             printf("\n");
         }
     }
+#endif
 }
 
 
@@ -3674,6 +3676,27 @@ BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].c
 int wt_ix;
 
 int n_gif = font_tbl[cur_fnt].char_l - font_tbl[cur_fnt].char_f + 1;
+
+#ifdef VTEX_MATH_CLASS_ADDONS
+    if (!group_math_classes)
+    {
+        char *cur_family = font_tbl[cur_fnt].htf_family_name;
+
+        // copy previously set math classes from fonts of the same family
+        for(int ii = 0; ii < font_tbl_size; ii++)
+            if ((ii != cur_fnt) && (font_tbl[cur_fnt].char_f == font_tbl[ii].char_f))
+            {
+                char *family = font_tbl[ii].htf_family_name;
+                if (cur_family && family &&
+                        cur_family[0] && family[0] && // not merging nameless fonts
+                        eq_str(cur_family, family))
+                    for (int ch = 0; ch < min(n_gif, font_tbl[ii].char_l - font_tbl[ii].char_f) + 1; ch++)
+                        if ((font_tbl[cur_fnt].math[ch] == 0) && (font_tbl[ii].math[ch] != 0))
+                            font_tbl[cur_fnt].math[ch] = font_tbl[ii].math[ch];
+            }
+    }
+#endif
+
 if (font_tbl[cur_fnt].math && ch_proper)
 {                              int r_ch;
    r_ch = ch - font_tbl[cur_fnt].char_f;
@@ -8676,6 +8699,10 @@ loopName[0] = '\0';
    new_font.ch = NULL;
    new_font.str = NULL;
 
+#ifdef VTEX_MATH_CLASS_ADDONS
+   new_font.htf_family_name = NULL;
+#endif
+
    new_font.accent_array = (unsigned int *) 0;
    new_font.accented_array = (unsigned int *) 0;
    new_font.accent_N = new_font.accented_N = 0;
@@ -9091,7 +9118,7 @@ while( char_l > new_font.char_l ){
 
 
          htf_to_lg(html_font,  new_font_name, fonts_n, file);
-         
+
 if( dump_htf_files ){
    dump_htf_files++;  dump_htf( file );  dump_htf_files--;
 }
@@ -9120,7 +9147,11 @@ if( dump_env_files ){ dump_env(); }
 
 // new_font.str = (unsigned U_CHAR **) r_alloc((void *)   new_font.str,
 //                     (size_t) ( (design_n?design_n:1) * sizeof(unsigned U_CHAR *)) );
-   
+
+#ifdef VTEX_MATH_CLASS_ADDONS
+    new_font.htf_family_name = new_font_name;
+#endif
+
 for( i = fonts_n; i--; )
   if (new_font_name && html_font[i].name &&
         new_font_name[0] && html_font[i].name[0] && // not merging nameless fonts
@@ -9327,7 +9358,10 @@ visited_file = v;
 } }
 
 
-   free((void *)  new_font_name);   font_tbl_size++;
+#ifndef VTEX_MATH_CLASS_ADDONS
+   free((void *)  new_font_name);
+#endif
+   font_tbl_size++;
 }
 #ifdef MAXFONTS
  else err_i_int(ERR_MAXFONTS, MAXFONTS);

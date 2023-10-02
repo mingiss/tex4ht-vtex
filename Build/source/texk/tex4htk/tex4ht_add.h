@@ -60,6 +60,7 @@ struct font_entry
 
     char *span_class; // font span class attribute and .css entry name, extracted from the third column of the mapping file .xdvipsk/%jobname%.opentype.map
     HANDLE pars; // pointer to OTF font HFontPars object actually
+    char *htf_family_name;
 };
 
 // ------------------------------
