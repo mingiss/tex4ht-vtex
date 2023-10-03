@@ -136,6 +136,7 @@ Master/bin/x86_64-linux/*
 !Master/bin/x86_64-linux/tex4ht_vtex*
 !Master/bin/x86_64-linux/tex4ht_michal*
 !Master/bin/x86_64-linux/t4ht
+!Master/test
 !Master/texmf-dist
 Master/texmf-dist/*
 !Master/texmf-dist/scripts

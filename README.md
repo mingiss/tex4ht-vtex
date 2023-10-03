@@ -105,6 +105,34 @@ There is implemented possibility to convert such letters to their Latin counterp
   enveloped into corresponding math variant `MathML` tags with corresponding attributes.
 
 
+### Grouping of math classes
+
+When configuring math clases to particulary symbols, `tex4ht` converter assigns them not to individual fonts,
+rather to font families, grouped according to the tree structure of `.htf` files.
+For example, the top level family file of the `cmmib` font is the `cmmi.htf` &ndash;
+math classes of the bold italic and regular italic fonts are managed together.
+Therefore, when assigning bold class to some symbol of `cmmib` font,
+the corresponding symbol of the `cmmi` font will obtain the bold class as well:
+
+      Master/test/math_class/test2_group.out.html
+
+Source files:
+
+      Master/test/math_class/test2.tex
+      Master/test/math_class/article.4ht
+
+- The problem could be partially solved by enhancing the `.htf` font tree structure &ndash;
+adding individual `.htf` file for the font `cmmib` as well:
+
+      Master/test/math_class/cmmib.htf
+
+- Alternativelly the command line parameter `-a` has been added to the `tex4ht` converter
+to switch off the font grouping feature during the math class assignement.
+Example result file, using the `-a` switch:
+
+      Master/test/math_class/test2.out.html
+
+
 ## Repository structure
 
 Designed as a mirror copy of `TeX Live` (`TL`) build tree structure.
@@ -159,16 +187,12 @@ additionally installed:
   > http://gnuwin32.sourceforge.net/packages/m4.htm
   > http://gnuwin32.sourceforge.net/packages/regex.htm
 
-- Additionally `QT v.5` (`QT Creator v.4`) build script is provided, the file
 
-      Build/source/texk/tex4htk/tex4ht.pro
+## Build sequence and optional build possibilities
 
-  `QT` tools for building in `QT Creator` `IDE` or `qmake` environments could be found here:
+### TeXlive automake scripts
 
-  > https://www.qt.io/ide/ 
-
-
-## Build sequence
+- `win32`, `win64`, `x86_64-linux` and `x86_64-darwin` targets.
 
 - Mount current `TL` repository version to some local path:
 
@@ -194,8 +218,62 @@ additionally installed:
 
       Master/bin
 
+- Following `MingW` system library files should be copied to the deployment folder:
+
+      libgcc_s_dw2-1.dll
+      libstdc++-6.dll
+      libwinpthread-1.dll
+
 `reautoconf` does not work yet under `MSYS`. Necessary slightly corrected `Linux` build
 environment configure scripts are provided here.
+
+
+### Make under `MSYS`
+
+- `win64` or `win32` (?) targets only.
+
+- Simple makefile for build in `MSYS` environment using `MingW` compiler:
+
+      Build/source/texk/tex4htk/Makefile_msys
+
+- The shell script:
+
+      Build/source/texk/tex4htk/make_msys
+
+- `Kpathsea` package is linked statically, no need for external `kpathsea*.dll` file.
+
+- Necessary `MingW` system library files should be copied to the deployment folder.
+
+
+### `QT Creator`
+
+- `win32`, `win64` (?) or `x86_64-linux` (?) targets.
+
+- `QT v.5` (`QT Creator v.4`) build script:
+
+      Build/source/texk/tex4htk/tex4ht.pro
+
+- `Kpathsea` package is linked statically, no need for external `kpathsea*.dll`/`kpathsea*.so` file.
+
+- In case of `MS Windows` build necessary `MingW` system library files should be copied to the deployment folder.
+
+
+### `MS Visual Studio`
+
+- `win32` or `win64` (?) targets only.
+
+- `MSVC v.17` (`VS 2022`) project and solution files:
+
+      Build/source/texk/tex4htk/tex4htx_vs17/tex4htx_vs17.sln
+      Build/source/texk/tex4htk/tex4htx_vs17/tex4htx_vs17.vcxproj
+
+- `Kpathsea` package is linked statically, no need for external `kpathsea*.dll` file.
+
+- Following `MSVC` system library files should be copied to the deployment folder:
+
+      msvcp140d.dll
+      vcruntime140d.dll
+      ucrtbased.dll
 
 
 ## TODO
@@ -210,7 +288,7 @@ environment configure scripts are provided here.
 
         tex4ht foo -n -cunihtf
 
-    - The limitation to enter all single letter keys prior to the keys with values is intentional:
+    - The limitation to enter all single letter keys prior to the keys with values is intentional, file `tex4ht.c`:
 
           if( (int) strlen((char *)  argv[i] ) == 2 ){
              if( ++i == argc ) bad_arg;
@@ -257,3 +335,5 @@ environment configure scripts are provided here.
 - [ ] Move `Build\source\libs\kplib` features to `tex4ht_add.h` and `tex4ht_add.cpp`, remove `Build\source\libs\kplib`.
 
 - [ ] Rename `tex4ht_vtex` / `tex4ht-vtex` to `xtex4ht`.
+
+- [ ] Free all allocated memory (`font_tbl[].name`, `font_tbl[].family_name`, `font_tbl[].htf_family_name`, `font_tbl[].math`, `font_tbl[].math_closing`, etc.).

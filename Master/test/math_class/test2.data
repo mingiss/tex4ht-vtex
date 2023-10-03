@@ -1,0 +1,4902 @@
+variety sequences-6
+pre 2 25400000 473628672 1000 27 ' TeX output 2023.09.18:1036'
+bop 1 0 0 0 0 0 0 0 0 0 -1
+d3 1048576
+d4 69926912
+[
+d4 -69140480
+d4 67174400
+[
+d4 -65536000
+special1 6 't4ht@['
+special1 6 't4ht@]'
+special1 9 't4ht.html'
+special1 42 't4ht+@Css: p.noindent { text-indent: 0em }'
+special1 62 't4ht+@Css: td p.noindent { text-indent: 0em; margin-top:0em; }'
+special1 40 't4ht+@Css: p.nopar { text-indent: 0em; }'
+special1 41 't4ht+@Css: p.indent{ text-indent: 1.5em }'
+special1 61 't4ht+@Css: @media print {div.crosslinks {visibility:hidden;}}'
+special1 68 't4ht+@Css: a img { border-top: 0; border-left: 0; border-right: 0; }'
+special1 52 't4ht;|000+<span 
+class="+%s+-%s+x-x-%d++">+</span>+0'
+special1 60 't4ht;|001+<img 
+src="+" alt="+" class="+%s+-%d+x-x-%x+" />+1'
+special1 89 't4ht;|003+<img 
+src="+" alt="+" class="%s-+%s+-%d+x-x-%x+" style="text-align:middle" />+3'
+special1 51 't4ht;|004+<span 
+class="+++++small-caps">+</span>+4'
+special1 44 't4ht;|006+<u 
+class="+++++underline">+</u>+6'
+special1 41 't4ht;|008+<sup class="htf">++++++</sup>+8'
+special1 49 't4ht;|010+<span class="htf-cmbx">++++++</span>+10'
+special1 57 't4ht;|012+<span 
+class="htf-calligraphy">++++++</span>+12'
+special1 52 't4ht;|014+<span 
+class="htf-italic">++++++</span>+14'
+special1 50 't4ht;|016+<span 
+class="htf-bold">++++++</span>+16'
+special1 62 't4ht;|018+<span 
+class="htf-calligraphy-bold">++++++</span>+18'
+special1 54 't4ht;|020+<span 
+class="htf-flip-hor">++++++</span>+20'
+special1 42 't4ht;|022+<sub class="htf">++++++</sub>+22'
+special1 52 't4ht;|024+<span 
+class="+++++small-caps">+</span>+24'
+special1 60 't4ht+@Font_Css("4"): .small-caps{font-variant: small-caps; }'
+special1 71 't4ht+@Font_Css("10"): .htf-cmbx {font-weight: bold; font-style:normal;}'
+special1 60 't4ht+@Font_Css("12"): .htf-calligraphy {font-family:cursive}'
+special1 55 't4ht+@Font_Css("14"): .htf-italic {font-style: italic;}'
+special1 52 't4ht+@Font_Css("16"): .htf-bold {font-weight: bold;}'
+special1 87 't4ht+@Font_Css("12"): .htf-calligraphy-bold {font-family:cursive ; font-weight: bold; }'
+special1 56 't4ht+@Css: center { margin-top:1em; margin-bottom:1em; }'
+special1 59 't4ht+@Css: td center { margin-top:0em; margin-bottom:0em; }'
+special4 380 't4ht"*<span 
+class="Canvas">*X<span style="position:relative; 
+width:%.2fex;"></span></span>**<span 
+style="position:absolute; left:%.2fex; top:%.2fex;" 
+class="Canvas-xy"><span 
+class="Canvas-char">*</span></span>*<span class="Canvas-HR" 
+style="position:absolute; left:%.2fex;top:%.2fex;width:%.2fex;" ><hr 
+style="height:%.2fex;"></span>*0.00000290646*0.0*0.00000290646*0.0*0.5'
+special1 41 't4ht+@Css: .Canvas { position:relative; }'
+special1 67 't4ht;|012+<!--span 
+class="htf-calligraphy"-->++++++<!--/span-->+12'
+special1 37 't4ht+@Css: math { text-indent: 0em; }'
+special1 43 't4ht+@Css: li p.indent { text-indent: 0em }'
+special1 46 't4ht+@Css: li p:first-child{ margin-top:0em; }'
+special1 70 't4ht+@Css: li p:last-child, li div:last-child { margin-bottom:0.5em; }'
+special1 73 't4ht+@Css: li p~ul:last-child, li p~ol:last-child{ margin-bottom:0.5em; }'
+special1 49 't4ht+@Css: .enumerate1 {list-style-type:decimal;}'
+special1 53 't4ht+@Css: .enumerate2 {list-style-type:lower-alpha;}'
+special1 53 't4ht+@Css: .enumerate3 {list-style-type:lower-roman;}'
+special1 53 't4ht+@Css: .enumerate4 {list-style-type:upper-alpha;}'
+special1 65 't4ht+@Css: div.newtheorem { margin-bottom: 2em; margin-top: 2em;}'
+special1 60 't4ht+@Css: .obeylines-h,.obeylines-v {white-space: nowrap; }'
+special1 63 't4ht+@Css: div.obeylines-v p { margin-top:0; margin-bottom:0; }'
+special1 49 't4ht+@Css: .overline{ text-decoration:overline; }'
+special1 56 't4ht+@Css: .overline img{ border-top: 1px solid black; }'
+special1 67 't4ht+@Css: td.displaylines {text-align:center; white-space:nowrap;}'
+special1 43 't4ht+@Css: .centerline {text-align:center;}'
+special1 41 't4ht+@Css: .rightline {text-align:right;}'
+special1 100 't4ht+@Css: div.verbatim {font-family: monospace; white-space: nowrap; text-align:left; clear:both; }'
+special1 103 't4ht+@Css: .fbox {padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }'
+special1 35 't4ht+@Css: div.fbox {display:table}'
+special1 148 't4ht+@Css: div.center div.fbox {text-align:center; clear:both; padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }'
+special1 36 't4ht+@Css: div.minipage{width:100%;}'
+special1 101 't4ht+@Css: div.center, div.center div.center {text-align: center; margin-left:1em; margin-right:1em;}'
+special1 45 't4ht+@Css: div.center div {text-align: left;}'
+special1 77 't4ht+@Css: div.flushright, div.flushright div.flushright {text-align: right;}'
+special1 49 't4ht+@Css: div.flushright div {text-align: left;}'
+special1 44 't4ht+@Css: div.flushleft {text-align: left;}'
+special1 51 't4ht+@Css: .underline{ text-decoration:underline; }'
+special1 79 't4ht+@Css: .underline img{ border-bottom: 1px solid black; margin-bottom:1pt; }'
+special1 136 't4ht+@Css: .framebox-c, .framebox-l, .framebox-r { padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }'
+special1 43 't4ht+@Css: .framebox-c {text-align:center;}'
+special1 41 't4ht+@Css: .framebox-l {text-align:left;}'
+special1 42 't4ht+@Css: .framebox-r {text-align:right;}'
+special1 51 't4ht+@Css: span.thank-mark{ vertical-align: super }'
+special1 109 't4ht+@Css: span.footnote-mark sup.textsuperscript, span.footnote-mark a sup.textsuperscript{ font-size:80%; }'
+special1 108 't4ht+@Css: div.tabular, div.center div.tabular {text-align: center; margin-top:0.5em; margin-bottom:0.5em; }'
+special1 46 't4ht+@Css: table.tabular td p{margin-top:0em;}'
+special1 65 't4ht+@Css: table.tabular {margin-left: auto; margin-right: auto;}'
+special1 46 't4ht+@Css: td p:first-child{ margin-top:0em; }'
+special1 48 't4ht+@Css: td p:last-child{ margin-bottom:0em; }'
+special1 57 't4ht+@Css: div.td00{ margin-left:0pt; margin-right:0pt; }'
+special1 57 't4ht+@Css: div.td01{ margin-left:0pt; margin-right:5pt; }'
+special1 57 't4ht+@Css: div.td10{ margin-left:5pt; margin-right:0pt; }'
+special1 57 't4ht+@Css: div.td11{ margin-left:5pt; margin-right:5pt; }'
+special1 89 't4ht+@Css: table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }'
+special1 58 't4ht+@Css: td.td00{ padding-left:0pt; padding-right:0pt; }'
+special1 58 't4ht+@Css: td.td01{ padding-left:0pt; padding-right:5pt; }'
+special1 58 't4ht+@Css: td.td10{ padding-left:5pt; padding-right:0pt; }'
+special1 58 't4ht+@Css: td.td11{ padding-left:5pt; padding-right:5pt; }'
+special1 89 't4ht+@Css: table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }'
+special1 60 't4ht+@Css: .hline hr, .cline hr{ height : 1px; margin:0px; }'
+special1 45 't4ht+@Css: .tabbing-right {text-align:right;}'
+special1 48 't4ht+@Css: span.TEX {letter-spacing: -0.125em; }'
+special1 72 't4ht+@Css: span.TEX span.E{ position:relative;top:0.5ex;left:-0.0417em;}'
+special1 54 't4ht+@Css: a span.TEX span.E {text-decoration: none; }'
+special1 89 't4ht+@Css: span.LATEX span.A{ position:relative; top:-0.5ex; left:-0.4em; font-size:85%;}'
+special1 66 't4ht+@Css: span.LATEX span.TEX{ position:relative; left: -0.4em; }'
+special1 73 't4ht+@Css: div.float, div.figure {margin-left: auto; margin-right: auto;}'
+special1 45 't4ht+@Css: div.float img {text-align:center;}'
+special1 46 't4ht+@Css: div.figure img {text-align:center;}'
+special1 160 't4ht+@Css: .marginpar,.reversemarginpar {width:20%; float:right; text-align:left; margin-left:auto; margin-top:0.5em; font-size:85%; text-decoration:underline;}'
+special1 83 't4ht+@Css: .marginpar p,.reversemarginpar p{margin-top:0.4em; margin-bottom:0.4em;}'
+special1 41 't4ht+@Css: .reversemarginpar{float:left;}'
+special1 67 't4ht+@Css: .equation td{text-align:center; vertical-align:middle; }'
+special1 32 't4ht+@Css: td.eq-no{ width:5%; }'
+special1 42 't4ht+@Css: table.equation { width:100%; } '
+special1 69 't4ht+@Css: div.math-display, div.par-math-display{text-align:center;}'
+special1 95 't4ht+@Css: mtr.hline mtd{ border-bottom:black solid 1px; padding-top:2px; padding-bottom:0em; }'
+special1 43 't4ht+@Css: mtr.hline mtd mo{ display:none }'
+special1 51 't4ht+@Css: math .texttt { font-family: monospace; }'
+special1 47 't4ht+@Css: math .textit { font-style: italic; }'
+special1 48 't4ht+@Css: math .textsl { font-style: oblique; }'
+special1 52 't4ht+@Css: math .textsf { font-family: sans-serif; }'
+special1 46 't4ht+@Css: math .textbf { font-weight: bold; }'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 44 't4ht^8*<mi 
+mathvariant="bold-script">*</mi>'
+d3 655360
+]
+]
+eop
+bop 2 0 0 0 0 0 0 0 0 0 42
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fd1 20 34062306014 655360 655360 0 7 '' 'cmbsy10'
+fn20
+(A)
+[
+d3 -237825
+fd1 21 32144521637 458752 458752 0 6 '' 'cmbsy7'
+fn21
+(A)
+[
+d3 -197774
+fd1 22 533501646 327680 327680 0 6 '' 'cmbsy5'
+fn22
+(A)
+]
+]
+r3 947026
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10529743
+special1 6 't4ht^8'
+fn20
+(A)
+[
+d3 -270593
+fn21
+(A)
+[
+d3 -197774
+fn22
+(A)
+]
+]
+r3 947026
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 3 0 0 0 0 0 0 0 0 0 7115
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(B)
+[
+r2 14751
+d3 -237825
+fn21
+(B)
+[
+r2 7081
+d3 -197774
+fn22
+(B)
+]
+]
+r3 801836
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10658989
+special1 6 't4ht^8'
+fn20
+(B)
+[
+r2 14751
+d3 -270593
+fn21
+(B)
+[
+r2 7081
+d3 -197774
+fn22
+(B)
+]
+]
+r3 801836
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 4 0 0 0 0 0 0 0 0 0 7397
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(C)
+[
+r2 30896
+d3 -237825
+fn21
+(C)
+[
+r2 17006
+d3 -197774
+fn22
+(C)
+]
+]
+r3 723256
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10742471
+special1 6 't4ht^8'
+fn20
+(C)
+[
+r2 30896
+d3 -270593
+fn21
+(C)
+[
+r2 17006
+d3 -197774
+fn22
+(C)
+]
+]
+r3 723256
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 5 0 0 0 0 0 0 0 0 0 7624
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(D)
+[
+r2 20935
+d3 -237825
+fn21
+(D)
+[
+r2 16292
+d3 -197774
+fn22
+(D)
+]
+]
+r3 973348
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10525970
+special1 6 't4ht^8'
+fn20
+(D)
+[
+r2 20935
+d3 -270593
+fn21
+(D)
+[
+r2 16292
+d3 -197774
+fn22
+(D)
+]
+]
+r3 973348
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 6 0 0 0 0 0 0 0 0 0 7851
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(E)
+[
+r3 54338
+d3 -237825
+fn21
+(E)
+[
+r3 35251
+d3 -197774
+fn22
+(E)
+]
+]
+r3 767107
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10722524
+special1 6 't4ht^8'
+fn20
+(E)
+[
+r3 54338
+d3 -270593
+fn21
+(E)
+[
+r3 35251
+d3 -197774
+fn22
+(E)
+]
+]
+r3 767107
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 7 0 0 0 0 0 0 0 0 0 8078
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(F)
+[
+r3 66673
+d3 -237825
+fn21
+(F)
+[
+r3 47491
+d3 -197774
+fn22
+(F)
+]
+]
+r3 983364
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10546518
+special1 6 't4ht^8'
+fn20
+(F)
+[
+r3 66673
+d3 -270593
+fn21
+(F)
+[
+r3 47491
+d3 -197774
+fn22
+(F)
+]
+]
+r3 983364
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 8 0 0 0 0 0 0 0 0 0 8309
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(G)
+[
+r3 36526
+d3 -237825
+fn21
+(G)
+[
+r2 24027
+d3 -197774
+fn22
+(G)
+]
+]
+r3 797815
+special1 5 't4ht^'
+]
+]
+d3 1372616
+[
+d3 -1243364
+d3 786432
+[
+[
+r4 10682708
+special1 6 't4ht^8'
+fn20
+(G)
+[
+r3 36526
+d3 -270593
+fn21
+(G)
+[
+r2 24027
+d3 -197774
+fn22
+(G)
+]
+]
+r3 797815
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 9 0 0 0 0 0 0 0 0 0 8540
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(H)
+[
+d3 -237825
+fn21
+(H)
+[
+d3 -197774
+fn22
+(H)
+]
+]
+r3 1021472
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10470677
+special1 6 't4ht^8'
+fn20
+(H)
+[
+d3 -270593
+fn21
+(H)
+[
+d3 -197774
+fn22
+(H)
+]
+]
+r3 1021472
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 10 0 0 0 0 0 0 0 0 0 8769
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(I)
+[
+r3 53356
+d3 -237825
+fn21
+(I)
+[
+r3 32910
+d3 -197774
+fn22
+(I)
+]
+]
+r3 807301
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10690812
+special1 6 't4ht^8'
+fn20
+(I)
+[
+r3 53356
+d3 -270593
+fn21
+(I)
+[
+r3 32910
+d3 -197774
+fn22
+(I)
+]
+]
+r3 807301
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 11 0 0 0 0 0 0 0 0 0 8984
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(J)
+[
+r3 122881
+d3 -237825
+fn21
+(J)
+[
+r3 86835
+d3 -197774
+fn22
+(J)
+]
+]
+r3 1086764
+special1 5 't4ht^'
+]
+]
+d3 1372616
+[
+d3 -1243364
+d3 786432
+[
+[
+r4 10506172
+special1 6 't4ht^8'
+fn20
+(J)
+[
+r3 122881
+d3 -270593
+fn21
+(J)
+[
+r3 86835
+d3 -197774
+fn22
+(J)
+]
+]
+r3 1086764
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 12 0 0 0 0 0 0 0 0 0 9215
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(K)
+[
+d3 -237825
+fn21
+(K)
+[
+d3 -197774
+fn22
+(K)
+]
+]
+r3 894310
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10572315
+special1 6 't4ht^8'
+fn20
+(K)
+[
+d3 -270593
+fn21
+(K)
+[
+d3 -197774
+fn22
+(K)
+]
+]
+r3 894310
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 13 0 0 0 0 0 0 0 0 0 9446
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(L)
+[
+d3 -237825
+fn21
+(L)
+[
+d3 -197774
+fn22
+(L)
+]
+]
+r3 817631
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10637871
+special1 6 't4ht^8'
+fn20
+(L)
+[
+d3 -270593
+fn21
+(L)
+[
+d3 -197774
+fn22
+(L)
+]
+]
+r3 817631
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 14 0 0 0 0 0 0 0 0 0 9661
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(M)
+[
+d3 -237825
+fn21
+(M)
+[
+d3 -197774
+fn22
+(M)
+]
+]
+r3 1357241
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10174854
+special1 6 't4ht^8'
+fn20
+(M)
+[
+d3 -270593
+fn21
+(M)
+[
+d3 -197774
+fn22
+(M)
+]
+]
+r3 1357241
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 15 0 0 0 0 0 0 0 0 0 9876
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(N)
+[
+r3 99623
+d3 -237825
+fn21
+(N)
+[
+r3 71375
+d3 -197774
+fn22
+(N)
+]
+]
+r3 1177672
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10408983
+special1 6 't4ht^8'
+fn20
+(N)
+[
+r3 99623
+d3 -270593
+fn21
+(N)
+[
+r3 71375
+d3 -197774
+fn22
+(N)
+]
+]
+r3 1177672
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 16 0 0 0 0 0 0 0 0 0 10091
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(O)
+[
+r2 20935
+d3 -237825
+fn21
+(O)
+[
+r2 16292
+d3 -197774
+fn22
+(O)
+]
+]
+r3 971709
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10522375
+special1 6 't4ht^8'
+fn20
+(O)
+[
+r2 20935
+d3 -270593
+fn21
+(O)
+[
+r2 16292
+d3 -197774
+fn22
+(O)
+]
+]
+r3 971709
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 17 0 0 0 0 0 0 0 0 0 10322
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(P)
+[
+r3 55431
+d3 -237825
+fn21
+(P)
+[
+r3 39622
+d3 -197774
+fn22
+(P)
+]
+]
+r3 975842
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10551665
+special1 6 't4ht^8'
+fn20
+(P)
+[
+r3 55431
+d3 -270593
+fn21
+(P)
+[
+r3 39622
+d3 -197774
+fn22
+(P)
+]
+]
+r3 975842
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 18 0 0 0 0 0 0 0 0 0 10549
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(Q)
+[
+d3 -237825
+fn21
+(Q)
+[
+d3 -197774
+fn22
+(Q)
+]
+]
+r3 961698
+special1 5 't4ht^'
+]
+]
+d3 1372616
+[
+d3 -1243364
+d3 786432
+[
+[
+r4 10516367
+special1 6 't4ht^8'
+fn20
+(Q)
+[
+d3 -270593
+fn21
+(Q)
+[
+d3 -197774
+fn22
+(Q)
+]
+]
+r3 961698
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 19 0 0 0 0 0 0 0 0 0 10780
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(R)
+[
+d3 -237825
+fn21
+(R)
+[
+d3 -197774
+fn22
+(R)
+]
+]
+r3 1022319
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10469537
+special1 6 't4ht^8'
+fn20
+(R)
+[
+d3 -270593
+fn21
+(R)
+[
+d3 -197774
+fn22
+(R)
+]
+]
+r3 1022319
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 20 0 0 0 0 0 0 0 0 0 10995
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(S)
+[
+r3 46720
+d3 -237825
+fn21
+(S)
+[
+r2 31082
+d3 -197774
+fn22
+(S)
+]
+]
+r3 836023
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10658757
+special1 6 't4ht^8'
+fn20
+(S)
+[
+r3 46720
+d3 -270593
+fn21
+(S)
+[
+r2 31082
+d3 -197774
+fn22
+(S)
+]
+]
+r3 836023
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 21 0 0 0 0 0 0 0 0 0 11210
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(T)
+[
+r3 175218
+d3 -237825
+fn21
+(T)
+[
+r3 127568
+d3 -197774
+fn22
+(T)
+]
+]
+r3 1104679
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10541548
+special1 6 't4ht^8'
+fn20
+(T)
+[
+r3 175218
+d3 -270593
+fn21
+(T)
+[
+r3 127568
+d3 -197774
+fn22
+(T)
+]
+]
+r3 1104679
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 22 0 0 0 0 0 0 0 0 0 11439
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(U)
+[
+r3 66673
+d3 -237825
+fn21
+(U)
+[
+r3 47491
+d3 -197774
+fn22
+(U)
+]
+]
+r3 895749
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10622888
+special1 6 't4ht^8'
+fn20
+(U)
+[
+r3 66673
+d3 -270593
+fn21
+(U)
+[
+r3 47491
+d3 -197774
+fn22
+(U)
+]
+]
+r3 895749
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 23 0 0 0 0 0 0 0 0 0 11670
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(V)
+[
+r3 55431
+d3 -237825
+fn21
+(V)
+[
+r3 39622
+d3 -197774
+fn22
+(V)
+]
+]
+r3 909359
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10608663
+special1 6 't4ht^8'
+fn20
+(V)
+[
+r3 55431
+d3 -270593
+fn21
+(V)
+[
+r3 39622
+d3 -197774
+fn22
+(V)
+]
+]
+r3 909359
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 24 0 0 0 0 0 0 0 0 0 11901
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(W)
+[
+r3 55431
+d3 -237825
+fn21
+(W)
+[
+r3 39622
+d3 -197774
+fn22
+(W)
+]
+]
+r3 1307488
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10268288
+special1 6 't4ht^8'
+fn20
+(W)
+[
+r3 55431
+d3 -270593
+fn21
+(W)
+[
+r3 39622
+d3 -197774
+fn22
+(W)
+]
+]
+r3 1307488
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 25 0 0 0 0 0 0 0 0 0 12132
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(X)
+[
+r3 96353
+d3 -237825
+fn21
+(X)
+[
+r3 67448
+d3 -197774
+fn22
+(X)
+]
+]
+r3 1057286
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10508694
+special1 6 't4ht^8'
+fn20
+(X)
+[
+r3 96353
+d3 -270593
+fn21
+(X)
+[
+r3 67448
+d3 -197774
+fn22
+(X)
+]
+]
+r3 1057286
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 26 0 0 0 0 0 0 0 0 0 12363
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(Y)
+[
+r3 55431
+d3 -237825
+fn21
+(Y)
+[
+r3 39622
+d3 -197774
+fn22
+(Y)
+]
+]
+r3 911796
+special1 5 't4ht^'
+]
+]
+d3 1372616
+[
+d3 -1243364
+d3 786432
+[
+[
+r4 10600482
+special1 6 't4ht^8'
+fn20
+(Y)
+[
+r3 55431
+d3 -270593
+fn21
+(Y)
+[
+r3 39622
+d3 -197774
+fn22
+(Y)
+]
+]
+r3 911796
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 27 0 0 0 0 0 0 0 0 0 12594
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 660424
+[
+[
+special1 6 't4ht^8'
+fn20
+(Z)
+[
+r3 53338
+d3 -237825
+fn21
+(Z)
+[
+r3 37992
+d3 -197774
+fn22
+(Z)
+]
+]
+r3 955289
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r4 10559119
+special1 6 't4ht^8'
+fn20
+(Z)
+[
+r3 53338
+d3 -270593
+fn21
+(Z)
+[
+r3 37992
+d3 -197774
+fn22
+(Z)
+]
+]
+r3 955289
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 28 0 0 0 0 0 0 0 0 0 12825
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 1143478
+[
+[
+special1 6 't4ht^1'
+[
+[
+d3 -491524
+fd1 0 37254272422 655360 655360 0 6 '' 'cmex10'
+fn0
+(`)
+]
+[
+r3 728177
+d3 -491524
+(W)
+]
+[
+r3 1383536
+d3 -491524
+(V)
+]
+[
+r3 2038895
+d3 -491524
+(U)
+]
+[
+r3 2694254
+d3 -491524
+(T)
+]
+[
+r3 3349613
+d3 -491524
+(S)
+]
+[
+r3 4004972
+d3 -527932
+(R)
+]
+[
+r3 4551103
+d3 -491524
+(Q)
+]
+[
+r3 5279280
+d3 -491524
+(P)
+]
+[
+r3 6080275
+d3 -491524
+(N)
+]
+[
+r3 6917679
+d3 -491524
+(L)
+]
+[
+r3 7755083
+d3 -491524
+(J)
+]
+[
+r4 8592487
+d3 -527932
+(H)
+]
+[
+r4 9138618
+d3 -491524
+(F)
+]
+[
+r4 9793977
+fd1 13 4110426232 655360 655360 0 6 '' 'cmsy10'
+fn13
+(s)
+]
+r4 10321903
+(489:>?rx{|}~)
+\7F
+]
+[
+[
+[
+r4 16365796
+d3 -808286
+fn0
+(`)
+]
+[
+r4 17074254
+d3 -808286
+(W)
+]
+[
+r4 17709894
+d3 -808286
+(V)
+]
+[
+r4 18345534
+d3 -808286
+(U)
+]
+[
+r4 18981174
+d3 -808286
+(T)
+]
+[
+r4 19616814
+d3 -808286
+(S)
+]
+[
+r4 20252454
+d3 -844694
+(R)
+]
+[
+r4 20778866
+d3 -808286
+(Q)
+]
+[
+r4 21487324
+d3 -808286
+(P)
+]
+[
+r4 22268600
+d3 -808286
+(N)
+]
+[
+r4 23086285
+d3 -808286
+(L)
+]
+[
+r4 23903970
+d3 -808286
+(J)
+]
+[
+r4 24721655
+d3 -844694
+(H)
+]
+[
+r4 25248067
+d3 -808286
+(F)
+]
+[
+r4 25883707
+d3 -365914
+fd1 12 11710361205 458752 458752 0 5 '' 'cmsy7'
+fn12
+(s)
+]
+r4 26166560
+d3 -365914
+(489:>?rx{|}~)
+\7F
+]
+[
+[
+r4 31039902
+d3 -1107070
+fn0
+(`)
+]
+[
+r4 31739258
+d3 -1107070
+(W)
+]
+[
+r4 32365796
+d3 -1107070
+(V)
+]
+[
+r4 32992334
+d3 -1107070
+(U)
+]
+[
+r4 33618872
+d3 -1107070
+(T)
+]
+[
+r4 34245410
+d3 -1107070
+(S)
+]
+[
+r4 34871948
+d3 -1143478
+(R)
+]
+[
+r4 35389258
+d3 -1107070
+(Q)
+]
+[
+r4 36088614
+d3 -1107070
+(P)
+]
+[
+r4 36860788
+d3 -1107070
+(N)
+]
+[
+r4 37669371
+d3 -1107070
+(L)
+]
+[
+r4 38477954
+d3 -1107070
+(J)
+]
+[
+r4 39286537
+d3 -1143478
+(H)
+]
+[
+r4 39803847
+d3 -1107070
+(F)
+]
+[
+r4 40430385
+d3 -697466
+fd1 11 26067030156 327680 327680 0 5 '' 'cmsy5'
+fn11
+(s)
+]
+r4 40682974
+d3 -697466
+(489:>?rx{|}~)
+\7F
+]
+]
+r4 44999303
+special1 5 't4ht^'
+]
+]
+d3 3713962
+[
+d3 -3448173
+d3 2228467
+[
+[
+special1 6 't4ht^1'
+[
+[
+[
+[
+d3 -622596
+fn0
+(a)
+]
+]
+]
+[
+[
+[
+r3 946630
+d3 -622596
+(_)
+]
+]
+]
+[
+[
+[
+r3 1784034
+d3 -622596
+(^)
+]
+]
+]
+[
+[
+[
+r3 2621438
+d3 -622596
+(])
+]
+]
+]
+[
+[
+[
+r3 3458842
+d3 -622596
+(\\)
+]
+]
+]
+[
+[
+[
+r3 4296246
+d3 -622596
+([)
+]
+]
+]
+[
+[
+[
+r3 5133650
+d3 -892025
+(Z)
+]
+]
+]
+[
+[
+[
+r3 5898235
+d3 -622596
+(Y)
+]
+]
+]
+[
+[
+[
+r3 6844865
+d3 -622596
+(X)
+]
+]
+]
+[
+[
+[
+r3 7900722
+d3 -622596
+(O)
+]
+]
+]
+[
+[
+[
+r4 9000271
+d3 -622596
+(M)
+]
+]
+]
+[
+[
+[
+r4 10099820
+d3 -622596
+(K)
+]
+]
+]
+[
+[
+[
+r4 11199369
+d3 -892025
+(I)
+]
+]
+]
+[
+[
+[
+r4 11963954
+d3 -622596
+(G)
+]
+]
+]
+[
+[
+r4 12801358
+fn13
+(s)
+]
+]
+r4 13329284
+(489:>?rx{|}~)
+\7F
+]
+[
+[
+[
+r4 19373177
+d3 -1172379
+fn0
+(`)
+]
+[
+r4 20081635
+d3 -1172379
+(W)
+]
+[
+r4 20717275
+d3 -1172379
+(V)
+]
+[
+r4 21352915
+d3 -1172379
+(U)
+]
+[
+r4 21988555
+d3 -1172379
+(T)
+]
+[
+r4 22624195
+d3 -1172379
+(S)
+]
+[
+r4 23259835
+d3 -1208787
+(R)
+]
+[
+r4 23786247
+d3 -1172379
+(Q)
+]
+[
+r4 24494705
+d3 -1172379
+(P)
+]
+[
+r4 25275981
+d3 -1172379
+(N)
+]
+[
+r4 26093666
+d3 -1172379
+(L)
+]
+[
+r4 26911351
+d3 -1172379
+(J)
+]
+[
+r4 27729036
+d3 -1208787
+(H)
+]
+[
+r4 28255448
+d3 -1172379
+(F)
+]
+[
+r4 28891088
+d3 -730007
+fn12
+(s)
+]
+r4 29173941
+d3 -730007
+(489:>?rx{|}~)
+\7F
+]
+[
+[
+r4 34047283
+d3 -1471163
+fn0
+(`)
+]
+[
+r4 34746639
+d3 -1471163
+(W)
+]
+[
+r4 35373177
+d3 -1471163
+(V)
+]
+[
+r4 35999715
+d3 -1471163
+(U)
+]
+[
+r4 36626253
+d3 -1471163
+(T)
+]
+[
+r4 37252791
+d3 -1471163
+(S)
+]
+[
+r4 37879329
+d3 -1507571
+(R)
+]
+[
+r4 38396639
+d3 -1471163
+(Q)
+]
+[
+r4 39095995
+d3 -1471163
+(P)
+]
+[
+r4 39868169
+d3 -1471163
+(N)
+]
+[
+r4 40676752
+d3 -1471163
+(L)
+]
+[
+r4 41485335
+d3 -1471163
+(J)
+]
+[
+r4 42293918
+d3 -1507571
+(H)
+]
+[
+r4 42811228
+d3 -1471163
+(F)
+]
+[
+r4 43437766
+d3 -1061559
+fn11
+(s)
+]
+r4 43690355
+d3 -1061559
+(489:>?rx{|}~)
+\7F
+]
+]
+r4 48006684
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 29 0 0 0 0 0 0 0 0 0 13056
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 773036
+[
+[
+special1 6 't4ht^2'
+[
+fn13
+\03
+w3 145632
+\00
+w0
+fd1 7 11374260171 655360 655360 0 5 '' 'cmr10'
+fn7
+(+)
+fd1 10 1350061076 655360 655360 0 6 '' 'cmmi10'
+fn10
+(=)
+w0
+(/)
+w0
+(.)
+w0
+fn13
+(4)
+w0
+(5)
+w0
+(^)
+w0
+(_)
+w0
+(\\)
+w0
+([)
+w0
+(z)
+w0
+(y)
+w0
+(u)
+w0
+(t)
+w0
+(])
+w0
+(q)
+w0
+\05
+w0
+\0F
+w0
+(o)
+w0
+\04
+w0
+\0C
+w0
+\0B
+w0
+\0A
+w0
+\09
+w0
+\08
+w0
+\07
+w0
+\06
+w0
+\0E
+w0
+\0D
+w0
+(n)
+w0
+\01
+w0
+\03
+w0
+\02
+w0
+fn10
+(?)
+fn13
+\01
+]
+[
+[
+r4 20334285
+d3 -329502
+fn12
+\03
+\00
+fd1 6 33144720122 458752 458752 0 4 '' 'cmr7'
+fn6
+(+)
+fd1 9 6031313562 458752 458752 0 5 '' 'cmmi7'
+fn9
+(=/.)
+fn12
+(45^_\\[zyut]q)
+\05
+\0F
+(o)
+\04
+\0C
+\0B
+\0A
+\09
+\08
+\07
+\06
+\0E
+\0D
+(n)
+\01
+\03
+\02
+fn9
+(?)
+fn12
+\01
+]
+[
+r4 32786153
+d3 -527276
+fn11
+\03
+\00
+fd1 5 20600715532 327680 327680 0 4 '' 'cmr5'
+fn5
+(+)
+fd1 8 11703355134 327680 327680 0 5 '' 'cmmi5'
+fn8
+(=/.)
+fn11
+(45^_\\[zyut]q)
+\05
+\0F
+(o)
+\04
+\0C
+\0B
+\0A
+\09
+\08
+\07
+\06
+\0E
+\0D
+(n)
+\01
+\03
+\02
+fn8
+(?)
+fn11
+\01
+]
+]
+r4 43790872
+special1 5 't4ht^'
+]
+]
+d3 2490368
+[
+d3 -2260992
+d3 1441792
+[
+[
+special1 6 't4ht^2'
+[
+fn13
+\03
+w3 145632
+\00
+w0
+fn7
+(+)
+fn10
+(=)
+w0
+(/)
+w0
+(.)
+w0
+fn13
+(4)
+w0
+(5)
+w0
+(^)
+w0
+(_)
+w0
+(\\)
+w0
+([)
+w0
+(z)
+w0
+(y)
+w0
+(u)
+w0
+(t)
+w0
+(])
+w0
+(q)
+w0
+\05
+w0
+\0F
+w0
+(o)
+w0
+\04
+w0
+\0C
+w0
+\0B
+w0
+\0A
+w0
+\09
+w0
+\08
+w0
+\07
+w0
+\06
+w0
+\0E
+w0
+\0D
+w0
+(n)
+w0
+\01
+w0
+\03
+w0
+\02
+w0
+fn10
+(?)
+fn13
+\01
+]
+[
+[
+r4 20334285
+d3 -329502
+fn12
+\03
+\00
+fn6
+(+)
+fn9
+(=/.)
+fn12
+(45^_\\[zyut]q)
+\05
+\0F
+(o)
+\04
+\0C
+\0B
+\0A
+\09
+\08
+\07
+\06
+\0E
+\0D
+(n)
+\01
+\03
+\02
+fn9
+(?)
+fn12
+\01
+]
+[
+r4 32786153
+d3 -527276
+fn11
+\03
+\00
+fn5
+(+)
+fn8
+(=/.)
+fn11
+(45^_\\[zyut]q)
+\05
+\0F
+(o)
+\04
+\0C
+\0B
+\0A
+\09
+\08
+\07
+\06
+\0E
+\0D
+(n)
+\01
+\03
+\02
+fn8
+(?)
+fn11
+\01
+]
+]
+r4 43790872
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 30 0 0 0 0 0 0 0 0 0 14570
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 773036
+[
+[
+special1 6 't4ht^3'
+[
+fn10
+(\(\)*+^_)
+fn13
+\10
+\11
+\12
+\13
+\14
+\15
+\16
+\17
+\18
+\19
+\1A
+\1B
+\1C
+\1D
+\1E
+\1F
+( !$'2367?)
+fn7
+(:=)
+fn10
+(><)
+fn13
+(/vwkja`%&-.,\(\))
+]
+[
+[
+r4 25377053
+d3 -329502
+fn9
+(\(\)*+^_)
+fn12
+\10
+\11
+\12
+\13
+\14
+\15
+\16
+\17
+\18
+\19
+\1A
+\1B
+\1C
+\1D
+\1E
+\1F
+( !$'2367?)
+fn6
+(:=)
+fn9
+(><)
+fn12
+(/vwkja`%&-.,\(\))
+]
+[
+r4 45714201
+d3 -527276
+fn8
+(\(\)*+^_)
+fn11
+\10
+\11
+\12
+\13
+\14
+\15
+\16
+\17
+\18
+\19
+\1A
+\1B
+\1C
+\1D
+\1E
+\1F
+( !$'2367?)
+fn5
+(:=)
+fn8
+(><)
+fn11
+(/vwkja`%&-.,\(\))
+]
+]
+r4 63315397
+special1 5 't4ht^'
+]
+]
+d3 2490368
+[
+d3 -2260992
+d3 1441792
+[
+[
+special1 6 't4ht^3'
+[
+fn10
+(\(\)*+^_)
+fn13
+\10
+\11
+\12
+\13
+\14
+\15
+\16
+\17
+\18
+\19
+\1A
+\1B
+\1C
+\1D
+\1E
+\1F
+( !$'2367?)
+fn7
+(:=)
+fn10
+(><)
+fn13
+(/vwkja`%&-.,\(\))
+]
+[
+[
+r4 25377053
+d3 -329502
+fn9
+(\(\)*+^_)
+fn12
+\10
+\11
+\12
+\13
+\14
+\15
+\16
+\17
+\18
+\19
+\1A
+\1B
+\1C
+\1D
+\1E
+\1F
+( !$'2367?)
+fn6
+(:=)
+fn9
+(><)
+fn12
+(/vwkja`%&-.,\(\))
+]
+[
+r4 45714201
+d3 -527276
+fn8
+(\(\)*+^_)
+fn11
+\10
+\11
+\12
+\13
+\14
+\15
+\16
+\17
+\18
+\19
+\1A
+\1B
+\1C
+\1D
+\1E
+\1F
+( !$'2367?)
+fn5
+(:=)
+fn8
+(><)
+fn11
+(/vwkja`%&-.,\(\))
+]
+]
+r4 63315397
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 31 0 0 0 0 0 0 0 0 0 15255
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 655360
+]
+]
+eop
+bop 32 0 0 0 0 0 0 0 0 0 15807
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 681359
+[
+[
+special1 6 't4ht^4'
+fn7
+(\()
+special1 6 't4ht^5'
+(\))
+special1 6 't4ht^4'
+[
+d3 -237825
+fn6
+(\()
+]
+w3 237569
+special1 6 't4ht^5'
+[
+d3 -237825
+(\))
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -435599
+fn5
+(\()
+]
+]
+w3 243031
+special1 6 't4ht^5'
+[
+[
+d3 -435599
+(\))
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 1572864
+[
+d3 -1343488
+d3 786432
+[
+[
+r4 10569497
+special1 6 't4ht^4'
+fn7
+(\()
+special1 6 't4ht^5'
+(\))
+special1 6 't4ht^4'
+[
+d3 -270593
+fn6
+(\()
+]
+w3 237569
+special1 6 't4ht^5'
+[
+d3 -270593
+(\))
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -468367
+fn5
+(\()
+]
+]
+w3 243031
+special1 6 't4ht^5'
+[
+[
+d3 -468367
+(\))
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 33 0 0 0 0 0 0 0 0 0 15917
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 681359
+[
+[
+special1 6 't4ht^4'
+fn7
+([)
+special1 6 't4ht^5'
+(])
+special1 6 't4ht^4'
+[
+d3 -237825
+fn6
+([)
+]
+w3 181135
+special1 6 't4ht^5'
+[
+d3 -237825
+(])
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -435599
+fn5
+([)
+]
+]
+w3 197520
+special1 6 't4ht^5'
+[
+[
+d3 -435599
+(])
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 1572864
+[
+d3 -1343488
+d3 786432
+[
+[
+r4 10744260
+special1 6 't4ht^4'
+fn7
+([)
+special1 6 't4ht^5'
+(])
+special1 6 't4ht^4'
+[
+d3 -270593
+fn6
+([)
+]
+w3 181135
+special1 6 't4ht^5'
+[
+d3 -270593
+(])
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -468367
+fn5
+([)
+]
+]
+w3 197520
+special1 6 't4ht^5'
+[
+[
+d3 -468367
+(])
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 34 0 0 0 0 0 0 0 0 0 16262
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 681359
+[
+[
+special1 6 't4ht^4'
+fn13
+(b)
+special1 6 't4ht^5'
+(c)
+special1 6 't4ht^4'
+[
+d3 -237825
+fn12
+(b)
+]
+w3 273067
+special1 6 't4ht^5'
+[
+d3 -237825
+(c)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -435599
+fn11
+(b)
+]
+]
+w3 283991
+special1 6 't4ht^5'
+[
+[
+d3 -435599
+(c)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 1572864
+[
+d3 -1343488
+d3 786432
+[
+[
+r4 10456631
+special1 6 't4ht^4'
+fn13
+(b)
+special1 6 't4ht^5'
+(c)
+special1 6 't4ht^4'
+[
+d3 -270593
+fn12
+(b)
+]
+w3 273067
+special1 6 't4ht^5'
+[
+d3 -270593
+(c)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -468367
+fn11
+(b)
+]
+]
+w3 283991
+special1 6 't4ht^5'
+[
+[
+d3 -468367
+(c)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 35 0 0 0 0 0 0 0 0 0 16607
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 681359
+[
+[
+special1 6 't4ht^4'
+fn13
+(d)
+special1 6 't4ht^5'
+(e)
+special1 6 't4ht^4'
+[
+d3 -237825
+fn12
+(d)
+]
+w3 273067
+special1 6 't4ht^5'
+[
+d3 -237825
+(e)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -435599
+fn11
+(d)
+]
+]
+w3 283991
+special1 6 't4ht^5'
+[
+[
+d3 -435599
+(e)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 1572864
+[
+d3 -1343488
+d3 786432
+[
+[
+r4 10456631
+special1 6 't4ht^4'
+fn13
+(d)
+special1 6 't4ht^5'
+(e)
+special1 6 't4ht^4'
+[
+d3 -270593
+fn12
+(d)
+]
+w3 273067
+special1 6 't4ht^5'
+[
+d3 -270593
+(e)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -468367
+fn11
+(d)
+]
+]
+w3 283991
+special1 6 't4ht^5'
+[
+[
+d3 -468367
+(e)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 36 0 0 0 0 0 0 0 0 0 16952
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 681359
+[
+[
+special1 6 't4ht^4'
+fn13
+(f)
+special1 6 't4ht^5'
+(g)
+special1 6 't4ht^4'
+[
+d3 -237825
+fn12
+(f)
+]
+w3 301284
+special1 6 't4ht^5'
+[
+d3 -237825
+(g)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -435599
+fn11
+(f)
+]
+]
+w3 306747
+special1 6 't4ht^5'
+[
+[
+d3 -435599
+(g)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 1572864
+[
+d3 -1343488
+d3 786432
+[
+[
+r4 10369248
+special1 6 't4ht^4'
+fn13
+(f)
+special1 6 't4ht^5'
+(g)
+special1 6 't4ht^4'
+[
+d3 -270593
+fn12
+(f)
+]
+w3 301284
+special1 6 't4ht^5'
+[
+d3 -270593
+(g)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -468367
+fn11
+(f)
+]
+]
+w3 306747
+special1 6 't4ht^5'
+[
+[
+d3 -468367
+(g)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 37 0 0 0 0 0 0 0 0 0 17297
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 681359
+[
+[
+special1 6 't4ht^4'
+fn13
+(h)
+special1 6 't4ht^5'
+(i)
+special1 6 't4ht^4'
+[
+d3 -237825
+fn12
+(h)
+]
+w3 244850
+special1 6 't4ht^5'
+[
+d3 -237825
+(i)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -435599
+fn11
+(h)
+]
+]
+w3 261236
+special1 6 't4ht^5'
+[
+[
+d3 -435599
+(i)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 1572864
+[
+d3 -1343488
+d3 786432
+[
+[
+r4 10544011
+special1 6 't4ht^4'
+fn13
+(h)
+special1 6 't4ht^5'
+(i)
+special1 6 't4ht^4'
+[
+d3 -270593
+fn12
+(h)
+]
+w3 244850
+special1 6 't4ht^5'
+[
+d3 -270593
+(i)
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -468367
+fn11
+(h)
+]
+]
+w3 261236
+special1 6 't4ht^5'
+[
+[
+d3 -468367
+(i)
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 38 0 0 0 0 0 0 0 0 0 17642
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 1073643
+[
+[
+special1 6 't4ht^4'
+fn0
+\00
+special1 6 't4ht^5'
+\01
+special1 6 't4ht^4'
+[
+d3 -830768
+\00
+]
+w3 333143
+special1 6 't4ht^5'
+[
+d3 -830768
+\01
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1047430
+\00
+]
+]
+w3 365911
+special1 6 't4ht^5'
+[
+[
+d3 -1047430
+\01
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 3151151
+[
+d3 -2325389
+d3 1171947
+[
+[
+r4 10305531
+special1 6 't4ht^4'
+\00
+special1 6 't4ht^5'
+\01
+special1 6 't4ht^4'
+[
+d3 -830768
+\00
+]
+w3 333143
+special1 6 't4ht^5'
+[
+d3 -830768
+\01
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1080198
+\00
+]
+]
+w3 365911
+special1 6 't4ht^5'
+[
+[
+d3 -1080198
+\01
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 39 0 0 0 0 0 0 0 0 0 17987
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 1073643
+[
+[
+special1 6 't4ht^4'
+fn0
+\02
+special1 6 't4ht^5'
+\03
+special1 6 't4ht^4'
+[
+d3 -830768
+\02
+]
+w3 305836
+special1 6 't4ht^5'
+[
+d3 -830768
+\03
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1047430
+\02
+]
+]
+w3 338604
+special1 6 't4ht^5'
+[
+[
+d3 -1047430
+\03
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 3151151
+[
+d3 -2325389
+d3 1171947
+[
+[
+r4 10387452
+special1 6 't4ht^4'
+\02
+special1 6 't4ht^5'
+\03
+special1 6 't4ht^4'
+[
+d3 -830768
+\02
+]
+w3 305836
+special1 6 't4ht^5'
+[
+d3 -830768
+\03
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1080198
+\02
+]
+]
+w3 338604
+special1 6 't4ht^5'
+[
+[
+d3 -1080198
+\03
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 40 0 0 0 0 0 0 0 0 0 18327
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 1073643
+[
+[
+special1 6 't4ht^4'
+fn0
+\04
+special1 6 't4ht^5'
+\05
+special1 6 't4ht^4'
+[
+d3 -830768
+\04
+]
+w3 342244
+special1 6 't4ht^5'
+[
+d3 -830768
+\05
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1047430
+\04
+]
+]
+w3 375012
+special1 6 't4ht^5'
+[
+[
+d3 -1047430
+\05
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 3151151
+[
+d3 -2325389
+d3 1171947
+[
+[
+r4 10278228
+special1 6 't4ht^4'
+\04
+special1 6 't4ht^5'
+\05
+special1 6 't4ht^4'
+[
+d3 -830768
+\04
+]
+w3 342244
+special1 6 't4ht^5'
+[
+d3 -830768
+\05
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1080198
+\04
+]
+]
+w3 375012
+special1 6 't4ht^5'
+[
+[
+d3 -1080198
+\05
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 41 0 0 0 0 0 0 0 0 0 18667
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 1073643
+[
+[
+special1 6 't4ht^4'
+fn0
+\06
+special1 6 't4ht^5'
+\07
+special1 6 't4ht^4'
+[
+d3 -830768
+\06
+]
+w3 342244
+special1 6 't4ht^5'
+[
+d3 -830768
+\07
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1047430
+\06
+]
+]
+w3 375012
+special1 6 't4ht^5'
+[
+[
+d3 -1047430
+\07
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 3151151
+[
+d3 -2325389
+d3 1171947
+[
+[
+r4 10278228
+special1 6 't4ht^4'
+\06
+special1 6 't4ht^5'
+\07
+special1 6 't4ht^4'
+[
+d3 -830768
+\06
+]
+w3 342244
+special1 6 't4ht^5'
+[
+d3 -830768
+\07
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1080198
+\06
+]
+]
+w3 375012
+special1 6 't4ht^5'
+[
+[
+d3 -1080198
+\07
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 42 0 0 0 0 0 0 0 0 0 19007
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 1073643
+[
+[
+special1 6 't4ht^4'
+fn0
+\08
+special1 6 't4ht^5'
+\09
+special1 6 't4ht^4'
+[
+d3 -830768
+\08
+]
+w3 415063
+special1 6 't4ht^5'
+[
+d3 -830768
+\09
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1047430
+\08
+]
+]
+w3 447831
+special1 6 't4ht^5'
+[
+[
+d3 -1047430
+\09
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 3151151
+[
+d3 -2325389
+d3 1171947
+[
+[
+r4 10059771
+special1 6 't4ht^4'
+\08
+special1 6 't4ht^5'
+\09
+special1 6 't4ht^4'
+[
+d3 -830768
+\08
+]
+w3 415063
+special1 6 't4ht^5'
+[
+d3 -830768
+\09
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1080198
+\08
+]
+]
+w3 447831
+special1 6 't4ht^5'
+[
+[
+d3 -1080198
+\09
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 43 0 0 0 0 0 0 0 0 0 19347
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 1073643
+[
+[
+special1 6 't4ht^4'
+fn0
+\0A
+special1 6 't4ht^5'
+\0B
+special1 6 't4ht^4'
+[
+d3 -830768
+\0A
+]
+w3 342244
+special1 6 't4ht^5'
+[
+d3 -830768
+\0B
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1047430
+\0A
+]
+]
+w3 375012
+special1 6 't4ht^5'
+[
+[
+d3 -1047430
+\0B
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+d3 3151151
+[
+d3 -2325389
+d3 1171947
+[
+[
+r4 10278228
+special1 6 't4ht^4'
+\0A
+special1 6 't4ht^5'
+\0B
+special1 6 't4ht^4'
+[
+d3 -830768
+\0A
+]
+w3 342244
+special1 6 't4ht^5'
+[
+d3 -830768
+\0B
+]
+w0
+special1 6 't4ht^4'
+[
+[
+d3 -1080198
+\0A
+]
+]
+w3 375012
+special1 6 't4ht^5'
+[
+[
+d3 -1080198
+\0B
+]
+]
+w0
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 44 0 0 0 0 0 0 0 0 0 19687
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 718422
+[
+[
+special1 6 't4ht^6'
+[
+fn10
+(:)
+w3 109224
+fn7
+(:)
+w0
+(!?;)
+w0
+fn10
+(;)
+]
+[
+[
+r3 1547373
+d3 -293093
+fn9
+(:)
+fn6
+(:!?;)
+fn9
+(;)
+]
+[
+r3 2550897
+d3 -490867
+fn8
+(:)
+fn5
+(:!?;)
+fn8
+(;)
+]
+]
+r3 3524391
+special1 5 't4ht^'
+]
+]
+d3 1500046
+[
+d3 -1307079
+d3 786432
+[
+[
+r4 9542765
+special1 6 't4ht^6'
+[
+fn10
+(:)
+w3 109224
+fn7
+(:)
+w0
+(!?;)
+w0
+fn10
+(;)
+]
+[
+[
+r3 1547373
+d3 -293093
+fn9
+(:)
+fn6
+(:!?;)
+fn9
+(;)
+]
+[
+r3 2550897
+d3 -490867
+fn8
+(:)
+fn5
+(:!?;)
+fn8
+(;)
+]
+]
+r3 3524391
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 45 0 0 0 0 0 0 0 0 0 20027
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 19 't4ht^0*<mi 
+>*</mi>'
+d3 655360
+]
+]
+eop
+bop 46 0 0 0 0 0 0 0 0 0 20320
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 39 't4ht^1*<mo 
+class="MathClass-op">*</mo>'
+d3 655360
+]
+]
+eop
+bop 47 0 0 0 0 0 0 0 0 0 20451
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 40 't4ht^2*<mo 
+class="MathClass-bin">*</mo>'
+d3 655360
+]
+]
+eop
+bop 48 0 0 0 0 0 0 0 0 0 20602
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 40 't4ht^3*<mo 
+class="MathClass-rel">*</mo>'
+d3 655360
+]
+]
+eop
+bop 49 0 0 0 0 0 0 0 0 0 20754
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 54 't4ht^4*<mrow ><mo 
+class="MathClass-open">*</mo><mrow>'
+d3 655360
+]
+]
+eop
+bop 50 0 0 0 0 0 0 0 0 0 20906
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 56 't4ht^5*</mrow><mo 
+class="MathClass-close">*</mo></mrow>'
+d3 655360
+]
+]
+eop
+bop 51 0 0 0 0 0 0 0 0 0 21072
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 41 't4ht^6*<mo 
+class="MathClass-punc">*</mo>'
+d3 655360
+]
+]
+eop
+bop 52 0 0 0 0 0 0 0 0 0 21240
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 17 't4ht^7*<mn>*</mn>'
+d3 669270
+[
+[
+special1 6 't4ht^7'
+[
+fn7
+(0123456789)
+]
+[
+[
+r3 3276810
+d3 -260325
+fn6
+(0123456789)
+]
+[
+r3 5889160
+d3 -458099
+fn5
+(0123456789)
+]
+]
+r3 8184776
+special1 5 't4ht^'
+]
+]
+d3 1245184
+[
+d3 -1179648
+d3 786432
+[
+[
+r3 7212572
+special1 6 't4ht^7'
+[
+fn7
+(0123456789)
+]
+[
+[
+r3 3276810
+d3 -270593
+fn6
+(0123456789)
+]
+[
+r3 5889160
+d3 -468367
+fn5
+(0123456789)
+]
+]
+r3 8184776
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 53 0 0 0 0 0 0 0 0 0 21393
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 40 't4ht^9*<mo 
+class="MathClass-ord">*</mo>'
+d3 655360
+]
+]
+eop
+bop 54 0 0 0 0 0 0 0 0 0 21704
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 50 't4ht+@Css: mo.MathClass-op + mi{margin-left:0.3em}'
+special1 50 't4ht+@Css: mi + mo.MathClass-op{margin-left:0.3em}'
+special1 83 't4ht+@Css:  math mi[mathvariant="bold"] { font-weight: bold; font-style: normal; } '
+special1 87 't4ht+@Css:  math mi[mathvariant="normal"] { font-weight: normal; font-style: normal; } '
+special1 6 't4ht;8'
+special1 6 't4ht@['
+special1 51 't4ht^:*<mo mathclass="WR" mathvariant="bold">*</mo>'
+d3 655360
+]
+]
+eop
+bop 55 0 0 0 0 0 0 0 0 0 21856
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 6 't4ht;8'
+special1 6 't4ht@['
+d3 773036
+[
+[
+special1 6 't4ht^:'
+[
+fd1 17 10421504624 655360 655360 0 7 '' 'cmmib10'
+fn17
+(M)
+r3 74866
+(AN)
+r3 242346
+fn20
+\03
+w3 167480
+\00
+w0
+fd1 14 3274421126 655360 655360 0 6 '' 'cmbx10'
+fn14
+(+)
+w0
+fn17
+(=)
+]
+[
+[
+r3 4686710
+d3 -329502
+fd1 18 12553723 458752 458752 0 6 '' 'cmmib7'
+fn18
+(M)
+w3 51586
+(AN)
+w0
+fn21
+\03
+\00
+fd1 15 14605622330 458752 458752 0 5 '' 'cmbx7'
+fn15
+(+)
+fn18
+(=)
+]
+[
+r3 7824335
+d3 -527276
+fd1 19 10046600237 327680 327680 0 6 '' 'cmmib5'
+fn19
+(M)
+w3 36978
+(AN)
+w0
+fn22
+\03
+\00
+fd1 16 25313306150 327680 327680 0 5 '' 'cmbx5'
+fn16
+(+)
+fn19
+(=)
+]
+]
+r4 10508086
+special1 5 't4ht^'
+]
+]
+d3 1572864
+[
+d3 -1343488
+d3 786432
+[
+[
+r3 6050917
+special1 6 't4ht^:'
+[
+fn17
+(M)
+r3 74866
+(AN)
+r3 242346
+fn20
+\03
+w3 167480
+\00
+w0
+fn14
+(+)
+w0
+fn17
+(=)
+]
+[
+[
+r3 4686710
+d3 -329502
+fn18
+(M)
+w3 51586
+(AN)
+w0
+fn21
+\03
+\00
+fn15
+(+)
+fn18
+(=)
+]
+[
+r3 7824335
+d3 -527276
+fn19
+(M)
+w3 36978
+(AN)
+w0
+fn22
+\03
+\00
+fn16
+(+)
+fn19
+(=)
+]
+]
+r4 10508086
+special1 5 't4ht^'
+]
+]
+]
+d3 786432
+]
+]
+eop
+bop 1 0 0 0 0 0 0 0 0 0 22297
+d3 1048576
+d4 40435712
+[
+d4 -39649280
+d4 37683200
+[
+d4 -36044800
+special1 6 't4ht@]'
+special1 6 't4ht;9'
+special1 116 't4ht+@Css: .partToc a, .partToc, .likepartToc a, .likepartToc {line-height: 200%; font-weight:bold; font-size:110%;}'
+special1 73 't4ht+@Css: .index-item, .index-subitem, .index-subsubitem {display:block}'
+special1 94 't4ht+@Css: div.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:left;}'
+special1 72 't4ht+@Css: div.caption span.id{font-weight: bold; white-space: nowrap; }'
+special1 42 't4ht+@Css: h1.partHead{text-align: center}'
+special1 100 't4ht+@Css: p.bibitem { text-indent: -2em; margin-left: 2em; margin-top:0.6em; margin-bottom:0.6em; }'
+special1 101 't4ht+@Css: p.bibitem-p { text-indent: 0em; margin-left: 2em; margin-top:0.6em; margin-bottom:0.6em; }'
+special1 83 't4ht+@Css: .paragraphHead, .likeparagraphHead { margin-top:2em; font-weight: bold;}'
+special1 73 't4ht+@Css: .subparagraphHead, .likesubparagraphHead { font-weight: bold;}'
+special1 115 't4ht+@Css: .quote {margin-bottom:0.25em; margin-top:0.25em; margin-left:1em; margin-right:1em; text-align:justify;}'
+special1 54 't4ht+@Css: .verse{white-space:nowrap; margin-left:2em}'
+special1 45 't4ht+@Css: div.maketitle {text-align:center;}'
+special1 43 't4ht+@Css: h2.titleHead{text-align:center;}'
+special1 47 't4ht+@Css: div.maketitle{ margin-bottom: 2em; }'
+special1 52 't4ht+@Css: div.author, div.date {text-align:center;}'
+special1 91 't4ht+@Css: div.thanks{text-align:left; margin-left:10%; font-size:85%; font-style:italic; }'
+special1 43 't4ht+@Css: div.author{white-space: nowrap;}'
+special1 82 't4ht+@Css: .quotation {margin-bottom:0.25em; margin-top:0.25em; margin-left:1em; }'
+special1 57 't4ht+@Css: .abstract p {margin-left:5%; margin-right:5%;}'
+special1 37 't4ht+@Css: div.abstract {width:100%;}'
+d3 655360
+[
+special1 14 't4ht>test2.css'
+special1 20 't4ht= 
+/* css.sty */'
+special1 14 't4ht<test2.css'
+special1 51 't4ht=<?xml version="1.0" encoding="iso-8859-1" ?> 
+'
+special1 130 't4ht=<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd" > 
+'
+special1 53 't4ht=<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+'
+special1 6 't4ht;8'
+special1 11 't4ht=<head>'
+special1 14 't4ht>test2.tmp'
+[
+fn7
+(x)
+special1 6 't4ht;-'
+(x)
+]
+r3 691772
+special1 14 't4ht<test2.tmp'
+special1 12 't4ht=<title>'
+special1 15 't4ht=</title> 
+'
+special1 81 't4ht=<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+'
+special1 78 't4ht=<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)" /> 
+'
+special1 107 't4ht=<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)" /> 
+<!-- xhtml,mathml,html --> 
+'
+special1 46 't4ht=<meta name="src" content="test2.tex" /> 
+'
+special1 65 't4ht=<link rel="stylesheet" type="text/css" href="test2.css" /> 
+'
+special1 12 't4ht=</head>'
+special1 6 't4ht;9'
+special1 13 't4ht=<body 
+>'
+]
+y3 786432
+[
+special1 37 't4ht=<!--l. 8--><p class="noindent" >'
+special1 6 't4ht;8'
+special1 6 't4ht@_'
+special1 16 't4ht=<!--l. 8-->'
+[
+special1 74 't4ht=<math  xmlns="http://www.w3.org/1998/Math/MathML"  display="inline" >'
+]
+special1 5 't4ht^'
+special1 6 't4ht@('
+[
+[
+r3 983040
+special1 6 't4ht@)'
+special1 5 't4ht~'
+special1 7 't4ht~<)'
+special1 5 't4ht~'
+special1 5 't4ht~'
+[
+special1 5 't4ht='
+]
+special1 6 't4ht;9'
+fn10
+(Z)
+r3 46876
+(A=)
+w3 145632
+fn13
+\00
+w0
+fn7
+(6)
+fn10
+(a)
+special1 6 't4ht;8'
+special1 5 't4ht~'
+special1 5 't4ht~'
+special1 7 't4ht~<('
+special1 5 't4ht~'
+special1 6 't4ht@('
+]
+]
+r4 22609920
+special1 6 't4ht@)'
+special1 5 't4ht^'
+[
+special1 12 't4ht=</math>'
+]
+special1 7 't4ht@__'
+special1 6 't4ht;9'
+]
+y0
+[
+[
+special1 9 't4ht=</p>'
+]
+special1 36 't4ht=<!--l. 15--><p class="indent" >'
+r3 983040
+fn7
+(TEXT)
+]
+y0
+[
+[
+special1 9 't4ht=</p>'
+]
+special1 36 't4ht=<!--l. 18--><p class="indent" >'
+w3 983040
+special1 6 't4ht;8'
+special1 6 't4ht@_'
+special1 17 't4ht=<!--l. 18-->'
+[
+special1 74 't4ht=<math  xmlns="http://www.w3.org/1998/Math/MathML"  display="inline" >'
+]
+special1 5 't4ht^'
+special1 6 't4ht@('
+[
+[
+w0
+special1 6 't4ht@)'
+special1 5 't4ht~'
+special1 7 't4ht~<)'
+special1 5 't4ht~'
+special1 5 't4ht~'
+[
+special1 5 't4ht='
+]
+special1 6 't4ht;9'
+fn17
+(Z)
+r3 45738
+(A)
+w3 167480
+fn20
+\03
+w0
+fn17
+(=)
+w0
+fn20
+\00
+w0
+fn14
+(+6)
+special1 6 't4ht;8'
+special1 5 't4ht~'
+special1 5 't4ht~'
+special1 7 't4ht~<('
+special1 5 't4ht~'
+special1 6 't4ht@('
+]
+]
+r4 22609920
+special1 6 't4ht@)'
+special1 5 't4ht^'
+[
+special1 12 't4ht=</math>'
+]
+special1 7 't4ht@__'
+special1 6 't4ht;9'
+]
+y0
+[
+special1 9 't4ht=</p>'
+]
+y0
+[
+r3 983040
+special1 14 't4ht= 
+</body>'
+special1 14 't4ht=</html> 
+'
+]
+]
+]
+eop
+post 22770 25400000 473628672 1000 70975488 63315397 9 56
+fd1 22 533501646 327680 327680 0 6 '' 'cmbsy5'
+fd1 21 32144521637 458752 458752 0 6 '' 'cmbsy7'
+fd1 20 34062306014 655360 655360 0 7 '' 'cmbsy10'
+fd1 19 10046600237 327680 327680 0 6 '' 'cmmib5'
+fd1 18 12553723 458752 458752 0 6 '' 'cmmib7'
+fd1 17 10421504624 655360 655360 0 7 '' 'cmmib10'
+fd1 16 25313306150 327680 327680 0 5 '' 'cmbx5'
+fd1 15 14605622330 458752 458752 0 5 '' 'cmbx7'
+fd1 14 3274421126 655360 655360 0 6 '' 'cmbx10'
+fd1 13 4110426232 655360 655360 0 6 '' 'cmsy10'
+fd1 12 11710361205 458752 458752 0 5 '' 'cmsy7'
+fd1 11 26067030156 327680 327680 0 5 '' 'cmsy5'
+fd1 10 1350061076 655360 655360 0 6 '' 'cmmi10'
+fd1 9 6031313562 458752 458752 0 5 '' 'cmmi7'
+fd1 8 11703355134 327680 327680 0 5 '' 'cmmi5'
+fd1 7 11374260171 655360 655360 0 5 '' 'cmr10'
+fd1 6 33144720122 458752 458752 0 4 '' 'cmr7'
+fd1 5 20600715532 327680 327680 0 4 '' 'cmr5'
+fd1 0 37254272422 655360 655360 0 6 '' 'cmex10'
+post_post 25982 2 223 223 223 223 223 223
