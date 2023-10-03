@@ -81,7 +81,7 @@ The problem arises in case of baseless sub/superscript, for instance:
 `tex4ht` has a mechanism of sub/superscript base searching through sending
 back initial `MathML` tags prior to the last printable character. In case
 when that character already is inside of a previous tagged structure,
-such a back insertion ruins the validity of the file. Such back-sending
+the not well-formed output file is produced. Such back-sending
 is organized through `DVI` file specials `t4ht~<*`.
 
 Following modification implemented: when in between of the last printable
