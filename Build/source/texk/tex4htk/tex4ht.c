@@ -630,8 +630,18 @@ struct send_back_entry{
   struct send_back_entry *next;
   U_CHAR *send;
   int  id;
+#ifdef VTEX_SSCRIPT_ADDONS
+  int cur_stack_n;
+#endif
 };
 
+#ifdef VTEX_SSCRIPT_ADDONS
+struct postponed_back_entry{
+  struct postponed_back_entry *prev;
+  struct postponed_back_entry *next;
+  int  id;
+};
+#endif
 
 struct group_path{
   U_CHAR action;
@@ -769,9 +779,13 @@ static BOOL cvt_to_math_var = FALSE;
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
-// flag for sending back base tags of sub-/superscripts
+// flag for not sending back base tags of sub-/superscripts over the t4ht= special literals with XML tags inside
 // set by command line parameter -p
 static BOOL dont_send_base_back = FALSE;
+
+// flag for postpone sending back of base tags for sub-/superscripts to nearer DVI group limits
+// set by command line parameter -q
+static BOOL postpone_send_base_back = FALSE;
 #endif
 
 #ifdef VTEX_MATH_CLASS_ADDONS
@@ -949,6 +963,12 @@ static BOOL ch_fl = FALSE; // flag for no xml tags after the last printable char
 
 
 static struct send_back_entry *back_token, *back_group;
+#ifdef VTEX_SSCRIPT_ADDONS
+// queue of back_token / back_group id's to be inserted at the nearest DVI group change
+// fields send and cur_stack_n are not used
+// the end of the list is marked by the node with id = -1, like in back_token / back_group list
+static struct postponed_back_entry *back_pending;
+#endif
 
 
 static BOOL pos_dvi = FALSE;
@@ -982,7 +1002,13 @@ static unsigned  U_CHAR  null_str = '\0';
 static short dump_htf_files = 0;
 static BOOL dump_env_files = FALSE;
 
+#ifdef VTEX_MATH_CLASS_ADDONS
 static BOOL dump_math_class_flag = FALSE;
+#endif
+
+#ifdef VTEX_SSCRIPT_ADDONS
+static BOOL dump_back_nodes_flag = FALSE;
+#endif
 
 static BOOL dumped_env = FALSE;
 
@@ -1149,8 +1175,22 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-f<path-separator-ch>]        remove path from the file name\n"
 "   [-F<ch-code>]        replacement for missing font characters; 0--255; default 0\n"
 "   [-g<bitmap-file-ext>]\n"
-"   [-h[efFgsvVmA]]      trace: e-errors/warnings, f-htf, F-htf search\n"
-"                           g-groups, s-specials, v-env, V-env search, m-math classes, A-all\n"
+"   [-h[efFgsvV"
+#ifdef VTEX_MATH_CLASS_ADDONS
+                "m"
+#endif
+#ifdef VTEX_SSCRIPT_ADDONS
+                "q"
+#endif
+                  "A]]      trace: e-errors/warnings, f-htf, F-htf search\n"
+"                           g-groups, s-specials, v-env, V-env search, "
+#ifdef VTEX_MATH_CLASS_ADDONS
+                "m-math classes, "
+#endif
+#ifdef VTEX_SSCRIPT_ADDONS
+                "q-send back nodes; "
+#endif
+                  "A-all\n"
 "   [-i<htf-font-dir>]\n"
 "   [-l<bookkeeping-file>]\n"
 "   [-P(*|<filter>)]     permission for system calls: *-always, filter\n"
@@ -1168,11 +1208,13 @@ static const U_CHAR *warn_err_mssg[]={
 #ifdef VTEX_OTF_ADDONS
 "   [-m]            convert math unicode characters to their latin equivalents, enveloped into math variant MathML tags\n"
 #endif
-#ifdef VTEX_SSCRIPT_ADDONS
-"   [-p]            switch off sending back of base tags for sub-/superscripts estimated as being baseless\n"
-#endif
 #ifdef VTEX_MATH_CLASS_ADDONS
 "   [-a]            switch off grouping of math class definitions to the font family level\n"
+#endif
+#ifdef VTEX_SSCRIPT_ADDONS
+" helps in sending back of base tags of baseless sub-/superscripts:\n"
+"   [-p]            blocks sending back over XML tags\n"
+"   [-q]            limits sending back to a nearer DVI group\n"
 #endif
 ,                                // ERR_HELP
 "Can't find/open file `%s'\n",                          // ERR_IN_FILE
@@ -1256,9 +1298,9 @@ static BOOL trace_special = FALSE;
 
 
 
+#ifdef VTEX_MATH_CLASS_ADDONS
 void dump_math_class(int cur_fnt, int ch, int math_class)
 {
-#ifdef VTEX_MATH_CLASS_ADDONS
     bool proper_font = ((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
     printf(">>>>>>>>>>>> fnt: %s fn%d family: %s htf_family: %s ch: %d %c math_class: %d\n", proper_font ? font_tbl[cur_fnt].name : "", cur_fnt, proper_font ? font_tbl[cur_fnt].family_name : "", proper_font ? font_tbl[cur_fnt].htf_family_name : "", ch, ch, math_class);
 
@@ -1283,10 +1325,32 @@ void dump_math_class(int cur_fnt, int ch, int math_class)
             printf("\n");
         }
     }
-#endif
 }
+#endif
 
 
+#ifdef VTEX_SSCRIPT_ADDONS
+void dump_back_tokens(void)
+{
+    printf("[ back_group: ");
+    struct send_back_entry *cur_btoken = back_group;
+    while (cur_btoken)
+    {
+        printf("%d %d; ", cur_btoken->cur_stack_n, cur_btoken->id);
+        if (cur_btoken->id == -1) break;
+        cur_btoken = cur_btoken->next;
+    }
+    printf("] [ back_pending: ");
+    struct postponed_back_entry *cur_pnode = back_pending;
+    while (cur_pnode)
+    {
+        printf("%d; ", cur_pnode->id);
+        if (cur_pnode->id == -1) break;
+        cur_pnode = cur_pnode->next;
+    }
+    printf("]");
+}
+#endif
 
 
 #ifdef WIN32
@@ -1392,6 +1456,14 @@ struct send_back_entry * rev_list( ARG_I(struct send_back_entry *) );
 static struct send_back_entry *
    back_insert( ARG_II(struct send_back_entry *, int) );
 
+#ifdef VTEX_SSCRIPT_ADDONS
+void postpone_back_insert(int id);
+void insert_pending_backs(void);
+static struct send_back_entry *
+   check_back_insert( ARG_II(struct send_back_entry *, int) );
+static struct send_back_entry *
+   do_back_insert( ARG_II(struct send_back_entry *, int) );
+#endif
 
 static double pos_dbl( ARG_I(long int *) );
 
@@ -1936,9 +2008,17 @@ case
      case 
 141 
 :
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("------------------ [ stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+#endif
+break;
      case 
 142 
-: { break; }
+: {
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("------------------ ] stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+#endif
+    break; }
      default: {
         if( (ch < 
 171  
@@ -2912,6 +2992,67 @@ static struct send_back_entry *  rev_list
 
 
 
+#ifdef VTEX_SSCRIPT_ADDONS
+void postpone_back_insert(int id)
+{
+if (dump_back_nodes_flag){ printf("======================== postpone_back_insert(): stack_n: %d id: %d ", stack_n, id); dump_back_tokens(); printf("\n"); }
+
+    if (postpone_send_base_back)
+    {
+        struct send_back_entry *cur_btoken = back_group;
+        while (cur_btoken)
+        {
+            if (cur_btoken->id == -1) break;
+            if (cur_btoken->id == id)
+            {
+                assert(back_pending);
+                struct postponed_back_entry *new_entry = m_alloc(struct postponed_back_entry, 1);
+                assert(new_entry);
+                new_entry->id = id;
+                new_entry->prev = NULL;
+                new_entry->next = back_pending;
+                back_pending->prev = new_entry;
+                back_pending = new_entry;
+                break;
+            }
+            cur_btoken = cur_btoken->next;
+        }
+    }
+
+if (dump_back_nodes_flag){ printf("                         postpone_back_insert(): stack_n: %d id: %d ", stack_n, id); dump_back_tokens(); printf("\n"); }
+}
+
+
+void insert_pending_backs(void)
+{
+if (dump_back_nodes_flag){ printf("======================== insert_pending_backs(): stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+
+    if (group_dvi && postpone_send_base_back)
+    {
+        struct postponed_back_entry *list_ptr = back_pending;
+        while (list_ptr && list_ptr->id != -1) list_ptr = list_ptr->next;
+        list_ptr = list_ptr->prev;
+        while (list_ptr)
+        {
+            struct postponed_back_entry *prev = list_ptr->prev;
+            struct send_back_entry *back_group_sav = back_group;
+            back_group = check_back_insert(back_group, list_ptr->id);
+            if (back_group_sav != back_group)
+            {
+                if (list_ptr->next) list_ptr->next->prev = prev;
+                if (prev) prev->next = list_ptr->next;
+                else back_pending = list_ptr->next;
+                free(list_ptr);
+            }
+            list_ptr = prev;
+        }
+    }
+
+if (dump_back_nodes_flag){ printf("                         insert_pending_backs(): stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+}
+#endif
+
+
 static struct send_back_entry *  back_insert
 #ifdef ANSI
 #define SEP ,
@@ -2928,17 +3069,83 @@ static struct send_back_entry *  back_insert
 ;
 #undef SEP
 #endif
+#ifdef VTEX_SSCRIPT_ADDONS
 {
+if (dump_back_nodes_flag){ printf("======================== back_insert(): stack_n: %d id: %d back->cur_stack_n: %d back->id: %d ", stack_n, id, back->cur_stack_n, back->id); dump_back_tokens(); printf("\n"); }
+
+    insert_pending_backs();
+    if ((!postpone_send_base_back) || (abs(back->cur_stack_n - stack_n) <= 1)) // sup/sub base is on previous depth level of the stack
+        back = do_back_insert(back, id);
+    else
+        postpone_back_insert(id);
+
+if (dump_back_nodes_flag){ printf("                         back_insert(): stack_n: %d id: %d back->cur_stack_n: %d back->id: %d ", stack_n, id, back->cur_stack_n, back->id); dump_back_tokens(); printf("\n"); }
+  return back;
+}
+
+static struct send_back_entry *check_back_insert
+#ifdef ANSI
+#define SEP ,
+(
+    struct send_back_entry *back SEP 
+    int    id
+)
+#undef SEP
+#else
+#define SEP ;
+    (back, id)
+    struct send_back_entry *back SEP 
+    int    id
+;
+#undef SEP
+#endif
+{
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("======================== check_back_insert(): stack_n: %d id: %d back->cur_stack_n: %d back->id: %d ", stack_n, id, back->cur_stack_n, back->id); dump_back_tokens(); printf("\n"); }
+#endif
+    if ((!postpone_send_base_back) || (abs(back->cur_stack_n - stack_n) <= 1)) // sup/sub base is on previous depth level of the stack
+        back = do_back_insert(back, id);
+
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("                         check_back_insert(): stack_n: %d id: %d back->cur_stack_n: %d back->id: %d ", stack_n, id, back->cur_stack_n, back->id); dump_back_tokens(); printf("\n"); }
+#endif
+  return back;
+}
+
+static struct send_back_entry *do_back_insert
+#ifdef ANSI
+#define SEP ,
+(
+    struct send_back_entry *back SEP 
+    int    id
+)
+#undef SEP
+#else
+#define SEP ;
+    (back, id)
+    struct send_back_entry *back SEP 
+    int    id
+;
+#undef SEP
+#endif
+#endif
+{
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("======================== do_back_insert(): stack_n: %d id: %d back->cur_stack_n: %d back->id: %d ", stack_n, id, back->cur_stack_n, back->id); dump_back_tokens(); printf("\n"); }
+#endif
   while( back->id == id ){
                          struct send_back_entry *p;
     print_f( back->send );
     back = (p = back)->next;
     free((void *)  p->send );
     free((void *)  p );
-  }
+    }
+
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("                         do_back_insert(): stack_n: %d id: %d back->cur_stack_n: %d back->id: %d ", stack_n, id, back->cur_stack_n, back->id); dump_back_tokens(); printf("\n"); }
+#endif
   return back;
 }
-
 
 
 static double pos_dbl
@@ -3666,11 +3873,13 @@ static  INTEGER set_ch_class
 {
 assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 
+#ifdef VTEX_MATH_CLASS_ADDONS
     if (dump_math_class_flag)
     {
         printf("------- set_ch_class():\n");
         dump_math_class(cur_fnt, ch, math_class);
     }
+#endif
 
 BOOL ch_proper = ((ch >= font_tbl[cur_fnt].char_f) && (ch <= font_tbl[cur_fnt].char_l));
 int wt_ix;
@@ -3726,7 +3935,9 @@ if (font_tbl[cur_fnt].math && ch_proper)
       return DEF_GLYPH_WDT_PT;
 
    
+#ifdef VTEX_MATH_CLASS_ADDONS
     if (dump_math_class_flag) dump_math_class(cur_fnt, ch, math_class);
+#endif
 
 return (INTEGER)(
 char_width(ch)
@@ -3762,11 +3973,13 @@ static  int math_class_of
                        5
                        : font_tbl[cur_fnt].math[r_ch];
 
+#ifdef VTEX_MATH_CLASS_ADDONS
     if (dump_math_class_flag)
     {
         printf("====== math_class_of():\n");
         dump_math_class(cur_fnt, ch, math_class);
     }
+#endif
 
    return (math_class);
 }
@@ -6784,7 +6997,18 @@ ch_fl = FALSE;
 
 
 back_token = back_group = m_alloc(struct send_back_entry,1);
+assert(back_token);
 back_token->id = -1;
+back_token->next = NULL;
+#ifdef VTEX_SSCRIPT_ADDONS
+back_token->cur_stack_n = 0;
+
+back_pending = m_alloc(struct postponed_back_entry, 1);
+assert(back_pending);
+back_pending->id = -1;
+back_pending->prev = NULL;
+back_pending->next = NULL;
+#endif
 
 
 pos_text = pos_line = end_pos_body = end_pos_text = pos_body =
@@ -6951,11 +7175,21 @@ dump_env_search = TRUE;
 
  unkn_opt = FALSE; }
 
+#ifdef VTEX_MATH_CLASS_ADDONS
     if (trace == 'A' || trace == 'm')
     {
         dump_math_class_flag = TRUE;
         unkn_opt = FALSE;
     }
+#endif
+
+#ifdef VTEX_SSCRIPT_ADDONS
+    if (trace == 'A' || trace == 'q')
+    {
+        dump_back_nodes_flag = TRUE;
+        unkn_opt = FALSE;
+    }
+#endif
 
   if (unkn_opt) { bad_arg; }
 }
@@ -7064,6 +7298,9 @@ ext = p+1;
 #ifdef VTEX_SSCRIPT_ADDONS
     case 'p':
         dont_send_base_back = TRUE;
+        break;
+    case 'q':
+        postpone_send_base_back = TRUE;
         break;
 #endif
 #ifdef VTEX_MATH_CLASS_ADDONS
@@ -11841,6 +12078,9 @@ if( !back_id_off )
 ((int) stack_len + 2)
 
  ){ warn_i(ERR_SYS_40); }
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("================== [ stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+#endif
    break;
 }
 case 
@@ -11865,6 +12105,9 @@ if( !back_id_off ){
 
 
    stack[stack_n].stack_id = -1;
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("================== ] stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+#endif
    break;
 }
 
@@ -11900,6 +12143,9 @@ if( back_id_off
    while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
 } else {
    p =  m_alloc(struct send_back_entry,1);
+#ifdef VTEX_SSCRIPT_ADDONS
+   p->cur_stack_n = stack_n;
+#endif
    p->send = get_str( (int)( i - 1 ));
    if( ch_token ){
      
@@ -11924,7 +12170,9 @@ if( sv_id >  back_token->id ){
         }
    }
 }
-
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf("========================= new back_token: stack_n: %d sv_id: %d ", stack_n, sv_id); dump_back_tokens(); printf("\n"); }
+#endif
  }
            else if( (ch == '[') && (i==1) ){
              i--;  
@@ -12591,6 +12839,10 @@ if( stack[stack_n].active_class_del ){
    stack[stack_n+1].no_left_del= FALSE;
 }
 
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf(".................. [ stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+    insert_pending_backs();
+#endif
 
 
    break; }
@@ -12779,6 +13031,10 @@ if (
             ) <  stack[stack_n].x_val) )  put_char(' ');
 text_on = stack[stack_n].text_on;
 
+#ifdef VTEX_SSCRIPT_ADDONS
+if (dump_back_nodes_flag){ printf(".................. ] stack_n: %d ", stack_n); dump_back_tokens(); printf("\n"); }
+    insert_pending_backs();
+#endif
   break; }
 
 

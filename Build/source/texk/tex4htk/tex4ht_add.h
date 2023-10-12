@@ -58,11 +58,17 @@ struct font_entry
     INTEGER layout_dir;
     unsigned long rgba_color;
 
+#ifdef VTEX_OTF_ADDONS
     char *span_class; // font span class attribute and .css entry name, extracted from the third column of the mapping file .xdvipsk/%jobname%.opentype.map
     HANDLE pars; // pointer to OTF font HFontPars object actually
+#endif
+
+#ifdef VTEX_MATH_CLASS_ADDONS
     char *htf_family_name;
+#endif
 };
 
+#ifdef VTEX_OTF_ADDONS
 // ------------------------------
 #ifdef __cplusplus
 // conversion table from TeX character codes to unicode
@@ -110,5 +116,6 @@ extern PLAIN_C void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *jo
 // tex_ch -- TeX character code
 // fnt_pars -- pointer to current font HFontPars object
 extern PLAIN_C void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var);
+#endif // #ifdef VTEX_OTF_ADDONS
 
 #endif // #ifndef TEX4HT_H_ADD_INCLUDED

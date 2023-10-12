@@ -8,7 +8,7 @@ Enhanced version of the `tex4ht` converter.
 
 ### Space recognition
 
-Following are attempts to deal with the problem, that original heuristic recognition of
+The following are attempts to deal with the problem, that the original heuristic recognition of
 spaces in `tex4ht` doesn't work correctly enough &ndash; there are situations with
 disappearing or redundant spaces.
 

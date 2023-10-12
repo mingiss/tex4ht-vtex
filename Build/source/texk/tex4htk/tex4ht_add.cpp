@@ -15,6 +15,7 @@
 
 using namespace std;
 
+#ifdef VTEX_OTF_ADDONS
 // ------------------------------
 COtfAdds theOtfAdds;
 
@@ -341,3 +342,4 @@ void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDL
     }
     wch_buf[ix++] = 0;
 }
+#endif // #ifdef VTEX_OTF_ADDONS

@@ -1,2 +1,4 @@
 make -f Makefile_msys clean > make_msys.log 2>&1
 make -f Makefile_msys >> make_msys.log 2>&1
+mv tex4ht.exe tex4htx_msys.exe
+cp tex4htx_msys.exe /d/texroot/2019/bin/win32
