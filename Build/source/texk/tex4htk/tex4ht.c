@@ -1,7 +1,7 @@
 
 /* tex4ht.c (2020-03-02-10:01), generated from tex4ht-c.tex
-   Copyright (C) 2009-2012 TeX Users Group
-   Copyright (C) 1996-2009 Eitan M. Gurari
+   Copyright 2009-2023 TeX Users Group
+   Copyright 1996-2009 Eitan M. Gurari
 
 %
 % This work may be distributed and/or modified under the
@@ -284,6 +284,7 @@
 #include <setjmp.h>
 #endif 
 
+#include "ProjData.h"
 #include "tex4ht.h"
 #ifdef VTEX_OTF_ADDONS
 #include "tex4ht_add.h"
@@ -6917,38 +6918,38 @@ sprintf(vers + strlen(vers), ".%02d", COMPILER_BUILD);
 #define VTEX_ADDONS_SIG ""
 
 #ifdef VTEX_SPACING_ADDONS
-#undef VTEX_ADDONS_SIG
-#define VTEX_ADDONS_SIG " vtex:"
+// #undef VTEX_ADDONS_SIG
+// #define VTEX_ADDONS_SIG " vtex:"
 #define VTEX_SPACING_ADDONS_SIG " spacing"
 #else
 #define VTEX_SPACING_ADDONS_SIG ""
 #endif
 
 #ifdef VTEX_OTF_ADDONS
-#undef VTEX_ADDONS_SIG
-#define VTEX_ADDONS_SIG " vtex:"
+// #undef VTEX_ADDONS_SIG
+// #define VTEX_ADDONS_SIG " vtex:"
 #define VTEX_OTF_ADDONS_SIG " otf"
 #else
 #define VTEX_OTF_ADDONS_SIG ""
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
-#undef VTEX_ADDONS_SIG
-#define VTEX_ADDONS_SIG " vtex:"
+// #undef VTEX_ADDONS_SIG
+// #define VTEX_ADDONS_SIG " vtex:"
 #define VTEX_SSCRIPT_ADDONS_SIG " sscript"
 #else
 #define VTEX_SSCRIPT_ADDONS_SIG ""
 #endif
 
 #ifdef VTEX_MATH_CLASS_ADDONS
-#undef VTEX_ADDONS_SIG
-#define VTEX_ADDONS_SIG " vtex:"
+// #undef VTEX_ADDONS_SIG
+// #define VTEX_ADDONS_SIG " vtex:"
 #define VTEX_MATH_CLASS_ADDONS_SIG " mclass"
 #else
 #define VTEX_MATH_CLASS_ADDONS_SIG ""
 #endif
 
-(IGNORED) printf("tex4ht.c (2020-03-02-10:01%s%d%s%s%s%s%s%s%s%s)\n", PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG, VTEX_MATH_CLASS_ADDONS_SIG);
+(IGNORED) printf("%s (%s%s%d%s%s%s%s%s%s%s%s)\n", PROJ_NAME, PROJ_DATE, PLATFORM_SIG, (int)sizeof(void *) * 8, COMPILER_SIG, vers, KPATHSEA_SIG, VTEX_ADDONS_SIG, VTEX_SPACING_ADDONS_SIG, VTEX_OTF_ADDONS_SIG, VTEX_SSCRIPT_ADDONS_SIG, VTEX_MATH_CLASS_ADDONS_SIG);
 
 for(i=0; i<argc; i++){
     (IGNORED) printf("%s%s ", (i>1)?"\n  " : "", argv[i]); }
@@ -9937,8 +9938,7 @@ else if ( in_trace_char ){
    
 assert((cur_fnt >= -1) && (cur_fnt < font_tbl_size));
 if( span_on && !in_span_ch  && !ignore_chs && !in_accenting
-            && (cur_fnt != -1)
-            && (default_font != font_tbl[cur_fnt].num) ){
+            && cur_fnt >= 0 && (default_font != font_tbl[cur_fnt].num) ){
   if(  (ch < 137) && (ch != 
 132 
 ) ){

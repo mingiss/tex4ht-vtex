@@ -2,8 +2,8 @@
 %         tex tex4ht-c
 % or   ht tex tex4ht-c
 
-% Copyright (C) 2009-2012 TeX Users Group
-% Copyright (C) 1996-2009 Eitan M. Gurari
+% Copyright 2009-2023 TeX Users Group
+% Copyright 1996-2009 Eitan M. Gurari
 % Released under LPPL 1.3c+.
 % See tex4ht-cpright.tex for license text.
 
@@ -232,8 +232,8 @@ the HTML/XML and \`'.css', also \`'.lg', \`'.idv', and
 
 \<tex4ht.c\><<< 
 /* tex4ht.c (`version), generated from `jobname.tex
-   Copyright (C) 2009-2012 TeX Users Group
-   Copyright (C) `CopyYear.1996. Eitan M. Gurari
+   Copyright 2009-2023 TeX Users Group
+   Copyright `CopyYear.1996. Eitan M. Gurari
 `<TeX4ht copyright`> */
 `<tex4ht.h`>
 >>>
@@ -2783,13 +2783,16 @@ if( span_on && (default_font != font_tbl[cur_fnt].num) ){
 static BOOL start_span = FALSE, in_span_ch = FALSE;
 >>>
 
-
+A span special might happen before any font has been defined (fntdef DVI
+command seen). In that case, |cur_fnt| will still be $-1$, and we must
+avoid indexing |font_tbl|. 
+ 
+See report at https://puszcza.gnu.org.ua/bugs/?611.
 
 \<span char block\><<<
 assert((cur_fnt >= -1) && (cur_fnt < font_tbl_size));
 if( span_on && !in_span_ch  && !ignore_chs && !in_accenting
-            && (cur_fnt != -1)
-            && (default_font != font_tbl[cur_fnt].num) ){
+            && cur_fnt >= 0 && (default_font != font_tbl[cur_fnt].num) ){
   if(  (ch < 137) && (ch != `<insert rule + move op`>) ){
     in_span_ch = TRUE; start_span = TRUE;    
 } }
