@@ -265,7 +265,10 @@
 #endif
 #endif
 
-
+#ifdef _MSC_VER
+#define NOMINMAX
+// #include <minwindef.h>
+#endif
 
 #ifdef KPATHSEA
 #include <kpathsea/c-errno.h>
@@ -3074,7 +3077,6 @@ static struct send_back_entry *  back_insert
 {
 if (dump_back_nodes_flag){ printf("======================== back_insert(): stack_n: %d id: %d back->cur_stack_n: %d back->id: %d ", stack_n, id, back->cur_stack_n, back->id); dump_back_tokens(); printf("\n"); }
 
-    insert_pending_backs();
     if ((!postpone_send_base_back) || (abs(back->cur_stack_n - stack_n) <= 1)) // sup/sub base is on previous depth level of the stack
         back = do_back_insert(back, id);
     else
@@ -9916,6 +9918,7 @@ if( group_dvi ){
  ) )
     ){
        ch_id++;
+       insert_pending_backs();
        back_token = back_insert ( back_token, ch_id);
 } }
 
@@ -12348,6 +12351,7 @@ for(i = stack_len; i >= 0; i--){
 
 back_group = rev_list( back_group );
 back_token = rev_list( back_token );
+insert_pending_backs();
 back_token = back_insert ( back_token, 0);
 
 ch_id = 0;
@@ -12620,6 +12624,7 @@ if( stack_n ){
 stack[stack_n].text_on = text_on;
 push_stack();  
 if( group_dvi ) {
+   insert_pending_backs();
    back_group = back_insert ( back_group, push_id);
 }
 
