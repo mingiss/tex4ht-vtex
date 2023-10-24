@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>mishura201-4ht -q -cunihtf</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>mishura201-4ht -n -q -hq -cunihtf</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>H:\vtex\tex4ht\tasks\__tex4ht_20231011_1_141136_-_DGBOOK_MISHURA2_gls_konvertavimas_matematikoje\test\dgbook\mishura2\mishura201</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerEnvironment>TEXMFCNF=d:\texroot\2019\texmf-vtex\web2c
