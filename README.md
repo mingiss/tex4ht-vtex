@@ -30,7 +30,7 @@ disappearing or redundant spaces.
   (are converted to `<mml:mspace width="2.5pt" />`, for example),
   therefore, more investigations should be carried out here.
 
-- command line switch -n
+- Command line switch `-n`
 
   Totally cuts off the heuristic algorithm for recognition of spaces in `.dvi` file;
   spaces then should be generated using some explicit means, for example by
@@ -81,18 +81,21 @@ The problem arises in case of baseless sub/superscript, for instance:
 `tex4ht` has a mechanism of sub/superscript base searching through sending
 back initial `MathML` tags prior to the last printable character. In case
 when that character already is inside of a previous tagged structure,
-the not well-formed output file is produced. Such back-sending
-is organized through `DVI` file specials `t4ht~<*`.
+the not well-formed output file is produced.
 
-Following modification implemented: when in between of the last printable
-character and the sub/superscript there are verbatim insertions `t4ht=`,
-containing tag characters `<` or `>` (`XML`/`HTML`/`MathML` tags hopefully),
-back sending of the initiating tags is suppressed, resulting in the verbatim
-insertion of the special `t4ht~<*` contents right in the place, where it was
-encountered. (The result is like as the special `t4ht~<*` was entered as
-`t4ht=`.)
+There are two enhancements to the superscript base recognition algorithm implemented:
 
-- Command line option `-p` switches on the enhanced superscript base recognition algorithm.
+- Command line switch `-q` for limiting of back-sending to `DVI` group borders.
+  The information in `DVI` file is logically grouped, according to scope groups in `TeX` code.
+  Limiting to these groups could help for superscript bases not to jump far enough, causing `XML` tags not to get mixed up.
+  The feature could help in cases, when not well-formed `XML` document is produced due to empty bases of sub/superscripts.
+
+- Additional tracing switch `-hq` could be used for debugging purposes of this feature.
+
+- Command line option `-p` switches on the limiting back-sending of bases through `XML` tag literals.
+  Only the plain text prior to the superscript index could be jumped over.
+  This limitation is stronger than behaviour of the switch `-q`,
+  could be used in case the latter still produces not well-formed documents.
 
 
 ### Math letters conversion to their Latin equivalents
@@ -302,10 +305,11 @@ environment configure scripts are provided here.
 
 - [ ] `reautoconf` under `MSYS`
 
-- [ ] MathML sub/superscript tag sending back algorithm:
-   Stepping over is not allowed not just through tags, entered inside of verbatim
+- [ ] MathML sub/superscript tag sending back limitation throug tag literals (command line switch `-p`):
+   The back-sending is organized through `DVI` file specials `t4ht~<*`.
+   Stepping over should be not allowed not just through tags, entered inside of verbatim
    specials `t4ht=`. All tag insertion specials, including `t4ht~<*` itself,
-   should be examined as well.
+   should be examined as well &ndash; they are kind of tag literals as well.
 
 - [ ] Extract space width feature of `OpenType` fonts instead of calculating median character width.
 
