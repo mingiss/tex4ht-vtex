@@ -1191,7 +1191,7 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-g<bitmap-file-ext>]\n"
 "   [-h[efFgsvV"
 #ifdef VTEX_MATH_CLASS_ADDONS
-                "m"
+                "a"
 #endif
 #ifdef VTEX_SSCRIPT_ADDONS
                 "q"
@@ -7224,7 +7224,7 @@ dump_env_search = TRUE;
  unkn_opt = FALSE; }
 
 #ifdef VTEX_MATH_CLASS_ADDONS
-    if (trace == 'A' || trace == 'm')
+    if (trace == 'A' || trace == 'a')
     {
         dump_math_class_flag = TRUE;
         unkn_opt = FALSE;

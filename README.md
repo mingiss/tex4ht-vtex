@@ -82,20 +82,21 @@ The problem arises in case of baseless sub/superscript, for instance:
 back initial `MathML` tags prior to the last printable character. In case
 when that character already is inside of a previous tagged structure,
 the not well-formed output file is produced.
+It could happen especially due to empty bases of sub/superscripts.
 
 There are two enhancements to the superscript base recognition algorithm implemented:
 
 - Command line switch `-q` for limiting of back-sending to `DVI` group borders.
   The information in `DVI` file is logically grouped, according to scope groups in `TeX` code.
   Limiting to these groups could help for superscript bases not to jump far enough, causing `XML` tags not to get mixed up.
-  The feature could help in cases, when not well-formed `XML` document is produced due to empty bases of sub/superscripts.
 
-- Additional tracing switch `-hq` could be used for debugging purposes of this feature.
+- Additional tracing switch `-hq` could be used for debugging purposes of the latter feature.
 
-- Command line option `-p` switches on the limiting back-sending of bases through `XML` tag literals.
+- Command line option `-p` switches on the prohibition back-sending of bases over `XML` tag literals.
   Only the plain text prior to the superscript index could be jumped over.
   This limitation is stronger than behaviour of the switch `-q`,
   could be used in case the latter still produces not well-formed documents.
+  Both switches `-p` and `-q` could be used for even more stronger restriction.
 
 
 ### Math letters conversion to their Latin equivalents
@@ -134,6 +135,8 @@ to switch off the font grouping feature during the math class assignement.
 Example result file, using the `-a` switch:
 
       Master/test/math_class/test2.out.html
+
+- Tracing switch `-ha` could be used for debugging of the feature.
 
 
 ## Repository structure
