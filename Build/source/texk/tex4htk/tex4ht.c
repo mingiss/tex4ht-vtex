@@ -956,9 +956,7 @@ static int ignore_end_group;
 
 #ifdef VTEX_SSCRIPT_ADDONS
 static int cur_grp_id = 0;
-static bool stack_popped = TRUE; // stack was popped recently
 static int sv_cur_grp_id;
-static bool sv_stack_popped;
 #endif
 
 static struct del_stack_entry  *del_stack;
@@ -2888,11 +2886,6 @@ stack[stack_n+1].no_left_del = stack[stack_n].no_left_del;
 
 
    stack_n++;
-#ifdef VTEX_SSCRIPT_ADDONS
-   if (stack_popped) cur_grp_id++;
-   stack_popped = FALSE;
-#endif
-
 if( stack_n > 
 ((int) stack_len + 2)
 
@@ -2924,7 +2917,7 @@ stack[stack_n].no_left_del = stack[stack_n].sv_no_left_del;
 
    --stack_n;
 #ifdef VTEX_SSCRIPT_ADDONS
-   stack_popped = TRUE;
+   cur_grp_id++;
 #endif
 
    x_val = stack[stack_n].x_val;
@@ -11868,7 +11861,6 @@ while( special_n-- > 0 ){
 
 #ifdef VTEX_SSCRIPT_ADDONS
     cur_grp_id = 0;
-    stack_popped = TRUE;
 #endif
 
 int cr_fnt;
@@ -12129,10 +12121,6 @@ if( !back_id_off )
 }
 
     stack_n++;
-#ifdef VTEX_SSCRIPT_ADDONS
-    if (stack_popped) cur_grp_id++;
-    stack_popped = FALSE;
-#endif
 
    if( stack_n > 
 ((int) stack_len + 2)
@@ -12148,7 +12136,7 @@ case
 : {
    stack_n--;  
 #ifdef VTEX_SSCRIPT_ADDONS
-   stack_popped = TRUE;
+   cur_grp_id++;
 #endif
 
 if( !back_id_off ){
@@ -12194,7 +12182,6 @@ if( i==0 ){
   group_dvi = FALSE ;
 #ifdef VTEX_SSCRIPT_ADDONS
   cur_grp_id = 0;
-  stack_popped = TRUE;
 #endif
 }else{
   switch( get_char() ){
@@ -12434,7 +12421,6 @@ ch_id = 0;
 #ifdef VTEX_SSCRIPT_ADDONS
   ch_fl = FALSE;
   cur_grp_id = 0;
-  stack_popped = TRUE;
 #endif
 } else { 
 {              int stack_n;
@@ -12446,7 +12432,6 @@ ch_id = 0;
     group_dvi = TRUE;
 #ifdef VTEX_SSCRIPT_ADDONS
     cur_grp_id = 0;
-    stack_popped = TRUE;
 #endif
 
 while( stack[stack_n-1].end ){
@@ -12470,7 +12455,6 @@ while( p ){
     group_dvi =FALSE;
 #ifdef VTEX_SSCRIPT_ADDONS
     cur_grp_id = 0;
-    stack_popped = TRUE;
 #endif
 
 while( stack[stack_n-1].begin ){
@@ -12524,7 +12508,6 @@ span_on       = sv_span_on;
 in_span_ch    = sv_in_span_ch;
 #ifdef VTEX_SSCRIPT_ADDONS
     cur_grp_id = sv_cur_grp_id;
-    stack_popped = sv_stack_popped;
 #endif
 
 
@@ -12539,7 +12522,6 @@ sv_span_on       = span_on;
 sv_in_span_ch    = in_span_ch;
 #ifdef VTEX_SSCRIPT_ADDONS
     sv_cur_grp_id = cur_grp_id;
-    sv_stack_popped = stack_popped;
 #endif
 
 
@@ -13196,7 +13178,6 @@ page_n = 0;
 x_val = 0;   y_val = 0;   stack_n = 0;
 #ifdef VTEX_SSCRIPT_ADDONS
     cur_grp_id = 0;
-    stack_popped = TRUE;
 #endif
 
 idv_char( 
@@ -13225,7 +13206,6 @@ case
   x_val = 0;   y_val = 0;  stack_n = 0;
 #ifdef VTEX_SSCRIPT_ADDONS
     cur_grp_id = 0;
-    stack_popped = TRUE;
 #endif
 
   (IGNORED) fseek(dvi_file, 44L, 
