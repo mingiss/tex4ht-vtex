@@ -289,7 +289,7 @@
 
 #include "ProjData.h"
 #include "tex4ht.h"
-#ifdef VTEX_OTF_ADDONS
+#if defined(VTEX_OTF_ADDONS) || defined(VTEX_MATH_CLASS_ADDONS)
 #include "tex4ht_add.h"
 #endif
 
@@ -655,7 +655,7 @@ struct group_path{
 };
 
 
-#ifndef VTEX_OTF_ADDONS
+#if !(defined(VTEX_OTF_ADDONS) || defined(VTEX_MATH_CLASS_ADDONS))
 struct font_entry {
  INTEGER num;
  INTEGER scale;
@@ -1478,7 +1478,11 @@ struct send_back_entry * rev_list( ARG_I(struct send_back_entry *) );
 
 
 static struct send_back_entry *
+#ifdef VTEX_SSCRIPT_ADDONS
    back_insert( ARG_III(struct send_back_entry *, int, struct postponed_back_entry **) );
+#else
+   back_insert( ARG_II(struct send_back_entry *, int) );
+#endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
 void postpone_back_insert(struct send_back_entry *back, int id, struct postponed_back_entry **back_pending_ptr);
@@ -3090,16 +3094,26 @@ static struct send_back_entry *  back_insert
 #define SEP ,
 (
                              struct send_back_entry *back SEP 
-                             int    id SEP
+                             int    id
+#ifdef VTEX_SSCRIPT_ADDONS
+                                        SEP
                              struct postponed_back_entry **back_pending_ptr
+#endif
 )
 #undef SEP
 #else
 #define SEP ;
-(back, id, back_pending_ptr)
+(back, id
+#ifdef VTEX_SSCRIPT_ADDONS
+         , back_pending_ptr
+#endif
+                            )
                              struct send_back_entry *back SEP 
-                             int    id SEP
+                             int    id
+#ifdef VTEX_SSCRIPT_ADDONS
+                                        SEP
                              struct postponed_back_entry **back_pending_ptr
+#endif
 ;
 #undef SEP
 #endif
@@ -5230,9 +5244,6 @@ if( no_root_file ){  open_o_file(); }
            }
        if( span_size[0] )  if( *span_size[0] ){
            assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
-#ifdef VTEX_OTF_ADDONS
-           if (font_tbl[cur_fnt].font_size && font_tbl[cur_fnt].font_size[0])
-#endif
                (IGNORED) fprintf(cur_o_file,
                    span_size[0], font_tbl[cur_fnt].font_size);
            }
@@ -9956,10 +9967,18 @@ if( group_dvi ){
  ) )
     ){
        ch_id++;
+#ifdef VTEX_SSCRIPT_ADDONS
        insert_pending_backs(false);
        if (dump_back_nodes_flag) { printf("======================== back_insert(back_token):          group_dvi: %d cur_grp_id: %2d back_token: ", group_dvi, cur_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
-       back_token = back_insert ( back_token, ch_id, &back_token_pending);
+#endif
+       back_token = back_insert ( back_token, ch_id
+#ifdef VTEX_SSCRIPT_ADDONS
+                                                   , &back_token_pending
+#endif
+                                                                        );
+#ifdef VTEX_SSCRIPT_ADDONS
        if (dump_back_nodes_flag) { printf("                         back_insert(back_token):          group_dvi: %d cur_grp_id: %2d back_token: ", group_dvi, cur_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+#endif
   } }
 
 
@@ -12404,10 +12423,18 @@ for(i = stack_len; i >= 0; i--){
 
 back_group = rev_list( back_group );
 back_token = rev_list( back_token );
+#ifdef VTEX_SSCRIPT_ADDONS
 insert_pending_backs(false);
 if (dump_back_nodes_flag) { printf("======================== back_insert(back_token):          group_dvi: %d cur_grp_id: %2d back_token: ", group_dvi, cur_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
-back_token = back_insert ( back_token, 0, &back_token_pending);
+#endif
+back_token = back_insert ( back_token, 0
+#ifdef VTEX_SSCRIPT_ADDONS
+                                        , &back_token_pending
+#endif
+                                                             );
+#ifdef VTEX_SSCRIPT_ADDONS
 if (dump_back_nodes_flag) { printf("                         back_insert(back_token):          group_dvi: %d cur_grp_id: %2d back_token: ", group_dvi, cur_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+#endif
 
 ch_id = 0;
 
@@ -12693,10 +12720,18 @@ if( stack_n ){
 stack[stack_n].text_on = text_on;
 push_stack();  
 if( group_dvi ) {
+#ifdef VTEX_SSCRIPT_ADDONS
    insert_pending_backs(false);
    if (dump_back_nodes_flag) { printf("======================== back_insert(back_group):          group_dvi: %d cur_grp_id: %2d back_token: ", group_dvi, cur_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
-   back_group = back_insert ( back_group, push_id, &back_group_pending);
+#endif
+   back_group = back_insert ( back_group, push_id
+#ifdef VTEX_SSCRIPT_ADDONS
+                                                 , &back_group_pending
+#endif
+                                                                      );
+#ifdef VTEX_SSCRIPT_ADDONS
    if (dump_back_nodes_flag) { printf("                         back_insert(back_group):          group_dvi: %d cur_grp_id: %2d back_token: ", group_dvi, cur_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+#endif
 }
 
 
@@ -13422,16 +13457,22 @@ while( --i ) (void)  putc( get_char(), log_file );
 } }
 
  }
+#ifdef VTEX_SSCRIPT_ADDONS
      else if (ch == '~')
      {
          if (i >= 2)
          {
-             if ((get_char() == '<') && (get_char() == '*'))
-                 insert_pending_backs(true);
-             i -= 2;
+             i--;
+             if (get_char() == '<')
+             {
+                i--;
+                if (get_char() == '*')
+                    insert_pending_backs(true);
+             }
          }
          while (i--) get_char();
      }
+#endif
      else   while( i-- ) (void)  get_char();
   }else if( dvi_flag ){ 
 visible_cnt = TRUE;   
