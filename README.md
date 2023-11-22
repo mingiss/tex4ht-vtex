@@ -84,7 +84,7 @@ when that character already is inside of a previous tagged structure,
 the not well-formed output file is produced.
 It could happen especially due to empty bases of sub/superscripts.
 
-There are two enhancements to the superscript base recognition algorithm implemented:
+There are two experimental enhancements to the superscript base recognition algorithm implemented:
 
 - Command line switch `-q` for limiting of back-sending to `DVI` group borders and depth.
   The information in `DVI` file is logically grouped, according to scope groups in `TeX` code.
