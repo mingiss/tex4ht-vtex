@@ -86,7 +86,7 @@ It could happen especially due to empty bases of sub/superscripts.
 
 There are two enhancements to the superscript base recognition algorithm implemented:
 
-- Command line switch `-q` for limiting of back-sending to `DVI` group borders.
+- Command line switch `-q` for limiting of back-sending to `DVI` group borders and depth.
   The information in `DVI` file is logically grouped, according to scope groups in `TeX` code.
   Limiting to these groups could help for superscript bases not to jump far enough, causing `XML` tags not to get mixed up.
 
