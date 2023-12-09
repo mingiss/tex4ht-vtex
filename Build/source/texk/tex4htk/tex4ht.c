@@ -787,7 +787,7 @@ static BOOL cvt_to_math_var = FALSE;
 #ifdef VTEX_SSCRIPT_ADDONS
 // flag for not sending back base tags of sub-/superscripts over the t4ht= special literals with XML tags inside
 // set by command line parameter -p
-static BOOL dont_send_base_back = FALSE;
+static BOOL parse_send_base_back = FALSE;
 
 // flag for postpone sending back of base tags for sub-/superscripts to nearer DVI group limits
 // set by command line parameter -q
@@ -1023,7 +1023,8 @@ static BOOL dump_math_class_flag = FALSE;
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
-static BOOL dump_back_nodes_flag = FALSE;
+static BOOL dump_parse_back_nodes_flag = FALSE;
+static BOOL dump_postponed_back_nodes_flag = FALSE;
 #endif
 
 static BOOL dumped_env = FALSE;
@@ -1196,7 +1197,7 @@ static const U_CHAR *warn_err_mssg[]={
                 "a"
 #endif
 #ifdef VTEX_SSCRIPT_ADDONS
-                "q"
+                "pq"
 #endif
                   "A]]      trace: e-errors/warnings, f-htf, F-htf search\n"
 "                           g-groups, s-specials, v-env, V-env search, "
@@ -1318,7 +1319,7 @@ static BOOL trace_special = FALSE;
 void dump_math_class(int cur_fnt, int ch, int math_class)
 {
     bool proper_font = ((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
-    printf(">>>>>>>>>>>> fnt: %s fn%d family: %s htf_family: %s ch: %d %c math_class: %d\n", proper_font ? font_tbl[cur_fnt].name : "", cur_fnt, proper_font ? font_tbl[cur_fnt].family_name : "", proper_font ? font_tbl[cur_fnt].htf_family_name : "", ch, ch, math_class);
+    printf("\n>>>>>>>>>>>> fnt: %s fn%d family: %s htf_family: %s ch: %d %c math_class: %d\n", proper_font ? font_tbl[cur_fnt].name : "", cur_fnt, proper_font ? font_tbl[cur_fnt].family_name : "", proper_font ? font_tbl[cur_fnt].htf_family_name : "", ch, ch, math_class);
 
     if (proper_font)
     {
@@ -1352,7 +1353,7 @@ void dump_back_tokens(const struct send_back_entry* back)
     const struct send_back_entry *cur_btoken = back;
     while (cur_btoken)
     {
-        printf("%d %d %d %d; ", cur_btoken->token_stack_n, cur_btoken->token_open_grp_id, cur_btoken->token_close_grp_id, cur_btoken->id);
+        printf("%d %d %d %d; ", cur_btoken->id, cur_btoken->token_stack_n, cur_btoken->token_open_grp_id, cur_btoken->token_close_grp_id);
         if (cur_btoken->id == -1) break;
         cur_btoken = cur_btoken->next;
     }
@@ -2041,14 +2042,14 @@ case
 141 
 :
 #ifdef VTEX_SSCRIPT_ADDONS
-    if (dump_back_nodes_flag) { printf("------------------ [ group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+    if (dump_postponed_back_nodes_flag) { printf("\n------------------ [ group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
 break;
      case 
 142 
 : {
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("------------------ ] group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n------------------ ] group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
     break; }
      default: {
@@ -3034,7 +3035,7 @@ static struct send_back_entry *  rev_list
 #ifdef VTEX_SSCRIPT_ADDONS
 void postpone_back_insert(struct send_back_entry* back, int id, struct postponed_back_entry** back_pending_ptr)
 {
-if (dump_back_nodes_flag){ printf("======================== postpone_back_insert():           group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d                   back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n======================== postpone_back_insert():           group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d                   back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
 
     if (postpone_send_base_back)
     {
@@ -3059,13 +3060,13 @@ if (dump_back_nodes_flag){ printf("======================== postpone_back_insert
         }
     }
 
-if (dump_back_nodes_flag){ printf("                         postpone_back_insert():           group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d                   back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n                         postpone_back_insert():           group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d                   back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
 }
 
 
 void insert_pending_backs(bool flush_fl)
 {
-if (dump_back_nodes_flag){ printf("======================== insert_pending_backs(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n======================== insert_pending_backs(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 
     if (group_dvi && postpone_send_base_back)
     {
@@ -3091,7 +3092,7 @@ if (dump_back_nodes_flag){ printf("======================== insert_pending_backs
         }
     }
 
-if (dump_back_nodes_flag){ printf("                         insert_pending_backs(back_group): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n                         insert_pending_backs(back_group): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 }
 #endif
 
@@ -3126,7 +3127,7 @@ static struct send_back_entry *  back_insert
 #endif
 #ifdef VTEX_SSCRIPT_ADDONS
 {
-if (dump_back_nodes_flag){ printf("======================== back_insert():                    group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d\n"
+if (dump_postponed_back_nodes_flag){ printf("\n======================== back_insert():                    group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d\n"
             "                                                                                                                back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
 
     if (
@@ -3143,7 +3144,7 @@ if (dump_back_nodes_flag){ printf("======================== back_insert():      
     else
         postpone_back_insert(back, id, back_pending_ptr);
 
-if (dump_back_nodes_flag){ printf("                         back_insert():                    group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d\n"
+if (dump_postponed_back_nodes_flag){ printf("\n                         back_insert():                    group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d\n"
             "                                                                                                                back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
   return back;
 }
@@ -3166,7 +3167,7 @@ static struct send_back_entry *check_back_insert
 #endif
 {
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("======================== check_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n======================== check_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
 #endif
     if (
             (!postpone_send_base_back) ||
@@ -3181,7 +3182,7 @@ if (dump_back_nodes_flag){ printf("======================== check_back_insert():
         back = do_back_insert(back, id);
 
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("                         check_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n                         check_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
 #endif
   return back;
 }
@@ -3205,7 +3206,7 @@ static struct send_back_entry *do_back_insert
 #endif
 {
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("======================== do_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d     back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n======================== do_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d     back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
 #endif
   while( back->id == id ){
                          struct send_back_entry *p;
@@ -3216,7 +3217,7 @@ if (dump_back_nodes_flag){ printf("======================== do_back_insert(): gr
     }
 
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("                         do_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d     back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n                         do_back_insert(): group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d id: %5d back->token_open_grp_id: %d back->token_close_grp_id: %d back->id: %5d     back: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, id, back->token_open_grp_id, back->token_close_grp_id, back->id); dump_back_tokens(back); dump_back_pending(); printf("\n"); }
 #endif
   return back;
 }
@@ -3950,7 +3951,7 @@ assert((cur_fnt >= 0) && (cur_fnt < font_tbl_size));
 #ifdef VTEX_MATH_CLASS_ADDONS
     if (dump_math_class_flag)
     {
-        printf("------- set_ch_class():\n");
+        printf("\n------- set_ch_class():\n");
         dump_math_class(cur_fnt, ch, math_class);
     }
 #endif
@@ -4050,7 +4051,7 @@ static  int math_class_of
 #ifdef VTEX_MATH_CLASS_ADDONS
     if (dump_math_class_flag)
     {
-        printf("====== math_class_of():\n");
+        printf("\n====== math_class_of():\n");
         dump_math_class(cur_fnt, ch, math_class);
     }
 #endif
@@ -7263,9 +7264,14 @@ dump_env_search = TRUE;
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
+    if (trace == 'A' || trace == 'p')
+    {
+        dump_parse_back_nodes_flag = TRUE;
+        unkn_opt = FALSE;
+    }
     if (trace == 'A' || trace == 'q')
     {
-        dump_back_nodes_flag = TRUE;
+        dump_postponed_back_nodes_flag = TRUE;
         unkn_opt = FALSE;
     }
 #endif
@@ -7376,7 +7382,7 @@ ext = p+1;
 #endif
 #ifdef VTEX_SSCRIPT_ADDONS
     case 'p':
-        dont_send_base_back = TRUE;
+        parse_send_base_back = TRUE;
         break;
     case 'q':
         postpone_send_base_back = TRUE;
@@ -9996,7 +10002,7 @@ if( group_dvi ){
        ch_id++;
 #ifdef VTEX_SSCRIPT_ADDONS
        insert_pending_backs(false);
-       if (dump_back_nodes_flag) { printf("======================== back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+       if (dump_postponed_back_nodes_flag) { printf("\n======================== back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
        back_token = back_insert ( back_token, ch_id
 #ifdef VTEX_SSCRIPT_ADDONS
@@ -10004,7 +10010,7 @@ if( group_dvi ){
 #endif
                                                                         );
 #ifdef VTEX_SSCRIPT_ADDONS
-       if (dump_back_nodes_flag) { printf("                         back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+       if (dump_postponed_back_nodes_flag) { printf("\n                         back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
   } }
 
@@ -11344,7 +11350,7 @@ while( special_n-- > 0 )  (void) get_char();
 
   break; }
   case '=': { 
-#ifdef VTEX_SPACING_ADDONS
+#if defined(VTEX_SPACING_ADDONS) || defined(VTEX_SSCRIPT_ADDONS)
    int tag_buf_len = special_n;
    char *tag_buf = malloc(tag_buf_len + 1);
    assert(tag_buf);
@@ -11358,7 +11364,7 @@ while( special_n-- > 0 ){
    if ((ch == '<') || (ch == '>'))
         ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
 #endif
-#ifdef VTEX_SPACING_ADDONS
+#if defined(VTEX_SPACING_ADDONS) || defined(VTEX_SSCRIPT_ADDONS)
    tag_buf[tag_buf_len - special_n - 1] = ch;
 #endif
    q = hcode_repl;
@@ -11373,12 +11379,21 @@ while( special_n-- > 0 ){
       while( *chr != 0 ){ put_char( *chr ); chr++; }
    } else { put_char( ch ); }
 }
-#ifdef VTEX_SPACING_ADDONS
+#if defined(VTEX_SPACING_ADDONS) || defined(VTEX_SSCRIPT_ADDONS)
    tag_buf[tag_buf_len] = '\0';
+#ifdef VTEX_SPACING_ADDONS
    const char *test_tag = "<math ";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
    test_tag = "</math>";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+#endif
+
+   if (dump_parse_back_nodes_flag)
+   {
+        printf("\n.................. %s\n", tag_buf);
+        printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
+   }
+
    free(tag_buf);
    tag_buf = NULL;
 #endif
@@ -11837,30 +11852,23 @@ if( p->action == '>' ){
 }  }
 
 
-#ifdef VTEX_SSCRIPT_ADDONS
-} else if ((in_ch == '<') && dont_send_base_back) {
+#if defined(VTEX_SSCRIPT_ADDONS) || defined(VTEX_SPACING_ADDONS)
+} else if ((in_ch == '<') && parse_send_base_back) {
     in_ch = get_char();
     special_n -= 2;
-    if ((in_ch == '*') && (!ch_fl) && dont_send_base_back) // supressed back sending special -- placing it right here
+    if ((in_ch == '*') && (!ch_fl) && parse_send_base_back) // supressed back sending special -- placing it right here
     {
-        
-#ifdef VTEX_SPACING_ADDONS
    int tag_buf_len = special_n;
    char *tag_buf = malloc(tag_buf_len + 1);
    assert(tag_buf);
-#endif
 while( special_n-- > 0 ){
         int ch;
         BOOL flag;
         struct hcode_repl_typ *q;
    ch = get_char();
-#ifdef VTEX_SSCRIPT_ADDONS
    if ((ch == '<') || (ch == '>'))
         ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
-#endif
-#ifdef VTEX_SPACING_ADDONS
    tag_buf[tag_buf_len - special_n - 1] = ch;
-#endif
    q = hcode_repl;
    flag = FALSE;
    while( q != (struct hcode_repl_typ*) 0 ){
@@ -11873,15 +11881,22 @@ while( special_n-- > 0 ){
       while( *chr != 0 ){ put_char( *chr ); chr++; }
    } else { put_char( ch ); }
 }
-#ifdef VTEX_SPACING_ADDONS
    tag_buf[tag_buf_len] = '\0';
+
+   if (dump_parse_back_nodes_flag)
+   {
+        printf("\n........:::::::::: %s\n", tag_buf);
+        printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
+   }
+
+#ifdef VTEX_SPACING_ADDONS
    const char *test_tag = "<math ";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
    test_tag = "</math>";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
+#endif
    free(tag_buf);
    tag_buf = NULL;
-#endif
 
 
     }
@@ -12177,7 +12192,7 @@ if( !back_id_off )
 
  ){ warn_i(ERR_SYS_40); }
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("======================== [                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n======================== [                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
    break;
 }
@@ -12208,7 +12223,7 @@ if( !back_id_off ){
 
    stack[stack_n].stack_id = -1;
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("======================== ]                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n======================== ]                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
    break;
 }
@@ -12241,12 +12256,23 @@ if( i==0 ){
            if( (ch = get_char()) == '*' )
              { 
               struct send_back_entry *p, *q, *t=0;
+              char *tag = get_str(i - 1);
+#ifdef VTEX_SSCRIPT_ADDONS
+              if (dump_parse_back_nodes_flag)
+              {
+                    printf("\n.......,,,,,,,,,,, %s\n", tag);
+                    printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
+              }
+#endif
 if( back_id_off
 #ifdef VTEX_SSCRIPT_ADDONS                      // there were xml tags after the last character -- ignoring back sending special --
-        || ((!ch_fl) && dont_send_base_back)    // on the second run it will be placed right here as a verbatim special
+        || ((!ch_fl) && parse_send_base_back)    // on the second run it will be placed right here as a verbatim special
 #endif
             ){
-   while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
+// while( --i ){ (IGNORED) get_char();  } // there are left i - 1 chars
+   free(tag);
+   tag = NULL;
+
 } else {
    p =  m_alloc(struct send_back_entry,1);
 #ifdef VTEX_SSCRIPT_ADDONS
@@ -12254,7 +12280,8 @@ if( back_id_off
    p->token_open_grp_id = cur_open_grp_id;
    p->token_close_grp_id = cur_close_grp_id;
 #endif
-   p->send = get_str( (int)( i - 1 ));
+   p->send = tag;
+   tag = NULL;
    if( ch_token ){
      
 p->id = sv_id;
@@ -12279,7 +12306,7 @@ if( sv_id >  back_token->id ){
    }
 }
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("========================= new back_token:                  group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d sv_id: %5d\n"
+if (dump_postponed_back_nodes_flag){ printf("\n========================= new back_token:                  group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d sv_id: %5d\n"
             "                                                                                    back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id, sv_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
  }
@@ -12343,13 +12370,17 @@ while( --i ) *q++ = get_char();
 
 
 #ifdef VTEX_SSCRIPT_ADDONS
-     } else if ((ch == '=') && dont_send_base_back){
-        while (i--)
+     } else if ((ch == '=') && parse_send_base_back){
+        char *tag = get_str(i);
+        if (strchr(tag, '<') || strchr(tag, '>'))
+            ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+        if (dump_parse_back_nodes_flag)
         {
-            int ch = get_char();
-            if ((ch == '<') || (ch == '>'))
-                ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
+            printf("\n.......;;;;;;;;;;; %s\n", tag);
+            printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
         }
+        free(tag);
+        tag = NULL;
 #endif
      } else {
        (IGNORED) fseek(dvi_file, (long) i, 
@@ -12459,7 +12490,7 @@ back_group = rev_list( back_group );
 back_token = rev_list( back_token );
 #ifdef VTEX_SSCRIPT_ADDONS
 insert_pending_backs(false);
-if (dump_back_nodes_flag) { printf("======================== back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag) { printf("\n======================== back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
 back_token = back_insert ( back_token, 0
 #ifdef VTEX_SSCRIPT_ADDONS
@@ -12467,7 +12498,7 @@ back_token = back_insert ( back_token, 0
 #endif
                                                              );
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag) { printf("                         back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag) { printf("\n                         back_insert(back_token):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
 
 ch_id = 0;
@@ -12761,7 +12792,7 @@ push_stack();
 if( group_dvi ) {
 #ifdef VTEX_SSCRIPT_ADDONS
    insert_pending_backs(false);
-   if (dump_back_nodes_flag) { printf("======================== back_insert(back_group):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+   if (dump_postponed_back_nodes_flag) { printf("\n======================== back_insert(back_group):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
    back_group = back_insert ( back_group, push_id
 #ifdef VTEX_SSCRIPT_ADDONS
@@ -12769,7 +12800,7 @@ if( group_dvi ) {
 #endif
                                                                       );
 #ifdef VTEX_SSCRIPT_ADDONS
-   if (dump_back_nodes_flag) { printf("                         back_insert(back_group):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+   if (dump_postponed_back_nodes_flag) { printf("\n                         back_insert(back_group):          group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
 #endif
 }
 
@@ -12990,7 +13021,7 @@ if( stack[stack_n].active_class_del ){
 }
 
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("........................ [                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n........................ [                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
     insert_pending_backs(false);
 #endif
 
@@ -13182,7 +13213,7 @@ if (
 text_on = stack[stack_n].text_on;
 
 #ifdef VTEX_SSCRIPT_ADDONS
-if (dump_back_nodes_flag){ printf("........................ ]                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
+if (dump_postponed_back_nodes_flag){ printf("\n........................ ]                                 group_dvi: %d stack_n: %2d cur_open_grp_id: %2d cur_close_grp_id: %2d back_token: ", group_dvi, stack_n, cur_open_grp_id, cur_close_grp_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n"); }
     insert_pending_backs(false);
 #endif
   break; }
