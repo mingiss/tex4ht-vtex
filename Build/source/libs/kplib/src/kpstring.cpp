@@ -76,6 +76,9 @@ int strcmp(const uchar *str1, const uchar *str2)
 int strcmp(const uchar *str1, const char *str2)
    { return (strcmp((const char *)str1, str2)); }
 
+int strcmp(const char *str1, const uchar *str2)
+   { return (strcmp(str1, (const char *)str2)); }
+
 int strncmp(const uchar *str1, const uchar *str2, size_t nbytes)
    { return (strncmp((const char *)str1, (const char *)str2, nbytes)); }
 

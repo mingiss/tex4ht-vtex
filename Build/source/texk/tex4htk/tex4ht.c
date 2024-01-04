@@ -1023,7 +1023,7 @@ static BOOL dump_math_class_flag = FALSE;
 #endif
 
 #ifdef VTEX_SSCRIPT_ADDONS
-static BOOL dump_parse_back_nodes_flag = FALSE;
+/* static */ BOOL dump_parse_back_nodes_flag = FALSE;
 static BOOL dump_postponed_back_nodes_flag = FALSE;
 #endif
 
@@ -1233,66 +1233,62 @@ static const U_CHAR *warn_err_mssg[]={
 "   [-p]            blocks sending back over XML tags\n"
 "   [-q]            limits sending back to a nearer DVI group\n"
 #endif
-,                                // ERR_HELP
+,                                                       // ERR_HELP
 "Can't find/open file `%s'\n",                          // ERR_IN_FILE
 "Can't open output file for `%s'\n",                    // ERR_OUT_FILE
 "Can't close file `%s' (file is not open)\n",           // ERR_CLOSE_FILE
-"Insufficient memory\n",                                 // ERR_MEM
-"Bad character code: %d\n",                              // ERR_BAD_CHAR
-"Can't find font number %d\n",                           // ERR_FONT_NUM
-"Improper dvi file\n",                                   // ERR_DVI_FILE
-"Improper op while scanning font defs in postamble\n",   // ERR_FONT_DEF
-"Problem with command line\n",                           // ERR_CMD_LINE
+"Insufficient memory\n",                                // ERR_MEM
+"Bad character code: %d\n",                             // ERR_BAD_CHAR
+"Can't find font number %d\n",                          // ERR_FONT_NUM
+"Improper dvi file\n",                                  // ERR_DVI_FILE
+"Improper op while scanning font defs in postamble\n",  // ERR_FONT_DEF
+"Problem with command line\n",                          // ERR_CMD_LINE
 "Font definition repeated in postamble\n",              // ERR_FONT_DEF_REP
 "Empty entry in font environment variable\n",           // ERR_FONT_EMPTY_ENV
-"Can't access directory `%s\n'",                       // ERR_DIR_ACC
+"Can't access directory `%s\n'",                        // ERR_DIR_ACC
 "Too many directories in font environment variable\n",  // ERR_FONT_DIR_ENV
 "Missing fonts, can't proceed\n",                       // ERR_NO_FONTS
-"Invalid header in file `%s'\n",                       // ERR_HEAD
+"Invalid header in file `%s'\n",                        // ERR_HEAD
 "Checksum inconsistent\n",                              // ERR_CHKSUM
 "MAXFONTS too small: %d\n",                             // ERR_MAXFONTS
-"Improper signature at end of file `%s.htf'\n",        // ERR_EOF_SIG
-"Improper signature at start of file `%s.htf'\n",      // ERR_STA_SIG
-"Improper file `%s.htf'\n",                            // ERR_HTF_FILE_FMT
-"Couldn't find font `%s.htf' (char codes: ",           // ERR_HTF_FILE
+"Improper signature at end of file `%s.htf'\n",         // ERR_EOF_SIG
+"Improper signature at start of file `%s.htf'\n",       // ERR_STA_SIG
+"Improper file `%s.htf'\n",                             // ERR_HTF_FILE_FMT
+"Couldn't find font `%s.htf' (char codes: ",            // ERR_HTF_FILE
 "File `%s.htf' starts/ends with character code %d (instead of %d)\n",  // ERR_HTF_STA_EOF
 "Implementation problem\n",                             // ERR_IMPL
 "Improper groups in \\special{t4ht+}... idv[%d]\n",     // ERR_SPC_GRP
-"Too many characters (> %d) for map line: `%c'\n",     // ERR_MAP_LINE_OVFL
+"Too many characters (> %d) for map line: `%c'\n",      // ERR_MAP_LINE_OVFL
 "Extra characters in \\special{t4ht%c...",              // ERR_SPC_OVFL
 "Page break within a ch map/picture\n",                 // ERR_PBR
 "Char code >255 in htf file: %d\n",                     // ERR_CHR_CODE_OVFL
 "Improper char for code in htf file: %c\n",             // ERR_CHR_HTF
-
-"Illegal storage address\n", 
-"Floating-point\n",          
-"Interrupt with Cntr-C\n",   
-
-                            // ERR_STO_ADDR, ERR_FLOAT, ERR_CTRLC
+"Illegal storage address\n",                            // ERR_STO_ADDR
+"Floating-point\n",                                     // ERR_FLOAT
+"Interrupt with Cntr-C\n",                              // ERR_CTRLC
 #ifdef DOS_WIN32
 "%c-script too long in tex4ht.env \n",                  // ERR_SCPT_OVFL
 #else
 "%c-script too long in tex4ht.env (.tex4ht)\n",
 #endif
-"Too many rows (> %d) for map: `%c'\n",                // ERR_MAP_ROWS_OVFL
+"Too many rows (> %d) for map: `%c'\n",                 // ERR_MAP_ROWS_OVFL
 "More than 256 strings in font\n",                      // ERR_FNT_OVFL
 "\\special{t4ht;%c...}?\n",                             // ERR_SPC_CHAR
 "\\special{t4ht;|%s}?\n",                               // ERR_SPC_BAR_STR
 "\\special{t4ht~!%s}?\n",                               // ERR_SPC_TILDE_STR
 "\\special{t4ht\"...%s}?\n",                            // ERR_SPC_BSL_STR
 "System error 40\n",                                    // ERR_SYS_40
-"`%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n",
-                                                        // ERR_SPC_BAD_CHAR
+"`%c' in \\special{t4ht@...} or \\special{t4ht@-...}?\n", // ERR_SPC_BAD_CHAR
 "\\special{t4ht~...} without \\special{t4ht~}\n",       // ERR_SPC_NO_TILDE
 "Ignoring \\special{t4ht.%s}\n",                        // ERR_SPC_IGNORE
 "PUSH for \\special{t4ht<...%s}?\n",                    // ERR_SPC_PUSH
 "Bad character code (%d) in \\special{t4h~}...\n",      // ERR_SPC_BAD_CHAR_CODE
 "Page break in \\special{t4h~}...\n",                   // ERR_SPC_PBR
-"tex4ht.fls: Couldn't find file `%s'\n",               // ERR_FLS_NO_FILE
+"tex4ht.fls: Couldn't find file `%s'\n",                // ERR_FLS_NO_FILE
 "Improper entry (line %d)\n",                           // ERR_ENTRY_LINE
-"Improper environment variable %s: `%s'\n",            // ERR_ENV_VAR
+"Improper environment variable %s: `%s'\n",             // ERR_ENV_VAR
 "Missing %s\n",                                         // ERR_MISSING
-"Can't back from file `%s\n'",                         // ERR_BACK_FILE
+"Can't back from file `%s\n'",                          // ERR_BACK_FILE
 "\\special{t4ht%s}?\n",                                 // ERR_SPC_QUEST
 "Improper -v option\n",                                 // ERR_PAR_V
 "Option -r value out of range: %d\n",                   // ERR_PAR_R
@@ -1301,6 +1297,8 @@ static const U_CHAR *warn_err_mssg[]={
 "File read error: %s\n",                                // ERR_FILE_READ
 "Improper file format: %s\n",                           // ERR_FILE_FORMAT
 "Fatal error, file: %s, line: %d\n",                    // ERR_FATAL
+"File output error: %s\n",                              // ERR_FILE_WRITE
+"Tag sequence not well formed: %s\n",                   // ERR_NOT_WELL
 
  "" };
 
@@ -1654,7 +1652,7 @@ static void warn_i_int_2( ARG_III(int,int,int) );
 /* static */ void warn_i_str( ARG_II(int,const char *) );
 
 
-static void warn_i_str2( ARG_III(int,const char *,const char *) );
+/* static */ void warn_i_str2( ARG_III(int,const char *,const char *) );
 
 
 /* static */ void err_i( ARG_II(int, ...) );
@@ -3211,6 +3209,16 @@ if (dump_postponed_back_nodes_flag){ printf("\n======================== do_back_
   while( back->id == id ){
                          struct send_back_entry *p;
     print_f( back->send );
+
+#ifdef VTEX_SSCRIPT_ADDONS
+    if (dump_parse_back_nodes_flag)
+    {
+        printf("\n.......=========== do_back_insert(): %s\n", back->send);
+        printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
+    }
+    parse_chunk(back->send);
+#endif
+
     back = (p = back)->next;
     free((void *)  p->send );
     free((void *)  p );
@@ -6694,7 +6702,7 @@ static void warn_i_int_2
 
 
 
-static void warn_i_str2
+/* static */ void warn_i_str2
 #ifdef ANSI
 #define SEP ,
 (
@@ -7521,6 +7529,11 @@ no_root_file = name;
 
  }
 }
+
+
+#ifdef VTEX_SSCRIPT_ADDONS
+init_xml_doc(no_root_file);
+#endif
 
 
   
@@ -10729,7 +10742,16 @@ if( special_n ){
       *str = get_char(); str++;
    }
    *str = 0;
-   
+
+#ifdef VTEX_SSCRIPT_ADDONS
+   if (dump_parse_back_nodes_flag)
+   {
+        printf("\n.........///////// storing hcode_repl node: %s\n", repl);
+        printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
+   }
+   // parse_chunk(repl);
+#endif
+
 if( hcode_repl != (struct hcode_repl_typ*) 0 ){
    if( *(hcode_repl->str) == *repl ){
       p = hcode_repl;
@@ -11352,7 +11374,7 @@ while( special_n-- > 0 )  (void) get_char();
   case '=': { 
 #if defined(VTEX_SPACING_ADDONS) || defined(VTEX_SSCRIPT_ADDONS)
    int tag_buf_len = special_n;
-   char *tag_buf = malloc(tag_buf_len + 1);
+   unsigned char *tag_buf = malloc(tag_buf_len + 1);
    assert(tag_buf);
 #endif
 while( special_n-- > 0 ){
@@ -11390,9 +11412,10 @@ while( special_n-- > 0 ){
 
    if (dump_parse_back_nodes_flag)
    {
-        printf("\n.................. %s\n", tag_buf);
+        printf("\n.................. just checking inside_math at t4ht=: %s\n", tag_buf);
         printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
    }
+   parse_chunk(tag_buf);
 
    free(tag_buf);
    tag_buf = NULL;
@@ -11885,9 +11908,10 @@ while( special_n-- > 0 ){
 
    if (dump_parse_back_nodes_flag)
    {
-        printf("\n........:::::::::: %s\n", tag_buf);
+        printf("\n........:::::::::: just checking inside_math at t4ht~<*: %s\n", tag_buf);
         printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
    }
+   parse_chunk(tag_buf);
 
 #ifdef VTEX_SPACING_ADDONS
    const char *test_tag = "<math ";
@@ -12260,9 +12284,10 @@ if( i==0 ){
 #ifdef VTEX_SSCRIPT_ADDONS
               if (dump_parse_back_nodes_flag)
               {
-                    printf("\n.......,,,,,,,,,,, %s\n", tag);
+                    printf("\n.......,,,,,,,,,,, storing back_token node: %s\n", tag);
                     printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
               }
+              // parse_chunk(tag);
 #endif
 if( back_id_off
 #ifdef VTEX_SSCRIPT_ADDONS                      // there were xml tags after the last character -- ignoring back sending special --
@@ -12371,14 +12396,16 @@ while( --i ) *q++ = get_char();
 
 #ifdef VTEX_SSCRIPT_ADDONS
      } else if ((ch == '=') && parse_send_base_back){
-        char *tag = get_str(i);
+        unsigned char *tag = get_str(i);
         if (strchr(tag, '<') || strchr(tag, '>'))
             ch_fl = FALSE; // verbatim xml tags hopefully -- switching off later back sendings
         if (dump_parse_back_nodes_flag)
         {
-            printf("\n.......;;;;;;;;;;; %s\n", tag);
+            printf("\n.......;;;;;;;;;;; just checking t4ht= for presence of tags: %s\n", tag);
             printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
         }
+        // parse_chunk(tag);
+
         free(tag);
         tag = NULL;
 #endif
@@ -13966,6 +13993,9 @@ for( i = 8 - file_n % 4;  i;  i-- ) idv_char(
 
  }
 
+#ifdef VTEX_SSCRIPT_ADDONS
+    finit_xml_doc();
+#endif
 
    return 0;
 }

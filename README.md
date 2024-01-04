@@ -345,3 +345,5 @@ environment configure scripts are provided here.
 - [ ] Rename `tex4ht_vtex` / `tex4ht-vtex` to `xtex4ht`.
 
 - [ ] Free all allocated memory (`font_tbl[].name`, `font_tbl[].family_name`, `font_tbl[].htf_family_name`, `font_tbl[].math`, `font_tbl[].math_closing`, etc.).
+
+- [ ] implement dump_otf_mapping through command line switch -ho for tracing of get_otf_fm() etc.

@@ -50,6 +50,7 @@ extern PLAIN_C void err_i(/* enum err_codes */ int nErrCode, ...);
 extern PLAIN_C void err_i_str(/* enum err_codes */ int nErrCode, const char *pszErrMsg);
 extern PLAIN_C void warn_i(/* enum err_codes */ int nErrCode);
 extern PLAIN_C void warn_i_str(/* enum err_codes */ int nErrCode, const char *pszErrMsg);
+extern PLAIN_C void warn_i_str2(/* enum err_codes */ int nErrCode, const char *pszErrMsg1, const char *pszErrMsg2);
 extern PLAIN_C void warn_i_int(/* enum err_codes */ int nErrCode, int nSupplErrCode);
 
 // new common definitions
@@ -137,7 +138,13 @@ ERR_BUF_OVFL,
 ERR_FILE_NFOUND,
 ERR_FILE_READ,
 ERR_FILE_FORMAT,
-ERR_FATAL
+ERR_FATAL,
+ERR_FILE_WRITE,
+ERR_NOT_WELL
 };
+
+#ifdef VTEX_SSCRIPT_ADDONS
+extern BOOL dump_parse_back_nodes_flag;
+#endif
 
 #endif // #ifndef TEX4HT_ADD_H_INCLUDED

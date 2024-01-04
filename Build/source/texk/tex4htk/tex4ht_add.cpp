@@ -153,7 +153,7 @@ void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE 
         {
             while (*ps_name == ' ')
                 ps_name++;
-printf(":::::::::::::::: [%s] [%s] [%s] [%s] [%s]\n", tfm_name, new_font.name, new_font.span_class, ps_name, font_style?font_style:"");
+            cout << ":::::::::::::::: [" << tfm_name << "] [" << new_font.name << "] [" << new_font.span_class << "] [" << ps_name << "] [" << (font_style?font_style:"") << "]" << endl;
             if (font_name)
             {
                 while (*font_name == ' ')
@@ -190,7 +190,7 @@ printf(":::::::::::::::: [%s] [%s] [%s] [%s] [%s]\n", tfm_name, new_font.name, n
                     }
                 }
             }
-printf(":::::::::::::::: [%s] [%s] [%s] [%s] [%s]\n", tfm_name, new_font.name, new_font.span_class, ps_name, font_style?font_style:"");
+            cout << ":::::::::::::::: [" << tfm_name << "] [" << new_font.name << "] [" << new_font.span_class << "] [" << ps_name << "] [" << (font_style?font_style:"") << "]" << endl;
 
             if (strlen(ps_name) > PATH_MAX)
                 err_i_str(ERR_BUF_OVFL, ps_name);
@@ -343,3 +343,84 @@ void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDL
     wch_buf[ix++] = 0;
 }
 #endif // #ifdef VTEX_OTF_ADDONS
+
+#ifdef VTEX_SSCRIPT_ADDONS
+TiXmlDocument *xml_doc = NULL;
+TiXmlNode *cur_node = NULL;
+
+void init_xml_doc(const char *filename)
+{
+    KpString fname(filename);
+    fname += ".trace.xml";
+    cur_node = xml_doc = new TiXmlDocument((const char *)fname.c_str());
+    assert(xml_doc);
+}
+
+void finit_xml_doc(void)
+{
+    if (xml_doc)
+    {
+        if (!xml_doc->SaveFile())
+            err_i_str(ERR_FILE_WRITE, xml_doc->Value());
+        delete xml_doc;
+    }
+    cur_node = xml_doc = NULL;
+}
+
+void add_new_child(const unsigned char *tag)
+{
+    assert(cur_node);
+    if (dump_parse_back_nodes_flag)
+        cout << "...... add_new_child(\"" << tag << "\")" << endl;
+    TiXmlElement new_node((const char *)tag);
+    cur_node = cur_node->InsertEndChild(new_node);
+}
+
+void close_cur_node(const unsigned char *tag)
+{
+    assert(cur_node);
+    if (dump_parse_back_nodes_flag)
+        cout << "...... close_cur_node(\"" << tag << "\") [" << cur_node->Value() << "]" << endl;
+    if (strcmp(cur_node->Value(), tag))
+        warn_i_str(ERR_NOT_WELL, (const char *)tag);
+    else if (cur_node != xml_doc)
+        cur_node = cur_node->Parent();
+}
+
+void parse_chunk(const unsigned char *chunk)
+{
+    KpString chunk_str(chunk);
+
+    if (dump_parse_back_nodes_flag)
+        cout << "...... parse_chunk(\"" << chunk_str << "\")" << endl;
+
+    vector<KpString> st_tags;
+    chunk_str.Split("<", st_tags);
+    for (vector<KpString>::iterator st_it = st_tags.begin(); st_it < st_tags.end(); st_it++)
+        if (st_it->c_str())
+        {
+            vector<KpString> end_tags;
+            st_it->Split(">", end_tags);
+            switch (end_tags[0][0])
+            {
+            case '!': // comment
+                break;
+            case '?': // instruction
+                break;
+            case '/': // end tag
+                close_cur_node(end_tags[0].c_str() + 1);
+                break;
+            default:
+                if (end_tags[0][end_tags[0].length() - 1] == '/') // TODO: single tag
+                {
+                }
+                vector<KpString> pure_tags;
+                end_tags[0].Split(" ", pure_tags);
+                if (pure_tags[0][0])
+                    add_new_child(pure_tags[0].c_str());
+                break;
+            }
+        }
+    cout << endl;
+}
+#endif

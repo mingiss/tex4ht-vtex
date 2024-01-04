@@ -93,6 +93,7 @@ extern const uchar *strstr(const uchar *p_pszString, const uchar *p_pszPattern);
 
 extern int strcmp(const uchar *str1, const uchar *str2);
 extern int strcmp(const uchar *str1, const char *str2);
+extern int strcmp(const char *str1, const uchar *str2);
 
 extern int strncmp(const uchar *str1, const uchar *str2, size_t nbytes);
 

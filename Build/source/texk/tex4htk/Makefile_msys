@@ -31,7 +31,7 @@ DEFS = -DHAVE_CONFIG_H -DKPATHSEA -DDEBUG -DDebug -DKPSE_DEBUG
 
 INCLUDES = -I. \
 	-I/e/vtex/tex4htx/src/tex4htx/src/tex4ht-vtex/Build/source/texk \
-	-I../../libs/kplib/include -I../../libs/kplib/src -I../../libs/kplib/src/net
+	-I../../libs/kplib/include -I../../libs/kplib/src -I../../libs/kplib/src/net -I../../libs/tinyxml
 # -I../../libs/kplib/src/win -I/d/kp/bin/Qt/Qt5.3.2/5.3/mingw482_32/mkspecs/win32-g++
 
 # gcc -c -pipe -fno-keep-inline-dllexport -std=c99 -g -Wall -Wextra -DDEBUG -DDebug -DKPATHSEA -DKPSE_DEBUG -DQT_DEBUG -I../tex4htk -I'../tex4htk' -I'../../Work/texk/tex4htk' -I'../../texk' -I'../../Work/texk' -I'../../libs/kplib/include' -I'../../libs/kplib/src' -I'../../libs/kplib/src/net' -I'../../libs/kplib/src/win' -I'.' -I'D:/kp/bin/Qt/Qt5.3.2/5.3/mingw482_32/mkspecs/win32-g++' -o debug/tex-hush.o ../kpathsea/tex-hush.c
@@ -56,7 +56,8 @@ LINK = $(CXX) $(COMMON_CFLAGS) $(PLATFORM) $(COMMON_CXXFLAGS) $(LDFLAGS) $(LIBPA
 SOURCES = tex4ht.c tex4ht_add.cpp \
 	../../libs/kplib/src/kpstring.cpp ../../libs/kplib/src/kpstdlib.cpp ../../libs/kplib/src/kpstdio.cpp ../../libs/kplib/src/kpctype.cpp \
 	../../libs/kplib/src/kperr.cpp ../../libs/kplib/src/kpsort.cpp ../../libs/kplib/src/kpcapp.cpp \
-	../../libs/kplib/src/chr/kptt.cpp ../../libs/kplib/src/win/kpwindow.cpp
+	../../libs/kplib/src/chr/kptt.cpp ../../libs/kplib/src/win/kpwindow.cpp \
+	../../libs/tinyxml/tinyxml.cpp ../../libs/tinyxml/tinystr.cpp ../../libs/tinyxml/tinyxmlparser.cpp ../../libs/tinyxml/tinyxmlerror.cpp
 
 OBJECTS = tex4ht.$(OBJEXT) tex4ht_add.$(OBJEXT) \
 	../../libs/kplib/src/kpstring.$(OBJEXT) \
@@ -68,6 +69,10 @@ OBJECTS = tex4ht.$(OBJEXT) tex4ht_add.$(OBJEXT) \
 	../../libs/kplib/src/kpcapp.$(OBJEXT) \
 	../../libs/kplib/src/chr/kptt.$(OBJEXT) \
 	../../libs/kplib/src/win/kpwindow.$(OBJEXT) \
+	../../libs/tinyxml/tinyxml.$(OBJEXT) \
+	../../libs/tinyxml/tinystr.$(OBJEXT) \
+	../../libs/tinyxml/tinyxmlparser.$(OBJEXT) \
+	../../libs/tinyxml/tinyxmlerror.$(OBJEXT) \
 	../kpathsea/progname.$(OBJEXT) \
 	../kpathsea/debug.$(OBJEXT) \
 	../kpathsea/variable.$(OBJEXT) \

@@ -24,6 +24,10 @@ using namespace std;
 
 #include "tex4ht.h"
 
+#ifdef __cplusplus
+#include "tinyxml.h"
+#endif
+
 // scale and design_sz values of /usr/local/texlive/2016/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 #define DEF_FONT_SCALE  655360
 #define DEF_DESIGN_SZ   655360
@@ -103,7 +107,7 @@ public:
 };
 extern COtfAdds theOtfAdds;
 
-#endif
+#endif // #ifdef __cplusplus
 
 // ------------------------------
 // tries to obtain otf font parameters from font mappings in subdirectory .xdvips provided by luafonts.lua
@@ -117,5 +121,13 @@ extern PLAIN_C void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *jo
 // fnt_pars -- pointer to current font HFontPars object
 extern PLAIN_C void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var);
 #endif // #ifdef VTEX_OTF_ADDONS
+
+#ifdef VTEX_SSCRIPT_ADDONS
+extern PLAIN_C void init_xml_doc(const char *filename);
+extern PLAIN_C void finit_xml_doc(void);
+extern PLAIN_C void add_new_child(const unsigned char *tag);
+extern PLAIN_C void close_cur_node(const unsigned char *tag);
+extern PLAIN_C void parse_chunk(const unsigned char *chunk);
+#endif
 
 #endif // #ifndef TEX4HT_H_ADD_INCLUDED
