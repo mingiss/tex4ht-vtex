@@ -411,13 +411,24 @@ void parse_chunk(const unsigned char *chunk)
                 close_cur_node(end_tags[0].c_str() + 1);
                 break;
             default:
-                if (end_tags[0][end_tags[0].length() - 1] == '/') // TODO: single tag
+                bool single_tag = False;
+                uint tag_len = end_tags[0].length();
+                if (tag_len > 0)
                 {
+                    if (end_tags[0][tag_len - 1] == '/')
+                    {
+                        single_tag = True;
+                        end_tags[0][--tag_len] = '\0';
+                    }
+                    vector<KpString> pure_tags;
+                    end_tags[0].Split(" ", pure_tags);
+                    if (pure_tags[0][0])
+                    {
+                        add_new_child(pure_tags[0].c_str());
+                        if (single_tag)
+                            close_cur_node(pure_tags[0].c_str());
+                    }
                 }
-                vector<KpString> pure_tags;
-                end_tags[0].Split(" ", pure_tags);
-                if (pure_tags[0][0])
-                    add_new_child(pure_tags[0].c_str());
                 break;
             }
         }

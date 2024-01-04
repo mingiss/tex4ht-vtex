@@ -54,6 +54,16 @@ Build/source/libs/poppler/*
 !Build/source/libs/poppler/aclocal.m4
 !Build/source/libs/poppler/config.h.in
 
+!Build/source/libs/tinyxml
+Build/source/libs/tinyxml/*
+!Build/source/libs/tinyxml/readme.txt
+!Build/source/libs/tinyxml/*.cpp
+!Build/source/libs/tinyxml/*.h
+!Build/source/libs/tinyxml/kpadd
+Build/source/libs/tinyxml/kpadd/*
+!Build/source/libs/tinyxml/kpadd/*.cpp
+!Build/source/libs/tinyxml/kpadd/*.h
+
 !Build/source/libs/zlib
 Build/source/libs/zlib/*
 !Build/source/libs/zlib/configure
