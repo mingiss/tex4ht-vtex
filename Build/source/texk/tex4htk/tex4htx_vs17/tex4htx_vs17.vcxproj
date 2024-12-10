@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -79,7 +79,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>KPATHSEA;KPSE_DEBUG;HAVE_STRING_H=1;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..;..\..;..\..\..\libs\kplib\include;..\..\..\libs\kplib\src;..\..\..\libs\kplib\src\net;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;..\..;..\..\..\libs\kplib\include;..\..\..\libs\kplib\src;..\..\..\libs\kplib\src\net;..\..\..\libs\tinyxml</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>

@@ -5,6 +5,7 @@ autom4te.cache
 .deps
 *.o
 *.d
+*.obj
 *.map
 
 *.log
@@ -103,7 +104,16 @@ Build/source/texk/tex4htk/*.d
 Build/source/texk/tex4htk/*.map
 Build/source/texk/tex4htk/*.exe
 
+!Build/source/texk/kpathsea
+
 !Build/source/texk/tex4htk/kpathsea
+Build/source/texk/kpathsea/win32/vs17
+!Build/source/texk/kpathsea/win32/vs17/kpathsea.sln
+!Build/source/texk/kpathsea/win32/vs17/kpathsea.vcxproj
+!Build/source/texk/kpathsea/win32/vs17/kpathsea.vcxproj.filters
+!Build/source/texk/kpathsea/win32/vs17/kpathseastatic.vcxproj
+!Build/source/texk/kpathsea/win32/vs17/kpathseastatic.filters
+!Build/source/texk/kpathsea/win32/vs17/rename.bat
 
 !Build/source/texk/tex4htk/ac
 Build/source/texk/tex4htk/ac/*

@@ -306,15 +306,24 @@ cout << ":::: " << vfnt_name << " first: " << ppars->m_ChFirst << " last: " << p
 void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var)
 {
     if ((!wch_buf) || (wch_buf_size == 0))
+    {
+        err_i(ERR_IMPL);
         return;
+    }
     wch_buf[0] = 0;
     HFontPars *ppars = (HFontPars *)fnt_pars;
     if (!ppars)
+    {
+        err_i(ERR_IMPL);
         return;
+    }
 
     TexUniTable::const_iterator it = ppars->m_mapTexUniTable.find(tex_ch);
     if (it == ppars->m_mapTexUniTable.end())
+    {
+        warn_i_int(ERR_BAD_CHAR, tex_ch);
         return;
+    }
 
     uint ix = 0;
     for (UniStr::const_iterator is = it->second.begin(); is != it->second.end(); is++)
@@ -329,16 +338,50 @@ void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDL
 
         if (ch_str)
         {
-            for (; ix < wch_buf_size - 1; ix++)
+            while (ch_str[ix])
             {
-                if (ch_str[ix] == '\0')
+                if (ix < wch_buf_size - 1)
+                {
+                    wch_buf[ix] = ch_str[ix];
+                    ix++;
+                }
+                else
+                {
+                    err_i_str(ERR_BUF_OVFL, "");
                     break;
-                wch_buf[ix] = ch_str[ix];
+                }
             }
         }
         else
-            if (ix < wch_buf_size - 1)
-                wch_buf[ix++] = *is;
+        {
+            switch (*is)
+            {
+            case '&':
+            case '<':
+            case '>':
+            case '[':
+            case ']':
+                if (ix < wch_buf_size - 8 - 1) // strlen("&#x003C;")
+                {
+                    char hex_str[10];
+                    int ii, ll;
+
+                    sprintf(hex_str, "&#x%04X;", *is);
+                    ll = strlen(hex_str);
+                    for (ii = 0; ii < ll; ii++)
+                        wch_buf[ix++] = hex_str[ii];
+                }
+                else
+                    err_i_str(ERR_BUF_OVFL, "");
+                break;
+            default:
+                if (ix < wch_buf_size - 1)
+                    wch_buf[ix++] = *is;
+                else
+                    err_i_str(ERR_BUF_OVFL, "");
+                break;
+            }
+        }
     }
     wch_buf[ix++] = 0;
 }
