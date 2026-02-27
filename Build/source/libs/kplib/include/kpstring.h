@@ -112,6 +112,7 @@ public:
     KpString (string sStr) : string(sStr) {}
     KpString& operator=(const uchar *lpszRight) { string::operator=((const char *)lpszRight); return *this; }
     KpString& operator=(const string& sRight) { string::operator=(sRight); return *this; }
+    char& operator[](int ix) { return ((string)(*this))[ix]; }
 
     operator uchar *() { return c_str(); }
     operator const char *() { return string::c_str(); }

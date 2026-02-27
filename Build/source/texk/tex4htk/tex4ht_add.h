@@ -123,11 +123,13 @@ extern PLAIN_C void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, in
 #endif // #ifdef VTEX_OTF_ADDONS
 
 #ifdef VTEX_SSCRIPT_ADDONS
+#   ifdef VTEX_SSCRIPT_PARSE
 extern PLAIN_C void init_xml_doc(const char *filename);
 extern PLAIN_C void finit_xml_doc(void);
 extern PLAIN_C void add_new_child(const unsigned char *tag);
 extern PLAIN_C void close_cur_node(const unsigned char *tag);
 extern PLAIN_C void parse_chunk(const unsigned char *chunk);
+#   endif
 #endif
 
 #endif // #ifndef TEX4HT_H_ADD_INCLUDED

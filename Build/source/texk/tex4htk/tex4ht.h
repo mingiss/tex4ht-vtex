@@ -144,7 +144,11 @@ ERR_NOT_WELL
 };
 
 #ifdef VTEX_SSCRIPT_ADDONS
-extern BOOL dump_parse_back_nodes_flag;
+extern
+#ifdef __cplusplus
+"C"
+#endif
+    BOOL dump_parse_back_nodes_flag;
 #endif
 
 #endif // #ifndef TEX4HT_ADD_H_INCLUDED

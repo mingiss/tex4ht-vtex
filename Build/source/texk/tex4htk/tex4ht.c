@@ -3216,7 +3216,9 @@ if (dump_postponed_back_nodes_flag){ printf("\n======================== do_back_
         printf("\n.......=========== do_back_insert(): %s\n", back->send);
         printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
     }
+#   ifdef VTEX_SSCRIPT_PARSE
     parse_chunk(back->send);
+#   endif
 #endif
 
     back = (p = back)->next;
@@ -7532,7 +7534,9 @@ no_root_file = name;
 
 
 #ifdef VTEX_SSCRIPT_ADDONS
-init_xml_doc(no_root_file);
+#   ifdef VTEX_SSCRIPT_PARSE
+    init_xml_doc(no_root_file);
+#   endif
 #endif
 
 
@@ -10749,7 +10753,9 @@ if( special_n ){
         printf("\n.........///////// storing hcode_repl node: %s\n", repl);
         printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
    }
+#   ifdef VTEX_SSCRIPT_PARSE
    // parse_chunk(repl);
+#   endif
 #endif
 
 if( hcode_repl != (struct hcode_repl_typ*) 0 ){
@@ -11415,7 +11421,9 @@ while( special_n-- > 0 ){
         printf("\n.................. just checking inside_math at t4ht=: %s\n", tag_buf);
         printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
    }
+#   ifdef VTEX_SSCRIPT_PARSE
    parse_chunk(tag_buf);
+#   endif
 
    free(tag_buf);
    tag_buf = NULL;
@@ -11911,14 +11919,16 @@ while( special_n-- > 0 ){
         printf("\n........:::::::::: just checking inside_math at t4ht~<*: %s\n", tag_buf);
         printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
    }
+#   ifdef VTEX_SSCRIPT_PARSE
    parse_chunk(tag_buf);
+#   endif
 
-#ifdef VTEX_SPACING_ADDONS
+#   ifdef VTEX_SPACING_ADDONS
    const char *test_tag = "<math ";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = TRUE;
    test_tag = "</math>";
    if (strncmp(tag_buf, test_tag, strlen(test_tag)) == 0) inside_math = FALSE;
-#endif
+#   endif
    free(tag_buf);
    tag_buf = NULL;
 
@@ -12287,7 +12297,9 @@ if( i==0 ){
                     printf("\n.......,,,,,,,,,,, storing back_token node: %s\n", tag);
                     printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
               }
+#   ifdef VTEX_SSCRIPT_PARSE
               // parse_chunk(tag);
+#   endif
 #endif
 if( back_id_off
 #ifdef VTEX_SSCRIPT_ADDONS                      // there were xml tags after the last character -- ignoring back sending special --
@@ -12404,7 +12416,9 @@ while( --i ) *q++ = get_char();
             printf("\n.......;;;;;;;;;;; just checking t4ht= for presence of tags: %s\n", tag);
             printf("------------------ [ group_dvi: %d ch_id: %d back_token: ", group_dvi, ch_id); dump_back_tokens(back_token); printf("back_group: "); dump_back_tokens(back_group); dump_back_pending(); printf("\n");
         }
+#   ifdef VTEX_SSCRIPT_PARSE
         // parse_chunk(tag);
+#   endif
 
         free(tag);
         tag = NULL;
@@ -13994,7 +14008,9 @@ for( i = 8 - file_n % 4;  i;  i-- ) idv_char(
  }
 
 #ifdef VTEX_SSCRIPT_ADDONS
+#   ifdef VTEX_SSCRIPT_PARSE
     finit_xml_doc();
+#   endif
 #endif
 
    return 0;

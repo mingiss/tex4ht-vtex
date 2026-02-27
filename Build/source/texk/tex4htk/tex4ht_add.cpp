@@ -67,7 +67,7 @@ void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE 
         ppars = &it->second;
     else
     {
-        cout << ":::: searching for .otf font " << vfnt_name << endl;
+        cout << ":::: searching for .otf font " << (vfnt_name?vfnt_name:"") << endl;
 
         if (strlen(job_name) > PATH_MAX)
             err_i_str(ERR_BUF_OVFL, job_name);
@@ -81,7 +81,7 @@ void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE 
             *pnts = 0;
         strcat(fmap_fname, ".opentype.map");
 
-        cout << ":::: reading font list " << fmap_fname << endl;
+        cout << ":::: reading font list " << (fmap_fname?fmap_fname:"") << endl;
 
         fmap_file = fopen(fmap_fname, "r");
         if (fmap_file)
@@ -153,7 +153,7 @@ void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE 
         {
             while (*ps_name == ' ')
                 ps_name++;
-            cout << ":::::::::::::::: [" << tfm_name << "] [" << new_font.name << "] [" << new_font.span_class << "] [" << ps_name << "] [" << (font_style?font_style:"") << "]" << endl;
+            cout << ":::::::::::::::: [" << (tfm_name?tfm_name:"") << "] [" << (new_font.name?new_font.name:"") << "] [" << (new_font.span_class?new_font.span_class:"") << "] [" << (ps_name?ps_name:"") << "] [" << (font_style?font_style:"") << "]" << endl;
             if (font_name)
             {
                 while (*font_name == ' ')
@@ -190,7 +190,7 @@ void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE 
                     }
                 }
             }
-            cout << ":::::::::::::::: [" << tfm_name << "] [" << new_font.name << "] [" << new_font.span_class << "] [" << ps_name << "] [" << (font_style?font_style:"") << "]" << endl;
+            cout << ":::::::::::::::: [" << (tfm_name?tfm_name:"") << "] [" << (new_font.name?new_font.name:"") << "] [" << (new_font.span_class?new_font.span_class:"") << "] [" << (ps_name?ps_name:"") << "] [" << (font_style?font_style:"") << "]" << endl;
 
             if (strlen(ps_name) > PATH_MAX)
                 err_i_str(ERR_BUF_OVFL, ps_name);
@@ -198,7 +198,7 @@ void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE 
             strcat(enc_fname, ps_name);
             strcat(enc_fname, ".encodings.map");
 
-            cout << ":::: parsing char map " << enc_fname << endl;
+            cout << ":::: parsing char map " << (enc_fname?enc_fname:"") << endl;
 
             enc_file = fopen(enc_fname, "r");
             if (enc_file)
@@ -300,7 +300,7 @@ void get_otf_fm(/* const */ char *vfnt_name, /* const */ char *job_name, HANDLE 
     new_font.design_sz = DEF_DESIGN_SZ;
     new_font.mag = DEF_MAG_VAL;
 
-cout << ":::: " << vfnt_name << " first: " << ppars->m_ChFirst << " last: " << ppars->m_ChLast << endl;
+cout << ":::: " << (vfnt_name?vfnt_name:"") << " first: " << ppars->m_ChFirst << " last: " << ppars->m_ChLast << endl;
 }
 
 void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDLE fnt_pars, BOOL cvt_to_math_var)
@@ -388,6 +388,7 @@ void get_uni_ch(int /* UniChar */ *wch_buf, uint wch_buf_size, int tex_ch, HANDL
 #endif // #ifdef VTEX_OTF_ADDONS
 
 #ifdef VTEX_SSCRIPT_ADDONS
+#   ifdef VTEX_SSCRIPT_PARSE
 TiXmlDocument *xml_doc = NULL;
 TiXmlNode *cur_node = NULL;
 
@@ -414,7 +415,7 @@ void add_new_child(const unsigned char *tag)
 {
     assert(cur_node);
     if (dump_parse_back_nodes_flag)
-        cout << "...... add_new_child(\"" << tag << "\")" << endl;
+        cout << "...... add_new_child(\"" << (tag?tag:"") << "\")" << endl;
     TiXmlElement new_node((const char *)tag);
     cur_node = cur_node->InsertEndChild(new_node);
 }
@@ -423,7 +424,7 @@ void close_cur_node(const unsigned char *tag)
 {
     assert(cur_node);
     if (dump_parse_back_nodes_flag)
-        cout << "...... close_cur_node(\"" << tag << "\") [" << cur_node->Value() << "]" << endl;
+        cout << "...... close_cur_node(\"" << (tag?tag:"") << "\") [" << cur_node->Value() << "]" << endl;
     if (strcmp(cur_node->Value(), tag))
         warn_i_str(ERR_NOT_WELL, (const char *)tag);
     else if (cur_node != xml_doc)
@@ -435,7 +436,7 @@ void parse_chunk(const unsigned char *chunk)
     KpString chunk_str(chunk);
 
     if (dump_parse_back_nodes_flag)
-        cout << "...... parse_chunk(\"" << chunk_str << "\")" << endl;
+        cout << "...... parse_chunk(\"" << (chunk_str?chunk_str:"") << "\")" << endl;
 
     vector<KpString> st_tags;
     chunk_str.Split("<", st_tags);
@@ -477,4 +478,5 @@ void parse_chunk(const unsigned char *chunk)
         }
     cout << endl;
 }
+#   endif
 #endif
