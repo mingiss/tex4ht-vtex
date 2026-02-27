@@ -140,6 +140,9 @@ Master/bin/*
 Master/bin/win32/*
 !Master/bin/win32/t4ht.exe
 !Master/bin/win32/tex4ht_vtex.exe
+!Master/bin/win32/tex4htx_vs17.exe
+!Master/bin/win32/msvcp140d.dll
+!Master/bin/win32/vcruntime140d.dll
 !Master/bin/win32/mingw53_32
 !Master/bin/win32/mingw53_32/*
 !Master/bin/win64

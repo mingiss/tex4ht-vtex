@@ -194,5 +194,8 @@
     <ClInclude Include="..\tex4ht_add.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libs\kplib\include\kpstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

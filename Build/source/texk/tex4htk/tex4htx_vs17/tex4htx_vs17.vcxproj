@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>D:\texroot\2019\bin\win32</OutDir>
+    <OutDir>..\..\..\..\..\Master\bin\win32\vs17</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,6 +86,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;../../../libs/tinyxml/Debugtinyxml/tinyxml.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -191,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\libs\kplib\include\kperr.h" />
     <ClInclude Include="..\..\..\libs\kplib\include\kpstdlib.h" />
+    <ClInclude Include="..\..\..\libs\kplib\include\kpstring.h" />
     <ClInclude Include="..\..\kpathsea\c-memstr.h" />
     <ClInclude Include="..\tex4ht.h" />
     <ClInclude Include="..\tex4ht_add.h" />
