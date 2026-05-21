@@ -1977,7 +1977,7 @@ static INTEGER move_x
 #undef SEP
 #endif
 {    register long     i;
-      long long dx;
+      long long dx = 0L;
       double sp;
    x_val += d;
    if( (x_val > max_x_val) && x_val ){
